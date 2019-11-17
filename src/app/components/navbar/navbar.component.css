@@ -1,0 +1,15 @@
+.navbar {
+    background-color: #000000;
+}
+
+.dropdown-menu{ 
+    top: 59px;
+}
+.user .dropdown-menu {
+    top: 59px;
+    left: -80px;
+}
+
+.nav-item {
+    font-size: 24px;
+}
