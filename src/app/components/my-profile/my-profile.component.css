@@ -1,0 +1,66 @@
+div{
+  --column-border-width:20px;
+  --theme-brown: #14000a;
+  --theme-gold: #946c00;
+  --theme-rose: #940046;
+  --theme-teal: #008194;
+
+  background-color:#946c00;
+  color: #14000a;
+  padding-top: 10px;
+
+}
+
+button {
+  --side-padding: 15px;
+
+  margin: 1%;
+  border-style: none;
+  border-radius: 3px;
+  padding-left: var(--side-padding);
+  padding-right: var(--side-padding);
+  font-size: 20px;
+
+}
+
+h1{
+  text-align: center;
+}
+
+h2{
+  text-align: center;
+}
+
+.column-dark{
+  border-style: solid;
+  border-width: var(--column-border-width);
+  border-color: var(--theme-rose);
+
+  padding: 20px;
+  background-color:var(--theme-brown);
+  color: var(--theme-gold);
+}
+
+.column-left{
+
+  border-right-width: calc(var(--column-border-width) / 2);
+}
+
+.column-right{
+  border-left-width: calc(var(--column-border-width) / 2);
+}
+
+.golden-button{
+  background-color:var(--theme-gold);
+  color: var(--theme-brown);
+
+}
+
+.brown-button{
+  background-color:var(--theme-brown);
+  color: var(--theme-gold);
+}
+
+.container{
+  padding: 0%;
+}

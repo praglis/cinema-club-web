@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { GreetingComponent } from './components/greeting/greeting.component';
 import { MainLayoutComponent } from './components/main-layout/main-layout.component';
 import { HomeComponent } from './components/home/home.component';
+import { MyProfileComponent } from './components/my-profile/my-profile.component';
 
 const routes: Routes = [
   { path: 'greeting', component: GreetingComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
     ]
   },
   { path: 'home', component: MainLayoutComponent },
+  { path: 'my_profile', component: MyProfileComponent }
 ];
 
 @NgModule({
