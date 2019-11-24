@@ -13,11 +13,15 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { MovieCardComponent } from './components/home/movie-card/movie-card.component';
 import { HomeComponent } from './components/home/home.component';
 import { MyProfileComponent } from './components/my-profile/my-profile.component';
+import { BestMoviesComponent } from './components/bestmovies/bestmovies.component';
+import { PopularMoviesComponent } from './components/popularmovies/popularmovies.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     GreetingComponent,
+    BestMoviesComponent,
+    PopularMoviesComponent,
     MainLayoutComponent,
     NavbarComponent,
     MovieCardComponent,
