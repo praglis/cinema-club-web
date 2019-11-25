@@ -6,6 +6,7 @@ import { MainLayoutComponent } from './components/main-layout/main-layout.compon
 import { HomeComponent } from './components/home/home.component';
 import { MyProfileComponent } from './components/my-profile/my-profile.component';
 import { PopularMoviesComponent } from './components/popularmovies/popularmovies.component';
+import { UserModule } from './components/user/user.module';
 
 
 const routes: Routes = [
@@ -28,7 +29,8 @@ const routes: Routes = [
     ]
   },
   { path: 'home', component: MainLayoutComponent },
-  { path: 'my_profile', component: MyProfileComponent }
+  { path: 'my_profile', component: MyProfileComponent },
+  {path: 'api/users', component: UserModule}
 ];
 
 @NgModule({
