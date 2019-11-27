@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit, AfterViewChecked, ContentChild, Directive, AfterContentChecked, QueryList, ViewChildren } from '@angular/core';
-import { MovieService } from 'src/app/movie.service';
+import { MovieService } from 'src/app/services/movie.service';
 import { DomSanitizer } from '@angular/platform-browser';
 declare let Swiper: any;
 
