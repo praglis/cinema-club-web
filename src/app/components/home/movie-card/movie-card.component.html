@@ -1,1 +1,32 @@
-<p class="text-white" *ngFor="let movie of movies" (click)="onClick()">{{ text }} works!</p>
+<div class="container">
+    <h1 class="movies-category">Popular movies</h1>
+    <div class="popular-movies">
+        <div class="swiper-container" #popularSwiperContainer>
+            <div class="swiper-wrapper">
+                <div #popularMoviesChildren class="swiper-slide" *ngFor="let movie of popularMovies">
+                    <a routerLink="/movie/{{movie.id}}" [state]="movie">
+                        <img class="slide-image" [src]="movie.poster_path">
+                    </a>
+                    <p class="slide-text">{{movie.title}}</p>
+                </div>
+            </div>
+            <div class="swiper-button-next" #popularSwiperButtonNext></div>
+            <div class="swiper-button-prev" #popularSwiperButtonPrev></div>
+        </div>
+    </div>
+    <h1 class="movies-category">Best rated movies</h1>
+    <div class="best-rated-movies">
+        <div class="swiper-container" #bestSwiperContainer>
+            <div class="swiper-wrapper">
+                <div #bestMoviesChildren class="swiper-slide" *ngFor="let movie of bestMovies">
+                    <a routerLink="/movie/{{movie.id}}">
+                        <img class="slide-image" [src]="movie.poster_path">
+                    </a>
+                    <p class="slide-text">{{movie.title}}</p>
+                </div>
+            </div>
+            <div class="swiper-button-next" #bestSwiperButtonNext></div>
+            <div class="swiper-button-prev" #bestSwiperButtonPrev></div>
+        </div>
+    </div>
+</div>

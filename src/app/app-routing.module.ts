@@ -5,11 +5,13 @@ import { BestMoviesComponent } from './components/bestmovies/bestmovies.componen
 import { MainLayoutComponent } from './components/main-layout/main-layout.component';
 import { HomeComponent } from './components/home/home.component';
 import { PopularMoviesComponent } from './components/popularmovies/popularmovies.component';
+import { MovieComponent } from './components/movie/movie.component';
 
 const routes: Routes = [
   { path: 'greeting', component: GreetingComponent },
   { path: 'best', component: BestMoviesComponent },
   { path: 'popular', component: PopularMoviesComponent },
+  { path: 'movie/:id', component: MovieComponent },
   {
     path: '',
     component: MainLayoutComponent,
