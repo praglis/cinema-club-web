@@ -8,8 +8,8 @@ import { PopularMoviesComponent } from './components/popularmovies/popularmovies
 
 const routes: Routes = [
   { path: 'greeting', component: GreetingComponent },
-  { path: 'best', component: BestMoviesComponent },
-  { path: 'popular', component: PopularMoviesComponent },
+  { path: 'movies/best', component: BestMoviesComponent },
+  { path: 'movies/popular', component: PopularMoviesComponent },
   {
     path: '',
     component: MainLayoutComponent,
