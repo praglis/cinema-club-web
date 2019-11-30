@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { SingleMovieResult } from '../../interfaces/singlemovie.interface';
 import { MoviesList } from '../../interfaces/movieslist.interface';
 import { ActivatedRoute } from '@angular/router';
+import { MovieService } from 'src/app/services/movie.service';
 
 @Component({
     selector: 'popular-movies',
@@ -21,8 +22,8 @@ export class PopularMoviesComponent implements OnInit {
     @Input() lastPage: number; 
     @Input() indices: number[]; 
 
-    constructor(private httpClient: HttpClient,
-      private activatedRoute: ActivatedRoute) { }
+    constructor(private activatedRoute: ActivatedRoute,
+                private movieService: MovieService) { }
 
     ngOnInit() {
       let requestedPageNo : number;
@@ -34,8 +35,7 @@ export class PopularMoviesComponent implements OnInit {
         }
       });
 
-      this.httpClient.get('http://localhost:8200/movies/popular?page=' + requestedPageNo)
-      .subscribe((data: any) => {
+      this.movieService.getPopularMovies(requestedPageNo).subscribe((data: any) => {
         let jsonObject: any = JSON.parse(JSON.stringify(data));
         this.movies = (<MoviesList>jsonObject).results;
         this.actualPage = (<MoviesList>jsonObject).page;
