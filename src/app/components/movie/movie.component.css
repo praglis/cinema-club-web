@@ -1,0 +1,15 @@
+.container {
+    text-align: center;
+}
+.title {
+    color: bisque;
+    display: block;
+    margin: 0 auto;
+}
+.movie-poster {
+    background-color: white;
+    display: block;
+    margin: 0 auto;
+    width: 200px;
+    height: 300px;
+}

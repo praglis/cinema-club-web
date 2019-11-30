@@ -16,6 +16,7 @@ import { MyProfileComponent } from './components/my-profile/my-profile.component
 import { BestMoviesComponent } from './components/bestmovies/bestmovies.component';
 import { PopularMoviesComponent } from './components/popularmovies/popularmovies.component';
 import { UserModule } from './components/user/user.module';
+import { MovieComponent } from './components/movie/movie.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { UserModule } from './components/user/user.module';
     MovieCardComponent,
     HomeComponent,
     MyProfileComponent,
-    UserModule
+    UserModule,
+    MovieComponent
   ],
   imports: [
     BrowserModule,
