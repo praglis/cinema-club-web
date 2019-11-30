@@ -1,8 +1,8 @@
 import { OnInit, Component, Injectable, Input } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { MoviesList } from '../interfaces/movieslist.interface';
-import { SingleMovieResult } from '../interfaces/singlemovie.interface';
+import { MoviesList } from '../../interfaces/movieslist.interface';
+import { SingleMovieResult } from '../../interfaces/singlemovie.interface';
 import { ActivatedRoute } from '@angular/router';
+import { MovieService } from 'src/app/services/movie.service';
 
 @Component({
     selector: 'best-movies',
@@ -21,8 +21,8 @@ export class BestMoviesComponent implements OnInit {
   @Input() lastPage: number; 
   @Input() indices: number[]; 
 
-  constructor(private httpClient: HttpClient,
-              private activatedRoute: ActivatedRoute) { }
+  constructor(private activatedRoute: ActivatedRoute,
+              private movieService: MovieService) {}
 
   ngOnInit() {
     let requestedPageNo : number;
@@ -34,9 +34,7 @@ export class BestMoviesComponent implements OnInit {
       }
     });
 
-    this.httpClient.get('http://localhost:8200/movies/best?page=' + requestedPageNo)
-    .subscribe((data: any) => {
-      let jsonObject: any = JSON.parse(JSON.stringify(data));
+    this.movieService.getBestMovies(requestedPageNo).subscribe((jsonObject: MoviesList) => {
       this.movies = (<MoviesList>jsonObject).results;
       this.actualPage = (<MoviesList>jsonObject).page;
       this.lastPage = (<MoviesList>jsonObject).total_pages; 

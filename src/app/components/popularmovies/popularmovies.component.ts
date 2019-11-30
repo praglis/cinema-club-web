@@ -1,7 +1,7 @@
 import { OnInit, Component, Injectable, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { SingleMovieResult } from '../interfaces/singlemovie.interface';
-import { MoviesList } from '../interfaces/movieslist.interface';
+import { SingleMovieResult } from '../../interfaces/singlemovie.interface';
+import { MoviesList } from '../../interfaces/movieslist.interface';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
