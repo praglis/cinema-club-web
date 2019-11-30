@@ -9,8 +9,8 @@ import { MovieComponent } from './components/movie/movie.component';
 
 const routes: Routes = [
   { path: 'greeting', component: GreetingComponent },
-  { path: 'best', component: BestMoviesComponent },
-  { path: 'popular', component: PopularMoviesComponent },
+  { path: 'movies/best', component: BestMoviesComponent },
+  { path: 'movies/popular', component: PopularMoviesComponent },
   { path: 'movie/:id', component: MovieComponent },
   {
     path: '',

@@ -44,12 +44,12 @@ export class MovieCardComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.popularMovies = this.pupulateSlides();
     this.bestMovies = this.pupulateSlides();
-    this.movieService.getPopularMovies()
+    this.movieService.getPopularMovies(1)
       .subscribe(res => {
         res.results.forEach(element => { this.bypassSecurityForPoster(element); });
         this.popularMovies = res.results;
       });
-    this.movieService.getBestMovies()
+    this.movieService.getBestMovies(1)
       .subscribe(res => {
         res.results.forEach(element => { this.bypassSecurityForPoster(element); });
         this.bestMovies = res.results;
