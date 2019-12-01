@@ -20,7 +20,7 @@ export class AuthenticationService {
   }
 
   login(username, password) {
-      return this.http.post<any>(`http://localhost:8200/login`, { username, password })
+      return this.http.post<any>(`http://localhost:8200/login`, { username, password }, {withCredentials: true})
           .pipe(map(user => {
               localStorage.setItem('currentUser', JSON.stringify(user));
               this.currentUserSubject.next(user);
