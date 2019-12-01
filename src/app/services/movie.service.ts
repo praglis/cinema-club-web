@@ -11,16 +11,18 @@ export class MovieService {
     private httpClient: HttpClient
   ) { }
 
-  getPopularMovies(): Observable<any> {
-    let url = "http://localhost:8200/movies/popular";
+  getPopularMovies(page: number): Observable<any> {
+    let url = "http://localhost:8200/movies/popular?page=" + page;
     return this.httpClient.get<any>(url)
       .pipe();
   }
-  getBestMovies(): Observable<any> {
-    let url = "http://localhost:8200/movies/best";
+
+  getBestMovies(page: number): Observable<any> {
+    let url = "http://localhost:8200/movies/best?page=" + page;
     return this.httpClient.get<any>(url)
       .pipe();
   }
+  
   getMovie(id: string): Observable<any> {
     let url = "http://localhost:8200/movies/get";
     url += "?id=" + id;

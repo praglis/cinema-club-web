@@ -12,6 +12,8 @@ import { AuthGuard } from './helpers/authGuard';
 const routes: Routes = [
   { path: 'best', component: BestMoviesComponent },
   { path: 'popular', component: PopularMoviesComponent },
+  { path: 'movies/best', component: BestMoviesComponent },
+  { path: 'movies/popular', component: PopularMoviesComponent },
   { path: 'movie/:id', component: MovieComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
