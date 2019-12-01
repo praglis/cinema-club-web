@@ -5,11 +5,16 @@ import { MainLayoutComponent } from './components/main-layout/main-layout.compon
 import { HomeComponent } from './components/home/home.component';
 import { PopularMoviesComponent } from './components/popularmovies/popularmovies.component';
 import { MovieComponent } from './components/movie/movie.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { AuthGuard } from './helpers/authGuard';
 
 const routes: Routes = [
   { path: 'best', component: BestMoviesComponent },
   { path: 'popular', component: PopularMoviesComponent },
   { path: 'movie/:id', component: MovieComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
   {
     path: '',
     component: MainLayoutComponent,
@@ -23,7 +28,7 @@ const routes: Routes = [
         path: 'home',
         component: HomeComponent
       }
-    ]
+    ], canActivate: [AuthGuard]
   },
   { path: 'home', component: MainLayoutComponent },
 ];
