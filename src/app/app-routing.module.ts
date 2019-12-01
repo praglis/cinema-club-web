@@ -1,17 +1,20 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { GreetingComponent } from './components/greeting/greeting.component';
 import { BestMoviesComponent } from './components/bestmovies/bestmovies.component';
 import { MainLayoutComponent } from './components/main-layout/main-layout.component';
 import { HomeComponent } from './components/home/home.component';
 import { PopularMoviesComponent } from './components/popularmovies/popularmovies.component';
 import { MovieComponent } from './components/movie/movie.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { AuthGuard } from './helpers/authGuard';
 
 const routes: Routes = [
-  { path: 'greeting', component: GreetingComponent },
   { path: 'movies/best', component: BestMoviesComponent },
   { path: 'movies/popular', component: PopularMoviesComponent },
   { path: 'movie/:id', component: MovieComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
   {
     path: '',
     component: MainLayoutComponent,
@@ -25,7 +28,7 @@ const routes: Routes = [
         path: 'home',
         component: HomeComponent
       }
-    ]
+    ], canActivate: [AuthGuard]
   },
   { path: 'home', component: MainLayoutComponent },
 ];
