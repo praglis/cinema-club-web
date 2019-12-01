@@ -5,7 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { GreetingComponent } from './components/greeting/greeting.component';
 import { from } from 'rxjs';
 import { MainLayoutComponent } from './components/main-layout/main-layout.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
@@ -19,7 +18,6 @@ import { MovieComponent } from './components/movie/movie.component';
 @NgModule({
   declarations: [
     AppComponent,
-    GreetingComponent,
     BestMoviesComponent,
     PopularMoviesComponent,
     MainLayoutComponent,

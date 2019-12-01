@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { GreetingComponent } from './components/greeting/greeting.component';
 import { BestMoviesComponent } from './components/bestmovies/bestmovies.component';
 import { MainLayoutComponent } from './components/main-layout/main-layout.component';
 import { HomeComponent } from './components/home/home.component';
@@ -8,7 +7,6 @@ import { PopularMoviesComponent } from './components/popularmovies/popularmovies
 import { MovieComponent } from './components/movie/movie.component';
 
 const routes: Routes = [
-  { path: 'greeting', component: GreetingComponent },
   { path: 'best', component: BestMoviesComponent },
   { path: 'popular', component: PopularMoviesComponent },
   { path: 'movie/:id', component: MovieComponent },
