@@ -17,7 +17,7 @@ import { MovieComponent } from './components/movie/movie.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
-// import { Interceptor } from './helpers/interceptor';
+import { Interceptor } from './helpers/interceptor';
 import { ErrorInterceptor } from './helpers/errorInterceptor';
 
 @NgModule({
@@ -42,7 +42,7 @@ import { ErrorInterceptor } from './helpers/errorInterceptor';
     MDBBootstrapModule.forRoot()
   ],
   providers: [
-    // { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
