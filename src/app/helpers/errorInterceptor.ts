@@ -16,7 +16,7 @@ export class ErrorInterceptor implements HttpInterceptor {
               location.reload(true);
           }
           let error;
-          if (typeof err.error === 'string') {
+          if (typeof err.error != undefined) {
               error = err.error;
           } else {
               error = err.statusText || err.error;

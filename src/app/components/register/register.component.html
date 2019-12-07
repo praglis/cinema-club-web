@@ -9,7 +9,7 @@
                         <div *ngIf="error" class="alert alert-danger">{{error}}</div>
                         <div class="form-group">
                             <label for="email" class="register-field">Email:</label><br>
-                            <input type="text" placeholder="example@email.coms" formControlName="email" id="email"
+                            <input type="text" placeholder="example@email.com" formControlName="email" id="email"
                                 class="form-control"
                                 [ngClass]="{ 'is-invalid': submitted && registerFormControls.email.errors }" />
                             <div *ngIf="submitted && registerFormControls.email.errors" class="invalid-feedback">

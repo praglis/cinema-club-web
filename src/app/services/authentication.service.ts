@@ -28,6 +28,14 @@ export class AuthenticationService {
           }));
   }
 
+  activeAccount(token, username) {
+      let link = 'http://localhost:8200/verifyuser?'
+      link += "token=" + token;
+      link += "&username=" + username; 
+      return this.http.get<any>(link)
+      .pipe();
+  }
+
   logout() {
       // remove user from local storage and set current user to null
       localStorage.removeItem('currentUser');

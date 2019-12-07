@@ -19,6 +19,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Interceptor } from './helpers/interceptor';
 import { ErrorInterceptor } from './helpers/errorInterceptor';
+import { VerificationComponent } from './components/verification/verification.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ErrorInterceptor } from './helpers/errorInterceptor';
     MovieComponent,
     LoginComponent,
     RegisterComponent,
+    VerificationComponent,
   ],
   imports: [
     BrowserModule,
