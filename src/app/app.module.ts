@@ -1,11 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { GreetingComponent } from './components/greeting/greeting.component';
 import { from } from 'rxjs';
 import { MainLayoutComponent } from './components/main-layout/main-layout.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
@@ -16,11 +15,16 @@ import { MyProfileComponent } from './components/my-profile/my-profile.component
 import { BestMoviesComponent } from './components/bestmovies/bestmovies.component';
 import { PopularMoviesComponent } from './components/popularmovies/popularmovies.component';
 import { MovieComponent } from './components/movie/movie.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { Interceptor } from './helpers/interceptor';
+import { ErrorInterceptor } from './helpers/errorInterceptor';
+import { VerificationComponent } from './components/verification/verification.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    GreetingComponent,
     BestMoviesComponent,
     PopularMoviesComponent,
     MainLayoutComponent,
@@ -28,16 +32,23 @@ import { MovieComponent } from './components/movie/movie.component';
     MovieCardComponent,
     HomeComponent,
     MyProfileComponent,
-    MovieComponent
+    MovieComponent,
+    LoginComponent,
+    RegisterComponent,
+    VerificationComponent,
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
     MDBBootstrapModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

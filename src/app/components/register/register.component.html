@@ -1,0 +1,106 @@
+<div id="register">
+    <div class="container">
+        <h1 class="text-center pt-5 promotion-title">Join our club!</h1>
+        <div id="register-row" class="row justify-content-center align-items-center">
+            <div id="register-column" class="col-md-6">
+                <div id="register-box" class="col-md-12">
+                    <form [formGroup]="registerForm" id="register-form" (ngSubmit)="onSubmit()">
+                        <h3 class="text-center register-title">Register here:</h3>
+                        <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+                        <div class="form-group">
+                            <label for="email" class="register-field">Email:</label><br>
+                            <input type="text" placeholder="example@email.com" formControlName="email" id="email"
+                                class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && registerFormControls.email.errors }" />
+                            <div *ngIf="submitted && registerFormControls.email.errors" class="invalid-feedback">
+                                <div *ngIf="registerFormControls.email.errors.required">Email is required.</div>
+                                <div *ngIf="registerFormControls.email.errors">Email does not match email pattern.</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="username" class="register-field">Username:</label><br>
+                            <input type="text" placeholder="Call me ..." formControlName="username" id="username"
+                                class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && registerFormControls.username.errors }" />
+                            <div *ngIf="submitted && registerFormControls.username.errors" class="invalid-feedback">
+                                <div *ngIf="registerFormControls.username.errors.required">Username is required</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password" id="password" class="register-field">Password:</label><br>
+                            <input #passwordField type="password" placeholder="Secret password"
+                                formControlName="password" id="password" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && registerFormControls.password.errors }" />
+                            <div *ngIf="submitted && registerFormControls.password.errors" class="invalid-feedback">
+                                <div *ngIf="registerFormControls.password.errors.required">Password is required</div>
+                                <div *ngIf="registerFormControls.password.errors.minlength">Password must be at least 6
+                                    characters</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="passwordRepeat" id="passwordRepeat" class="register-field">Repeat
+                                password:</label><br>
+                            <input type="password" formControlName="passwordRepeat" id="passwordRepeat"
+                                class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && registerFormControls.passwordRepeat.errors }" />
+                            <div *ngIf="submitted && registerFormControls.passwordRepeat.errors"
+                                class="invalid-feedback">
+                                <div *ngIf="registerFormControls.passwordRepeat.errors.passwordNotMatch">Passwords not
+                                    match</div>
+                            </div>
+                        </div>
+                        <!-- Address section -->
+                        <div *ngIf="showAddressForm">
+                            <h5 class="address-title">Address</h5>
+
+                            <div class="form-group">
+                                <label for="address.country" id="passwordRepeat"
+                                    class="register-field">Country:</label><br>
+                                <input type="text" formControlName="country" id="address.country"
+                                    class="form-control" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="address.state" id="passwordRepeat" class="register-field">State:</label><br>
+                                <input type="text" formControlName="state" id="address.state" class="form-control" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="address.coucityntry" id="passwordRepeat"
+                                    class="register-field">City:</label><br>
+                                <input type="text" formControlName="city" id="address.city" class="form-control" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="address.street_name" id="passwordRepeat"
+                                    class="register-field">Street:</label><br>
+                                <input type="text" formControlName="street_name" id="address.street_name"
+                                    class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm form-group">
+                                <button [disabled]="loading" class="btn btn-secondary">
+                                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                                    Register
+                                </button>
+                                <a routerLink="/login" class="btn text-right register-field">I have account</a>
+                            </div>
+                            <div class="col-sm text-right">
+                                <button type="button" class="btn btn-link"
+                                    (click)="toggleAddressField()">{{!showAddressForm ? "Add address" : "Remove Address"}}</button>
+                                <span class="d-inline-block" tabindex="0" data-toggle="tooltip"
+                                    title="You can add your address to help us &#013;&#010;find out the best cinemas and events for you! &#013;&#010;This option is optional">
+                                    <i class="far fa-question-circle"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>z
