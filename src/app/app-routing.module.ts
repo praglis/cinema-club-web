@@ -9,6 +9,8 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AuthGuard } from './helpers/authGuard';
 import { VerificationComponent } from './components/verification/verification.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
 
 const routes: Routes = [
   { path: 'movies/best', component: BestMoviesComponent },
@@ -17,6 +19,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'verification', component: VerificationComponent},
+  { path: 'resetPassword', component: ResetPasswordComponent},
+  { path: 'password', component: ChangePasswordComponent},
   {
     path: '',
     component: MainLayoutComponent,
