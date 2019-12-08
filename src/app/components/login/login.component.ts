@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
       this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
 
       if (this.route.snapshot.queryParams['registered']) {
-        this.success = 'Registration successful';
+        this.success = 'Registration successful, activation link has been sent to provided email';
     }
   }
 
@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
                   this.router.navigate([this.returnUrl]);
               },
               error => {
-                  this.error = error;
+                  this.error = error.message;
                   this.loading = false;
               });
   }

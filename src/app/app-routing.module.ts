@@ -8,6 +8,7 @@ import { MovieComponent } from './components/movie/movie.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AuthGuard } from './helpers/authGuard';
+import { VerificationComponent } from './components/verification/verification.component';
 
 const routes: Routes = [
   { path: 'movies/best', component: BestMoviesComponent },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'movie/:id', component: MovieComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'verification', component: VerificationComponent},
   {
     path: '',
     component: MainLayoutComponent,
