@@ -25,11 +25,10 @@ export class MyProfileComponent implements OnInit {
   @Input() phoneNo: string;
   @Input() address: string;
 
-  constructor(private activatedRoute: ActivatedRoute,
-              private userService: UserService) { }
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.userService.findById('0').subscribe((jsonObject: User) => {
+    this.userService.findByUsername('zxcv').subscribe((jsonObject: User) => {
       this.id = (jsonObject as User).id;
       this.username = (jsonObject as User).username;
       this.enrolmentDate = (jsonObject as User).enrolmentDate;
