@@ -20,6 +20,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Interceptor } from './helpers/interceptor';
 import { ErrorInterceptor } from './helpers/errorInterceptor';
 import { VerificationComponent } from './components/verification/verification.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { VerificationComponent } from './components/verification/verification.co
     LoginComponent,
     RegisterComponent,
     VerificationComponent,
+    ResetPasswordComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     BrowserModule,

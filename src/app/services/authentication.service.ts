@@ -31,7 +31,7 @@ export class AuthenticationService {
   activeAccount(token, username) {
       let link = 'http://localhost:8200/verifyuser?'
       link += "token=" + token;
-      link += "&username=" + username; 
+      link += "&username=" + username;
       return this.http.get<any>(link)
       .pipe();
   }
@@ -40,5 +40,16 @@ export class AuthenticationService {
       // remove user from local storage and set current user to null
       localStorage.removeItem('currentUser');
       this.currentUserSubject.next(null);
+  }
+
+  changePassword(user, token, username) {
+    let link = 'http://localhost:8200/changePassword?'
+    link += "token=" + token;
+    link += "&username=" + username;
+    return this.http.post<any>(link, user, {withCredentials: true})
+      .pipe();
+  }
+  resetPassword(username) {
+    return this.http.post(`http://localhost:8200/resetPassword`, username, {withCredentials: true});
   }
 }
