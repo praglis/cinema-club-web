@@ -7,7 +7,7 @@
                 <li class="page-item" *ngIf="actualPage != 1">
                     <a class="page-link" href="movies/popular?page={{prevPage}}" tabindex="-1" aria-disabled="true">Previous</a>
                 </li>
-    
+
                 <ng-container *ngFor="let index of indices">
                     <li class="page-item active" *ngIf="actualPage == index">
                         <a class="page-link" href="movies/popular?page={{index}}">{{index}}</a>
@@ -16,7 +16,7 @@
                         <a class="page-link" href="movies/popular?page={{index}}">{{index}}</a>
                     </li>
                 </ng-container>
-                
+
                 <li class="page-item disabled" *ngIf="actualPage == lastPage">
                     <a class="page-link" href="movies/popular?page={{nextPage}}">Next</a>
                 </li>
@@ -25,13 +25,13 @@
                 </li>
             </ul>
         </nav>
-    
+
         <table class="table table-striped text-white">
             <tr *ngFor="let movie of movies">
-                <td><img src="https://image.tmdb.org/t/p/w200/{{movie.poster_path}}"/></td>
+                <td><a routerLink="/movie/{{movie.id}}"><img src="https://image.tmdb.org/t/p/w200/{{movie.poster_path}}"/></a></td>
                 <td>
                     <p class="font-weight-bold">{{movie.title}}</p>
-    
+
                     <p align="justify">
                         {{movie.overview}}
                     </p>
@@ -39,7 +39,7 @@
             </tr>
             <tr><td></td><td></td></tr>
         </table>
-    
+
         <nav aria-label="popular-movies-pagination">
             <ul class="pagination justify-content-center">
                 <li class="page-item disabled" *ngIf="actualPage == 1">
@@ -48,7 +48,7 @@
                 <li class="page-item" *ngIf="actualPage != 1">
                     <a class="page-link" href="movies/popular?page={{prevPage}}" tabindex="-1" aria-disabled="true">Previous</a>
                 </li>
-    
+
                 <ng-container *ngFor="let index of indices">
                     <li class="page-item active" *ngIf="actualPage == index">
                         <a class="page-link" href="movies/popular?page={{index}}">{{index}}</a>
@@ -57,7 +57,7 @@
                         <a class="page-link" href="movies/popular?page={{index}}">{{index}}</a>
                     </li>
                 </ng-container>
-                
+
                 <li class="page-item disabled" *ngIf="actualPage == lastPage">
                     <a class="page-link" href="movies/popular?page={{nextPage}}">Next</a>
                 </li>
@@ -66,4 +66,4 @@
                 </li>
             </ul>
         </nav>
-    </div> 
+    </div>
