@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { BestMoviesComponent } from './components/bestmovies/bestmovies.component';
+import { MoviesListComponent } from './components/movieslist/movieslist.component';
 import { MainLayoutComponent } from './components/main-layout/main-layout.component';
 import { HomeComponent } from './components/home/home.component';
-import { PopularMoviesComponent } from './components/popularmovies/popularmovies.component';
 import { MovieComponent } from './components/movie/movie.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -13,8 +12,7 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 
 const routes: Routes = [
-  { path: 'movies/best', component: BestMoviesComponent },
-  { path: 'movies/popular', component: PopularMoviesComponent },
+  { path: 'movies', component: MoviesListComponent },
   { path: 'movie/:id', component: MovieComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
