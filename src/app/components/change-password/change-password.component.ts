@@ -24,7 +24,6 @@ export class ChangePasswordComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private router: Router,
     private formBuilder: FormBuilder,
-    private userService: RegisterService
   ) { }
 
   ngOnInit() {
@@ -48,7 +47,7 @@ export class ChangePasswordComponent implements OnInit {
     if (this.changePasswordForm.invalid) {
       return;
     }
-    const user = this.convertToRegistractionValues(this.changePasswordForm.value);
+    const user = this.convertToChangePasswordValues(this.changePasswordForm.value);
 
     this.loading = true;
     this.authenticationService.changePassword(user, this.token, this.username)
@@ -59,7 +58,7 @@ export class ChangePasswordComponent implements OnInit {
       });
   }
 
-  convertToRegistractionValues(values) {
+  convertToChangePasswordValues(values) {
     return {
       password: values.password,
     }

@@ -30,7 +30,7 @@ export class ResetPasswordComponent implements OnInit {
     });
   }
 
-  get registerFormControls() { return this.resetPasswordForm.controls; }
+  get resetPasswordFormControls() { return this.resetPasswordForm.controls; }
 
   onSubmit() {
     this.submitted = true;
@@ -38,10 +38,10 @@ export class ResetPasswordComponent implements OnInit {
     if (this.resetPasswordForm.invalid) {
       return;
     }
-    const registrationValues = this.convertToRegistractionValues(this.resetPasswordForm.value);
+    const resetPasswordValues = this.convertToResetPasswordValues(this.resetPasswordForm.value);
 
     this.loading = true;
-    this.authenticationService.resetPassword(registrationValues)
+    this.authenticationService.resetPassword(resetPasswordValues)
       .pipe(first())
       .subscribe(
         data => {
@@ -53,7 +53,7 @@ export class ResetPasswordComponent implements OnInit {
         });
   }
 
-  convertToRegistractionValues(values) {
+  convertToResetPasswordValues(values) {
     return {
       username: values.username,
     }
