@@ -45,7 +45,7 @@ export class ResetPasswordComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          this.router.navigate(['/login'], { queryParams: { registered: true } });
+          this.router.navigate(['/login'], { queryParams: { passwordChanged: true } });
         },
         error => {
           this.error = error.message;
