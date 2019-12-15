@@ -31,3 +31,29 @@
 .property-value {
   text-align: left;
 }
+
+.review-title {
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+
+.review-short {
+  color: white;
+  text-align: justify;
+}
+
+.review-author {
+  color: white;
+  text-align: right;
+  font-style: italic;
+}
+
+.review-link {
+  color: white;
+}
+
+.reviews {
+  color: white;
+  margin-top: 20px;
+}
