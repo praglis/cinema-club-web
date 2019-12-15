@@ -29,4 +29,11 @@ export class MovieService {
     return this.httpClient.get<any>(url)
       .pipe();
   }
+
+  getMovieNYTReview(title: string): Observable<any> {
+    let url = "http://localhost:8200/movie/get/reviews";
+    url += "?title=" + title;
+
+    return this.httpClient.get<any>(url).pipe();
+  }
 }

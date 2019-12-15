@@ -67,3 +67,30 @@
     </div>
   </div>
 </div>
+
+<div class="container reviews">
+  <ng-container *ngFor="let review of reviews">
+    <ng-container *ngIf="review != null">
+      <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4">
+          <div class="review-title">
+            {{ review.headline }}
+          </div>
+          <div class="review-short">
+            „{{ review.summary_short }}”
+          </div>
+          <div class="review-author">
+            — {{ review.byline}}
+          </div>
+          <div class="review-link">
+            Read more at: <a href="{{review.link.url}}">New York Times</a>
+          </div>
+        </div>
+        <div class="col-4"></div>
+      </div>
+    </ng-container>
+  </ng-container>
+</div>
+
+
