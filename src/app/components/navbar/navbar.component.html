@@ -34,7 +34,13 @@
                 <a class="nav-link"><i class="fas fa-calendar-alt mr-2"></i>Events</a>
             </li>
         </ul>
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav ml-auto">           
+            <li class="nav-item nav-link"> <div class="input-group">
+                    <input formControlName="title" type="text" class="form-control bg-transparent border-dark searchBox" type="search" placeholder="Find the movie" aria-label="Search">
+                    <div class="input-group-append">
+                      <button ng-click="search()" class="btn btn-outline-dark btn-style"> <i class="fas fa-search fa-fw"></i> Search</button>
+                    </div>
+                  </div></li>
             <li class="nav-item nav-link">My Profile</li>
             <li class="nav-item dropdown user">
                 <a class="nav-link dropdown-toggle" href="#" id="logIn" role="button" data-toggle="dropdown"
