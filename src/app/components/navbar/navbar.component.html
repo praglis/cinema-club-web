@@ -15,14 +15,15 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="#">Characters</a>
-                    <a routerLink="/movies/best">
-                        <a class="dropdown-item">Movies</a>
-                    </a>
+                    <a [routerLink]="['/movies']" [queryParams]="{ type: 'popular' }" class="dropdown-item">
+                        Popular movies</a>
+                    <a [routerLink]="['/movies']" [queryParams]="{ type: 'best' }" class="dropdown-item">
+                        Best movies</a>
                     <a class="dropdown-item" href="#">Cinemas</a>
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" ><i class="fas fa-search-location mr-2"></i>Locations</a>
+                <a class="nav-link"><i class="fas fa-search-location mr-2"></i>Locations</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link"><i class="fas fa-theater-masks mr-2"></i>Preferences</a>
