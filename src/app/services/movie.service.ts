@@ -31,7 +31,14 @@ export class MovieService {
   }
 
   getMovieNYTReview(title: string): Observable<any> {
-    let url = "http://localhost:8200/movie/get/reviews";
+    let url = "http://localhost:8200/movie/get/reviews/nyt";
+    url += "?title=" + title;
+
+    return this.httpClient.get<any>(url).pipe();
+  }
+
+  getMovieGuardianReview(title: string): Observable<any> {
+    let url = "http://localhost:8200/movie/get/reviews/guardian";
     url += "?title=" + title;
 
     return this.httpClient.get<any>(url).pipe();
