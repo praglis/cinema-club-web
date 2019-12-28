@@ -17,7 +17,7 @@
       <div class="col-7">
         <div class="row" *ngIf="movie.original_title != null">
           <div class="col property-header">
-            <p>Tytuł oryginalny</p>
+            <p>Original title</p>
           </div>
           <div class="col property-value">
             <p>{{movie.original_title}}</p>
@@ -33,7 +33,7 @@
         </div>
         <div class="row" *ngIf="movie.release_date != null">
           <div class="col property-header">
-            <p>Data wydania</p>
+            <p>Release date</p>
           </div>
           <div class="col property-value">
             <p>{{movie.release_date}}</p>
@@ -41,7 +41,7 @@
         </div>
         <div class="row" *ngIf="movie.genres != null">
           <div class="col property-header">
-            <p>Gatunki</p>
+            <p>Genres</p>
           </div>
           <div class="col property-value">
             <p>
@@ -53,7 +53,7 @@
         </div>
         <div class="row" *ngIf="movie.production_companies != null">
           <div class="col property-header">
-            <p>Producenci</p>
+            <p>Production companies</p>
           </div>
           <div class="col property-value">
             <p>
@@ -69,28 +69,34 @@
 </div>
 
 <div class="container reviews">
-  <ng-container *ngFor="let review of reviews">
-    <ng-container *ngIf="review != null">
-      <div class="row">
-        <div class="col-4"></div>
-        <div class="col-4">
-          <div class="review-title">
-            {{ review.headline }}
-          </div>
-          <div class="review-short">
-            „{{ review.summary_short }}”
-          </div>
-          <div class="review-author">
-            — {{ review.byline}}
-          </div>
-          <div class="review-link">
-            Read more at: <a href="{{review.link.url}}">New York Times</a>
-          </div>
-        </div>
-        <div class="col-4"></div>
+  <div class="row" *ngIf="reviewNYT != null">
+    <div class="col-4">
+      <div class="review-title">
+        {{ reviewNYT.headline }}
       </div>
-    </ng-container>
-  </ng-container>
+      <div class="review-short">
+        „{{ reviewNYT.summary_short }}”
+      </div>
+      <div class="review-author">
+        — {{ reviewNYT.byline}}
+      </div>
+      <div class="review-link">
+        Read more at: <a href="{{reviewNYT.link.url}}">New York Times</a>
+      </div>
+    </div>
+    <div class="col-4" *ngIf="reviewGuardian != null">
+      <div class="review-title">
+        {{ reviewGuardian.webTitle }}
+      </div>
+      <div class="review-short">
+        „{{ reviewGuardian.fields.trailText }}”
+      </div>
+      <div class="review-author">
+        — {{ reviewGuardian.fields.byline }}
+      </div>
+      <div class="review-link">
+        Read more at: <a href="{{reviewGuardian.webUrl}}">The Guardian</a>
+      </div>
+    </div>
+  </div>
 </div>
-
-

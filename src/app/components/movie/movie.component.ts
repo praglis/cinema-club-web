@@ -4,6 +4,8 @@ import { MovieService } from 'src/app/services/movie.service';
 import { MovieDetails } from "../../interfaces/moviedetails.interface";
 import {NYTResponse} from "../../interfaces/nytresponse.interface";
 import {NYTReview} from "../../interfaces/nyt.review.interface";
+import {GuardianResponse} from "../../interfaces/guardianresponse.interface";
+import {GuardianReview} from "../../interfaces/guardian.review.interface";
 
 @Component({
   selector: 'app-movie',
@@ -13,7 +15,8 @@ import {NYTReview} from "../../interfaces/nyt.review.interface";
 export class MovieComponent implements OnInit {
 
   @Input() movie: MovieDetails;
-  @Input() reviews: NYTReview[];
+  @Input() reviewNYT: NYTReview;
+  @Input() reviewGuardian: GuardianReview;
 
   constructor(
     private route: ActivatedRoute,
@@ -27,12 +30,19 @@ export class MovieComponent implements OnInit {
       this.movieService.getMovieNYTReview(this.movie.title).subscribe((jsonObject : NYTResponse) => {
         let response = (<NYTResponse>jsonObject);
 
-        this.reviews = new Array(response.num_results);
         for(let review of response.results) {
           if(review.display_title === this.movie.title) {
-            this.reviews.push(review);
+            this.reviewNYT = review;
+            break;
           }
         }
+      });
+
+      this.movieService.getMovieGuardianReview(this.movie.title).subscribe((jsonObject : GuardianResponse) => {
+        console.log(jsonObject);
+        console.log(jsonObject.response);
+        console.log(jsonObject.response.content);
+        this.reviewGuardian = jsonObject.response.content;
       })
     });
   }
