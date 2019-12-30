@@ -36,4 +36,12 @@ export class MovieService {
 
     return this.httpClient.get<any>(url).pipe();
   }
+
+  getMovieByQuery(query: string): Observable<any> {
+    let url = 'http://localhost:8200/movie/get/search';
+    url += '?query=' + query;
+    return this.httpClient.get<any>(url)
+      .pipe();
+  }
+
 }

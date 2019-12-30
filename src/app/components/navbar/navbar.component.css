@@ -23,3 +23,11 @@ color:rgba(255,255,255,.5);
     color: rgba(255,255,255,.5);
     border-color: rgba(255,255,255,.5);
 }
+
+.form-control:focus {
+    box-shadow: 0 0 0 0.2rem rgba(180, 10, 61, 0.25);
+}
+.btn-outline-dark:not(:disabled):not(.disabled).active, .btn-outline-dark:not(:disabled):not(.disabled):active, .show>.btn-outline-dark.dropdown-toggle {
+    background-color: #343a40;
+    border-color: #343a40;
+}

@@ -22,7 +22,7 @@ export class MoviesListComponent implements OnInit {
   @Input() indices: number[];
 
   constructor(private activatedRoute: ActivatedRoute,
-    private movieService: MovieService) { }
+              private movieService: MovieService) { }
 
   ngOnInit() {
     let requestedPageNo: number;

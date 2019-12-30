@@ -10,6 +10,7 @@ import { AuthGuard } from './helpers/authGuard';
 import { VerificationComponent } from './components/verification/verification.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
+import { FindMovieComponent } from './components/find-movie/find-movie.component';
 
 const routes: Routes = [
   { path: 'movies', component: MoviesListComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'verification', component: VerificationComponent},
   { path: 'resetPassword', component: ResetPasswordComponent},
   { path: 'password', component: ChangePasswordComponent},
+  { path: 'searchResult', component: FindMovieComponent},
   {
     path: '',
     component: MainLayoutComponent,
