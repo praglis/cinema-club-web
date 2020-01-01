@@ -1,18 +1,20 @@
 <div *ngIf="movies.length  !== 0" class="movies">
   <table class="table table-striped text-white">
-      <tr *ngFor="let movie of movies">
-          <td><a routerLink="/movie/{{movie.id}}"><img src="https://image.tmdb.org/t/p/w200/{{movie.poster_path}}"/></a></td>
-          <td>
-              <p class="font-weight-bold"><a class="title-link" routerLink="/movie/{{movie.id}}">{{movie.title}}</a> ({{movie.vote_average}} / 10.0)</p>
+    <tr *ngFor="let movie of movies">
+      <td><a routerLink="/movie/{{movie.id}}"><img src="https://image.tmdb.org/t/p/w200/{{movie.poster_path}}" /></a>
+      </td>
+      <td>
+        <p class="font-weight-bold"><a class="title-link" routerLink="/movie/{{movie.id}}">{{movie.title}}</a>
+          ({{movie.vote_average}} / 10.0)</p>
 
-              <p align="justify">
-                  {{movie.overview}}
-              </p>
-          </td>
-      </tr>
+        <p align="justify">
+          {{movie.overview}}
+        </p>
+      </td>
+    </tr>
   </table>
 </div>
 
-<div *ngIf="movies.length  === 0"> 
+<div *ngIf="movies.length  === 0">
   <h1>No results found</h1>
 </div>

@@ -25,39 +25,39 @@ export class FindMovieComponent implements OnInit, DoCheck {
   movies: SingleMovieResult[] = [];
   query: string;
 
-    ngOnInit() {
+  ngOnInit() {
+    this.query = this.findMovieService.query;
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.smoothScrollToTop();
+      this.getMoviesObserver(this.query).subscribe((jsonObject: MoviesList) => {
+        this.movies = (jsonObject as MoviesList).results;
+
+      });
+    }
+    );
+  }
+
+  ngDoCheck() {
+    if (this.query !== this.findMovieService.query || typeof this.query === undefined) {
       this.query = this.findMovieService.query;
-      this.activatedRoute.queryParams.subscribe(params => {
-        this.smoothScrollToTop();
-        this.getMoviesObserver(this.query).subscribe((jsonObject: MoviesList) => {
-          this.movies = (jsonObject as MoviesList).results;
-
-        });
-      }
-      );
+      this.getMoviesObserver(this.query).subscribe((jsonObject: MoviesList) => {
+        this.movies = (jsonObject as MoviesList).results;
+      });
     }
+  }
 
-    ngDoCheck() {
-      if (this.query !== this.findMovieService.query || typeof this.query === undefined) {
-        this.query = this.findMovieService.query;
-        this.getMoviesObserver(this.query).subscribe((jsonObject: MoviesList) => {
-          this.movies = (jsonObject as MoviesList).results;
-        });
+  private smoothScrollToTop() {
+    let scrollToTop = window.setInterval(() => {
+      let pos = window.pageYOffset;
+      if (pos > 0) {
+        window.scrollTo(0, pos - 200); // how far to scroll on each step
+      } else {
+        window.clearInterval(scrollToTop);
       }
-    }
-
-    private smoothScrollToTop() {
-      let scrollToTop = window.setInterval(() => {
-        let pos = window.pageYOffset;
-        if (pos > 0) {
-            window.scrollTo(0, pos - 200); // how far to scroll on each step
-        } else {
-            window.clearInterval(scrollToTop);
-        }
     }, 16);
-    }
+  }
 
-    private getMoviesObserver(query: string) {
-        return this.movieService.getMovieByQuery(query);
-    }
+  private getMoviesObserver(query: string) {
+    return this.movieService.getMovieByQuery(query);
+  }
 }
