@@ -36,6 +36,18 @@
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
+            <li class="nav-item nav-link">
+                <div class="input-group">
+                    <input (keyup.enter)="saveQuery()" [(ngModel)]="query" type="text"
+                        class="form-control bg-transparent border-dark searchBox" type="search"
+                        placeholder="Find the movie" aria-label="Search">
+                    <div class="input-group-append">
+                        <button (click)="saveQuery()" [routerLink]="['/searchResult']"
+                            [queryParams]="{ type: 'searchQuery' }" class="btn btn-outline-dark btn-style"> <i
+                                class="fas fa-search fa-fw"></i> Search</button>
+                    </div>
+                </div>
+            </li>
             <li class="nav-item nav-link">My Profile</li>
             <li class="nav-item dropdown user">
                 <a class="nav-link dropdown-toggle" href="#" id="logIn" role="button" data-toggle="dropdown"

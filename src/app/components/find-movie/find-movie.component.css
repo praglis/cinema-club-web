@@ -1,0 +1,52 @@
+.searchBox {
+    background-color: #000000;
+    border-color: rgba(255, 255, 255, .5);
+    color: rgba(255, 255, 255, .5);
+}
+
+.btn-style {
+    color: rgba(255, 255, 255, .5);
+    border-color: rgba(255, 255, 255, .5);
+}
+
+.form-control:focus {
+    box-shadow: 0 0 0 0.2rem rgba(180, 10, 61, 0.25);
+}
+
+.btn-outline-dark:not(:disabled):not(.disabled).active,
+.btn-outline-dark:not(:disabled):not(.disabled):active,
+.show>.btn-outline-dark.dropdown-toggle {
+    background-color: #343a40;
+    border-color: #343a40;
+}
+
+.movies {
+    width: 80%;
+    margin: 30px auto;
+    text-align: center;
+}
+
+.title-link {
+    color: white;
+    font-size: 20px;
+}
+
+.page-link {
+    color: black;
+}
+
+.page-item.active .page-link {
+    background-color: rgb(143, 70, 110);
+    border-color: rgb(143, 70, 110);
+    box-shadow: 0 0 0 0.2rem rgba(180, 10, 61, 0.25);
+}
+
+h1 {
+    color: white;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}

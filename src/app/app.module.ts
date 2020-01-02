@@ -20,6 +20,8 @@ import { ErrorInterceptor } from './helpers/errorInterceptor';
 import { VerificationComponent } from './components/verification/verification.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
+import { FindMovieComponent } from './components/find-movie/find-movie.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -35,8 +37,10 @@ import { ChangePasswordComponent } from './components/change-password/change-pas
     VerificationComponent,
     ResetPasswordComponent,
     ChangePasswordComponent,
+    FindMovieComponent,
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
