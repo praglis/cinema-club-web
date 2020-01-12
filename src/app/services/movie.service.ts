@@ -22,11 +22,33 @@ export class MovieService {
     return this.httpClient.get<any>(url)
       .pipe();
   }
-  
-  getMovie(id: string): Observable<any> {
-    let url = "http://localhost:8200/movies/get";
+
+  getMovie(id: number): Observable<any> {
+    let url = "http://localhost:8200/movie/get";
     url += "?id=" + id;
     return this.httpClient.get<any>(url)
       .pipe();
   }
+
+  getMovieNYTReview(title: string): Observable<any> {
+    let url = "http://localhost:8200/movie/get/reviews/nyt";
+    url += "?title=" + title;
+
+    return this.httpClient.get<any>(url).pipe();
+  }
+
+  getMovieGuardianReview(title: string): Observable<any> {
+    let url = "http://localhost:8200/movie/get/reviews/guardian";
+    url += "?title=" + title;
+
+    return this.httpClient.get<any>(url).pipe();
+  }
+
+  getMovieByQuery(query: string): Observable<any> {
+    let url = 'http://localhost:8200/movie/get/search';
+    url += '?query=' + query;
+    return this.httpClient.get<any>(url)
+      .pipe();
+  }
+
 }

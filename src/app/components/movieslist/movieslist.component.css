@@ -1,0 +1,18 @@
+.movies {
+    width: 80%;
+    margin: 30px auto;
+    text-align: center;     
+}
+.title-link {
+    color: white;
+    font-size: 20px;
+}
+.page-link {
+
+    color: black;
+}
+.page-item.active .page-link {
+    background-color: rgb(143, 70, 110);
+    border-color: rgb(143, 70, 110);
+    box-shadow: 0 0 0 0.2rem rgba(180, 10, 61, 0.25);
+}

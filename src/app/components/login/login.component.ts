@@ -40,6 +40,9 @@ export class LoginComponent implements OnInit {
       if (this.route.snapshot.queryParams['registered']) {
         this.success = 'Registration successful, activation link has been sent to provided email';
     }
+      else if(this.route.snapshot.queryParams['passwordChanged']) {
+        this.success = 'A link enabling password change has been sent to your email.';
+      }
   }
 
   get loginFormControls() { return this.loginForm.controls; }

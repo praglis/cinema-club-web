@@ -6,10 +6,54 @@
     display: block;
     margin: 0 auto;
 }
+
 .movie-poster {
     background-color: white;
     display: block;
     margin: 0 auto;
-    width: 200px;
-    height: 300px;
+}
+
+.movie-details {
+  margin-top: 30px;
+  color: bisque;
+}
+
+.overview {
+  text-align: justify;
+  color: bisque;
+  padding-top: 15px;
+}
+
+.property-header {
+  text-align: left;
+}
+
+.property-value {
+  text-align: left;
+}
+
+.review-title {
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+
+.review-short {
+  color: white;
+  text-align: justify;
+}
+
+.review-author {
+  color: white;
+  text-align: right;
+  font-style: italic;
+}
+
+.review-link {
+  color: white;
+}
+
+.reviews {
+  color: white;
+  margin-top: 20px;
 }

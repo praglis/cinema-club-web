@@ -1,6 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MovieService } from 'src/app/services/movie.service';
+import { MovieDetails } from "../../interfaces/moviedetails.interface";
+import {NYTResponse} from "../../interfaces/nytresponse.interface";
+import {NYTReview} from "../../interfaces/nyt.review.interface";
+import {GuardianResponse} from "../../interfaces/guardianresponse.interface";
+import {GuardianReview} from "../../interfaces/guardian.review.interface";
 
 @Component({
   selector: 'app-movie',
@@ -9,7 +14,9 @@ import { MovieService } from 'src/app/services/movie.service';
 })
 export class MovieComponent implements OnInit {
 
-  movie: any;
+  @Input() movie: MovieDetails;
+  @Input() reviewNYT: NYTReview;
+  @Input() reviewGuardian: GuardianReview;
 
   constructor(
     private route: ActivatedRoute,
@@ -17,19 +24,26 @@ export class MovieComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    //Do usunięcia gdy będzie działać metoda getMovie/ chwilowe obejście
-    if (window.history.state != null) {
-      this.movie = window.history.state;
-      this.movie.poster_path = this.movie.poster_path.changingThisBreaksApplicationSecurity;
-    }
-    //
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.movieService.getMovie(id).subscribe((jsonObject: MovieDetails) => {
+      this.movie = (<MovieDetails>jsonObject);
+      this.movieService.getMovieNYTReview(this.movie.title).subscribe((jsonObject : NYTResponse) => {
+        let response = (<NYTResponse>jsonObject);
 
-    console.log(this.movie);
-    const id = this.route.snapshot.paramMap.get('nick');
-    this.movieService.getMovie(id)
-      .subscribe(data => {
-          //TODO: this.movie = data
+        for(let review of response.results) {
+          if(review.display_title === this.movie.title) {
+            this.reviewNYT = review;
+            break;
+          }
+        }
       });
-  }
 
+      this.movieService.getMovieGuardianReview(this.movie.title).subscribe((jsonObject : GuardianResponse) => {
+        console.log(jsonObject);
+        console.log(jsonObject.response);
+        console.log(jsonObject.response.content);
+        this.reviewGuardian = jsonObject.response.content;
+      })
+    });
+  }
 }
