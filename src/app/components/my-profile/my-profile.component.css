@@ -1,48 +1,5 @@
-/*div {
-  --column-border-width: 12px;
-  --theme-black: black;
-  --theme-gold: #946c00;
-  --theme-rose: #940046;
-  --theme-teal: #008194;
-  --theme-grey: rgb(109, 109, 109);
-
-  background-color: var(--theme-black);
-  color: var(--theme-grey);
-  padding-top: 10px;
-}
-
-button {
-  --side-padding: 15px;
-
-  align-self: end;
-
-  margin: 1%;
-
-  padding-left: var(--side-padding);
-  padding-right: var(--side-padding);
-  font-size: 20px;
-
-  background-color: var(--theme-grey);
-  color: var(--theme-black);
-}
-
-.column-dark {
-  border-style: solid;
-  border-top-width: var(--column-border-width);
-  border-bottom-width: var(--column-border-width);
-  border-color: var(--theme-rose);
-
-  padding: 20px;
-  background-color: var(--theme-black);
-}
-*/
-
 div {
-  --theme-black: black;
   --theme-gold: #ccb67a;
-  --theme-rose: #940046;
-  --theme-teal: #008194;
-  --theme-grey: rgb(109, 109, 109);
   color: var(--theme-gold);
   padding: 5%;
 }
@@ -84,7 +41,7 @@ button {
   grid-template-columns: auto;
 }
 
-.edit-button{
+.edit-button {
   width: min-content;
   height: min-content;
 }
