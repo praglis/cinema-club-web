@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { MoviesListComponent } from './components/movieslist/movieslist.component';
 import { MainLayoutComponent } from './components/main-layout/main-layout.component';
 import { HomeComponent } from './components/home/home.component';
+import { MyProfileComponent } from './components/my-profile/my-profile.component';
 import { MovieComponent } from './components/movie/movie.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -37,6 +38,7 @@ const routes: Routes = [
     ], canActivate: [AuthGuard]
   },
   { path: 'home', component: MainLayoutComponent },
+  { path: 'my_profile', component: MyProfileComponent }
 ];
 
 @NgModule({

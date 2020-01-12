@@ -10,6 +10,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { MovieCardComponent } from './components/home/movie-card/movie-card.component';
 import { HomeComponent } from './components/home/home.component';
+import { MyProfileComponent } from './components/my-profile/my-profile.component';
 import { MoviesListComponent } from './components/movieslist/movieslist.component';
 import { MovieComponent } from './components/movie/movie.component';
 import { LoginComponent } from './components/login/login.component';
@@ -31,6 +32,7 @@ import { FormsModule } from '@angular/forms';
     NavbarComponent,
     MovieCardComponent,
     HomeComponent,
+    MyProfileComponent,
     MovieComponent,
     LoginComponent,
     RegisterComponent,
