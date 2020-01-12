@@ -1,4 +1,4 @@
-div {
+/*div {
   --column-border-width: 12px;
   --theme-black: black;
   --theme-gold: #946c00;
@@ -17,29 +17,13 @@ button {
   align-self: end;
 
   margin: 1%;
-  border-style: none;
-  border-radius: 3px;
+
   padding-left: var(--side-padding);
   padding-right: var(--side-padding);
   font-size: 20px;
 
   background-color: var(--theme-grey);
   color: var(--theme-black);
-}
-
-.manage-button{
-  justify-self: end;
-}
-
-h2 {
-  text-align: center;
-  margin: 0 auto;
-  justify-self: center;
-}
-
-h1{
-  text-align: center;
-  margin: 0 auto;
 }
 
 .column-dark {
@@ -51,26 +35,56 @@ h1{
   padding: 20px;
   background-color: var(--theme-black);
 }
+*/
 
-.column-left {
-  border-left-width: 0px;
-  border-right-width: calc(var(--column-border-width) / 2);
-}
-
-.column-right {
-  border-left-width: calc(var(--column-border-width) / 2);
-  border-right-width: 0px;
-}
-
-.brown-button {
-  background-color: var(--theme-black);
+div {
+  --theme-black: black;
+  --theme-gold: #ccb67a;
+  --theme-rose: #940046;
+  --theme-teal: #008194;
+  --theme-grey: rgb(109, 109, 109);
   color: var(--theme-gold);
+  padding: 5%;
 }
 
-.container {
-  padding: 0%;
+h2 {
+  text-align: center;
+  grid-column-start: 1;
+  grid-column-end: 3;
 }
 
-.row{
-  display: flex;
+h1 {
+  text-align: center;
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+
+button {
+  border-style: none;
+  border-radius: 4px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  font-size: 16px;
+}
+
+.list-container {
+  display: grid;
+  grid-template-columns: auto;
+}
+
+.button-container {
+  grid-row-start: 3;
+  grid-row-end: 6;
+  grid-column-start: 3;
+  grid-column-end: 4;
+  display: grid;
+  grid-template-columns: auto;
+}
+
+.edit-button{
+  width: min-content;
+  height: min-content;
 }

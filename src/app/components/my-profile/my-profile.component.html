@@ -1,31 +1,51 @@
 <!DOCTYPE html>
-<div class="container col-md-10">
-  <div class="row">
-    <h1>Profile Info</h1>
+
+<div class="grid-container">
+  <h1> My Profile</h1>
+
+  <h2>Account Data</h2>
+  <div></div>
+
+  <div class="list-container">
+    <p>ID: {{id}}</p>
+    <p>Username: {{username}}</p>
+    <p>Avatar: </p>
+    <p>Joined: {{enrolmentDate}}</p>
+    <p>Points: {{points}}</p>
   </div>
 
-  <div class="row">
-    <div class="col-md-6 column-dark column-left">
-      <h2>Account Data</h2>
-      <p>ID: {{id}}</p>
-      <p>Username: {{username}}</p>
-      <p>Joined: {{enrolmentDate}}</p>
-      <p>Points: {{points}}</p>
-      <button>edit</button>
-    </div>
-    <div class="col-md-6 column-dark column-right">
-      <h2>Personal Data</h2>
-      <p>First name: {{name}}</p>
-      <p>Last name: {{surname}}</p>
-      <p>Birthday: {{birthdayDate}}</p>
-      <p>Mail: {{email}}</p>
-      <p>Phone no.: {{phoneNo}}</p>
-      <p>Address: not available</p>
-      <button>edit</button>
-    </div>
+  <div class="list-container">
+    <p></p>
+    <button class="edit-button">edit</button>
+    <button class="edit-button">edit</button>
+    <img src="" alt="default avatar">
+    <p></p>
   </div>
-  <div class="row">
-    <h2>Events</h2>
-    <button class="manage-button">manage</button>
+
+  <div class="button-container">
+    <button>go to my preferences (>>)</button>
+        <button>go to my movie library (>>)</button>
+        <button>report a bug (!)</button>
+        <button>delete account (X)</button>
+  </div>
+  <h2>Personal Data</h2>
+  <div class="list-container">
+
+    <p>First name: {{name}}</p>
+    <p>Last name: {{surname}}</p>
+    <p>Birthday: {{birthdayDate}}</p>
+    <p>Mail: {{email}}</p>
+    <p>Phone no.: {{phoneNo}}</p>
+    <p>Address: not available</p>
+  </div>
+
+  <div class="list-container">
+
+    <button class="edit-button">edit</button>
+    <button class="edit-button">edit</button>
+    <button class="edit-button">edit</button>
+    <button class="edit-button">edit</button>
+    <button class="edit-button">edit</button>
+    <button class="edit-button">edit</button>
   </div>
 </div>
