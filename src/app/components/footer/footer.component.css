@@ -1,0 +1,13 @@
+.footer-content {
+    width: 100%;
+}
+.footer-text {
+    color: azure;
+    text-align: right;
+}
+.footer-link {
+    margin-left: 10px;
+}
+.container {
+    max-width: 100%;
+}
