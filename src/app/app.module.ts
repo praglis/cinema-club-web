@@ -26,7 +26,6 @@ import { FormsModule } from '@angular/forms';
 import { FooterComponent } from './components/footer/footer.component';
 import { PrivacyComponent } from './components/privacy/privacy.component';
 import { RegulationsComponent } from './components/regulations/regulations.component';
-import { HelppageComponent } from './components/helppage/helppage.component';
 import { HelpPageComponent } from './components/help-page/help-page.component';
 
 @NgModule({
@@ -48,7 +47,6 @@ import { HelpPageComponent } from './components/help-page/help-page.component';
     FooterComponent,
     PrivacyComponent,
     RegulationsComponent,
-    HelppageComponent,
     HelpPageComponent,
   ],
   imports: [
