@@ -2,7 +2,6 @@
     margin: 0;
     max-width: 100%;
     padding: 0;
-    cursor: url(http://www.rw-designer.com/cursor-extern.php?id=75481), auto;
 }
 .movies-category {
   margin-top: 05rpx;
@@ -39,7 +38,6 @@
   color: beige;
   background: rgba(255, 255, 255, 0.233);
   border-radius: 20px;
-  cursor: url(http://www.rw-designer.com/cursor-extern.php?id=75481), pointer;
 }
 .slide-image {
   background-color: white;
@@ -47,12 +45,10 @@
   margin: 0 auto;
   width: 200px;
   height: 300px;
-  cursor: url(http://www.rw-designer.com/cursor-extern.php?id=75481), pointer;
   /* object-fit: none; */
 }
 .slide-text {
   margin-top: 5px;
   margin-bottom: 0px;
   max-height: 55px;
-  cursor: url(http://www.rw-designer.com/cursor-extern.php?id=75481), pointer;
 }
