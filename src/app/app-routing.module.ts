@@ -12,6 +12,9 @@ import { VerificationComponent } from './components/verification/verification.co
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { FindMovieComponent } from './components/find-movie/find-movie.component';
+import { PrivacyComponent } from './components/privacy/privacy.component';
+import { RegulationsComponent } from './components/regulations/regulations.component';
+import { HelpPageComponent } from './components/help-page/help-page.component';
 
 const routes: Routes = [
   { path: 'movies', component: MoviesListComponent },
@@ -22,6 +25,9 @@ const routes: Routes = [
   { path: 'resetPassword', component: ResetPasswordComponent},
   { path: 'password', component: ChangePasswordComponent},
   { path: 'searchResult', component: FindMovieComponent},
+  { path: 'privacy', component: PrivacyComponent },
+  { path: 'regulation', component: RegulationsComponent },
+  { path: 'help', component: HelpPageComponent},
   {
     path: '',
     component: MainLayoutComponent,

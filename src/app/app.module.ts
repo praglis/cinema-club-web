@@ -23,6 +23,10 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { FindMovieComponent } from './components/find-movie/find-movie.component';
 import { FormsModule } from '@angular/forms';
+import { FooterComponent } from './components/footer/footer.component';
+import { PrivacyComponent } from './components/privacy/privacy.component';
+import { RegulationsComponent } from './components/regulations/regulations.component';
+import { HelpPageComponent } from './components/help-page/help-page.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +44,10 @@ import { FormsModule } from '@angular/forms';
     ResetPasswordComponent,
     ChangePasswordComponent,
     FindMovieComponent,
+    FooterComponent,
+    PrivacyComponent,
+    RegulationsComponent,
+    HelpPageComponent,
   ],
   imports: [
     FormsModule,
