@@ -2,7 +2,11 @@
     background-color: #000000;
 }
 
-.dropdown-menu{ 
+.navbar-brand{
+  font-size: 32px;
+}
+
+.dropdown-menu{
     top: 59px;
 }
 .user .dropdown-menu {
@@ -11,7 +15,7 @@
 }
 
 .nav-item {
-    font-size: 24px;
+    font-size: 18px;
 }
 .searchBox{
 background-color: #000000;

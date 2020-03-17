@@ -1,16 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; 
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 
-    background-image: url(assets/images/background.jpg);
-    background-repeat: no-repeat;
-    background-position: center ;
-    background-size: cover;
-    background-attachment: fixed;
-    color: white;
+  background-image: url(assets/images/background.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  color: white;
 }
 
-.elegant-color{
-    color:#2E2E2E
+.elegant-color {
+  color: #2e2e2e;
 }

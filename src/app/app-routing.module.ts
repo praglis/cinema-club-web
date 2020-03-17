@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { MoviesListComponent } from './components/movieslist/movieslist.component';
 import { MainLayoutComponent } from './components/main-layout/main-layout.component';
 import { HomeComponent } from './components/home/home.component';
+import { MyProfileComponent } from './components/my-profile/my-profile.component';
 import { MovieComponent } from './components/movie/movie.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -11,6 +12,9 @@ import { VerificationComponent } from './components/verification/verification.co
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { FindMovieComponent } from './components/find-movie/find-movie.component';
+import { PrivacyComponent } from './components/privacy/privacy.component';
+import { RegulationsComponent } from './components/regulations/regulations.component';
+import { HelpPageComponent } from './components/help-page/help-page.component';
 
 const routes: Routes = [
   { path: 'movies', component: MoviesListComponent },
@@ -21,6 +25,9 @@ const routes: Routes = [
   { path: 'resetPassword', component: ResetPasswordComponent},
   { path: 'password', component: ChangePasswordComponent},
   { path: 'searchResult', component: FindMovieComponent},
+  { path: 'privacy', component: PrivacyComponent },
+  { path: 'regulation', component: RegulationsComponent },
+  { path: 'help', component: HelpPageComponent},
   {
     path: '',
     component: MainLayoutComponent,
@@ -37,6 +44,7 @@ const routes: Routes = [
     ], canActivate: [AuthGuard]
   },
   { path: 'home', component: MainLayoutComponent },
+  { path: 'my_profile', component: MyProfileComponent }
 ];
 
 @NgModule({
