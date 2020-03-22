@@ -13,20 +13,20 @@ export class MovieService {
 
   getPopularMovies(page: number): Observable<any> {
     let url = "http://localhost:8200/movies/popular?page=" + page;
-    return this.httpClient.get<any>(url)
+    return this.httpClient.get<any>(url, {withCredentials : true})
       .pipe();
   }
 
   getBestMovies(page: number): Observable<any> {
     let url = "http://localhost:8200/movies/best?page=" + page;
-    return this.httpClient.get<any>(url)
+    return this.httpClient.get<any>(url, {withCredentials : true})
       .pipe();
   }
 
   getMovie(id: number): Observable<any> {
     let url = "http://localhost:8200/movie/get";
     url += "?id=" + id;
-    return this.httpClient.get<any>(url)
+    return this.httpClient.get<any>(url, {withCredentials : true})
       .pipe();
   }
 
@@ -34,20 +34,20 @@ export class MovieService {
     let url = "http://localhost:8200/movie/get/reviews/nyt";
     url += "?title=" + title;
 
-    return this.httpClient.get<any>(url).pipe();
+    return this.httpClient.get<any>(url, {withCredentials : true}).pipe();
   }
 
   getMovieGuardianReview(title: string): Observable<any> {
     let url = "http://localhost:8200/movie/get/reviews/guardian";
     url += "?title=" + title;
 
-    return this.httpClient.get<any>(url).pipe();
+    return this.httpClient.get<any>(url, {withCredentials : true}).pipe();
   }
 
   getMovieByQuery(query: string): Observable<any> {
     let url = 'http://localhost:8200/movie/get/search';
     url += '?query=' + query;
-    return this.httpClient.get<any>(url)
+    return this.httpClient.get<any>(url, {withCredentials : true})
       .pipe();
   }
 

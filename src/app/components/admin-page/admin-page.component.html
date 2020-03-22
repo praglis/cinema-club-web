@@ -1,0 +1,18 @@
+<div id="admin-page">
+  <div class="container">
+    <h1 class="text-center pt-5 promotion-title">Admin page</h1>
+    <div id="admin-page-row" class="row justify-content-center align-items-center">
+      <form  id="login-form"  class="form"(ngSubmit)="onSubmit($event)">
+        <div class="keyword-wrapper">
+          <input type="text"  list="names" [(ngModel)]="userModel" (change)="saveCode($event)">
+        </div>
+        <datalist id = "names">
+          <option *ngFor="let user of usersList" [value]= "user" >{{user}}</option>
+        </datalist>
+        <button class="btn btn-secondary">
+          Ban
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
