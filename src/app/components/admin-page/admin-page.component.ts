@@ -5,6 +5,7 @@ import {MovieService} from '../../services/movie.service';
 import {AdminService} from '../../services/admin.service';
 import {MoviesList} from '../../interfaces/movieslist.interface';
 import {FormControl} from '@angular/forms';
+import {UserService} from '../../services/user.service';
 
 @Component({
   selector: 'app-admin-page',
@@ -18,7 +19,8 @@ export class AdminPageComponent implements OnInit {
   public userModel: string;
 
   constructor(private activatedRoute: ActivatedRoute,
-              private adminService: AdminService) { }
+              private adminService: AdminService,
+              private userService: UserService){ }
 
   ngOnInit() {
     this.getUserObserver().subscribe(response =>
@@ -32,7 +34,7 @@ export class AdminPageComponent implements OnInit {
 
 
   private getUserObserver() {
-    return this.adminService.getAllUsers();
+    return this.userService.getAllUsers();
   }
 
   private banUser(userName: string) {
