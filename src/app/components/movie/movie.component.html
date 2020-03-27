@@ -1,3 +1,4 @@
+<div *ngIf="success_msg != undefined" class="alert alert-success">{{success_msg}}</div>
 <div class="movie-details">
   <div class="container">
     <div class="row">
@@ -96,6 +97,31 @@
       </div>
       <div class="review-link">
         Read more at: <a href="{{reviewGuardian.webUrl}}">The Guardian</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="userReviews" class="user-review-content">
+    <button *ngIf="!showCommentForm" class="btn btn-dark" type="button" (click)="onAddReviewClick()">Add comment</button>
+    <div *ngIf="showCommentForm" style="margin-bottom: 75px;">
+      <div style="text-align: left; margin-bottom: -10px;"><p>My comment</p></div>
+      <textarea #commentForm class="form-control darkTextArea" rows="3"></textarea>
+      <div class="row">
+        <div class="col-sm">
+          <a (click)="submitComment()" class="review-button add-comment-button row float-left">Add comment</a>
+        </div>
+        <div class="col-sm">
+          <a (click)="showCommentForm = false" class="review-button row float-right">Close button</a>
+        </div>
+      </div>
+    </div>
+    <div class="comments-section">
+      <div *ngFor="let item of comments" class="commentArea">
+          <p style="color: #6a6666;"><strong class="text-grey">{{item.infoCU.username}}</strong> write on day {{item.infoCD | date}}</p>
+          <div style="margin-left: 10px; margin-right: 10px;">
+            <p>{{item.statement}}</p>
+          </div>
+          <p style="font-size: 24px;">{{item.likes}} <a (click)="likeComment(item.id)"><i class="far fa-thumbs-up"></i></a></p>
       </div>
     </div>
   </div>
