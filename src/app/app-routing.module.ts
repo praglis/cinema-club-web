@@ -11,6 +11,7 @@ import { AuthGuard } from './helpers/authGuard';
 import { VerificationComponent } from './components/verification/verification.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
+import { AdminPageComponent } from './components/admin-page/admin-page.component';
 import { FindMovieComponent } from './components/find-movie/find-movie.component';
 import { PrivacyComponent } from './components/privacy/privacy.component';
 import { RegulationsComponent } from './components/regulations/regulations.component';
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'privacy', component: PrivacyComponent },
   { path: 'regulation', component: RegulationsComponent },
   { path: 'help', component: HelpPageComponent},
+  { path: 'admin', component: AdminPageComponent},
   {
     path: '',
     component: MainLayoutComponent,
