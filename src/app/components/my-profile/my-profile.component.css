@@ -21,6 +21,15 @@ button {
   border-radius: 4px;
 }
 
+img{
+  height: 100px;
+  width: 100px;
+}
+
+p{
+  padding: 10px 0;
+}
+
 .grid-container {
   display: grid;
   grid-template-columns: auto auto auto;
@@ -44,4 +53,11 @@ button {
 .edit-button {
   width: min-content;
   height: min-content;
+}
+
+.avatar-container{
+  display: grid;
+  grid-template-columns: auto auto;
+  padding: -5%;
+  align-items: center;
 }

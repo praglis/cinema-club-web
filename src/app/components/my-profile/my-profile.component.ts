@@ -47,8 +47,6 @@ export class MyProfileComponent implements OnInit {
   }
 
   getCleanAddress(): string {
-    console.log('address:', this.address);
-
     const cleanAddress = this.address.streetName + ' ' + this.address.houseNumber + ', '
     + this.address.city + ', ' + this.address.state + ', ' + this.address.country;
     return cleanAddress;
