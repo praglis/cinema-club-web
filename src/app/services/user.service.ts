@@ -23,4 +23,10 @@ export class UserService {
     return this.httpClient.get<any>(this.url)
       .pipe();
   }
+
+  getAllUsers(): Observable<any>{
+    let url = "http://localhost:8200/getUsers";
+    return this.httpClient.get<any>(url, {withCredentials : true})
+      .pipe();
+  }
 }

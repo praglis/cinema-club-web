@@ -57,3 +57,47 @@
   color: white;
   margin-top: 20px;
 }
+
+.darkTextArea {
+  outline: none;
+  color: white;
+  border-color: black;
+  background-color: #2d2d2dbf;
+  resize: none;
+}
+
+.review-button {
+  text-decoration: underline;
+  color: dimgrey;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.add-comment-button {
+  font-size: 24px;
+  color: azure;
+}
+
+.user-review-content {
+  width: 50%;
+  margin-top: 50px;
+}
+
+.comments-section {
+  width: 100%;
+}
+.commentArea {
+  /* margin: 10px; */
+  padding-left: 20px;
+  width: 100%;
+  text-align: left;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: #2d2d2dbf;
+  /* box-shadow: 10px 10px 5px #2d2d2dbf; */
+  border-radius: 25px;
+}
+
+a:hover {
+  cursor:pointer;
+ }

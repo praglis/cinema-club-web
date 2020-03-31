@@ -21,6 +21,7 @@ import { ErrorInterceptor } from './helpers/errorInterceptor';
 import { VerificationComponent } from './components/verification/verification.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
+import { AdminPageComponent } from './components/admin-page/admin-page.component';
 import { FindMovieComponent } from './components/find-movie/find-movie.component';
 import { FormsModule } from '@angular/forms';
 import { FooterComponent } from './components/footer/footer.component';
@@ -43,6 +44,7 @@ import { HelpPageComponent } from './components/help-page/help-page.component';
     VerificationComponent,
     ResetPasswordComponent,
     ChangePasswordComponent,
+    AdminPageComponent,
     FindMovieComponent,
     FooterComponent,
     PrivacyComponent,
