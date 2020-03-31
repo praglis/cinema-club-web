@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
+  url = 'http://localhost:8200/user';
 
   constructor(
     private httpClient: HttpClient
@@ -18,8 +19,8 @@ export class UserService {
   }
 
   findByUsername(username: string): Observable<any> {
-    const url = 'http://localhost:8200/user/get?username=' + username;
-    return this.httpClient.get<any>(url)
+    // const url = 'http://localhost:8200/user/get?username=' + username;
+    return this.httpClient.get<any>(this.url)
       .pipe();
   }
 }
