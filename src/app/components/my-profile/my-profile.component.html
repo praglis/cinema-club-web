@@ -8,7 +8,9 @@
 
   <div class="list-container">
     <p>ID: {{id}}</p>
-    <p>Username: {{username}}</p>
+    <p>
+      Username: <span *ngIf="edited != 'username'">{{username}}</span>
+      <input type="text" *ngIf="edited == 'username'" ngModel={{editedProfile.username}}></p>
     <section class="avatar-container">
       <p>Avatar: </p>
       <img src="../../../assets/images/default-avatar.png" alt="default avatar">
@@ -19,8 +21,8 @@
 
   <div class="list-container">
     <p></p>
-    <button class="edit-button">edit</button>
-    <button class="edit-button">edit</button>
+    <button class="edit-button" (click)="edit('username')">edit</button>
+    <button class="edit-button" (click)="edit('avatar')">edit</button>
     <p></p>
   </div>
 
@@ -33,21 +35,39 @@
   <h2>Personal Data</h2>
   <div class="list-container">
 
-    <p>First name: {{name}}</p>
-    <p>Last name: {{surname}}</p>
-    <p>Birthday: {{birthdayDate}}</p>
-    <p>Mail: {{email}}</p>
-    <p>Phone no.: {{phoneNo}}</p>
-    <p>Address: {{getCleanAddress()}}</p>
+    <p>
+      Name: <span *ngIf="edited != 'name'"> {{name}}</span>
+      <input type="text" *ngIf="edited == 'name'" ngModel={{editedProfile.name}}>
+    </p>
+
+    <p>
+      Last name: <span *ngIf="edited != 'surname'">  {{surname}}</span>
+      <input type="text" *ngIf="edited == 'surname'" ngModel={{editedProfile.surname}}></p>
+    <p>
+      Birthday: <span *ngIf="edited != 'birthdayDate'">  {{birthdayDate}}</span>
+      <input type="text" *ngIf="edited == 'birthdayDate'" ngModel={{editedProfile.birthday}}>
+    </p>
+    <p>
+      Mail: <span *ngIf="edited != 'email'">  {{email}}</span>
+      <input type="text" *ngIf="edited == 'email'" ngModel={{editedProfile.email}}>
+    </p>
+    <p>
+      Phone no.: <span *ngIf="edited != 'phoneNo'">  {{phoneNo}}</span>
+      <input type="text" *ngIf="edited == 'phoneNo'" ngModel={{editedProfile.phoneNo}}>
+    </p>
+    <p>
+      Address: <span *ngIf="edited != 'address'">  {{getCleanAddress()}}</span>
+      <input type="text" *ngIf="edited == 'address'" ngModel={{editedProfile.address}}>
+    </p>
   </div>
 
   <div class="list-container">
 
-    <button class="edit-button">edit</button>
-    <button class="edit-button">edit</button>
-    <button class="edit-button">edit</button>
-    <button class="edit-button">edit</button>
-    <button class="edit-button">edit</button>
-    <button class="edit-button">edit</button>
+    <button class="edit-button" (click)="edit('name')">edit</button>
+    <button class="edit-button" (click)="edit('surname')">edit</button>
+    <button class="edit-button" (click)="edit('birthdayDate')">edit</button>
+    <button class="edit-button" (click)="edit('email')">edit</button>
+    <button class="edit-button" (click)="edit('phoneNo')">edit</button>
+    <button class="edit-button" (click)="edit('address')">edit</button>
   </div>
 </div>

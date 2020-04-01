@@ -12,20 +12,19 @@ export class UserService {
     private httpClient: HttpClient
   ) { }
 
-  findById(id: string): Observable<any> {
-    const url = 'http://localhost:8200/user/get?id=' + id;
-    return this.httpClient.get<any>(url)
-      .pipe();
-  }
-
   findLoggedUser(): Observable<any> {
     const url = 'http://localhost:8200/user';
-    return this.httpClient.get<any>(url,  {withCredentials: true}).pipe();
+    return this.httpClient.get<any>(url, { withCredentials: true }).pipe();
+  }
+
+  updateProfile(user): Observable<any> {
+    const url = 'http://localhost:8200/user/update';
+    return this.httpClient.post(url, user, { withCredentials: true });
   }
 
   getAllUsers(): Observable<any> {
     const url = 'http://localhost:8200/getUsers';
-    return this.httpClient.get<any>(url, {withCredentials : true})
+    return this.httpClient.get<any>(url, { withCredentials: true })
       .pipe();
   }
 }
