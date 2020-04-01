@@ -2,6 +2,8 @@ import { Component, OnInit, Injectable, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { User } from '../../interfaces/user.interface';
+import { Address } from '../../interfaces/address.interface';
+import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-my-profile',
@@ -23,22 +25,30 @@ export class MyProfileComponent implements OnInit {
   @Input() birthdayDate: Date;
   @Input() email: string;
   @Input() phoneNo: string;
-  @Input() address: string;
+  @Input() address: Address;
 
-  constructor(private userService: UserService) { }
+
+  constructor(private userService: UserService) {
+  }
 
   ngOnInit() {
-    this.userService.findByUsername('zxcv').subscribe((jsonObject: User) => {
-      this.id = (jsonObject as User).id;
-      this.username = (jsonObject as User).username;
-      this.enrolmentDate = (jsonObject as User).enrolmentDate;
-      this.points = (jsonObject as User).points;
-      this.name = (jsonObject as User).name;
-      this.surname = (jsonObject as User).surname;
-      this.birthdayDate = (jsonObject as User).birthday;
-      this.email = (jsonObject as User).email;
-      this.phoneNo = (jsonObject as User).phoneNo;
-      this.address = (jsonObject as User).address;
+    this.userService.findLoggedUser().subscribe((jsonObject: User) => {
+      this.id = (jsonObject.username as unknown as User).id;
+      this.username = (jsonObject.username as unknown as User).username;
+      this.enrolmentDate = (jsonObject.username as unknown as User).enrolmentDate;
+      this.points = (jsonObject.username as unknown as User).points;
+      this.name = (jsonObject.username as unknown as User).name;
+      this.surname = (jsonObject.username as unknown as User).surname;
+      this.birthdayDate = (jsonObject.username as unknown as User).birthday;
+      this.email = (jsonObject.username as unknown as User).email;
+      this.phoneNo = (jsonObject.username as unknown as User).phoneNo;
+      this.address = (jsonObject.username as unknown as User).address as unknown as Address;
     });
+  }
+
+  getCleanAddress(): string {
+    const cleanAddress = this.address.streetName + ' ' + this.address.houseNumber + ', '
+    + this.address.city + ', ' + this.address.state + ', ' + this.address.country;
+    return cleanAddress;
   }
 }
