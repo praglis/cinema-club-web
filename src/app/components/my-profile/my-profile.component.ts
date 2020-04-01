@@ -33,16 +33,16 @@ export class MyProfileComponent implements OnInit {
 
   ngOnInit() {
     this.userService.findLoggedUser().subscribe((jsonObject: User) => {
-      this.id = (jsonObject as User).id;
-      this.username = (jsonObject as User).username;
-      this.enrolmentDate = (jsonObject as User).enrolmentDate;
-      this.points = (jsonObject as User).points;
-      this.name = (jsonObject as User).name;
-      this.surname = (jsonObject as User).surname;
-      this.birthdayDate = (jsonObject as User).birthday;
-      this.email = (jsonObject as User).email;
-      this.phoneNo = (jsonObject as User).phoneNo;
-      this.address = (jsonObject as User).address as unknown as Address;
+      this.id = (jsonObject.username as unknown as User).id;
+      this.username = (jsonObject.username as unknown as User).username;
+      this.enrolmentDate = (jsonObject.username as unknown as User).enrolmentDate;
+      this.points = (jsonObject.username as unknown as User).points;
+      this.name = (jsonObject.username as unknown as User).name;
+      this.surname = (jsonObject.username as unknown as User).surname;
+      this.birthdayDate = (jsonObject.username as unknown as User).birthday;
+      this.email = (jsonObject.username as unknown as User).email;
+      this.phoneNo = (jsonObject.username as unknown as User).phoneNo;
+      this.address = (jsonObject.username as unknown as User).address as unknown as Address;
     });
   }
 
