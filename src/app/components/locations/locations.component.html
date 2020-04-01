@@ -1,0 +1,39 @@
+<div class="row" style="padding: 20px">
+  <div class="col-4">
+
+    <li class="nav-item nav-link" style="padding-bottom: 20px">
+      <div class="input-group">
+        <input (keyup.enter)="szukaj()" [(ngModel)]="tekst" type="text"
+               class="form-control bg-transparent border-dark searchBox" type="search"
+               placeholder="Find the cinema" aria-label="Search">
+        <div class="input-group-append">
+          <button (click)="szukaj()" class="btn btn-outline-dark btn-style"> <i
+            class="fas fa-search fa-fw"></i> Search</button>
+        </div>
+      </div>
+    </li>
+
+    <div *ngIf="cinemas.length !== 0" class="movies">
+      <table class="table table-striped text-white">
+        <tr *ngFor="let cinema of cinemas">
+          <td>
+            <p style="color: brown; cursor: pointer" (click)="wybierz(cinema)">{{cinema.name}}</p>
+
+            <p style="cursor: default" align="justify">
+              {{cinema.address.city}}, {{cinema.address.streetName}} {{cinema.address.houseNumber}}
+            </p>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div *ngIf="cinemas.length  === 0">
+      <h1>No results found</h1>
+    </div>
+
+
+  </div>
+  <div class="col-8">
+    <app-map [cinema]="wybor"></app-map>
+  </div>
+</div>

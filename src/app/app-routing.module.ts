@@ -16,6 +16,7 @@ import { FindMovieComponent } from './components/find-movie/find-movie.component
 import { PrivacyComponent } from './components/privacy/privacy.component';
 import { RegulationsComponent } from './components/regulations/regulations.component';
 import { HelpPageComponent } from './components/help-page/help-page.component';
+import { LocationsComponent } from './components/locations/locations.component';
 
 const routes: Routes = [
   { path: 'movies', component: MoviesListComponent },
@@ -46,7 +47,8 @@ const routes: Routes = [
     ], canActivate: [AuthGuard]
   },
   { path: 'home', component: MainLayoutComponent },
-  { path: 'my_profile', component: MyProfileComponent }
+  { path: 'my_profile', component: MyProfileComponent },
+  { path: 'locations', component: LocationsComponent }
 ];
 
 @NgModule({

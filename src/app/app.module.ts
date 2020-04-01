@@ -28,6 +28,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { PrivacyComponent } from './components/privacy/privacy.component';
 import { RegulationsComponent } from './components/regulations/regulations.component';
 import { HelpPageComponent } from './components/help-page/help-page.component';
+import { LocationsComponent } from './components/locations/locations.component';
+import { MapComponent } from './components/locations/map/map.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,8 @@ import { HelpPageComponent } from './components/help-page/help-page.component';
     PrivacyComponent,
     RegulationsComponent,
     HelpPageComponent,
+    LocationsComponent,
+    MapComponent,
   ],
   imports: [
     FormsModule,
