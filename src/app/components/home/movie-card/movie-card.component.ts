@@ -1,6 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit, AfterViewChecked, ContentChild, Directive, AfterContentChecked, QueryList, ViewChildren } from '@angular/core';
 import { MovieService } from 'src/app/services/movie.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import {UserService} from '../../../services/user.service';
+import {Router} from '@angular/router';
+import {AuthenticationService} from '../../../services/authentication.service';
 declare let Swiper: any;
 
 @Component({
@@ -28,11 +31,22 @@ export class MovieCardComponent implements OnInit, AfterViewInit {
   bestMovies: any[];
   popularMoviesSwiper: any;
   bestMoviesSwiper: any;
+  x: any;
 
   constructor(
     private movieService: MovieService,
-    private santizator: DomSanitizer
-  ) { }
+    private userService: UserService,
+    private router: Router,
+    private santizator: DomSanitizer,
+    private authenticationService: AuthenticationService
+  ) {
+    this.userService.checkIfUserIsLogged().subscribe(res => {
+      if (!res) {
+        this.authenticationService.logout();
+        this.router.navigate(['/login']);
+      }
+    });
+  }
 
   ngAfterViewInit() {
     this.popularMoviesSwiper = this.initPopularMoviesSwiper()
@@ -42,6 +56,7 @@ export class MovieCardComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+
     this.popularMovies = this.pupulateSlides();
     this.bestMovies = this.pupulateSlides();
     this.movieService.getPopularMovies(1)
