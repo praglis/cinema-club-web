@@ -19,11 +19,12 @@ h1 {
 button {
   border-style: none;
   border-radius: 4px;
+  float: left;
 }
 
 img{
-  height: 100px;
-  width: 100px;
+  height: 70px;
+  width: 70px;
 }
 
 p{
@@ -48,6 +49,7 @@ p{
   grid-column-end: 4;
   display: grid;
   grid-template-columns: auto;
+  row-gap: 50px;
 }
 
 .edit-button {
@@ -60,4 +62,8 @@ p{
   grid-template-columns: auto auto;
   padding: -5%;
   align-items: center;
+}
+
+.submit-button{
+  background-color: var(--theme-gold);
 }

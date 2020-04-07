@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-
+<!-- <form (ngSubmit)="onSubmit()"> -->
 <div class="grid-container">
   <h1> My Profile</h1>
 
@@ -9,8 +9,8 @@
   <div class="list-container">
     <p>ID: {{id}}</p>
     <p>
-      Username: <span *ngIf="edited != 'username'">{{username}}</span>
-      <input type="text" *ngIf="edited == 'username'" ngModel={{editedProfile.username}}></p>
+      Username: <span *ngIf="editedField != 'username'">{{username}}</span>
+      <input type="text" *ngIf="editedField == 'username'" ngModel={{editedProfile.username}}></p>
     <section class="avatar-container">
       <p>Avatar: </p>
       <img src="../../../assets/images/default-avatar.png" alt="default avatar">
@@ -27,37 +27,39 @@
   </div>
 
   <div class="button-container">
+    <button class="submit-button" *ngIf="editedField != 'none'" (click)="onSubmit()">submit changes</button>
     <button>go to my preferences (>>)</button>
-        <button>go to my movie library (>>)</button>
-        <button>report a bug (!)</button>
-        <button>delete account (X)</button>
+    <button>go to my movie library (>>)</button>
+    <button>report a bug (!)</button>
+    <button>delete account (X)</button>
+
   </div>
   <h2>Personal Data</h2>
   <div class="list-container">
 
     <p>
-      Name: <span *ngIf="edited != 'name'"> {{name}}</span>
-      <input type="text" *ngIf="edited == 'name'" ngModel={{editedProfile.name}}>
+      Name: <span *ngIf="editedField != 'name'"> {{name}}</span>
+      <input type="text" *ngIf="editedField == 'name'" ngModel={{editedProfile.name}}>
     </p>
 
     <p>
-      Last name: <span *ngIf="edited != 'surname'">  {{surname}}</span>
-      <input type="text" *ngIf="edited == 'surname'" ngModel={{editedProfile.surname}}></p>
+      Last name: <span *ngIf="editedField != 'surname'">  {{surname}}</span>
+      <input type="text" *ngIf="editedField == 'surname'" ngModel={{editedProfile.surname}}></p>
     <p>
-      Birthday: <span *ngIf="edited != 'birthdayDate'">  {{birthdayDate}}</span>
-      <input type="text" *ngIf="edited == 'birthdayDate'" ngModel={{editedProfile.birthday}}>
+      Birthday: <span *ngIf="editedField != 'birthdayDate'">  {{birthdayDate}}</span>
+      <input type="text" *ngIf="editedField == 'birthdayDate'" ngModel={{editedProfile.birthday}}>
     </p>
     <p>
-      Mail: <span *ngIf="edited != 'email'">  {{email}}</span>
-      <input type="text" *ngIf="edited == 'email'" ngModel={{editedProfile.email}}>
+      Mail: <span *ngIf="editedField != 'email'">  {{email}}</span>
+      <input type="text" *ngIf="editedField == 'email'" ngModel={{editedProfile.email}}>
     </p>
     <p>
-      Phone no.: <span *ngIf="edited != 'phoneNo'">  {{phoneNo}}</span>
-      <input type="text" *ngIf="edited == 'phoneNo'" ngModel={{editedProfile.phoneNo}}>
+      Phone no.: <span *ngIf="editedField != 'phoneNo'">  {{phoneNo}}</span>
+      <input type="text" *ngIf="editedField == 'phoneNo'" ngModel={{editedProfile.phoneNo}}>
     </p>
     <p>
-      Address: <span *ngIf="edited != 'address'">  {{getCleanAddress()}}</span>
-      <input type="text" *ngIf="edited == 'address'" ngModel={{editedProfile.address}}>
+      Address: <span *ngIf="editedField != 'address'">  {{getCleanAddress()}}</span>
+      <input type="text" *ngIf="editedField == 'address'" ngModel={{editedProfile.address}}>
     </p>
   </div>
 
@@ -70,4 +72,6 @@
     <button class="edit-button" (click)="edit('phoneNo')">edit</button>
     <button class="edit-button" (click)="edit('address')">edit</button>
   </div>
+
 </div>
+<!-- </form> -->

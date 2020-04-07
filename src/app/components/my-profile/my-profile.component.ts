@@ -27,12 +27,12 @@ export class MyProfileComponent implements OnInit {
   @Input() phoneNo: string;
   @Input() address: Address;
 
-  edited: string;
+  editedField: string;
 
   editedProfile: User;
 
   constructor(private userService: UserService) {
-    this.edited = 'none';
+    this.editedField = 'none';
   }
 
   ngOnInit() {
@@ -51,6 +51,10 @@ export class MyProfileComponent implements OnInit {
     });
   }
 
+  onSubmit(){
+    this.editedField = 'none';
+  }
+
   getCleanAddress(): string {
     const cleanAddress = this.address.streetName + ' ' + this.address.houseNumber + ', '
       + this.address.city + ', ' + this.address.state + ', ' + this.address.country;
@@ -58,6 +62,6 @@ export class MyProfileComponent implements OnInit {
   }
 
   edit(field: string): void {
-    this.edited = field;
+    this.editedField = field;
   }
 }
