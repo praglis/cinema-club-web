@@ -44,7 +44,7 @@
                             <label for="passwordRepeat" id="passwordRepeat" class="register-field">Repeat
                                 password:</label><br>
                             <input type="password" formControlName="passwordRepeat" id="passwordRepeat"
-                                class="form-control"
+                                class="form-control" placeholder="Repeat secret password"
                                 [ngClass]="{ 'is-invalid': submitted && registerFormControls.passwordRepeat.errors }" />
                             <div *ngIf="submitted && registerFormControls.passwordRepeat.errors"
                                 class="invalid-feedback">
@@ -87,7 +87,7 @@
                                     <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                                     Register
                                 </button>
-                                <a routerLink="/login" class="btn text-right register-field">I have account</a>
+                                <a routerLink="/login" class="btn text-right register-field">I have an account</a>
                             </div>
                             <div class="col-sm text-right">
                                 <button type="button" class="btn btn-link"
@@ -103,4 +103,4 @@
             </div>
         </div>
     </div>
-</div>z
+</div>

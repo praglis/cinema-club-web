@@ -27,4 +27,10 @@ export class UserService {
     return this.httpClient.get<any>(url, { withCredentials: true })
       .pipe();
   }
+
+  checkIfUserIsLogged(): Observable<any> {
+    const url = 'http://localhost:8200/check';
+    return this.httpClient.get<boolean>(url, {withCredentials : true})
+      .pipe();
+  }
 }
