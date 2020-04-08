@@ -51,17 +51,39 @@ export class MyProfileComponent implements OnInit {
     });
   }
 
-  onSubmit(){
+  onSubmit() {
+    console.log('OnSubmit');
     this.editedField = 'none';
+    console.log('editedProfile:' + JSON.stringify(this.editedProfile));
+
+    const userValues = this.convertToUserValues(this.editedProfile);
+    this.userService.updateProfile(userValues);
+    console.log('OnSubmit YEET');
   }
 
-  getCleanAddress(): string {
-    const cleanAddress = this.address.streetName + ' ' + this.address.houseNumber + ', '
-      + this.address.city + ', ' + this.address.state + ', ' + this.address.country;
+  getCleanAddress(user: User): string {
+    const cleanAddress = user.address.streetName + ' ' + user.address.houseNumber + ', '
+      + user.address.city + ', ' + user.address.state + ', ' + user.address.country;
     return cleanAddress;
   }
 
   edit(field: string): void {
     this.editedField = field;
+  }
+
+  convertToUserValues(values) {
+    return {
+      name: values.name,
+      surname: values.surname,
+      birthday: values.birthday,
+      phoneNo: values.phoneNo,
+      address: {
+        country: values.address.country,
+        state: values.address.state,
+        city: values.address.city,
+        streetName: values.address.streetName,
+        houseNumber: values.address.houseNumber
+      }
+    };
   }
 }
