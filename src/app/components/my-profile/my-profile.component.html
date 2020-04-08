@@ -6,7 +6,7 @@
   <div></div>
 
   <div class="list-container">
-    <p>ID: <span>{{id}}</span></p>
+    <p>ID: <span>{{editedProfile.id}}</span></p>
     <p>
       Username: <span *ngIf="editedField != 'username'">{{editedProfile.username}}</span>
     </p>
@@ -14,8 +14,8 @@
       <p>Avatar: </p>
       <img src="../../../assets/images/default-avatar.png" alt="default avatar">
     </section>
-    <p>Joined: {{enrolmentDate}}</p>
-    <p>Points: {{points}}</p>
+    <p>Joined: {{editedProfile.enrolmentDate|date : 'mediumDate'}}</p>
+    <p>Points: {{editedProfile.points}}</p>
   </div>
 
   <div class="button-container">
@@ -38,7 +38,7 @@
       Last name: <span *ngIf=" editedField !='surname'">  {{editedProfile.surname}}</span>
       <input id=" surname" type="text" *ngIf="editedField == 'surname'" [(ngModel)]="editedProfile.surname"></p>
     <p>
-      Birthday: <span *ngIf="editedField != 'birthdayDate'">  {{editedProfile.birthday}}</span>
+      Birthday: <span *ngIf="editedField != 'birthdayDate'">  {{editedProfile.birthday|date : 'mediumDate'}}</span>
       <input id="birthdayDate" type="text" *ngIf="editedField == 'birthdayDate'" [(ngModel)]="editedProfile.birthday">
     </p>
     <p>
