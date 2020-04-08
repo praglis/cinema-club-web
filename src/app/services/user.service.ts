@@ -14,16 +14,12 @@ export class UserService {
 
   findLoggedUser(): Observable<any> {
     const url = 'http://localhost:8200/user';
-    console.log(JSON.stringify(this.httpClient.get<any>(url, { withCredentials: true })));
     return this.httpClient.get<any>(url, { withCredentials: true }).pipe();
   }
 
   updateProfile(user) {
 
     const url = 'http://localhost:8200/user/update';
-    console.log('userstr: ' + JSON.stringify(user));
-    // console.log('user: ' + user);
-    // console.log('mystery: ' + JSON.stringify(this.httpClient.post<any>(url, user, { withCredentials: true })));
     return this.httpClient.post<any>(url, user, { withCredentials: true })
       .subscribe();
   }

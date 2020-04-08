@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- <form (ngSubmit)="onSubmit()"> -->
 <div class="grid-container">
   <h1> My Profile</h1>
 
@@ -7,19 +6,16 @@
   <div></div>
 
   <div class="list-container">
-    <p>ID: {{id}}</p>
+    <p>ID: <span>{{id}}</span></p>
     <p>
       Username: <span *ngIf="editedField != 'username'">{{editedProfile.username}}</span>
-      <input id="username" type="text" *ngIf="editedField == 'username'" [(ngModel)]="editedProfile.username"></p>
+    </p>
     <section class="avatar-container">
       <p>Avatar: </p>
       <img src="../../../assets/images/default-avatar.png" alt="default avatar">
     </section>
     <p>Joined: {{enrolmentDate}}</p>
     <p>Points: {{points}}</p>
-  </div>
-
-  <div class="list-container">
   </div>
 
   <div class="button-container">
@@ -53,20 +49,30 @@
       <input id="phoneNo" type="text" *ngIf="editedField == 'phoneNo'" [(ngModel)]="editedProfile.phoneNo">
     </p>
     <p>
-      Address: <span *ngIf="editedField != 'address'">  {{getCleanAddress(editedProfile)}}</span>
-      <input id="address" type="text" *ngIf="editedField == 'address'" [(ngModel)]="editedProfile.address">
+      Address: {{getCleanAddress(editedProfile)}}
     </p>
+    <span *ngIf="editedField == 'address'" class="address-container">
+      <br>
+      Country: <input type="text" [(ngModel)]="editedProfile.address.country"><br>
+      State: <input type="text" [(ngModel)]="editedProfile.address.state"><br>
+      City: <input type="text" [(ngModel)]="editedProfile.address.city"><br>
+      Street: <input type="text" [(ngModel)]="editedProfile.address.streetName"><br>
+      House number: <input type="text" [(ngModel)]="editedProfile.address.houseNumber">
+
+    </span>
+
   </div>
 
-  <div class="list-container">
+  <div class="edit-button-container">
 
     <button class="edit-button" (click)="edit('name')">edit</button>
     <button class="edit-button" (click)="edit('surname')">edit</button>
     <button class="edit-button" (click)="edit('birthdayDate')">edit</button>
-    <span></span>
+    <span class="edit-span"></span>
     <button class="edit-button" (click)="edit('phoneNo')">edit</button>
     <button class="edit-button" (click)="edit('address')">edit</button>
+    <span *ngIf="editedField == 'address'" class="address-container"></span>
+
   </div>
 
 </div>
-<!-- </form> -->

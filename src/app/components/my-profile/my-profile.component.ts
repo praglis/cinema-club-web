@@ -52,13 +52,9 @@ export class MyProfileComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('OnSubmit');
     this.editedField = 'none';
-    console.log('editedProfile:' + JSON.stringify(this.editedProfile));
-
     const userValues = this.convertToUserValues(this.editedProfile);
     this.userService.updateProfile(userValues);
-    console.log('OnSubmit YEET');
   }
 
   getCleanAddress(user: User): string {
