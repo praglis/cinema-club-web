@@ -1,5 +1,5 @@
 <div *ngIf="success_msg != undefined" class="alert alert-success">{{success_msg}}</div>
-<div class="movie-details">
+<div class="movie-details" *ngIf="movie != undefined">
   <div class="container">
     <div class="row">
       <div class="col align-middle">
@@ -13,7 +13,12 @@
     <div class="row" style="padding-top: 15px">
       <div class="col align-middle">
         <p>TUTAJ BĘDĄ OCENY GWIAZDKOWE</p>
-        <p>TUTAJ BĘDZIE PRZYCISK DODAJ DO KOLEKCJI LUB USUŃ</p>
+        <div *ngIf="isMovieInFavourites">
+          <a (click)="onRemoveMovieFromFavourites()">Delete from favourites</a>
+        </div>
+        <div *ngIf="!isMovieInFavourites">
+          <a (click)="onAddToFavourites()">Add to favourites</a>
+        </div>
       </div>
       <div class="col-7">
         <div class="row" *ngIf="movie.original_title != null">

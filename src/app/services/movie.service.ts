@@ -13,10 +13,8 @@ export class MovieService {
   ) { }
 
   getCinemas() {
-    this.httpClient.get<any>("http://localhost:8200/cinema/find")
-      .subscribe(test => {
-        console.log(test);
-      })
+    this.httpClient.get<any>("http://localhost:8200/cinema/find", {withCredentials: true})
+      .subscribe(test => {})
   }
 
   getPopularMovies(page: number): Observable<any> {
@@ -75,4 +73,8 @@ export class MovieService {
     return this.httpClient.put<any>(url, {}, { withCredentials: true }).pipe();
   }
 
+  getUserFavourites(userId : string) : Observable<any> {
+    let url = "http://localhost:8200/user/favourites?user=" + userId;
+    return this.httpClient.get<any>(url, { withCredentials: true }).pipe();
+  }
 }

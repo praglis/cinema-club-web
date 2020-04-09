@@ -6,9 +6,11 @@
   font-size: 32px;
 }
 
-.dropdown-menu{
+.dropdown-menu {
     top: 59px;
+    cursor: pointer;
 }
+
 .user .dropdown-menu {
     top: 59px;
     left: -80px;
@@ -16,6 +18,7 @@
 
 .nav-item {
     font-size: 18px;
+    cursor: pointer;
 }
 .searchBox{
 background-color: #000000;
