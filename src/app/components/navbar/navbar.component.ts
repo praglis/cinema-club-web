@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { FormGroup } from '@angular/forms';
 import { FindMovieService } from 'src/app/services/find-movie.service';
+import {UserService} from "../../services/user.service";
+import {User} from "../../interfaces/user.interface";
 
 @Component({
   selector: 'app-navbar',
@@ -12,14 +14,19 @@ import { FindMovieService } from 'src/app/services/find-movie.service';
 export class NavbarComponent implements OnInit {
   query: string;
   currentUser: any;
+  currentUserID: number;
   navForm: FormGroup;
 
-    constructor(
+    constructor (
         public findMovieService: FindMovieService,
+        private userService: UserService,
         private router: Router,
         private authenticationService: AuthenticationService
     ) {
         this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+        this.userService.findLoggedUser().subscribe((jsonObject: User) => {
+          this.currentUserID = jsonObject.id;
+        });
     }
 
   ngOnInit() {

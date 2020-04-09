@@ -30,6 +30,7 @@ import { RegulationsComponent } from './components/regulations/regulations.compo
 import { HelpPageComponent } from './components/help-page/help-page.component';
 import { LocationsComponent } from './components/locations/locations.component';
 import { MapComponent } from './components/locations/map/map.component';
+import { FavouriteMoviesComponent } from './components/favourite-movies/favourite-movies.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { MapComponent } from './components/locations/map/map.component';
     HelpPageComponent,
     LocationsComponent,
     MapComponent,
+    FavouriteMoviesComponent,
   ],
   imports: [
     FormsModule,

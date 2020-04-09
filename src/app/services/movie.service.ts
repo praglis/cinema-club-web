@@ -75,4 +75,9 @@ export class MovieService {
     return this.httpClient.put<any>(url, {}, { withCredentials: true }).pipe();
   }
 
+  getUserFavourites(userId : string) : Observable<any> {
+    let url = "http://localhost:8200/user/favourites?user=" + userId;
+    console.log(url);
+    return this.httpClient.get<any>(url, { withCredentials: true }).pipe();
+  }
 }
