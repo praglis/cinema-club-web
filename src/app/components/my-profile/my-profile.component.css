@@ -1,5 +1,6 @@
 div {
   --theme-gold: #ccb67a;
+  --address-height: 300px;
   color: var(--theme-gold);
   padding: 5%;
 }
@@ -18,16 +19,27 @@ h1 {
 
 button {
   border-style: none;
-  border-radius: 4px;
+  border-radius: 20px;
+  float: left;
 }
 
-img{
-  height: 100px;
-  width: 100px;
+img {
+  height: 70px;
+  width: 70px;
 }
 
-p{
+p {
   padding: 10px 0;
+  align-items: center;
+}
+
+input{
+  background-color: black;
+  border-radius: 20px;
+  border: solid;
+  border-width: 5px;
+  border-color: var(--theme-gold);
+  color: white;
 }
 
 .grid-container {
@@ -36,9 +48,10 @@ p{
   font-size: 16px;
 }
 
-.list-container {
+.edit-button-container {
   display: grid;
   grid-template-columns: auto;
+  padding: 12.5%;
 }
 
 .button-container {
@@ -48,16 +61,39 @@ p{
   grid-column-end: 4;
   display: grid;
   grid-template-columns: auto;
+  row-gap: 50px;
 }
 
 .edit-button {
   width: min-content;
   height: min-content;
+  align-self: center;
+  margin: 9px 0px 25px;
 }
 
-.avatar-container{
+.edit-span {
+  height: 26px;
+  align-self: center;
+  margin: 9px 0px 25px;
+}
+
+.avatar-container {
   display: grid;
   grid-template-columns: auto auto;
   padding: -5%;
   align-items: center;
+}
+
+.empty-300px{
+  height: var(--address-height);
+}
+
+.address-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  height: var(--address-height);
+}
+
+.submit-button {
+  background-color: var(--theme-gold);
 }
