@@ -50,9 +50,7 @@ export class FavouriteMoviesComponent implements OnInit {
       "movieTitle": movieTitle,
       "movieUrl": movieUrl
     }).subscribe((response) => {
-      console.log(response);
-      console.log("Deleted");
       window.location.reload();
-    });
+    })
   }
 }

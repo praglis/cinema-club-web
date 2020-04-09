@@ -11,7 +11,6 @@ export class HomeComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log('Hello' + localStorage.currentUser);
     this.text = 'home init test';
   }
 

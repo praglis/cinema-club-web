@@ -55,9 +55,6 @@ export class MovieComponent implements OnInit {
       });
 
       this.movieService.getMovieGuardianReview(this.movie.title).subscribe((jsonObject: GuardianResponse) => {
-        console.log(jsonObject);
-        console.log(jsonObject.response);
-        console.log(jsonObject.response.content);
         this.reviewGuardian = jsonObject.response.content;
       });
 
@@ -81,7 +78,6 @@ export class MovieComponent implements OnInit {
   reloadComments() {
     this.movieService.getComments(this.route.snapshot.paramMap.get('id')).subscribe((object) => {
       this.comments = object;
-      console.log(object);
     })
   }
 
@@ -110,8 +106,6 @@ export class MovieComponent implements OnInit {
       "movieTitle": this.movie.title,
       "movieUrl": this.movie.id.toString()
     }).subscribe((response) => {
-      console.log(response);
-      console.log("Deleted");
       window.location.reload();
     });
   }

@@ -13,6 +13,7 @@
       </div>
     </li>
 
+    <ng-container *ngIf="cinemas != undefined">
     <div *ngIf="cinemas.length !== 0" class="movies">
       <table class="table table-striped text-white">
         <tr *ngFor="let cinema of cinemas">
@@ -30,8 +31,7 @@
     <div *ngIf="cinemas.length  === 0">
       <h1>No results found</h1>
     </div>
-
-
+    </ng-container>
   </div>
   <div class="col-8">
     <app-map [cinema]="wybor"></app-map>

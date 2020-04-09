@@ -20,7 +20,7 @@ export class CinemaService {
         url += value + ' ';
       });
     }
-    return this.httpClient.get<CinemaInterface[]>(url)
+    return this.httpClient.get<CinemaInterface[]>(url, {withCredentials: true})
       .pipe();
   }
 

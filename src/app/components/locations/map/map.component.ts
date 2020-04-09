@@ -13,13 +13,15 @@ export class MapComponent implements OnInit {
 
   @Input('cinema')
   set cinema(cinema: CinemaInterface) {
-    this._cinema = cinema;
-    if (cinema.name === 'Białystok Helios Alfa') {
-      this.setCenter(53.1252582, 23.1685194);
-    } else if (cinema.name === 'Białystok Helios Biała') {
-      this.setCenter(53.1223598, 23.176877);
-    } else if (cinema.name === 'Białystok Helios Jurawiecka') {
-      this.setCenter(53.1365746, 23.1631379);
+    if (cinema != undefined) {
+      this._cinema = cinema;
+      if (cinema.name === 'Białystok Helios Alfa') {
+        this.setCenter(53.1252582, 23.1685194);
+      } else if (cinema.name === 'Białystok Helios Biała') {
+        this.setCenter(53.1223598, 23.176877);
+      } else if (cinema.name === 'Białystok Helios Jurawiecka') {
+        this.setCenter(53.1365746, 23.1631379);
+      }
     }
   }
   get cinema(): CinemaInterface { return this._cinema; }

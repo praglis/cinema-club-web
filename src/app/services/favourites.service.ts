@@ -24,12 +24,10 @@ export class FavouritesService {
 
   removeUserFavourite(favourite: Favourites) : Observable<any>{
     let url = "http://localhost:8200/user/favourites?userId=" + favourite.userId + "&movieId=" + favourite.movieUrl;
-    console.log(url);
     const options = {
       withCredentials: true,
     };
 
-    console.log(options);
     return this.httpClient.delete<any>(url).pipe();
   }
 }
