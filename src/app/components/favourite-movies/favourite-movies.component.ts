@@ -5,7 +5,6 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {AuthenticationService} from "../../services/authentication.service";
 import {SingleMovieResult} from "../../interfaces/singlemovie.interface";
 import {FavouritesService} from "../../services/favourites.service";
-import {MovieDetails} from "../../interfaces/moviedetails.interface";
 import {User} from "../../interfaces/user.interface";
 
 @Component({

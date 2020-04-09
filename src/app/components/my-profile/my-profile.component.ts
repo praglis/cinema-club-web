@@ -26,7 +26,7 @@ export class MyProfileComponent implements OnInit {
 
   ngOnInit() {
     this.userService.findLoggedUser().subscribe((jsonObject: User) => {
-      this.editedProfile = jsonObject.username as unknown as User;
+      this.editedProfile = jsonObject as User;
       this.editedProfile.birthday = this.datePipe.transform(this.editedProfile.birthday, 'MM-dd-yyyy');
 
     });
