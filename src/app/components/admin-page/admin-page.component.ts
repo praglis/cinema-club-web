@@ -28,8 +28,20 @@ export class AdminPageComponent implements OnInit {
 
   }
 
-  onSubmit(event: any) {
+  onSubmitBanUser(event: any) {
     this.banUser(this.currentUser).subscribe();
+  }
+
+  onSubmitBlockUser(event: any) {
+    this.blockUser(this.currentUser).subscribe();
+  }
+
+  onSubmitActiveUser(event: any) {
+    this.activeUser(this.currentUser).subscribe();
+  }
+
+  onSubmitDeleteUser(event: any) {
+    this.deleteUser(this.currentUser).subscribe();
   }
 
 
@@ -39,6 +51,18 @@ export class AdminPageComponent implements OnInit {
 
   private banUser(userName: string) {
     return this.adminService.banUser(userName);
+  }
+
+  private blockUser(userName: string) {
+    return this.adminService.blockUser(userName);
+  }
+
+  private activeUser(userName: string) {
+    return this.adminService.activeUser(userName);
+  }
+
+  private deleteUser(userName: string) {
+    return this.adminService.deleteUser(userName);
   }
 
   public saveCode(e): void {
