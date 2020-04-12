@@ -33,8 +33,8 @@ export class PreferencesComponent implements OnInit, AfterViewInit {
   genresMoviesSwiper: any;
   castsMoviesSwiper: any;
   crewsMoviesSwiper: any;
-  x: any;
 
+  haveRecommendations: Boolean = true;
   genresMovies;
   genres: String[];
   castsMovies;
@@ -50,18 +50,21 @@ export class PreferencesComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.userService.getRecommendation("C", "1").subscribe(data => {
       this.genres = data.recommendation_values;
-      data.movies.results.forEach(element => {this.bypassSecurityForPoster(element);});
+      data.movies.results.forEach(element => { this.bypassSecurityForPoster(element); });
       this.genresMovies = data.movies.results;
+      this.haveRecommendations = data.recommendations;
     });
     this.userService.getRecommendation("A", "1").subscribe(data => {
       this.crews = data.recommendation_values;
-      data.movies.results.forEach(element => {this.bypassSecurityForPoster(element);});
+      data.movies.results.forEach(element => { this.bypassSecurityForPoster(element); });
       this.crewsMovies = data.movies.results;
+      this.haveRecommendations = data.recommendations;
     });
     this.userService.getRecommendation("D", "1").subscribe(data => {
       this.casts = data.recommendation_values;
-      data.movies.results.forEach(element => {this.bypassSecurityForPoster(element);});
+      data.movies.results.forEach(element => { this.bypassSecurityForPoster(element); });
       this.castsMovies = data.movies.results;
+      this.haveRecommendations = data.recommendations;
     });
   }
 
@@ -90,7 +93,7 @@ export class PreferencesComponent implements OnInit, AfterViewInit {
         prevEl: this.castsSwiperButtonPrev.nativeElement
       }
     });
-  }  
+  }
   private initCrewsMoviesSwiper() {
     return new Swiper(this.crewsSwiperContainer.nativeElement, {
       slidesPerView: 'auto',
