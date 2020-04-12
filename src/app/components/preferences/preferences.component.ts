@@ -49,7 +49,6 @@ export class PreferencesComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.userService.getRecommendation("C", "1").subscribe(data => {
-      console.log(data);
       this.genres = data.recommendation_values;
       data.movies.results.forEach(element => {this.bypassSecurityForPoster(element);});
       this.genresMovies = data.movies.results;
@@ -85,7 +84,6 @@ export class PreferencesComponent implements OnInit, AfterViewInit {
       slidesPerView: 'auto',
       spaceBetween: 30,
       slidesPerGroup: 2,
-      // loop: true,
       loopFillGroupWithBlank: true,
       navigation: {
         nextEl: this.castsSwiperButtonNext.nativeElement,
@@ -98,7 +96,6 @@ export class PreferencesComponent implements OnInit, AfterViewInit {
       slidesPerView: 'auto',
       spaceBetween: 30,
       slidesPerGroup: 2,
-      // loop: true,
       loopFillGroupWithBlank: true,
       navigation: {
         nextEl: this.crewsSwiperButtonNext.nativeElement,
@@ -112,7 +109,6 @@ export class PreferencesComponent implements OnInit, AfterViewInit {
       slidesPerView: 'auto',
       spaceBetween: 30,
       slidesPerGroup: 2,
-      // loop: true,
       loopFillGroupWithBlank: true,
       navigation: {
         nextEl: this.genresSwiperButtonNext.nativeElement,

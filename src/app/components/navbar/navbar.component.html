@@ -24,7 +24,7 @@
                 <a [routerLink]="['/locations']" class="nav-link"><i class="fas fa-search-location mr-2"></i>Locations</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link"><i class="fas fa-theater-masks mr-2"></i>Preferences</a>
+                <a [routerLink]="['/preferences']" class="nav-link"><i class="fas fa-theater-masks mr-2"></i>Preferences</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link"><i class="fas fa-users mr-2"></i>Reviews</a>
@@ -56,7 +56,7 @@
                     <a  class="dropdown-item" [routerLink]="['/movies/favourite']">Favourite movies</a>
                     <a class="dropdown-item" href="#">Settings</a>
                     <a class="dropdown-item" (click)="logout()" style="cursor: pointer;">Logout</a>
-                    <a class="dropdown-item" href="#">My preferences</a>
+                    <a class="dropdown-item" [routerLink]="['/preferences']">My preferences</a>
                 </div>
             </li>
         </ul>

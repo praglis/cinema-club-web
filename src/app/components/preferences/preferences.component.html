@@ -1,4 +1,4 @@
-<span class="slider-title">
+<span class="slider-title" *ngIf="genres.length != 0">
 Because you like:
 <ng-container *ngFor="let genre of genres;let index=index">
     <span>{{genre}}<ng-container *ngIf="index  < genres.length - 1">, </ng-container></span>
@@ -19,7 +19,7 @@ Because you like:
     </div>
 </div>
 <br>
-<span class="slider-title">
+<span class="slider-title" *ngIf="casts.length != 0">
 Becouse you like:
 <ng-container *ngFor="let cast of casts;let index=index">
     <span>{{cast}}<ng-container *ngIf="index < casts.length - 1">, </ng-container></span>
@@ -40,7 +40,7 @@ Becouse you like:
     </div>
 </div>
 <br>
-<span class="slider-title">
+<span class="slider-title" *ngIf="crews.length != 0">
 Becouse you like:
 <ng-container *ngFor="let crew of crews;let index=index">
     <span>{{crew}}<ng-container *ngIf="index  < crews.length - 1">, </ng-container></span>
