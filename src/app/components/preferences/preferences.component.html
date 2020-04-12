@@ -1,0 +1,62 @@
+<span class="slider-title">
+Because you like:
+<ng-container *ngFor="let genre of genres;let index=index">
+    <span>{{genre}}<ng-container *ngIf="index  < genres.length - 1">, </ng-container></span>
+</ng-container>
+</span>
+<div class="genres-movies">
+    <div class="swiper-container" #genresSwiperContainer>
+        <div class="swiper-wrapper">
+            <div #genresMoviesChildren class="swiper-slide" *ngFor="let movie of genresMovies">
+                <a routerLink="/movie/{{movie.id}}" [state]="movie">
+                    <img class="slide-image" [src]="movie.poster_path">
+                </a>
+                <p class="slide-text">{{movie.title}}</p>
+            </div>
+        </div>
+        <div class="swiper-button-next" #genresSwiperButtonNext></div>
+        <div class="swiper-button-prev" #genresSwiperButtonPrev></div>
+    </div>
+</div>
+<br>
+<span class="slider-title">
+Becouse you like:
+<ng-container *ngFor="let cast of casts;let index=index">
+    <span>{{cast}}<ng-container *ngIf="index < casts.length - 1">, </ng-container></span>
+</ng-container>
+</span>
+<div class="casts-movies">
+    <div class="swiper-container" #castsSwiperContainer>
+        <div class="swiper-wrapper">
+            <div #castsMoviesChildren class="swiper-slide" *ngFor="let movie of castsMovies">
+                <a routerLink="/movie/{{movie.id}}" [state]="movie">
+                    <img class="slide-image" [src]="movie.poster_path">
+                </a>
+                <p class="slide-text">{{movie.title}}</p>
+            </div>
+        </div>
+        <div class="swiper-button-next" #castsSwiperButtonNext></div>
+        <div class="swiper-button-prev" #castsSwiperButtonPrev></div>
+    </div>
+</div>
+<br>
+<span class="slider-title">
+Becouse you like:
+<ng-container *ngFor="let crew of crews;let index=index">
+    <span>{{crew}}<ng-container *ngIf="index  < crews.length - 1">, </ng-container></span>
+</ng-container>
+</span>
+<div class="crews-movies">
+    <div class="swiper-container" #crewsSwiperContainer>
+        <div class="swiper-wrapper">
+            <div #crewsMoviesChildren class="swiper-slide" *ngFor="let movie of crewsMovies">
+                <a routerLink="/movie/{{movie.id}}" [state]="movie">
+                    <img class="slide-image" [src]="movie.poster_path">
+                </a>
+                <p class="slide-text">{{movie.title}}</p>
+            </div>
+        </div>
+        <div class="swiper-button-next" #crewsSwiperButtonNext></div>
+        <div class="swiper-button-prev" #crewsSwiperButtonPrev></div>
+    </div>
+</div>

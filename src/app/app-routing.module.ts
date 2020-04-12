@@ -18,20 +18,22 @@ import { RegulationsComponent } from './components/regulations/regulations.compo
 import { HelpPageComponent } from './components/help-page/help-page.component';
 import { LocationsComponent } from './components/locations/locations.component';
 import { FavouriteMoviesComponent } from "./components/favourite-movies/favourite-movies.component";
+import { PreferencesComponent } from './components/preferences/preferences.component';
 
 const routes: Routes = [
   { path: 'movies', component: MoviesListComponent },
   { path: 'movie/:id', component: MovieComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'verification', component: VerificationComponent},
-  { path: 'resetPassword', component: ResetPasswordComponent},
-  { path: 'password', component: ChangePasswordComponent},
-  { path: 'searchResult', component: FindMovieComponent},
+  { path: 'verification', component: VerificationComponent },
+  { path: 'resetPassword', component: ResetPasswordComponent },
+  { path: 'password', component: ChangePasswordComponent },
+  { path: 'searchResult', component: FindMovieComponent },
   { path: 'privacy', component: PrivacyComponent },
   { path: 'regulation', component: RegulationsComponent },
-  { path: 'help', component: HelpPageComponent},
-  { path: 'admin', component: AdminPageComponent},
+  { path: 'help', component: HelpPageComponent },
+  { path: 'admin', component: AdminPageComponent },
+  { path: 'preferences', component: PreferencesComponent },
   {
     path: '',
     component: MainLayoutComponent,
