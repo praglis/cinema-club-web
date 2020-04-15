@@ -1,0 +1,31 @@
+
+#admin-page .container #admin-page-rows {
+  margin-top: 120px;
+  text-align: center;
+  border: 1px solid black;
+  width: 100%;
+}
+
+#admin-page .container #admin-page-row  {
+  padding: 20px;
+}
+
+#admin-page .container #admin-page-row2  {
+  padding: 20px;
+}
+
+#admin-page .container #admin-page-row3  {
+  padding: 20px;
+}
+
+#admin-page .container #admin-page-row4  {
+  padding: 20px;
+}
+
+.btn-secondary{
+  margin: 10px;
+}
+
+h1 {
+  color: white;
+}

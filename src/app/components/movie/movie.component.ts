@@ -30,6 +30,8 @@ export class MovieComponent implements OnInit {
   success_msg: string;
   isMovieInFavourites: boolean;
   userId: number;
+  error: string;
+  loading = false;
   allDataFetched: boolean = false;
 
   constructor(
@@ -118,7 +120,11 @@ export class MovieComponent implements OnInit {
       this.success_msg = "Commend has been added";
       this.showCommentForm = false;
       this.reloadComments();
-    })
+    },
+      error => {
+        this.error = error.message;
+        this.loading = false;
+      })
   }
 
   likeComment(commentId: string) {
