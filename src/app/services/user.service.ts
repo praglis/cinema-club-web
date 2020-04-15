@@ -7,7 +7,6 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
 
-
   constructor(
     private httpClient: HttpClient
   ) { }
@@ -18,7 +17,6 @@ export class UserService {
   }
 
   updateProfile(user) {
-
     const url = 'http://localhost:8200/user/update';
     return this.httpClient.post<any>(url, user, { withCredentials: true })
       .subscribe();

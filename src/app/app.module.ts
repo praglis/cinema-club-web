@@ -32,6 +32,8 @@ import { LocationsComponent } from './components/locations/locations.component';
 import { MapComponent } from './components/locations/map/map.component';
 import { FavouriteMoviesComponent } from './components/favourite-movies/favourite-movies.component';
 import { PreferencesComponent } from './components/preferences/preferences.component';
+import { BugReportComponent } from './components/bug-report/bug-report.component';
+import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -58,6 +60,7 @@ import { PreferencesComponent } from './components/preferences/preferences.compo
     MapComponent,
     FavouriteMoviesComponent,
     PreferencesComponent,
+    BugReportComponent,
   ],
   imports: [
     FormsModule,
@@ -66,11 +69,18 @@ import { PreferencesComponent } from './components/preferences/preferences.compo
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
-    MDBBootstrapModule.forRoot()
+    MDBBootstrapModule.forRoot(),
+    MatDialogModule
+  ],
+  entryComponents: [
+    BugReportComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } },
+    { provide: MAT_DIALOG_DATA, useValue: {} },
+    { provide: MatDialogRef, useValue: {} }
   ],
   bootstrap: [AppComponent]
 })

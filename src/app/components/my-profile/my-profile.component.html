@@ -20,9 +20,9 @@
 
   <div class="button-container">
     <button class="submit-button" *ngIf="editedField != 'none'" (click)="onSubmit()">submit changes</button>
-    <button>go to my preferences (>>)</button>
-    <button>go to my movie library (>>)</button>
-    <button>report a bug (!)</button>
+    <button [routerLink]="['/preferences']">go to my preferences (>>)</button>
+    <button [routerLink]="['/movies/favourite']">go to my movie library (>>)</button>
+    <button mat-raised-button (click)="reportBug()">report a bug (!)</button>
     <button>delete account (X)</button>
 
   </div>
