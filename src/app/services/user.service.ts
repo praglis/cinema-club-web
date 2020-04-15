@@ -35,4 +35,9 @@ export class UserService {
     return this.httpClient.get<boolean>(url, { withCredentials: true })
       .pipe();
   }
+
+  getRecommendation(type: string, page: string): Observable<any> {
+    const url = 'http://localhost:8200/user/preferences?type=' + type + "&page=" + page;
+    return this.httpClient.get<any>(url, { withCredentials: true }).pipe();
+  }
 }
