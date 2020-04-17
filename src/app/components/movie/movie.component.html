@@ -136,28 +136,26 @@
 
   </div>
 
+    <p class="title">Users' rating and comments</p>
 
-
-  <div class="row" style="padding-left: 110px; padding-top: 30px">
-
-    <div class="star-rating">
-      Users' rating
+    <div class="row" style="padding-left: 110px">
+      <div class="star-rating">
       <!-- The '|| 0' would prevent an undefined or null value on the Rating property -->
-      <div class="full-star2" style='width:{{movie.vote_average * 10}}%'></div>
-      <!--            <div class="full-star" style='width:75%'></div>-->
-      <div class="empty-star"> </div>
+<!--      <div class="full-star2" style='width:{{movie.vote_average * 10}}%'></div>-->
+                  <div class="full-star2" style='width:75%'></div>
+      <div class="empty-star"></div>
     </div>
 
-    <div style="padding: 5px; padding-top: 25px">
+    <div style="padding: 5px">
       <button class="btn btn-dark" type="button" (click)="onAddReviewClick()">Rate movie</button>
     </div>
 
-    <div style="padding: 5px; padding-top: 25px">
+      <div style="padding: 5px">
       <button *ngIf="isMovieInFavourites" class="btn btn-dark" type="button" (click)="onRemoveMovieFromFavourites()">Delete movie from favourites</button>
       <button *ngIf="!isMovieInFavourites" class="btn btn-dark" type="button" (click)="onAddToFavourites()">Add movie to favourites</button>
     </div>
 
-    <div style="padding: 5px; padding-top: 25px">
+      <div style="padding: 5px">
       <button class="btn btn-dark" type="button" (click)="onAddReviewClick()">Comment movie</button>
     </div>
 
