@@ -49,7 +49,7 @@ export class MovieCardComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.popularMoviesSwiper = this.initPopularMoviesSwiper()
+    this.popularMoviesSwiper = this.initPopularMoviesSwiper();
     this.bestMoviesSwiper = this.initBestMoviesSwiper();
     this.popularMoviesChildren.changes.subscribe(t => { this.popularMoviesSwiper.update(); })
     this.bestMoviesChildren.changes.subscribe(t => { this.bestMoviesSwiper.update(); })
@@ -77,7 +77,7 @@ export class MovieCardComponent implements OnInit, AfterViewInit {
   }
 
   private initBestMoviesSwiper() {
-    return new Swiper(this.bestSwiperContainer.nativeElement, {
+    return this.bestMoviesSwiper = new Swiper(this.bestSwiperContainer.nativeElement, {
       slidesPerView: 'auto',
       spaceBetween: 30,
       slidesPerGroup: 2,
