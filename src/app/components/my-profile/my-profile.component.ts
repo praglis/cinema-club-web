@@ -1,7 +1,7 @@
-import { Component, OnInit, Injectable } from '@angular/core';
-import { UserService } from 'src/app/services/user.service';
-import { User } from '../../interfaces/user.interface';
-import { DatePipe } from '@angular/common';
+import {Component, Injectable, OnInit} from '@angular/core';
+import {UserService} from 'src/app/services/user.service';
+import {User} from '../../interfaces/user.interface';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-my-profile',
@@ -18,6 +18,8 @@ export class MyProfileComponent implements OnInit {
 
   editedProfile: User;
 
+  editMode: boolean;
+
   constructor(
     private userService: UserService,
     private datePipe: DatePipe) {
@@ -28,24 +30,25 @@ export class MyProfileComponent implements OnInit {
     this.userService.findLoggedUser().subscribe((jsonObject: User) => {
       this.editedProfile = jsonObject as User;
       this.editedProfile.birthday = this.datePipe.transform(this.editedProfile.birthday, 'MM-dd-yyyy');
-
     });
+
+    this.editMode = false;
   }
 
   onSubmit() {
     this.editedField = 'none';
     const userValues = this.convertToUserValues(this.editedProfile);
     this.userService.updateProfile(userValues);
+    this.editMode = false;
   }
 
   getCleanAddress(user: User): string {
-    const cleanAddress = user.address.streetName + ' ' + user.address.houseNumber + ', '
+    return user.address.streetName + ' ' + user.address.houseNumber + ', '
       + user.address.city + ', ' + user.address.state + ', ' + user.address.country;
-    return cleanAddress;
   }
 
-  edit(field: string): void {
-    this.editedField = field;
+  edit(): void {
+    this.editMode = true;
   }
 
   convertToUserValues(values) {
