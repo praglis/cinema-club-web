@@ -2,9 +2,11 @@
     text-align: center;
 }
 .title {
-    color: bisque;
-    display: block;
-    margin: 0 auto;
+  color: white;
+  text-align: left;
+  font-size: 30px;
+  display: block;
+  margin: 20px;
 }
 
 .movie-poster {
@@ -15,12 +17,12 @@
 
 .movie-details {
   margin-top: 30px;
-  color: bisque;
+  color: white;
 }
 
 .overview {
   text-align: justify;
-  color: bisque;
+  color: white;
   padding-top: 15px;
 }
 
@@ -79,8 +81,8 @@
 }
 
 .user-review-content {
-  width: 50%;
-  margin-top: 50px;
+  /*width: 50%;*/
+  /*margin-top: 50px;*/
 }
 
 .comments-section {
@@ -101,3 +103,43 @@
 a:hover {
   cursor:pointer;
  }
+
+/* This is just an example instead of using <img> tags you can use background-image and achive half-star results */
+.star-rating {
+  height: 40px;
+  width: 400px;
+  position: relative;
+}
+
+.full-star {
+  position: absolute;
+  z-index: 1;
+  height: 100%;
+  background-image: url('src/assets/images/star_yellow.png');
+  background-size: 400px 40px;
+  /*  other styles to match preference */
+}
+
+.full-star2 {
+  position: absolute;
+  z-index: 1;
+  height: 100%;
+  background-image: url('src/assets/images/star_blue.png');
+  background-size: 400px 40px;
+  /*  other styles to match preference */
+}
+
+.empty-star {
+  width: 100%;
+  height: 100%;
+  background-image: url('src/assets/images/star_grey.png');
+  background-size: 400px 40px;
+  /*  other styles to match preference */
+}
+
+#movie-container {
+  padding: 20px;
+  border: 1px solid black;
+  background-color: #02030F;
+  opacity: 0.8;
+}
