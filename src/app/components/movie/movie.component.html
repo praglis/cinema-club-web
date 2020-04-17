@@ -12,8 +12,7 @@
         <div class="row" style="padding-left: 30px">
           <div class="star-rating">
             <!-- The '|| 0' would prevent an undefined or null value on the Rating property -->
-            <div class="full-star2" style='width:{{movie.vote_average * 10}}%'></div>
-<!--            <div class="full-star" style='width:75%'></div>-->
+            <div class="full-star" [ngStyle]="{'width': movie.vote_average * 10 + '%'}"></div>
             <div class="empty-star"> </div>
           </div>
         </div>
@@ -124,7 +123,7 @@
     <div class="col-7">
       <p>Cast</p>
       <div id="movie-container"></div>
-<!--      tutaj dać cast-->
+      <!--      tutaj dać cast-->
 <!--
 
 !!!
@@ -141,30 +140,30 @@
     <div class="row" style="padding-left: 110px">
       <div class="star-rating">
       <!-- The '|| 0' would prevent an undefined or null value on the Rating property -->
-<!--      <div class="full-star2" style='width:{{movie.vote_average * 10}}%'></div>-->
-                  <div class="full-star2" style='width:75%'></div>
+        <div class="full-star2" [ngStyle]="{'width': movie.vote_average * 10 + '%'}"></div>
       <div class="empty-star"></div>
     </div>
 
     <div style="padding: 5px">
-      <button class="btn btn-dark" type="button" (click)="onAddReviewClick()">Rate movie</button>
-    </div>
-
-      <div style="padding: 5px">
-      <button *ngIf="isMovieInFavourites" class="btn btn-dark" type="button" (click)="onRemoveMovieFromFavourites()">Delete movie from favourites</button>
-      <button *ngIf="!isMovieInFavourites" class="btn btn-dark" type="button" (click)="onAddToFavourites()">Add movie to favourites</button>
+      <button class="btn btn-dark" type="button" (click)="onAddRateClick()">Rate movie</button>
     </div>
 
       <div style="padding: 5px">
       <button class="btn btn-dark" type="button" (click)="onAddReviewClick()">Comment movie</button>
     </div>
 
+      <div style="padding: 5px">
+        <button *ngIf="isMovieInFavourites" class="btn btn-dark" type="button" (click)="onRemoveMovieFromFavourites()">Delete movie from favourites</button>
+        <button *ngIf="!isMovieInFavourites" class="btn btn-dark" type="button" (click)="onAddToFavourites()">Add movie to favourites</button>
+      </div>
+
   </div>
 
-  <div class="row">
+  <div class="row" style="padding-left: 80px; padding-right: 80px">
 
     <div class="userReviews" class="user-review-content">
-      <div *ngIf="showCommentForm" style="margin-bottom: 75px;">
+
+      <div *ngIf="showCommentForm" style="margin-bottom: 30px;">
         <div style="text-align: left; margin-bottom: -10px;"><p>My comment</p></div>
         <textarea #commentForm class="form-control darkTextArea" rows="3"></textarea>
         <div class="row">
@@ -176,24 +175,48 @@
           </div>
         </div>
       </div>
-      <div class="comments-section">
+
+      <div>
+      <div id=rate-container *ngIf="showRateForm" style="margin-bottom: 30px;">
+
+        <div style="text-align: left; margin-bottom: -10px;"><p>My rate</p></div>
+
+        <span (click)="submitRate(1)" class="rate-button"> 1 </span>
+        <span (click)="submitRate(2)" class="rate-button"> 2 </span>
+        <span (click)="submitRate(3)" class="rate-button"> 3 </span>
+        <span (click)="submitRate(4)" class="rate-button"> 4 </span>
+        <span (click)="submitRate(5)" class="rate-button"> 5 </span>
+        <span (click)="submitRate(6)" class="rate-button"> 6 </span>
+        <span (click)="submitRate(7)" class="rate-button"> 7 </span>
+        <span (click)="submitRate(8)" class="rate-button"> 8 </span>
+        <span (click)="submitRate(9)" class="rate-button"> 9 </span>
+        <span (click)="submitRate(10)" class="rate-button"> 10 </span>
+
+          <div class="row">
+            <div class="col-sm">
+              <a (click)="showRateForm = false" class="review-button row float-right">Close button</a>
+            </div>
+          </div>
+      </div>
+
+      <div *ngIf="comments.length  === 0">
+        <h2 style="text-align: center; color: dimgray; padding: 40px; opacity: 50%">No results found. Comment first!</h2>
+      </div>
+
+      <div class="comments-section" style="padding-top: 15px">
         <div *ngFor="let item of comments" class="commentArea">
-          <p style="color: #6a6666;"><strong class="text-grey">{{item.infoCU.username}}</strong> write on day {{item.infoCD | date}}</p>
+          <p style="color: #6a6666; padding-top: 10px"><strong class="text-grey">{{item.infoCU.username}}</strong> write on day {{item.infoCD | date}}</p>
           <div style="margin-left: 10px; margin-right: 10px;">
             <p>{{item.statement}}</p>
           </div>
-          <p style="font-size: 24px;">{{item.likes}} <a (click)="likeComment(item.id)"><i class="far fa-thumbs-up"></i></a></p>
+          <p style="font-size: 24px;">{{item.likes}} <a (click)="likeComment(item.id)"><i class="far fa-thumbs-up" style="padding-bottom: 15px"></i></a></p>
         </div>
       </div>
     </div>
 
   </div>
 
-
   </div>
-
-
-
 
 </div>
 

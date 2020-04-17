@@ -32,6 +32,7 @@ import { LocationsComponent } from './components/locations/locations.component';
 import { MapComponent } from './components/locations/map/map.component';
 import { FavouriteMoviesComponent } from './components/favourite-movies/favourite-movies.component';
 import { PreferencesComponent } from './components/preferences/preferences.component';
+import {MatRadioModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -59,15 +60,16 @@ import { PreferencesComponent } from './components/preferences/preferences.compo
     FavouriteMoviesComponent,
     PreferencesComponent,
   ],
-  imports: [
-    FormsModule,
-    BrowserModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    AppRoutingModule,
-    MDBBootstrapModule.forRoot()
-  ],
+    imports: [
+        FormsModule,
+        BrowserModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        AppRoutingModule,
+        MDBBootstrapModule.forRoot(),
+        MatRadioModule
+    ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
