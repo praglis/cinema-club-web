@@ -10,6 +10,7 @@ import {UserService} from '../../services/user.service';
 import {User} from '../../interfaces/user.interface';
 import {FavouritesService} from '../../services/favourites.service';
 import {Favourites} from '../../interfaces/favourites.interface';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-movie',
@@ -21,11 +22,15 @@ export class MovieComponent implements OnInit {
   @ViewChildren('commentForm')
   commentForms: any;
 
+  @ViewChildren('rateForm')
+  rateForms: any;
+
   @Input() movie: MovieDetails;
   @Input() reviewNYT: NYTReview;
   @Input() reviewGuardian: GuardianReview;
 
   showCommentForm = false;
+  showRateForm = false;
   comments: any = [];
   success_msg: string;
   isMovieInFavourites: boolean;
@@ -33,13 +38,19 @@ export class MovieComponent implements OnInit {
   error: string;
   loading = false;
   allDataFetched = false;
+  form: FormGroup;
 
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
     private favouriteService: FavouritesService,
     private movieService: MovieService,
-  ) { }
+    fb: FormBuilder
+  ) {
+    this.form = fb.group({
+      contrl: ['', Validators.required]
+    });
+  }
 
   ngOnInit() {
     const id = +this.route.snapshot.paramMap.get('id');
@@ -84,8 +95,19 @@ export class MovieComponent implements OnInit {
   }
 
   onAddReviewClick() {
+    this.showRateForm = false;
     this.showCommentForm = true;
     this.commentForms.changes.subscribe(comps => {
+      if (comps.length != 0) {
+        comps.first.nativeElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  }
+
+  onAddRateClick() {
+    this.showCommentForm = false;
+    this.showRateForm = true;
+    this.rateForms.changes.subscribe(comps => {
       if (comps.length != 0) {
         comps.first.nativeElement.scrollIntoView({ behavior: 'smooth' });
       }
@@ -125,6 +147,21 @@ export class MovieComponent implements OnInit {
         this.error = error.message;
         this.loading = false;
       });
+  }
+
+  submitRate(rate: number) {
+    // this.movieService.postComment({
+    //   movieId: Number(this.route.snapshot.paramMap.get('id')),
+    //   reviewBody: this.commentForms.first.nativeElement.value
+    // }).subscribe((data) => {
+        this.success_msg = 'Rate has been added';
+        this.showRateForm = false;
+      //   this.reloadComments();
+      // },
+      // error => {
+      //   this.error = error.message;
+      //   this.loading = false;
+      // });
   }
 
   likeComment(commentId: string) {
