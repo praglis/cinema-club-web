@@ -1,0 +1,19 @@
+<div class="container">
+  <h2 style="color: white">Plan to watch list</h2>
+  <div *ngIf="planToWatchMovies !== undefined && planToWatchMovies.length !== 0" class="favourites">
+    <div class="row">
+      <ng-container *ngFor="let movie of planToWatchMovies">
+        <div class="col-4 text-center">
+          <div class="img-wrap">
+            <span class="close" (click)="onRemoveMovieFromList(movie.title, movie.id.toString())">&times;</span>
+            <a routerLink="/movie/{{movie.id}}">
+              <img src="https://image.tmdb.org/t/p/w200/{{ movie.poster_path }}" />
+            </a>
+          </div>
+          <p class="subtitle">{{movie.title}}</p>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+

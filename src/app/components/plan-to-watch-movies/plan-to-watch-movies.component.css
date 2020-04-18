@@ -1,0 +1,25 @@
+.subtitle {
+  margin-top: 10px;
+  color: white;
+}
+
+.favourites {
+  margin-top: 15px;
+}
+
+.img-wrap {
+  position: relative;
+}
+
+.img-wrap .close {
+  position: absolute;
+  top: 0;
+  right: 80px;
+  z-index: 100;
+}
+
+.close {
+  color: red;
+  font-weight: bold;
+  cursor: pointer;
+}
