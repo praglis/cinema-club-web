@@ -77,4 +77,9 @@ export class MovieService {
     let url = "http://localhost:8200/user/favourites?user=" + userId;
     return this.httpClient.get<any>(url, { withCredentials: true }).pipe();
   }
+
+  getUserPlanToWatch(userId : string) : Observable<any> {
+    let url = "http://localhost:8200/user/plantowatch?user=" + userId;
+    return this.httpClient.get<any>(url, { withCredentials: true }).pipe();
+  }
 }

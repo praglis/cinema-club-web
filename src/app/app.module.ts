@@ -32,6 +32,7 @@ import { LocationsComponent } from './components/locations/locations.component';
 import { MapComponent } from './components/locations/map/map.component';
 import { FavouriteMoviesComponent } from './components/favourite-movies/favourite-movies.component';
 import { PreferencesComponent } from './components/preferences/preferences.component';
+import { PlanToWatchMoviesComponent } from './components/plan-to-watch-movies/plan-to-watch-movies.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { PreferencesComponent } from './components/preferences/preferences.compo
     MapComponent,
     FavouriteMoviesComponent,
     PreferencesComponent,
+    PlanToWatchMoviesComponent,
   ],
   imports: [
     FormsModule,

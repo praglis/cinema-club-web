@@ -7,23 +7,23 @@ import {UserReview} from "../interfaces/userreview.interface";
 @Injectable({
   providedIn: 'root'
 })
-export class FavouritesService {
+export class PlanToWatchService {
   constructor(
     private httpClient: HttpClient
   ) { }
 
-  getUserFavourites(userID: number) : Observable<Favourites[]> {
-    let url = 'http://localhost:8200/user/favourites/short?user=' + userID;
+  getUserPlanToWatch(userID: number) : Observable<Favourites[]> {
+    let url = 'http://localhost:8200/user/plantowatch/short?user=' + userID;
     return this.httpClient.get<Favourites[]>(url, { withCredentials: true }).pipe();
   }
 
-  addUserFavourite(favourite: Favourites): Observable<any> {
-    let url = "http://localhost:8200/user/favourites";
+  addUserPlanToWatch(favourite: Favourites): Observable<any> {
+    let url = "http://localhost:8200/user/plantowatch";
     return this.httpClient.post<any>(url, favourite, { withCredentials: true }).pipe();
   }
 
-  removeUserFavourite(favourite: Favourites) : Observable<any>{
-    let url = "http://localhost:8200/user/favourites?userId=" + favourite.userId + "&movieId=" + favourite.movieUrl;
+  removeUserPlanToWatch(favourite: Favourites) : Observable<any>{
+    let url = "http://localhost:8200/user/plantowatch?userId=" + favourite.userId + "&movieId=" + favourite.movieUrl;
     const options = {
       withCredentials: true,
     };
