@@ -34,6 +34,7 @@ import { FavouriteMoviesComponent } from './components/favourite-movies/favourit
 import { PreferencesComponent } from './components/preferences/preferences.component';
 import { BugReportComponent } from './components/bug-report/bug-report.component';
 import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { UserReportComponent } from './components/user-report/user-report.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS, MAT_DIALOG_DATA, MatDialog
     FavouriteMoviesComponent,
     PreferencesComponent,
     BugReportComponent,
+    UserReportComponent,
   ],
   imports: [
     FormsModule,
@@ -73,7 +75,8 @@ import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS, MAT_DIALOG_DATA, MatDialog
     MatDialogModule
   ],
   entryComponents: [
-    BugReportComponent
+    BugReportComponent,
+    UserReportComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true },

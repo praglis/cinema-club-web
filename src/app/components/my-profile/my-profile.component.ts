@@ -4,7 +4,6 @@ import { User } from '../../interfaces/user.interface';
 import { DatePipe } from '@angular/common';
 import { BugReportComponent } from '../bug-report/bug-report.component';
 import { MatDialogModule, MatDialog, MatDialogRef, MatDialogConfig } from '@angular/material/dialog';
-import { BugReport } from 'src/app/interfaces/bug.report.interface';
 import { ReportService } from 'src/app/services/report.service';
 
 @Component({
@@ -26,8 +25,9 @@ export class MyProfileComponent implements OnInit {
   constructor(
     private userService: UserService,
     private reportService: ReportService,
-    private datePipe: DatePipe,
-    private dialog: MatDialog) {
+    private dialog: MatDialog,
+    private datePipe: DatePipe
+  ) {
     this.editedField = 'none';
   }
 
@@ -71,14 +71,12 @@ export class MyProfileComponent implements OnInit {
   }
 
   reportBug() {
-    console.log('bugDesc: ', this.bugDescription);
     const dialogRef = this.dialog.open(BugReportComponent, {
       hasBackdrop: true,
       data: this.bugDescription
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed. Result:', result);
       if (result.doSend === true) { this.reportService.reportBug(this.prepareBugReport(result.description)); }
     });
   }

@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Report comment</h1>
+<div mat-dialog-content>
+  <p>Describe reason this comment should be deleted:</p>
+  <textarea matInput [(ngModel)]="data" id="bug-desc" rows="8" cols="100" required>
+    </textarea>
+</div>
+
+<div class="button-container" mat-dialog-actions>
+  <button mat-button cdkFocusInitial (click)="onClick(true)">Send report</button>
+  <button class="cancel-button" mat-button (click)="onClick(false)">Cancel</button>
+</div>
