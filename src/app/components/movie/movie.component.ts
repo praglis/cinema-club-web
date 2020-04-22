@@ -10,6 +10,7 @@ import { UserService } from '../../services/user.service';
 import { User } from '../../interfaces/user.interface';
 import { FavouritesService } from '../../services/favourites.service';
 import { Favourites } from '../../interfaces/favourites.interface';
+import { PlanToWatchService } from '../../services/plantowatch.service';
 import { UserReportComponent } from '../user-report/user-report.component';
 import { ReportService } from 'src/app/services/report.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -32,6 +33,7 @@ export class MovieComponent implements OnInit {
   comments: any = [];
   success_msg: string;
   isMovieInFavourites: boolean;
+  isMovieInPlanToWatch: boolean;
   userId: number;
   error: string;
   loading = false;
@@ -44,7 +46,8 @@ export class MovieComponent implements OnInit {
     private favouriteService: FavouritesService,
     private movieService: MovieService,
     private reportService: ReportService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private planToWatchService: PlanToWatchService,
   ) { }
 
   ngOnInit() {
@@ -63,7 +66,9 @@ export class MovieComponent implements OnInit {
       });
 
       this.movieService.getMovieGuardianReview(this.movie.title).subscribe((jsonObject: GuardianResponse) => {
-        this.reviewGuardian = jsonObject.response.content;
+        if (jsonObject !== null) {
+          this.reviewGuardian = jsonObject.response.content;
+        }
       });
 
       this.userService.findLoggedUser().subscribe((jsonObject: User) => {
@@ -76,6 +81,16 @@ export class MovieComponent implements OnInit {
             }
           });
         });
+
+        this.planToWatchService.getUserPlanToWatch(jsonObject.id).subscribe((ptw: Favourites[]) => {
+          this.isMovieInPlanToWatch = false;
+          ptw.forEach(fav => {
+            if (fav.movieUrl === this.movie.id.toString()) {
+              this.isMovieInPlanToWatch = true;
+            }
+          });
+        });
+
         this.allDataFetched = true;
       });
     });
@@ -100,6 +115,16 @@ export class MovieComponent implements OnInit {
 
   onAddToFavourites() {
     this.favouriteService.addUserFavourite({
+      userId: this.userId,
+      movieTitle: this.movie.title,
+      movieUrl: this.movie.id.toString()
+    }).subscribe((data) => {
+      window.location.reload();
+    });
+  }
+
+  onAddToPlanToWatch() {
+    this.planToWatchService.addUserPlanToWatch({
       'userId': this.userId,
       'movieTitle': this.movie.title,
       'movieUrl': this.movie.id.toString()
@@ -110,6 +135,16 @@ export class MovieComponent implements OnInit {
 
   onRemoveMovieFromFavourites() {
     this.favouriteService.removeUserFavourite({
+      userId: this.userId,
+      movieTitle: this.movie.title,
+      movieUrl: this.movie.id.toString()
+    }).subscribe((response) => {
+      window.location.reload();
+    });
+  }
+
+  onRemoveMovieFromPlanToWatch() {
+    this.planToWatchService.removeUserPlanToWatch({
       'userId': this.userId,
       'movieTitle': this.movie.title,
       'movieUrl': this.movie.id.toString()
@@ -120,8 +155,8 @@ export class MovieComponent implements OnInit {
 
   submitComment() {
     this.movieService.postComment({
-      'movieId': Number(this.route.snapshot.paramMap.get('id')),
-      'reviewBody': this.commentForms.first.nativeElement.value
+      movieId: Number(this.route.snapshot.paramMap.get('id')),
+      reviewBody: this.commentForms.first.nativeElement.value
     }).subscribe((data) => {
       this.success_msg = 'Commend has been added';
       this.showCommentForm = false;

@@ -35,6 +35,7 @@ import { PreferencesComponent } from './components/preferences/preferences.compo
 import { BugReportComponent } from './components/bug-report/bug-report.component';
 import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { UserReportComponent } from './components/user-report/user-report.component';
+import { PlanToWatchMoviesComponent } from './components/plan-to-watch-movies/plan-to-watch-movies.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { UserReportComponent } from './components/user-report/user-report.compon
     PreferencesComponent,
     BugReportComponent,
     UserReportComponent,
+    PlanToWatchMoviesComponent,
   ],
   imports: [
     FormsModule,

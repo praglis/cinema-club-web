@@ -19,6 +19,7 @@ import { HelpPageComponent } from './components/help-page/help-page.component';
 import { LocationsComponent } from './components/locations/locations.component';
 import { FavouriteMoviesComponent } from "./components/favourite-movies/favourite-movies.component";
 import { PreferencesComponent } from './components/preferences/preferences.component';
+import { PlanToWatchMoviesComponent } from "./components/plan-to-watch-movies/plan-to-watch-movies.component";
 
 const routes: Routes = [
   { path: 'movies', component: MoviesListComponent },
@@ -52,7 +53,8 @@ const routes: Routes = [
   { path: 'home', component: MainLayoutComponent },
   { path: 'my_profile', component: MyProfileComponent },
   { path: 'locations', component: LocationsComponent },
-  { path: 'movies/favourite', component: FavouriteMoviesComponent }
+  { path: 'movies/favourite', component: FavouriteMoviesComponent },
+  { path: 'movies/plan-to-watch', component: PlanToWatchMoviesComponent }
 ];
 
 @NgModule({

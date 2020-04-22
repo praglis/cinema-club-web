@@ -21,6 +21,7 @@ export class MyProfileComponent implements OnInit {
   editedProfile: User;
 
   bugDescription = '';
+  editMode: boolean;
 
   constructor(
     private userService: UserService,
@@ -36,22 +37,24 @@ export class MyProfileComponent implements OnInit {
       this.editedProfile = jsonObject as User;
       this.editedProfile.birthday = this.datePipe.transform(this.editedProfile.birthday, 'MM-dd-yyyy');
     });
+
+    this.editMode = false;
   }
 
   onSubmit() {
     this.editedField = 'none';
     const userValues = this.convertToUserValues(this.editedProfile);
     this.userService.updateProfile(userValues);
+    this.editMode = false;
   }
 
   getCleanAddress(user: User): string {
-    const cleanAddress = user.address.streetName + ' ' + user.address.houseNumber + ', '
+    return user.address.streetName + ' ' + user.address.houseNumber + ', '
       + user.address.city + ', ' + user.address.state + ', ' + user.address.country;
-    return cleanAddress;
   }
 
-  edit(field: string): void {
-    this.editedField = field;
+  edit(): void {
+    this.editMode = true;
   }
 
   convertToUserValues(values) {

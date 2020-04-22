@@ -1,6 +1,6 @@
 <div *ngIf="error" class="alert alert-danger">{{error}}</div>
 <div *ngIf="success_msg != undefined" class="alert alert-success">{{success_msg}}</div>
-<div class="movie-details" *ngIf="movie != undefined">
+<div class="movie-details" *ngIf="movie !== undefined && allDataFetched">
   <div class="container">
     <div class="row">
       <div class="col align-middle">
@@ -19,6 +19,12 @@
         </div>
         <div *ngIf="!isMovieInFavourites">
           <a (click)="onAddToFavourites()">Add to favourites</a>
+        </div>
+        <div *ngIf="isMovieInPlanToWatch">
+          <a (click)="onRemoveMovieFromPlanToWatch()">Delete from plan to watch list</a>
+        </div>
+        <div *ngIf="!isMovieInPlanToWatch">
+          <a (click)="onAddToPlanToWatch()">Add to plan to watch list</a>
         </div>
       </div>
       <div class="col-7">
