@@ -80,7 +80,9 @@ export class MyProfileComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result.doSend === true) { this.reportService.reportBug(this.prepareBugReport(result.description)); }
+      if (result.doSend === true) {
+        this.reportService.reportBug(this.prepareBugReport(result.description));
+      }
     });
   }
 

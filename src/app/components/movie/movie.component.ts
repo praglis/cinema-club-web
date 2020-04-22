@@ -176,7 +176,6 @@ export class MovieComponent implements OnInit {
   }
 
   reportUser(commentId: string) {
-    console.log('reportReason: ', this.reportReason);
     const dialogRef = this.dialog.open(UserReportComponent, {
       hasBackdrop: true,
       data: this.reportReason
@@ -184,7 +183,7 @@ export class MovieComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed. Result:', result);
-      if (result.doSend === true) { this.reportService.reportUser(this.prepareUserReport(commentId, result.reportReason)); }
+      if (result.doSend === true) { this.reportService.reportUser(this.prepareUserReport(commentId, result.description)); }
     });
   }
 
