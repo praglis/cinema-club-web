@@ -1,16 +1,19 @@
 import { Component, Input, OnInit, ViewChildren } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MovieService } from 'src/app/services/movie.service';
-import { MovieDetails } from "../../interfaces/moviedetails.interface";
-import { NYTResponse } from "../../interfaces/nytresponse.interface";
-import { NYTReview } from "../../interfaces/nyt.review.interface";
-import { GuardianResponse } from "../../interfaces/guardianresponse.interface";
-import { GuardianReview } from "../../interfaces/guardian.review.interface";
-import {UserService} from "../../services/user.service";
-import {User} from "../../interfaces/user.interface";
-import {FavouritesService} from "../../services/favourites.service";
-import {Favourites} from "../../interfaces/favourites.interface";
-import {PlanToWatchService} from "../../services/plantowatch.service";
+import { MovieDetails } from '../../interfaces/moviedetails.interface';
+import { NYTResponse } from '../../interfaces/nytresponse.interface';
+import { NYTReview } from '../../interfaces/nyt.review.interface';
+import { GuardianResponse } from '../../interfaces/guardianresponse.interface';
+import { GuardianReview } from '../../interfaces/guardian.review.interface';
+import { UserService } from '../../services/user.service';
+import { User } from '../../interfaces/user.interface';
+import { FavouritesService } from '../../services/favourites.service';
+import { Favourites } from '../../interfaces/favourites.interface';
+import { PlanToWatchService } from '../../services/plantowatch.service';
+import { UserReportComponent } from '../user-report/user-report.component';
+import { ReportService } from 'src/app/services/report.service';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-movie',
@@ -19,14 +22,14 @@ import {PlanToWatchService} from "../../services/plantowatch.service";
 })
 export class MovieComponent implements OnInit {
 
-  @ViewChildren("commentForm")
+  @ViewChildren('commentForm')
   commentForms: any;
 
   @Input() movie: MovieDetails;
   @Input() reviewNYT: NYTReview;
   @Input() reviewGuardian: GuardianReview;
 
-  showCommentForm: boolean = false;
+  showCommentForm = false;
   comments: any = [];
   success_msg: string;
   isMovieInFavourites: boolean;
@@ -34,24 +37,27 @@ export class MovieComponent implements OnInit {
   userId: number;
   error: string;
   loading = false;
-  allDataFetched: boolean = false;
+  allDataFetched = false;
+  reportReason = '';
 
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
     private favouriteService: FavouritesService,
+    private movieService: MovieService,
+    private reportService: ReportService,
+    private dialog: MatDialog,
     private planToWatchService: PlanToWatchService,
-    private movieService: MovieService
   ) { }
 
   ngOnInit() {
     const id = +this.route.snapshot.paramMap.get('id');
     this.movieService.getMovie(id).subscribe((jsonObject: MovieDetails) => {
-      this.movie = (<MovieDetails>jsonObject);
+      this.movie = (jsonObject as MovieDetails);
       this.movieService.getMovieNYTReview(this.movie.title).subscribe((jsonObject: NYTResponse) => {
-        let response = (<NYTResponse>jsonObject);
+        const response = (jsonObject as NYTResponse);
 
-        for (let review of response.results) {
+        for (const review of response.results) {
           if (review.display_title === this.movie.title) {
             this.reviewNYT = review;
             break;
@@ -65,24 +71,24 @@ export class MovieComponent implements OnInit {
         }
       });
 
-      this.userService.findLoggedUser().subscribe((jsonObject : User) => {
+      this.userService.findLoggedUser().subscribe((jsonObject: User) => {
         this.userId = jsonObject.id;
-        this.favouriteService.getUserFavourites(jsonObject.id).subscribe((favourites : Favourites[]) => {
+        this.favouriteService.getUserFavourites(jsonObject.id).subscribe((favourites: Favourites[]) => {
           this.isMovieInFavourites = false;
           favourites.forEach(fav => {
             if (fav.movieUrl === this.movie.id.toString()) {
               this.isMovieInFavourites = true;
             }
-          })
+          });
         });
 
-        this.planToWatchService.getUserPlanToWatch(jsonObject.id).subscribe((ptw : Favourites[]) => {
+        this.planToWatchService.getUserPlanToWatch(jsonObject.id).subscribe((ptw: Favourites[]) => {
           this.isMovieInPlanToWatch = false;
           ptw.forEach(fav => {
             if (fav.movieUrl === this.movie.id.toString()) {
               this.isMovieInPlanToWatch = true;
             }
-          })
+          });
         });
 
         this.allDataFetched = true;
@@ -95,7 +101,7 @@ export class MovieComponent implements OnInit {
   reloadComments() {
     this.movieService.getComments(this.route.snapshot.paramMap.get('id')).subscribe((object) => {
       this.comments = object;
-    })
+    });
   }
 
   onAddReviewClick() {
@@ -104,14 +110,14 @@ export class MovieComponent implements OnInit {
       if (comps.length != 0) {
         comps.first.nativeElement.scrollIntoView({ behavior: 'smooth' });
       }
-    })
+    });
   }
 
   onAddToFavourites() {
     this.favouriteService.addUserFavourite({
-      "userId": this.userId,
-      "movieTitle": this.movie.title,
-      "movieUrl": this.movie.id.toString()
+      userId: this.userId,
+      movieTitle: this.movie.title,
+      movieUrl: this.movie.id.toString()
     }).subscribe((data) => {
       window.location.reload();
     });
@@ -119,9 +125,9 @@ export class MovieComponent implements OnInit {
 
   onAddToPlanToWatch() {
     this.planToWatchService.addUserPlanToWatch({
-      "userId": this.userId,
-      "movieTitle": this.movie.title,
-      "movieUrl": this.movie.id.toString()
+      'userId': this.userId,
+      'movieTitle': this.movie.title,
+      'movieUrl': this.movie.id.toString()
     }).subscribe((data) => {
       window.location.reload();
     });
@@ -129,9 +135,9 @@ export class MovieComponent implements OnInit {
 
   onRemoveMovieFromFavourites() {
     this.favouriteService.removeUserFavourite({
-      "userId": this.userId,
-      "movieTitle": this.movie.title,
-      "movieUrl": this.movie.id.toString()
+      userId: this.userId,
+      movieTitle: this.movie.title,
+      movieUrl: this.movie.id.toString()
     }).subscribe((response) => {
       window.location.reload();
     });
@@ -139,9 +145,9 @@ export class MovieComponent implements OnInit {
 
   onRemoveMovieFromPlanToWatch() {
     this.planToWatchService.removeUserPlanToWatch({
-      "userId": this.userId,
-      "movieTitle": this.movie.title,
-      "movieUrl": this.movie.id.toString()
+      'userId': this.userId,
+      'movieTitle': this.movie.title,
+      'movieUrl': this.movie.id.toString()
     }).subscribe((response) => {
       window.location.reload();
     });
@@ -149,23 +155,43 @@ export class MovieComponent implements OnInit {
 
   submitComment() {
     this.movieService.postComment({
-      "movieId": Number(this.route.snapshot.paramMap.get('id')),
-      "reviewBody": this.commentForms.first.nativeElement.value
+      movieId: Number(this.route.snapshot.paramMap.get('id')),
+      reviewBody: this.commentForms.first.nativeElement.value
     }).subscribe((data) => {
-      this.success_msg = "Commend has been added";
+      this.success_msg = 'Commend has been added';
       this.showCommentForm = false;
       this.reloadComments();
     },
       error => {
         this.error = error.message;
         this.loading = false;
-      })
+      });
   }
 
   likeComment(commentId: string) {
     this.movieService.likeComment(commentId)
       .subscribe(response => {
         this.reloadComments();
-      })
+      });
+  }
+
+  reportUser(commentId: string) {
+    const dialogRef = this.dialog.open(UserReportComponent, {
+      hasBackdrop: true,
+      data: this.reportReason
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed. Result:', result);
+      if (result.doSend === true) { this.reportService.reportUser(this.prepareUserReport(commentId, result.description)); }
+    });
+  }
+
+  prepareUserReport(commentId: string, reason: string) {
+    return {
+      commentId,
+      reportDate: new Date(),
+      reportReason: reason
+    };
   }
 }

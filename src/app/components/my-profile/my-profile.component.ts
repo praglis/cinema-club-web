@@ -1,7 +1,10 @@
-import {Component, Injectable, OnInit} from '@angular/core';
-import {UserService} from 'src/app/services/user.service';
-import {User} from '../../interfaces/user.interface';
-import {DatePipe} from '@angular/common';
+import { Component, OnInit, Injectable } from '@angular/core';
+import { UserService } from 'src/app/services/user.service';
+import { User } from '../../interfaces/user.interface';
+import { DatePipe } from '@angular/common';
+import { BugReportComponent } from '../bug-report/bug-report.component';
+import { MatDialogModule, MatDialog, MatDialogRef, MatDialogConfig } from '@angular/material/dialog';
+import { ReportService } from 'src/app/services/report.service';
 
 @Component({
   selector: 'app-my-profile',
@@ -15,14 +18,17 @@ import {DatePipe} from '@angular/common';
 export class MyProfileComponent implements OnInit {
 
   editedField: string;
-
   editedProfile: User;
 
+  bugDescription = '';
   editMode: boolean;
 
   constructor(
     private userService: UserService,
-    private datePipe: DatePipe) {
+    private reportService: ReportService,
+    private dialog: MatDialog,
+    private datePipe: DatePipe
+  ) {
     this.editedField = 'none';
   }
 
@@ -64,6 +70,27 @@ export class MyProfileComponent implements OnInit {
         streetName: values.address.streetName,
         houseNumber: values.address.houseNumber
       }
+    };
+  }
+
+  reportBug() {
+    const dialogRef = this.dialog.open(BugReportComponent, {
+      hasBackdrop: true,
+      data: this.bugDescription
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result.doSend === true) {
+        this.reportService.reportBug(this.prepareBugReport(result.description));
+      }
+    });
+  }
+
+  prepareBugReport(description: string) {
+    return {
+      reporter: this.editedProfile.username,
+      reportDate: new Date(),
+      bugDescription: description
     };
   }
 }

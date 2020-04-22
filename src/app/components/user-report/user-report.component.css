@@ -1,0 +1,21 @@
+div {
+  background-color: white;
+  --theme-gold: #ccb67a;
+  padding: 50px;
+}
+
+button {
+  height: 30px;
+  width: 100px;
+  border-style: none;
+  border-radius: 20px;
+  background-color: black;
+  color: var(--theme-gold);
+}
+.button-container{
+  display: flex;
+}
+
+.cancel-button{
+  margin-left: auto;
+}
