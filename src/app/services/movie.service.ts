@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UserReview } from '../interfaces/userreview.interface';
+import {MovieSearchCriteria} from "../interfaces/movie.search.criteria.interface";
+import {MoviesList} from "../interfaces/movieslist.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -81,5 +83,10 @@ export class MovieService {
   getUserPlanToWatch(userId : string) : Observable<any> {
     let url = "http://localhost:8200/user/plantowatch?user=" + userId;
     return this.httpClient.get<any>(url, { withCredentials: true }).pipe();
+  }
+
+  getMoviesByCriteria(criteria: MovieSearchCriteria) : Observable<MoviesList> {
+    let url = "http://localhost:8200/movies/get";
+    return this.httpClient.post<any>(url, criteria, { withCredentials: true}).pipe();
   }
 }
