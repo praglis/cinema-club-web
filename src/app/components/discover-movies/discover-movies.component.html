@@ -1,0 +1,69 @@
+<ng-container *ngIf="genres !== undefined">
+  <form [formGroup]="registerForm" id="search-form" (ngSubmit)="onSubmit()">
+    <input type="number" formControlName="page" id="page" value="1" hidden/>
+    <div class="container">
+        <div class="row">
+          <div class="col-3 d-flex flex-column">
+            <select formControlName="genreID" id="genreID" style="height: 100%">
+              <option value="" selected>None</option>
+              <ng-container *ngFor="let genre of genres">
+                <option value="{{ genre.id }}">{{ genre.name }}</option>
+              </ng-container>
+            </select>
+          </div>
+          <div class="col-3 d-flex flex-column">
+            <input type="number" placeholder="Earliest release year" formControlName="yearFrom" id="yearFrom" min="0"/>
+          </div>
+          <div class="col-3 d-flex flex-column">
+            <input type="number" placeholder="Latest release year" formControlName="yearTo" id="yearTo" min="0"/>
+          </div>
+          <div class="col-3 d-flex flex-column">
+            <input type="number" placeholder="Score: (0.0 — 10.0)" formControlName="voteFrom" id="voteFrom" step="0.1" min="0.0" max="10.0"/>
+          </div>
+        </div>
+      <div class="row search-button-container">
+        <div class="col-12 text-right">
+          <button [disabled]="loading" class="btn btn-secondary">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Search
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <div class="movies-list container">
+    <div class="movies">
+      <table class="table table-striped text-white">
+        <tr *ngFor="let movie of movies">
+          <td><a routerLink="/movie/{{movie.id}}"><img src="https://image.tmdb.org/t/p/w200/{{movie.poster_path}}"/></a></td>
+          <td>
+            <p class="font-weight-bold"><a class="title-link" routerLink="/movie/{{movie.id}}">{{movie.title}}</a> ({{movie.vote_average}} / 10.0)</p>
+
+            <p align="justify">
+              {{movie.overview}}
+            </p>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <nav aria-label="movies-pagination" *ngIf="movies !== undefined && movies.length !== 0">
+      <ul class="pagination justify-content-center">
+        <li class="page-item" [class.disabled]="actualPage == 1">
+          <a (click)="onPrevPage()" href="javascript:void(0)" tabindex="-1" aria-disabled="true" class="page-link" queryParamsHandling="merge">Previous</a>
+        </li>
+
+        <ng-container *ngFor="let index of indices">
+          <li class="page-item" [class.active]="actualPage == index">
+            <a class="page-link" (click)="onJumpPage(index)" href="javascript:void(0)" class="page-link" queryParamsHandling="merge">{{index}}</a>
+          </li>
+        </ng-container>
+
+        <li class="page-item" [class.disabled]="actualPage == lastPage">
+          <a (click)="onNextPage()" href="javascript:void(0)" class="page-link" queryParamsHandling="merge">Next</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</ng-container>
