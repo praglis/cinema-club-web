@@ -203,14 +203,18 @@
         <h2 style="text-align: center; color: dimgray; padding: 40px; opacity: 50%">No comments found. Comment first!</h2>
       </div>
 
-      <div class="comments-section" style="padding-top: 15px">
+      <div class="comments-section" style="padding-top: 15px; word-wrap: break-word; width: 950px">
         <div *ngFor="let item of comments" class="commentArea">
           <p style="color: #6a6666; padding-top: 10px"><strong class="text-grey">{{item.infoCU.username}}</strong> write on day {{item.infoCD | date}}</p>
           <div style="margin-left: 10px; margin-right: 10px;">
             <p>{{item.statement}}</p>
           </div>
-          <p style="font-size: 24px;">{{item.likes}} <a (click)="likeComment(item.id)"><i class="far fa-thumbs-up" style="padding-bottom: 15px"></i></a></p>
-        </div>
+          <div style="display: flex;">
+            <p style="font-size: 24px;">{{item.likes}} <a (click)="likeComment(item.id)"><i
+              class="far fa-thumbs-up"></i></a>
+            </p>
+            <p style="margin-left: auto;"><a style="color: #6a6666;" (click)="reportUser(item.id)">report comment</a></p>
+          </div>        </div>
       </div>
     </div>
 

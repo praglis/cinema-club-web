@@ -6,11 +6,15 @@ import { NYTResponse } from '../../interfaces/nytresponse.interface';
 import { NYTReview } from '../../interfaces/nyt.review.interface';
 import { GuardianResponse } from '../../interfaces/guardianresponse.interface';
 import { GuardianReview } from '../../interfaces/guardian.review.interface';
-import {UserService} from '../../services/user.service';
-import {User} from '../../interfaces/user.interface';
-import {FavouritesService} from '../../services/favourites.service';
-import {Favourites} from '../../interfaces/favourites.interface';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { UserService } from '../../services/user.service';
+import { User } from '../../interfaces/user.interface';
+import { FavouritesService } from '../../services/favourites.service';
+import { Favourites } from '../../interfaces/favourites.interface';
+// import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PlanToWatchService } from '../../services/plantowatch.service';
+import { UserReportComponent } from '../user-report/user-report.component';
+import { ReportService } from 'src/app/services/report.service';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-movie',
@@ -38,18 +42,22 @@ export class MovieComponent implements OnInit {
   error: string;
   loading = false;
   allDataFetched = false;
-  form: FormGroup;
+  reportReason = '';
+  // form: FormGroup;
 
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
     private favouriteService: FavouritesService,
     private movieService: MovieService,
-    fb: FormBuilder
+    private reportService: ReportService,
+    private dialog: MatDialog,
+    private planToWatchService: PlanToWatchService,
+    // fb: FormBuilder
   ) {
-    this.form = fb.group({
-      contrl: ['', Validators.required]
-    });
+    // this.form = fb.group({
+    //   contrl: ['', Validators.required]
+    // });
   }
 
   ngOnInit() {
@@ -68,7 +76,9 @@ export class MovieComponent implements OnInit {
       });
 
       this.movieService.getMovieGuardianReview(this.movie.title).subscribe((jsonObject: GuardianResponse) => {
-        this.reviewGuardian = jsonObject.response.content;
+        if (jsonObject !== null) {
+          this.reviewGuardian = jsonObject.response.content;
+        }
       });
 
       this.userService.findLoggedUser().subscribe((jsonObject: User) => {
@@ -124,11 +134,31 @@ export class MovieComponent implements OnInit {
     });
   }
 
+  onAddToPlanToWatch() {
+    this.planToWatchService.addUserPlanToWatch({
+      'userId': this.userId,
+      'movieTitle': this.movie.title,
+      'movieUrl': this.movie.id.toString()
+    }).subscribe((data) => {
+      window.location.reload();
+    });
+  }
+
   onRemoveMovieFromFavourites() {
     this.favouriteService.removeUserFavourite({
       userId: this.userId,
       movieTitle: this.movie.title,
       movieUrl: this.movie.id.toString()
+    }).subscribe((response) => {
+      window.location.reload();
+    });
+  }
+
+  onRemoveMovieFromPlanToWatch() {
+    this.planToWatchService.removeUserPlanToWatch({
+      'userId': this.userId,
+      'movieTitle': this.movie.title,
+      'movieUrl': this.movie.id.toString()
     }).subscribe((response) => {
       window.location.reload();
     });
@@ -169,5 +199,25 @@ export class MovieComponent implements OnInit {
       .subscribe(response => {
         this.reloadComments();
       });
+  }
+
+  reportUser(commentId: string) {
+    const dialogRef = this.dialog.open(UserReportComponent, {
+      hasBackdrop: true,
+      data: this.reportReason
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed. Result:', result);
+      if (result.doSend === true) { this.reportService.reportUser(this.prepareUserReport(commentId, result.description)); }
+    });
+  }
+
+  prepareUserReport(commentId: string, reason: string) {
+    return {
+      commentId,
+      reportDate: new Date(),
+      reportReason: reason
+    };
   }
 }
