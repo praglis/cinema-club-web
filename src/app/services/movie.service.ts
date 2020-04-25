@@ -67,7 +67,7 @@ export class MovieService {
 
   getComments(movieId: string): Observable<any> {
     let url = "http://localhost:8200/reviews/userReview/" + movieId;
-    return this.httpClient.get<any>(url).pipe();
+    return this.httpClient.get<any>(url,{ withCredentials: true }).pipe();
   }
 
   likeComment(commentId: string): Observable<any> {

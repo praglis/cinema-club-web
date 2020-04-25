@@ -99,6 +99,10 @@
   border-radius: 25px;
 }
 
+.thumbs-color{
+  color: deepskyblue;
+}
+
 a:hover {
   cursor:pointer;
  }

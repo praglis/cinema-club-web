@@ -138,9 +138,19 @@
           <p>{{item.statement}}</p>
         </div>
         <div style="display: flex;">
-          <p style="font-size: 24px;">{{item.likes}} <a (click)="likeComment(item.id)"><i
+          <ng-container *ngIf="item.liked == false;else second">
+              <p style="font-size: 24px;">{{item.likes}} <a (click)="likeComment(item.id)"><i
+              class="far fa-thumbs-up"></i></a>
+            </p>
+          </ng-container>
+          <ng-template #second>
+            <div class="thumbs-color">
+              <p style="font-size: 24px;">{{item.likes}} <a (click)="likeComment(item.id)"><i
                 class="far fa-thumbs-up"></i></a>
-          </p>
+              </p>
+            </div>
+          </ng-template>
+
           <p style="margin-left: auto;"><a style="color: #6a6666;" (click)="reportUser(item.id)">report comment</a></p>
         </div>
 
