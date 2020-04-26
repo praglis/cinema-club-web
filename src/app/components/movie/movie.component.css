@@ -170,3 +170,12 @@ a:hover {
   cursor:pointer;
   text-shadow: 0 0 15px white;
 }
+
+.cast-image {
+  /*background-color: white;*/
+  /*display: block;*/
+  /*margin: 0 auto;*/
+  object-fit: cover;
+  width: 30px;
+  height: 30px;
+}

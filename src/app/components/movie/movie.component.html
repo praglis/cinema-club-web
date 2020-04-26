@@ -25,40 +25,42 @@
         <p>Overview</p>
         <p id=movie-container class="overview">{{movie.overview}}</p>
 
-        <p>Critics' reviews</p>
-        <div id=movie-container class="container reviews">
-          <div class="row" *ngIf="reviewNYT != null">
-            <div class="col-6">
-              <div class="review-title">
-                {{ reviewNYT.headline }}
+        <div *ngIf="reviewNYT != null || reviewGuardian != null">
+          <p>Critics' reviews</p>
+          <div id=movie-container class="container reviews">
+            <div class="row">
+              <div class="col-6" *ngIf="reviewNYT != null">
+                <div class="review-title">
+                  {{ reviewNYT.headline }}
+                </div>
+                <div class="review-short">
+                  „{{ reviewNYT.summary_short }}”
+                </div>
+                <div class="review-author">
+                  — {{ reviewNYT.byline}}
+                </div>
+                <div class="review-link">
+                  Read more at: <a href="{{reviewNYT.link.url}}">New York Times</a>
+                </div>
               </div>
-              <div class="review-short">
-                „{{ reviewNYT.summary_short }}”
-              </div>
-              <div class="review-author">
-                — {{ reviewNYT.byline}}
-              </div>
-              <div class="review-link">
-                Read more at: <a href="{{reviewNYT.link.url}}">New York Times</a>
-              </div>
-            </div>
-            <div class="col-6" *ngIf="reviewGuardian != null">
-              <div class="review-title">
-                {{ reviewGuardian.webTitle }}
-              </div>
-              <div class="review-short">
-                „{{ reviewGuardian.fields.trailText }}”
-              </div>
-              <div class="review-author">
-                — {{ reviewGuardian.fields.byline }}
-              </div>
-              <div class="review-link">
-                Read more at: <a href="{{reviewGuardian.webUrl}}">The Guardian</a>
+              <div class="col-6" *ngIf="reviewGuardian != null">
+                <div class="review-title">
+                  {{ reviewGuardian.webTitle }}
+                </div>
+                <div class="review-short">
+                  „{{ reviewGuardian.fields.trailText }}”
+                </div>
+                <div class="review-author">
+                  — {{ reviewGuardian.fields.byline }}
+                </div>
+                <div class="review-link">
+                  Read more at: <a href="{{reviewGuardian.webUrl}}">The Guardian</a>
+                </div>
               </div>
             </div>
           </div>
+        </div>
 
-      </div>
     </div>
 
   </div>
@@ -93,6 +95,32 @@
             <p>{{movie.release_date}}</p>
           </div>
         </div>
+
+        <div class="row" *ngIf="movie.crews != null">
+          <div class="col property-header">
+            <p style="font-weight: bold">Directing</p>
+          </div>
+          <div class="col property-value">
+            <p>
+              <ng-container *ngFor="let crew of movie.crews">
+                <ng-container *ngIf="crew.department==='Directing' && crew.job === 'Director'">{{crew.name}}, </ng-container>
+              </ng-container>
+            </p>
+          </div>
+        </div>
+        <div class="row" *ngIf="movie.crews != null">
+          <div class="col property-header">
+            <p style="font-weight: bold">Screenplay</p>
+          </div>
+          <div class="col property-value">
+            <p>
+              <ng-container *ngFor="let crew of movie.crews">
+                <ng-container *ngIf="crew.department==='Writing' && (crew.job === 'Screenplay' || crew.job === 'Writer')">{{crew.name}}, </ng-container>
+              </ng-container>
+            </p>
+          </div>
+        </div>
+
         <div class="row" *ngIf="movie.genres != null">
           <div class="col property-header">
             <p style="font-weight: bold">Genres</p>
@@ -100,7 +128,7 @@
           <div class="col property-value">
             <p>
               <ng-container *ngFor="let genre of movie.genres">
-                {{genre.name}}
+                {{genre.name}},
               </ng-container>
             </p>
           </div>
@@ -112,7 +140,7 @@
           <div class="col property-value">
             <p>
               <ng-container *ngFor="let company of movie.production_companies">
-                {{company.name}}
+                {{company.name}},
               </ng-container>
             </p>
           </div>
@@ -122,15 +150,34 @@
 
     <div class="col-7">
       <p>Cast</p>
-      <div id="movie-container"></div>
-      <!--      tutaj dać cast-->
-<!--
+      <div id="movie-container">
 
-!!!
+        <div class="row">
+          <div class="col-1"></div>
+          <div class="col property-header">
+            <p style="font-weight: bold">Name</p>
+          </div>
+          <div class="col property-value">
+            <p style="font-weight: bold">Character</p>
+          </div>
+        </div>
 
-          !!!!
-                !!!!
--->
+        <div *ngFor="let cast of movie.casts; index as i" class="row">
+            <div *ngIf="!cast.profile_path && i < 20" class="col-1"></div>
+            <div *ngIf="cast.profile_path && i < 20" class="col-1">
+              <img class="cast-image" src="https://image.tmdb.org/t/p/w300/{{cast.profile_path}}">
+            </div>
+            <div *ngIf="i < 20" class="col property-header">
+              <p>{{cast.name}}</p>
+            </div>
+            <div *ngIf="i < 20" class="col property-value">
+              <p>{{cast.character}}</p>
+            </div>
+        </div>
+
+
+      </div>
+
     </div>
 
   </div>

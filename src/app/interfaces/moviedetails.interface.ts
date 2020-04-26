@@ -2,6 +2,8 @@ import {Genre} from "./genre.interface";
 import {ProductionCompany} from "./productioncompany.interface";
 import {ProductionCountry} from "./productioncountry.interface";
 import {Language} from "./language.interface";
+import {Crew} from './crew.interface';
+import {Cast} from './cast.interface';
 
 export interface MovieDetails {
   adult: boolean;
@@ -31,4 +33,6 @@ export interface MovieDetails {
   vote_count: number;
   rating: number;
   numberOfVotes: number;
+  crews?: Crew[];
+  casts?: Cast[];
 }
