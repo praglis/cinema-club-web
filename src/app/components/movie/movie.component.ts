@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChildren } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit, AfterViewChecked, ContentChild, Directive, AfterContentChecked, QueryList, ViewChildren } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MovieService } from 'src/app/services/movie.service';
 import { MovieDetails } from '../../interfaces/moviedetails.interface';
@@ -10,18 +10,19 @@ import { UserService } from '../../services/user.service';
 import { User } from '../../interfaces/user.interface';
 import { FavouritesService } from '../../services/favourites.service';
 import { Favourites } from '../../interfaces/favourites.interface';
-// import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PlanToWatchService } from '../../services/plantowatch.service';
 import { UserReportComponent } from '../user-report/user-report.component';
 import { ReportService } from 'src/app/services/report.service';
 import { MatDialog } from '@angular/material/dialog';
+
+declare let Swiper: any;
 
 @Component({
   selector: 'app-movie',
   templateUrl: './movie.component.html',
   styleUrls: ['./movie.component.css']
 })
-export class MovieComponent implements OnInit {
+export class MovieComponent implements OnInit, AfterViewInit {
 
   @ViewChildren('commentForm')
   commentForms: any;
@@ -33,6 +34,13 @@ export class MovieComponent implements OnInit {
   @Input() reviewNYT: NYTReview;
   @Input() reviewGuardian: GuardianReview;
 
+  // Comments swiper
+  @ViewChildren('commentsChildren') commentsChildren: QueryList<any>;
+  @ViewChild('commentsSwiperContainer', { static: true }) commentsSwiperContainer: ElementRef;
+  @ViewChild('commentsSwiperButtonNext', { static: true }) commentsSwiperButtonNext: ElementRef;
+  @ViewChild('commentsSwiperButtonPrev', { static: true }) commentsSwiperButtonPrev: ElementRef;
+
+  commentsSwiper: any;
   showCommentForm = false;
   showRateForm = false;
   comments: any = [];
@@ -43,7 +51,6 @@ export class MovieComponent implements OnInit {
   loading = false;
   allDataFetched = false;
   reportReason = '';
-  // form: FormGroup;
 
   constructor(
     private route: ActivatedRoute,
@@ -53,11 +60,25 @@ export class MovieComponent implements OnInit {
     private reportService: ReportService,
     private dialog: MatDialog,
     private planToWatchService: PlanToWatchService,
-    // fb: FormBuilder
-  ) {
-    // this.form = fb.group({
-    //   contrl: ['', Validators.required]
-    // });
+  ) { }
+
+  ngAfterViewInit() {
+    this.commentsSwiper = this.initCommentsSwiper();
+    this.commentsChildren.changes.subscribe(t => { this.commentsSwiper.update(); });
+  }
+
+  private initCommentsSwiper() {
+    return this.commentsSwiper = new Swiper(this.commentsSwiperContainer.nativeElement, {
+      slidesPerView: 'auto',
+      spaceBetween: 30,
+      slidesPerGroup: 2,
+      // loop: true,
+      loopFillGroupWithBlank: true,
+      navigation: {
+        nextEl: this.commentsSwiperButtonNext.nativeElement,
+        prevEl: this.commentsSwiperButtonPrev.nativeElement
+      }
+    });
   }
 
   ngOnInit() {

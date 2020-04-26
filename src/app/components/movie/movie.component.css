@@ -80,30 +80,12 @@
   color: azure;
 }
 
-.user-review-content {
-  /*width: 50%;*/
-  /*margin-top: 50px;*/
-}
-
 .comments-section {
-  width: 100%;
-}
-.commentArea {
-  /* margin: 10px; */
-  padding-left: 20px;
-  padding-right: 20px;
-  width: 100%;
-  text-align: left;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  background-color: #2d2d2dbf;
-  /* box-shadow: 10px 10px 5px #2d2d2dbf; */
-  border-radius: 25px;
+  /*width: 50%;*/
+  padding-top: 15px;
+  width: 970px;
 }
 
-a:hover {
-  cursor:pointer;
- }
 
 /* This is just an example instead of using <img> tags you can use background-image and achive half-star results */
 .star-rating {
@@ -160,5 +142,31 @@ a:hover {
 }
 
 .rate-button:hover{
+  text-shadow: 0 0 15px white;
+}
+
+.swiper-container {
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 20px;
+  height: auto;
+  /*max-height: 200px;*/
+  color: white;
+}
+
+.swiper-slide {
+  margin: 5px;
+  word-wrap: break-word;
+  padding-left: 20px;
+  padding-right: 20px;
+  min-width: 650px;
+  max-width: 650px;
+  text-align: left;
+  background-color: #2d2d2dbf;
+  border-radius: 25px;
+}
+
+a:hover {
+  cursor:pointer;
   text-shadow: 0 0 15px white;
 }
