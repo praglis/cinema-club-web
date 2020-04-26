@@ -201,18 +201,21 @@ export class MovieComponent implements OnInit, AfterViewInit {
   }
 
   submitRate(rate: number) {
-    // this.movieService.postComment({
-    //   movieId: Number(this.route.snapshot.paramMap.get('id')),
-    //   reviewBody: this.commentForms.first.nativeElement.value
-    // }).subscribe((data) => {
+    this.movieService.postRate(
+      Number(this.route.snapshot.paramMap.get('id')),
+      { rate: rate }).subscribe((data) => {
         this.success_msg = 'Rate has been added';
         this.showRateForm = false;
-      //   this.reloadComments();
-      // },
-      // error => {
-      //   this.error = error.message;
-      //   this.loading = false;
-      // });
+        const id = +this.route.snapshot.paramMap.get('id');
+        this.movieService.getMovie(id).subscribe((jsonObject: MovieDetails) => {
+          this.movie = (jsonObject as MovieDetails);
+        });
+        this.reloadComments();
+      },
+      error => {
+        this.error = error.message;
+        this.loading = false;
+      });
   }
 
   likeComment(commentId: string) {
