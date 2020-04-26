@@ -1,10 +1,28 @@
 <div *ngIf="!haveRecommendations" class="no-recommendation">
-    We can't find recommendations for you, please add movies to your favourite list,
+    We can't find recommendations for you, please add movies to your favourite list or rate some of them,
     so we can personalize a movie list for you!
     <br>
     <button [routerLink]="['/home']" class="browse-movies btn btn-light btn-lg">Browse Movies</button>
 </div>
 <div [hidden]="!haveRecommendations">
+    <span class="slider-title" *ngIf="genres != undefined && genres.length != 0">
+        Othere like you also watched: <button (click)="onRefresh()" class="link">Refresh</button><span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+    </span>
+    <div class="prefer-movies">
+        <div class="swiper-container" #preferSwiperContainer>
+            <div class="swiper-wrapper">
+                <div #preferMoviesChildren class="swiper-slide" *ngFor="let movie of preferMovies">
+                    <a routerLink="/movie/{{movie.id}}" [state]="movie">
+                        <img class="slide-image" [src]="movie.poster_path">
+                    </a>
+                    <p class="slide-text">{{movie.title}}</p>
+                </div>
+            </div>
+            <div class="swiper-button-next" #preferSwiperButtonNext></div>
+            <div class="swiper-button-prev" #preferSwiperButtonPrev></div>
+        </div>
+    </div>
+    <br>
     <span class="slider-title" *ngIf="genres != undefined && genres.length != 0">
         Because you like:
         <ng-container *ngFor="let genre of genres;let index=index">

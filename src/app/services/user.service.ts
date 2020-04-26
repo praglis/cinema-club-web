@@ -38,4 +38,9 @@ export class UserService {
     const url = 'http://localhost:8200/user/preferences?type=' + type + "&page=" + page;
     return this.httpClient.get<any>(url, { withCredentials: true }).pipe();
   }
+
+  refreshPreferences() {
+    const url = 'http://localhost:8200/user/preferences/refresh'
+    return this.httpClient.post<any>(url, '', { withCredentials: true }).pipe();
+  }
 }
