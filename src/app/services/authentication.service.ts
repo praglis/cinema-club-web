@@ -49,7 +49,12 @@ export class AuthenticationService {
     return this.http.post<any>(link, user, {withCredentials: true})
       .pipe();
   }
+
   resetPassword(username) {
     return this.http.post(`http://localhost:8200/resetPassword`, username, {withCredentials: true});
+  }
+
+  resetPasswordWithLoggedUser() {
+    return this.http.get<any>(`http://localhost:8200/resetPasswordWithLoggedUser`, {withCredentials: true}).pipe();
   }
 }

@@ -19,7 +19,7 @@ export class UserService {
   updateProfile(user) {
     const url = 'http://localhost:8200/user/update';
     return this.httpClient.post<any>(url, user, { withCredentials: true })
-      .subscribe();
+      .pipe();
   }
 
   getAllUsers(): Observable<any> {
