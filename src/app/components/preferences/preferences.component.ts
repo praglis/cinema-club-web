@@ -10,6 +10,11 @@ declare let Swiper: any;
 })
 export class PreferencesComponent implements OnInit, AfterViewInit {
 
+  @ViewChildren('preferMoviesChildren') preferMoviesChildren: QueryList<any>;
+  @ViewChild('preferSwiperContainer', { static: true }) preferSwiperContainer: ElementRef;
+  @ViewChild('preferSwiperButtonNext', { static: true }) preferSwiperButtonNext: ElementRef;
+  @ViewChild('preferSwiperButtonPrev', { static: true }) preferSwiperButtonPrev: ElementRef;
+
   // Genres Movies Swiper
   @ViewChildren('genresMoviesChildren') genresMoviesChildren: QueryList<any>;
   @ViewChild('genresSwiperContainer', { static: true }) genresSwiperContainer: ElementRef;
@@ -33,6 +38,7 @@ export class PreferencesComponent implements OnInit, AfterViewInit {
   genresMoviesSwiper: any;
   castsMoviesSwiper: any;
   crewsMoviesSwiper: any;
+  preferMoviesSwiper: any;
 
   haveRecommendations: Boolean = true;
   genresMovies;
@@ -41,6 +47,9 @@ export class PreferencesComponent implements OnInit, AfterViewInit {
   casts: String[];
   crewsMovies;
   crews: String[];
+  preferMovies;
+  prefers: String[];
+  loading: boolean;
 
   constructor(
     private userService: UserService,
@@ -66,20 +75,40 @@ export class PreferencesComponent implements OnInit, AfterViewInit {
       this.castsMovies = data.movies.results;
       this.haveRecommendations = data.recommendations;
     });
+    this.userService.getRecommendation("S", "1").subscribe(data => {
+      data.movies.results.forEach(element => { this.bypassSecurityForPoster(element); });
+      this.preferMovies = data.movies.results;
+      this.haveRecommendations = data.recommendations;
+    })
   }
 
   ngAfterViewInit() {
     this.genresMoviesSwiper = this.initGenresMoviesSwiper()
     this.castsMoviesSwiper = this.initCastsMoviesSwiper();
     this.crewsMoviesSwiper = this.initCrewsMoviesSwiper();
-    this.genresMoviesChildren.changes.subscribe(t => { this.genresMoviesSwiper.update(); })
-    this.castsMoviesChildren.changes.subscribe(t => { this.castsMoviesSwiper.update(); })
-    this.crewsMoviesChildren.changes.subscribe(t => { this.crewsMoviesSwiper.update(); })
+    this.preferMoviesSwiper = this.initPreferMoviesSwiper();
+    this.genresMoviesChildren.changes.subscribe(t => { this.genresMoviesSwiper.update(); });
+    this.castsMoviesChildren.changes.subscribe(t => { this.castsMoviesSwiper.update(); });
+    this.crewsMoviesChildren.changes.subscribe(t => { this.crewsMoviesSwiper.update(); });
+    this.preferMoviesChildren.changes.subscribe(t => { this.preferMoviesSwiper.update() });
   }
 
   private bypassSecurityForPoster(element: any) {
     element.poster_path = "https://image.tmdb.org/t/p/w500" + element.poster_path;
     element.poster_path = this.santizator.bypassSecurityTrustUrl(element.poster_path);
+  }
+
+  private initPreferMoviesSwiper() {
+    return new Swiper(this.preferSwiperContainer.nativeElement, {
+      slidesPerView: 'auto',
+      spaceBetween: 30,
+      slidesPerGroup: 2,
+      loopFillGroupWithBlank: true,
+      navigation: {
+        nextEl: this.preferSwiperButtonNext.nativeElement,
+        prevEl: this.preferSwiperButtonPrev.nativeElement
+      }
+    });
   }
 
   private initCastsMoviesSwiper() {
@@ -129,6 +158,18 @@ export class PreferencesComponent implements OnInit, AfterViewInit {
       })
     }
     return dummy;
+  }
+
+  onRefresh() {
+    this.loading = true;
+    this.userService.refreshPreferences().subscribe(data => {
+      this.userService.getRecommendation("S", "1").subscribe(data => {
+        data.movies.results.forEach(element => { this.bypassSecurityForPoster(element); });
+        this.preferMovies = data.movies.results;
+        this.haveRecommendations = data.recommendations;
+        this.loading = false;
+      })
+    });
   }
 
 }
