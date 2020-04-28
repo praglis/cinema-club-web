@@ -170,6 +170,10 @@
   border-radius: 25px;
 }
 
+.thumbs-color{
+  color: deepskyblue;
+}
+
 a:hover {
   cursor:pointer;
   text-shadow: 0 0 15px white;

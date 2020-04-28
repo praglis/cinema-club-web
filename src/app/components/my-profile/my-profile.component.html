@@ -1,3 +1,5 @@
+<div *ngIf="errorMsg" class="alert alert-danger">{{errorMsg}}</div>
+<div *ngIf="successMsg != undefined" class="alert alert-success">{{successMsg}}</div>
 <ng-container *ngIf="editedProfile !== undefined">
   <div class="container">
     <div class="row">
@@ -29,7 +31,9 @@
               [ngModelOptions]="{standalone: true}">
           </p>
           <p>
-            Mail:  {{editedProfile.email}}
+            Mail:  <span *ngIf="!editMode">  {{editedProfile.email}}</span>
+            <input id="email" type="text" *ngIf="editMode" [(ngModel)]="editedProfile.email"
+                   [ngModelOptions]="{standalone: true}">
           </p>
           <p>
             Phone no.: <span *ngIf="!editMode">  {{editedProfile.phoneNo}}</span>
@@ -79,7 +83,9 @@
         <li class="nav-item">
           <a (click)="reportBug()" class="nav-link"><i class="fas fa-bug fa-2x"></i><br />Report a bug</a>
         </li>
-
+        <li class="nav-item">
+          <a (click)="resetPassword()" class="nav-link"><i class="fa fa-key fa-2x"></i><br />Reset Password</a>
+        </li>
       </ul>
     </div>
   </div>
