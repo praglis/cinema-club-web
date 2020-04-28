@@ -2,9 +2,20 @@
     text-align: center;
 }
 .title {
-    color: bisque;
-    display: block;
-    margin: 0 auto;
+  color: white;
+  text-align: left;
+  font-size: 30px;
+  display: block;
+  margin: 20px;
+}
+
+.title2 {
+  color: white;
+  text-align: left;
+  font-size: 30px;
+  display: block;
+  margin-left: -35px;
+  /*margin: 20px;*/
 }
 
 .movie-poster {
@@ -15,12 +26,12 @@
 
 .movie-details {
   margin-top: 30px;
-  color: bisque;
+  color: white;
 }
 
 .overview {
   text-align: justify;
-  color: bisque;
+  color: white;
   padding-top: 15px;
 }
 
@@ -78,24 +89,84 @@
   color: azure;
 }
 
-.user-review-content {
-  width: 50%;
-  margin-top: 50px;
+.comments-section {
+  padding-top: 15px;
+  width: 970px;
 }
 
-.comments-section {
-  width: 100%;
+
+.star-rating {
+  height: 40px;
+  width: 400px;
+  position: relative;
 }
-.commentArea {
-  /* margin: 10px; */
+
+.full-star {
+  position: absolute;
+  z-index: 1;
+  height: 100%;
+  background-image: url('src/assets/images/star_yellow.png');
+  background-size: 400px 40px;
+}
+
+.full-star2 {
+  position: absolute;
+  z-index: 1;
+  height: 100%;
+  background-image: url('src/assets/images/star_blue.png');
+  background-size: 400px 40px;
+}
+
+.empty-star {
+  width: 100%;
+  height: 100%;
+  background-image: url('src/assets/images/star_grey.png');
+  background-size: 400px 40px;
+}
+
+#movie-container {
+  padding: 20px;
+  border: 1px solid black;
+  background-color: #02030F;
+  opacity: 0.8;
+}
+
+#rate-container {
+  padding: 20px;
+  border: 1px solid black;
+  background-color: #2d2d2dbf;
+  opacity: 0.8;
+}
+
+.rate-button{
+  font-size: 30px;
+  margin-right: 5px;
+  margin-left: 5px;
+  cursor: pointer
+}
+
+.rate-button:hover{
+  text-shadow: 0 0 15px white;
+}
+
+.swiper-container {
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 20px;
+  height: auto;
+  /*max-height: 200px;*/
+  color: white;
+}
+
+.swiper-slide {
+  margin: 5px;
+  word-wrap: break-word;
   padding-left: 20px;
   padding-right: 20px;
-  width: 100%;
+  min-width: 650px;
+  max-width: 650px;
   text-align: left;
-  margin-top: 10px;
-  margin-bottom: 10px;
   background-color: #2d2d2dbf;
-  /* box-shadow: 10px 10px 5px #2d2d2dbf; */
   border-radius: 25px;
 }
 
@@ -105,4 +176,11 @@
 
 a:hover {
   cursor:pointer;
- }
+  text-shadow: 0 0 15px white;
+}
+
+.cast-image {
+  object-fit: cover;
+  width: 30px;
+  height: 30px;
+}

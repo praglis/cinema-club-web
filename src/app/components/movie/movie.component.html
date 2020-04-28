@@ -1,36 +1,79 @@
-<div *ngIf="error" class="alert alert-danger">{{error}}</div>
-<div *ngIf="success_msg != undefined" class="alert alert-success">{{success_msg}}</div>
-<div class="movie-details" *ngIf="movie !== undefined && allDataFetched">
+<div style="position:fixed; top:0; width:100%; z-index:100; " *ngIf="error" class="alert alert-danger">{{error}}</div>
+<div style="position:fixed; top:0; width:100%; z-index:100; opacity: 0.8;" *ngIf="success_msg != undefined" class="alert alert-success">{{success_msg}}</div>
+<div class="movie-details" *ngIf="movie != undefined">
   <div class="container">
+
+    <p class="title">{{movie.title}} ({{movie.vote_average}} / 10.0)</p>
+
+
     <div class="row">
+
       <div class="col align-middle">
-        <img class="movie-poster" src="https://image.tmdb.org/t/p/w300/{{movie.poster_path}}">
+        <div class="row" style="padding-left: 30px">
+          <div class="star-rating">
+            <!-- The '|| 0' would prevent an undefined or null value on the Rating property -->
+            <div class="full-star" [ngStyle]="{'width': movie.vote_average * 10 + '%'}"></div>
+            <div class="empty-star"> </div>
+          </div>
+        </div>
+        <div class="row" style="padding-top: 30px">
+          <img class="movie-poster" src="https://image.tmdb.org/t/p/w300/{{movie.poster_path}}">
+        </div>
       </div>
       <div class="col-7">
-        <p class="title">{{movie.title}}</p>
-        <p class="overview">{{movie.overview}}</p>
-      </div>
+
+        <p>Overview</p>
+        <p id=movie-container class="overview">{{movie.overview}}</p>
+
+        <div *ngIf="reviewNYT != null || reviewGuardian != null">
+          <p>Critics' reviews</p>
+          <div id=movie-container class="container reviews">
+            <div class="row">
+              <div class="col-6" *ngIf="reviewNYT != null">
+                <div class="review-title">
+                  {{ reviewNYT.headline }}
+                </div>
+                <div class="review-short">
+                  „{{ reviewNYT.summary_short }}”
+                </div>
+                <div class="review-author">
+                  — {{ reviewNYT.byline}}
+                </div>
+                <div class="review-link">
+                  Read more at: <a href="{{reviewNYT.link.url}}">New York Times</a>
+                </div>
+              </div>
+              <div class="col-6" *ngIf="reviewGuardian != null">
+                <div class="review-title">
+                  {{ reviewGuardian.webTitle }}
+                </div>
+                <div class="review-short">
+                  „{{ reviewGuardian.fields.trailText }}”
+                </div>
+                <div class="review-author">
+                  — {{ reviewGuardian.fields.byline }}
+                </div>
+                <div class="review-link">
+                  Read more at: <a href="{{reviewGuardian.webUrl}}">The Guardian</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
     </div>
-    <div class="row" style="padding-top: 15px">
-      <div class="col align-middle">
-        <p>TUTAJ BĘDĄ OCENY GWIAZDKOWE</p>
-        <div *ngIf="isMovieInFavourites">
-          <a (click)="onRemoveMovieFromFavourites()">Delete from favourites</a>
-        </div>
-        <div *ngIf="!isMovieInFavourites">
-          <a (click)="onAddToFavourites()">Add to favourites</a>
-        </div>
-        <div *ngIf="isMovieInPlanToWatch">
-          <a (click)="onRemoveMovieFromPlanToWatch()">Delete from plan to watch list</a>
-        </div>
-        <div *ngIf="!isMovieInPlanToWatch">
-          <a (click)="onAddToPlanToWatch()">Add to plan to watch list</a>
-        </div>
-      </div>
-      <div class="col-7">
+
+  </div>
+
+  <div class="row" style="padding-top: 30px; padding-bottom: 30px">
+
+    <div  class="col-5">
+      <p>Details</p>
+
+      <div id="movie-container">
         <div class="row" *ngIf="movie.original_title != null">
           <div class="col property-header">
-            <p>Original title</p>
+            <p style="font-weight: bold">Original title</p>
           </div>
           <div class="col property-value">
             <p>{{movie.original_title}}</p>
@@ -38,7 +81,7 @@
         </div>
         <div class="row" *ngIf="movie.status != null">
           <div class="col property-header">
-            <p>Status</p>
+            <p style="font-weight: bold">Status</p>
           </div>
           <div class="col property-value">
             <p>{{movie.status}}</p>
@@ -46,115 +89,194 @@
         </div>
         <div class="row" *ngIf="movie.release_date != null">
           <div class="col property-header">
-            <p>Release date</p>
+            <p style="font-weight: bold">Release date</p>
           </div>
           <div class="col property-value">
             <p>{{movie.release_date}}</p>
           </div>
         </div>
+
+        <div class="row" *ngIf="movie.crews != null">
+          <div class="col property-header">
+            <p style="font-weight: bold">Directing</p>
+          </div>
+          <div class="col property-value">
+            <p>
+              <ng-container *ngFor="let crew of movie.crews">
+                <ng-container *ngIf="crew.department==='Directing' && crew.job === 'Director'">{{crew.name}}, </ng-container>
+              </ng-container>
+            </p>
+          </div>
+        </div>
+        <div class="row" *ngIf="movie.crews != null">
+          <div class="col property-header">
+            <p style="font-weight: bold">Screenplay</p>
+          </div>
+          <div class="col property-value">
+            <p>
+              <ng-container *ngFor="let crew of movie.crews">
+                <ng-container *ngIf="crew.department==='Writing' && (crew.job === 'Screenplay' || crew.job === 'Writer')">{{crew.name}}, </ng-container>
+              </ng-container>
+            </p>
+          </div>
+        </div>
+
         <div class="row" *ngIf="movie.genres != null">
           <div class="col property-header">
-            <p>Genres</p>
+            <p style="font-weight: bold">Genres</p>
           </div>
           <div class="col property-value">
             <p>
               <ng-container *ngFor="let genre of movie.genres">
-                {{genre.name}}
+                {{genre.name}},
               </ng-container>
             </p>
           </div>
         </div>
         <div class="row" *ngIf="movie.production_companies != null">
           <div class="col property-header">
-            <p>Production companies</p>
+            <p style="font-weight: bold">Production companies</p>
           </div>
           <div class="col property-value">
             <p>
               <ng-container *ngFor="let company of movie.production_companies">
-                {{company.name}}
+                {{company.name}},
               </ng-container>
             </p>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
 
-<div class="container reviews">
-  <div class="row" *ngIf="reviewNYT != null">
-    <div class="col-4">
-      <div class="review-title">
-        {{ reviewNYT.headline }}
-      </div>
-      <div class="review-short">
-        „{{ reviewNYT.summary_short }}”
-      </div>
-      <div class="review-author">
-        — {{ reviewNYT.byline}}
-      </div>
-      <div class="review-link">
-        Read more at: <a href="{{reviewNYT.link.url}}">New York Times</a>
-      </div>
-    </div>
-    <div class="col-4" *ngIf="reviewGuardian != null">
-      <div class="review-title">
-        {{ reviewGuardian.webTitle }}
-      </div>
-      <div class="review-short">
-        „{{ reviewGuardian.fields.trailText }}”
-      </div>
-      <div class="review-author">
-        — {{ reviewGuardian.fields.byline }}
-      </div>
-      <div class="review-link">
-        Read more at: <a href="{{reviewGuardian.webUrl}}">The Guardian</a>
-      </div>
-    </div>
-  </div>
+    <div class="col-7">
+      <p>Cast</p>
+      <div id="movie-container">
 
-  <div class="userReviews" class="user-review-content">
-    <button *ngIf="!showCommentForm" class="btn btn-dark" type="button" (click)="onAddReviewClick()">Add
-      comment</button>
-    <div *ngIf="showCommentForm" style="margin-bottom: 75px;">
-      <div style="text-align: left; margin-bottom: -10px;">
-        <p>My comment</p>
-      </div>
-      <textarea #commentForm class="form-control darkTextArea" rows="3"></textarea>
-      <div class="row">
-        <div class="col-sm">
-          <a (click)="submitComment()" class="review-button add-comment-button row float-left">Add comment</a>
+        <div class="row">
+          <div class="col-1"></div>
+          <div class="col property-header">
+            <p style="font-weight: bold">Name</p>
+          </div>
+          <div class="col property-value">
+            <p style="font-weight: bold">Character</p>
+          </div>
         </div>
-        <div class="col-sm">
-          <a (click)="showCommentForm = false" class="review-button row float-right">Close button</a>
-        </div>
-      </div>
-    </div>
-    <div class="comments-section">
-      <div *ngFor="let item of comments" class="commentArea">
-        <p style="color: #6a6666;"><strong class="text-grey">{{item.infoCU.username}}</strong> write on day
-          {{item.infoCD | date}}</p>
-        <div style="margin-left: 10px; margin-right: 10px;">
-          <p>{{item.statement}}</p>
-        </div>
-        <div style="display: flex;">
-          <ng-container *ngIf="item.liked == false;else second">
-              <p style="font-size: 24px;">{{item.likes}} <a (click)="likeComment(item.id)"><i
-              class="far fa-thumbs-up"></i></a>
-            </p>
-          </ng-container>
-          <ng-template #second>
-            <div class="thumbs-color">
-              <p style="font-size: 24px;">{{item.likes}} <a (click)="likeComment(item.id)"><i
-                class="far fa-thumbs-up"></i></a>
-              </p>
+
+        <div *ngFor="let cast of movie.casts; index as i" class="row">
+            <div *ngIf="!cast.profile_path && i < 20" class="col-1"></div>
+            <div *ngIf="cast.profile_path && i < 20" class="col-1">
+              <img class="cast-image" src="https://image.tmdb.org/t/p/w300/{{cast.profile_path}}">
             </div>
-          </ng-template>
-
-          <p style="margin-left: auto;"><a style="color: #6a6666;" (click)="reportUser(item.id)">report comment</a></p>
+            <div *ngIf="i < 20" class="col property-header">
+              <p>{{cast.name}}</p>
+            </div>
+            <div *ngIf="i < 20" class="col property-value">
+              <p>{{cast.character}}</p>
+            </div>
         </div>
 
+
+      </div>
+
+    </div>
+
+  </div>
+
+    <p class="title2">Users' rating and comments</p>
+
+    <div class="row" style="margin-left: -40px">
+      <div class="star-rating">
+      <!-- The '|| 0' would prevent an undefined or null value on the Rating property -->
+        <div class="full-star2" [ngStyle]="{'width': movie.rating * 10 + '%'}"></div>
+      <div class="empty-star"></div>
+    </div>
+
+    <div style="padding: 5px">
+      <button class="btn btn-dark" type="button" (click)="onAddRateClick()">Rate movie</button>
+    </div>
+
+      <div style="padding: 5px">
+      <button class="btn btn-dark" type="button" (click)="onAddReviewClick()">Comment movie</button>
+    </div>
+
+      <div style="padding: 5px">
+        <button *ngIf="isMovieInFavourites" class="btn btn-dark" type="button" (click)="onRemoveMovieFromFavourites()">Delete movie from favourites</button>
+        <button *ngIf="!isMovieInFavourites" class="btn btn-dark" type="button" (click)="onAddToFavourites()">Add movie to favourites</button>
+      </div>
+      <div style="padding: 5px">
+        <button *ngIf="isMovieInPlanToWatch" class="btn btn-dark" type="button" (click)="onRemoveMovieFromPlanToWatch()">Delete movie from plan to watch</button>
+        <button *ngIf="!isMovieInPlanToWatch" class="btn btn-dark" type="button" (click)="onAddToPlanToWatch()">Add movie to plan to watch</button>
+      </div>
+
+  </div>
+
+  <div class="row">
+
+      <div *ngIf="showCommentForm" style="margin-bottom: 30px; padding-left:100px; width: 1000px">
+        <div style="text-align: left; margin-bottom: -10px;"><p>My comment</p></div>
+        <textarea #commentForm class="form-control darkTextArea" rows="3"></textarea>
+        <div class="row">
+          <div class="col-sm">
+            <a (click)="submitComment()" class="review-button add-comment-button row float-left">Add comment</a>
+          </div>
+          <div class="col-sm">
+            <a (click)="showCommentForm = false" class="review-button row float-right">Close button</a>
+          </div>
+        </div>
+      </div>
+
+    <div style="padding-left: 110px">
+      <div id=rate-container *ngIf="showRateForm" style="margin-bottom: 30px; margin-left: -125px; margin-top: 20px; padding-top: 10px">
+
+        <div style="text-align: left; margin-bottom: -10px;"><p>My rate</p></div>
+
+        <span (click)="submitRate(1)" class="rate-button"> 1 </span>
+        <span (click)="submitRate(2)" class="rate-button"> 2 </span>
+        <span (click)="submitRate(3)" class="rate-button"> 3 </span>
+        <span (click)="submitRate(4)" class="rate-button"> 4 </span>
+        <span (click)="submitRate(5)" class="rate-button"> 5 </span>
+        <span (click)="submitRate(6)" class="rate-button"> 6 </span>
+        <span (click)="submitRate(7)" class="rate-button"> 7 </span>
+        <span (click)="submitRate(8)" class="rate-button"> 8 </span>
+        <span (click)="submitRate(9)" class="rate-button"> 9 </span>
+        <span (click)="submitRate(10)" class="rate-button"> 10 </span>
+
+          <div class="row">
+            <div class="col-sm">
+              <a (click)="showRateForm = false" class="review-button row float-right">Close button</a>
+            </div>
+          </div>
+      </div>
+    </div>
+
+  </div>
+
+    <div *ngIf="comments.length === 0" style="padding-bottom: 50px">
+      <h2 style="text-align: center; color: dimgray; padding: 40px; opacity: 50%">No comments found. Comment first!</h2>
+    </div>
+
+</div>
+
+</div>
+
+<div class="swiper-container" #commentsSwiperContainer>
+  <div class="swiper-wrapper">
+    <div #commentsChildren class="swiper-slide" *ngFor="let item of comments">
+      <p style="color: #6a6666; padding-top: 10px"><strong class="text-grey">{{item.infoCU.username}}</strong> write on day {{item.infoCD | date}}</p>
+      <div style="margin-left: 10px; margin-right: 10px;">
+        <p>{{item.statement}}</p>
+      </div>
+      <div style="display: flex;">
+        <p style="font-size: 24px;">{{item.likes}} <a (click)="likeComment(item.id)"><i
+          class="far fa-thumbs-up"></i></a>
+        </p>
+        <p style="margin-left: auto;"><a style="color: #6a6666;" (click)="reportUser(item.id)">report comment</a></p>
       </div>
     </div>
   </div>
+  <div class="swiper-button-next" #commentsSwiperButtonNext></div>
+  <div class="swiper-button-prev" #commentsSwiperButtonPrev></div>
 </div>
+
+
+

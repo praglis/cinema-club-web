@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { UserReview } from '../interfaces/userreview.interface';
 import {MovieSearchCriteria} from "../interfaces/movie.search.criteria.interface";
 import {MoviesList} from "../interfaces/movieslist.interface";
+import {RateInterface} from '../interfaces/rate.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -88,5 +89,10 @@ export class MovieService {
   getMoviesByCriteria(criteria: MovieSearchCriteria) : Observable<MoviesList> {
     let url = "http://localhost:8200/movies/get";
     return this.httpClient.post<any>(url, criteria, { withCredentials: true}).pipe();
+  }
+
+  postRate(id: number, rate: RateInterface): Observable<any> {
+    let url = "http://localhost:8200/movie/" + id + "/rate";
+    return this.httpClient.post<any>(url, rate, { withCredentials: true }).pipe();
   }
 }
