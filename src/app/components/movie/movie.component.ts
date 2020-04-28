@@ -45,9 +45,10 @@ export class MovieComponent implements OnInit, AfterViewInit {
   showRateForm = false;
   comments: any = [];
   success_msg: string;
-  isMovieInFavourites: boolean;
-  userId: number;
   error: string;
+  isMovieInFavourites: boolean;
+  isMovieInPlanToWatch: boolean;
+  userId: number;
   loading = false;
   allDataFetched = false;
   reportReason = '';
@@ -112,6 +113,14 @@ export class MovieComponent implements OnInit, AfterViewInit {
             }
           });
         });
+        this.planToWatchService.getUserPlanToWatch(jsonObject.id).subscribe((favourites: Favourites[]) => {
+          this.isMovieInPlanToWatch = false;
+          favourites.forEach(fav => {
+            if (fav.movieUrl === this.movie.id.toString()) {
+              this.isMovieInPlanToWatch = true;
+            }
+          });
+        });
         this.allDataFetched = true;
       });
     });
@@ -157,9 +166,9 @@ export class MovieComponent implements OnInit, AfterViewInit {
 
   onAddToPlanToWatch() {
     this.planToWatchService.addUserPlanToWatch({
-      'userId': this.userId,
-      'movieTitle': this.movie.title,
-      'movieUrl': this.movie.id.toString()
+      userId: this.userId,
+      movieTitle: this.movie.title,
+      movieUrl: this.movie.id.toString()
     }).subscribe((data) => {
       window.location.reload();
     });
@@ -177,9 +186,9 @@ export class MovieComponent implements OnInit, AfterViewInit {
 
   onRemoveMovieFromPlanToWatch() {
     this.planToWatchService.removeUserPlanToWatch({
-      'userId': this.userId,
-      'movieTitle': this.movie.title,
-      'movieUrl': this.movie.id.toString()
+      userId: this.userId,
+      movieTitle: this.movie.title,
+      movieUrl: this.movie.id.toString()
     }).subscribe((response) => {
       window.location.reload();
     });

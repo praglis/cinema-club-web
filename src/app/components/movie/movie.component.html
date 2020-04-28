@@ -1,5 +1,5 @@
-<div *ngIf="error" class="alert alert-danger">{{error}}</div>
-<div *ngIf="success_msg != undefined" class="alert alert-success">{{success_msg}}</div>
+<div style="position:fixed; top:0; width:100%; z-index:100; " *ngIf="error" class="alert alert-danger">{{error}}</div>
+<div style="position:fixed; top:0; width:100%; z-index:100; opacity: 0.8;" *ngIf="success_msg != undefined" class="alert alert-success">{{success_msg}}</div>
 <div class="movie-details" *ngIf="movie != undefined">
   <div class="container">
 
@@ -182,9 +182,9 @@
 
   </div>
 
-    <p class="title">Users' rating and comments</p>
+    <p class="title2">Users' rating and comments</p>
 
-    <div class="row" style="padding-left: 110px">
+    <div class="row" style="margin-left: -40px">
       <div class="star-rating">
       <!-- The '|| 0' would prevent an undefined or null value on the Rating property -->
         <div class="full-star2" [ngStyle]="{'width': movie.rating * 10 + '%'}"></div>
@@ -202,6 +202,10 @@
       <div style="padding: 5px">
         <button *ngIf="isMovieInFavourites" class="btn btn-dark" type="button" (click)="onRemoveMovieFromFavourites()">Delete movie from favourites</button>
         <button *ngIf="!isMovieInFavourites" class="btn btn-dark" type="button" (click)="onAddToFavourites()">Add movie to favourites</button>
+      </div>
+      <div style="padding: 5px">
+        <button *ngIf="isMovieInPlanToWatch" class="btn btn-dark" type="button" (click)="onRemoveMovieFromPlanToWatch()">Delete movie from plan to watch</button>
+        <button *ngIf="!isMovieInPlanToWatch" class="btn btn-dark" type="button" (click)="onAddToPlanToWatch()">Add movie to plan to watch</button>
       </div>
 
   </div>
@@ -222,7 +226,7 @@
       </div>
 
     <div style="padding-left: 110px">
-      <div id=rate-container *ngIf="showRateForm" style="margin-bottom: 30px; padding-top: 30px">
+      <div id=rate-container *ngIf="showRateForm" style="margin-bottom: 30px; margin-left: -125px; margin-top: 20px; padding-top: 10px">
 
         <div style="text-align: left; margin-bottom: -10px;"><p>My rate</p></div>
 
