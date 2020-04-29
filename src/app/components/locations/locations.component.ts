@@ -1,4 +1,4 @@
-import {Component, DoCheck, OnInit} from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
 import { CinemaService } from '../../services/cinema.service';
 import { CinemaInterface } from 'src/app/interfaces/cinema.interface';
 import { ActivatedRoute } from '@angular/router';
@@ -23,16 +23,16 @@ export class LocationsComponent implements OnInit, DoCheck {
     this.query = [''];
     this.newQuery = [''];
     this.activatedRoute.queryParams.subscribe(params => {
-        this.smoothScrollToTop();
-        this.getCinemasObserver(this.query).subscribe((jsonObject: CinemaInterface[]) => {
-          this.cinemas = (jsonObject as CinemaInterface[]);
-        });
-      }
+      this.smoothScrollToTop();
+      this.getCinemasObserver(this.query).subscribe((jsonObject: CinemaInterface[]) => {
+        this.cinemas = (jsonObject as CinemaInterface[]);
+      });
+    }
     );
   }
 
   ngDoCheck() {
-    if (this.query !== this.newQuery){
+    if (this.query !== this.newQuery) {
       this.query = this.newQuery;
       this.getCinemasObserver(this.query).subscribe((jsonObject: CinemaInterface[]) => {
         this.cinemas = (jsonObject as CinemaInterface[]);
