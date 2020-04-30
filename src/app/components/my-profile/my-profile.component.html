@@ -10,6 +10,7 @@
           <p>Username: <span *ngIf="editedField != 'username'">{{editedProfile.username}}</span></p>
           <p>Joined: {{editedProfile.enrolmentDate|date : 'mediumDate'}}</p>
           <p>Points: {{editedProfile.points}}</p>
+          <p>Badge: {{badgeName}}</p>
         </form>
       </div>
       <div class="col-md-6">
