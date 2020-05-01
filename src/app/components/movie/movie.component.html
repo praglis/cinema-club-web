@@ -213,7 +213,7 @@
   <div class="row">
 
       <div *ngIf="showCommentForm" style="margin-bottom: 30px; padding-left:100px; width: 1000px">
-        <div style="text-align: left; margin-bottom: -10px;"><p>My comment</p></div>
+        <div style="text-align: left; margin-bottom: -10px;"><p>{{commentFormTitle}}</p></div>
         <textarea #commentForm class="form-control darkTextArea" rows="3"></textarea>
         <div class="row">
           <div class="col-sm">
@@ -262,20 +262,39 @@
 <div class="swiper-container" #commentsSwiperContainer>
   <div class="swiper-wrapper">
     <div #commentsChildren class="swiper-slide" *ngFor="let item of comments">
-      <p style="color: #6a6666; padding-top: 10px"><span style = "color: #B7D4FF">{{badgeName}} </span><strong class="text-grey">{{item.infoCU.username}}</strong> write on day {{item.infoCD | date}}</p>
-      <div style="margin-left: 10px; margin-right: 10px;">
+      <div class="comment-child">
+        <div style="margin-left: 10px; margin-right: 10px; display: flex;">
+          <p style="color: #6a6666; padding-top: 10px"><span style = "color: #B7D4FF">{{badgeName}} </span><strong class="text-grey">{{item.infoCU.username}}</strong> write on
+            day {{item.infoCD | date}}</p>
+          <p style="margin-left: auto;font-size: 24px;">
+            <a (click)="onAddReviewClick(item.id)">
+              <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Reply on comment">
+                <i class="fas fa-reply"></i>
+              </span>
+            </a>
+          </p>
+        </div>
         <p>{{item.statement}}</p>
+        <div style="display: flex;">
+          <p style="font-size: 24px;">{{item.likes}} <a (click)="likeComment(item.id)"><i class="far fa-thumbs-up"></i></a>
+          </p>
+          <p style="margin-left: auto;"><a style="color: #6a6666;" (click)="reportUser(item.id)">report comment</a></p>
+        </div>
       </div>
-      <div style="display: flex;">
-        <p style="font-size: 24px;">{{item.likes}} <a (click)="likeComment(item.id)"><i
-          class="far fa-thumbs-up"></i></a>
-        </p>
-        <p style="margin-left: auto;"><a style="color: #6a6666;" (click)="reportUser(item.id)">report comment</a></p>
+      <div class="comment-child" style="margin-left: 100px;margin-top: 20px;" *ngFor="let reply of item.replies">
+        <p style="color: #6a6666; padding-top: 10px"><strong class="text-grey">{{reply.infoCU.username}}</strong> reply on
+          day {{reply.infoCD | date}}</p>
+        <p>{{reply.statement}}</p>
+        <div style="display: flex;">
+          <p style="font-size: 24px;">{{reply.likes}} <a (click)="likeComment(reply.id)"><i class="far fa-thumbs-up"></i></a>
+          </p>
+          <p style="margin-left: auto;"><a style="color: #6a6666;" (click)="reportUser(reply.id)">report comment</a></p>
+        </div>
       </div>
     </div>
   </div>
-  <div class="swiper-button-next" #commentsSwiperButtonNext></div>
-  <div class="swiper-button-prev" #commentsSwiperButtonPrev></div>
+  <div class="swiper-button-next" style="top: 100px;" #commentsSwiperButtonNext></div>
+  <div class="swiper-button-prev" style="top: 100px;" #commentsSwiperButtonPrev></div>
 </div>
 
 
