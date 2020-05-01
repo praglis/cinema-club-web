@@ -43,4 +43,9 @@ export class UserService {
     const url = 'http://localhost:8200/user/preferences/refresh'
     return this.httpClient.post<any>(url, '', { withCredentials: true }).pipe();
   }
+
+  getUserBadge(): Observable<any> {
+    const url = 'http://localhost:8200/badge'
+    return this.httpClient.get<any>(url, { withCredentials: true }).pipe();
+  }
 }

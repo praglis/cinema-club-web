@@ -20,6 +20,7 @@ export class MyProfileComponent implements OnInit {
 
   editedField: string;
   editedProfile: User;
+  badgeName: string;
   successMsg: string;
   errorMsg: string;
 
@@ -42,6 +43,11 @@ export class MyProfileComponent implements OnInit {
       this.editedProfile.birthday = this.datePipe.transform(this.editedProfile.birthday, 'MM-dd-yyyy');
     });
 
+    this.userService.getUserBadge().subscribe( (data) => {
+      this.badgeName = data.name;
+      console.log(data);
+      console.log(' a ' + this.badgeName);
+    });
     this.editMode = false;
   }
 
