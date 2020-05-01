@@ -264,7 +264,7 @@
     <div #commentsChildren class="swiper-slide" *ngFor="let item of comments">
       <div class="comment-child">
         <div style="margin-left: 10px; margin-right: 10px; display: flex;">
-          <p style="color: #6a6666; padding-top: 10px"><strong class="text-grey">{{item.infoCU.username}}</strong> write on
+          <p style="color: #6a6666; padding-top: 10px"><span style = "color: #B7D4FF">{{badgeName}} </span><strong class="text-grey">{{item.infoCU.username}}</strong> write on
             day {{item.infoCD | date}}</p>
           <p style="margin-left: auto;font-size: 24px;">
             <a (click)="onAddReviewClick(item.id)">

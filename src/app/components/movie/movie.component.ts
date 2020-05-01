@@ -47,6 +47,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
   commentFormTitle: string = "My comment"
   comments: any = [];
   success_msg: string;
+  badgeName: string;
   error: string;
   isMovieInFavourites: boolean;
   isMovieInPlanToWatch: boolean;
@@ -97,6 +98,10 @@ export class MovieComponent implements OnInit, AfterViewInit {
             break;
           }
         }
+      });
+
+      this.userService.getUserBadge().subscribe( (data) => {
+        this.badgeName = data.name;
       });
 
       this.movieService.getMovieGuardianReview(this.movie.title).subscribe((jsonObject: GuardianResponse) => {
@@ -229,7 +234,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
   submitRate(rate: number) {
     this.movieService.postRate(
       Number(this.route.snapshot.paramMap.get('id')),
-      { rate: rate }).subscribe((data) => {
+      { rate }).subscribe((data) => {
         this.success_msg = 'Rate has been added';
         this.showRateForm = false;
         const id = +this.route.snapshot.paramMap.get('id');
