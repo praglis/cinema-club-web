@@ -3,6 +3,8 @@ export interface UserReview {
     cinemaId?: number,
     movieTitle?: string,
     reviewBody?: string,
-    reviewId?: number
+    reviewId?: number,
+    parentReviewId?: number
+    replies?: UserReview[]
 }
   

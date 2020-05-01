@@ -43,6 +43,8 @@ export class MovieComponent implements OnInit, AfterViewInit {
   commentsSwiper: any;
   showCommentForm = false;
   showRateForm = false;
+  parentCommentId: number;
+  commentFormTitle: string = "My comment"
   comments: any = [];
   success_msg: string;
   error: string;
@@ -134,9 +136,23 @@ export class MovieComponent implements OnInit, AfterViewInit {
     });
   }
 
-  onAddReviewClick() {
+  onAddReviewClick(parentComment: number) {
     this.showRateForm = false;
     this.showCommentForm = true;
+    this.parentCommentId = parentComment;
+    if (parentComment != undefined) {
+      var comment;
+      for (let index = 0; index < this.comments.length; index++) {
+        const element = this.comments[index];
+        if(element.id === parentComment) {
+          comment = element;
+          break;
+        }
+      }
+      this.commentFormTitle = "Reply on comment " + comment.infoCU.username;
+    } else {
+      this.commentFormTitle = "My comment";
+    }
     this.commentForms.changes.subscribe(comps => {
       if (comps.length != 0) {
         comps.first.nativeElement.scrollIntoView({ behavior: 'smooth' });
@@ -197,7 +213,8 @@ export class MovieComponent implements OnInit, AfterViewInit {
   submitComment() {
     this.movieService.postComment({
       movieId: Number(this.route.snapshot.paramMap.get('id')),
-      reviewBody: this.commentForms.first.nativeElement.value
+      reviewBody: this.commentForms.first.nativeElement.value,
+      parentReviewId: this.parentCommentId
     }).subscribe((data) => {
       this.success_msg = 'Commend has been added';
       this.showCommentForm = false;
