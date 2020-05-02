@@ -7,4 +7,3 @@ export interface UserReview {
     parentReviewId?: number
     replies?: UserReview[]
 }
-  

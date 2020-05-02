@@ -66,6 +66,11 @@ export class MovieService {
     return this.httpClient.put<any>(url, userReview, { withCredentials: true }).pipe();
   }
 
+  deleteComment(reviewId : number): Observable<any> {
+    let url = "http://localhost:8200/reviews/userReview/" + reviewId + "/remove";
+    return this.httpClient.put<any>(url, null, {withCredentials: true}).pipe();
+  }
+
   getComments(movieId: string): Observable<any> {
     let url = "http://localhost:8200/reviews/userReview/" + movieId;
     return this.httpClient.get<any>(url,{ withCredentials: true }).pipe();

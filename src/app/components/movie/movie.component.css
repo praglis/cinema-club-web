@@ -124,7 +124,7 @@
   background-size: 400px 40px;
 }
 
-#movie-container {
+.movie-container {
   padding: 20px;
   border: 1px solid black;
   background-color: #02030F;

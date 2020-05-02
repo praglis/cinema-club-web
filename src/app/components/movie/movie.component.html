@@ -23,11 +23,11 @@
       <div class="col-7">
 
         <p>Overview</p>
-        <p id=movie-container class="overview">{{movie.overview}}</p>
+        <p class="overview movie-container">{{movie.overview}}</p>
 
         <div *ngIf="reviewNYT != null || reviewGuardian != null">
           <p>Critics' reviews</p>
-          <div id=movie-container class="container reviews">
+          <div class="container reviews movie-container">
             <div class="row">
               <div class="col-6" *ngIf="reviewNYT != null">
                 <div class="review-title">
@@ -70,7 +70,7 @@
     <div  class="col-5">
       <p>Details</p>
 
-      <div id="movie-container">
+      <div class="movie-container">
         <div class="row" *ngIf="movie.original_title != null">
           <div class="col property-header">
             <p style="font-weight: bold">Original title</p>
@@ -150,7 +150,7 @@
 
     <div class="col-7">
       <p>Cast</p>
-      <div id="movie-container">
+      <div class="movie-container">
 
         <div class="row">
           <div class="col-1"></div>
@@ -211,16 +211,23 @@
   </div>
 
   <div class="row">
-
       <div *ngIf="showCommentForm" style="margin-bottom: 30px; padding-left:100px; width: 1000px">
         <div style="text-align: left; margin-bottom: -10px;"><p>{{commentFormTitle}}</p></div>
         <textarea #commentForm class="form-control darkTextArea" rows="3"></textarea>
         <div class="row">
+          <ng-container *ngIf="editCommentMode">
+            <div class="col-sm">
+              <a (click)="submitComment()" class="review-button add-comment-button row float-left">Edit comment</a>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="!editCommentMode">
+            <div class="col-sm">
+              <a (click)="submitComment()" class="review-button add-comment-button row float-left">Add comment</a>
+            </div>
+          </ng-container>
+
           <div class="col-sm">
-            <a (click)="submitComment()" class="review-button add-comment-button row float-left">Add comment</a>
-          </div>
-          <div class="col-sm">
-            <a (click)="showCommentForm = false" class="review-button row float-right">Close button</a>
+            <a (click)="showCommentForm = false; editCommentMode = false" class="review-button row float-right">Close button</a>
           </div>
         </div>
       </div>
@@ -273,6 +280,22 @@
               </span>
             </a>
           </p>
+          <ng-container *ngIf="item.infoCU.id == userId">
+            <p style="margin-left: 5px; font-size: 24px;">
+              <a (click)="onDeleteReviewClick(item.id)">
+              <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Delete comment">
+                <i class="fas fa-trash"></i>
+              </span>
+              </a>
+            </p>
+            <p style="margin-left: 5px; font-size: 24px;">
+              <a (click)="onEditReviewClick(item)">
+              <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Edit comment">
+                <i class="fas fa-edit"></i>
+              </span>
+              </a>
+            </p>
+          </ng-container>
         </div>
         <p>{{item.statement}}</p>
         <div style="display: flex;">
