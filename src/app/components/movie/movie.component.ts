@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit, AfterViewChecked, ContentChild, Directive, AfterContentChecked, QueryList, ViewChildren } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit, QueryList, ViewChildren } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MovieService } from 'src/app/services/movie.service';
 import { MovieDetails } from '../../interfaces/moviedetails.interface';
@@ -55,6 +55,8 @@ export class MovieComponent implements OnInit, AfterViewInit {
   loading = false;
   allDataFetched = false;
   reportReason = '';
+  editCommentMode = false;
+  editedReviewId: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -100,10 +102,6 @@ export class MovieComponent implements OnInit, AfterViewInit {
         }
       });
 
-      this.userService.getUserBadge().subscribe( (data) => {
-        this.badgeName = data.name;
-      });
-
       this.movieService.getMovieGuardianReview(this.movie.title).subscribe((jsonObject: GuardianResponse) => {
         if (jsonObject !== null) {
           this.reviewGuardian = jsonObject.response.content;
@@ -130,6 +128,9 @@ export class MovieComponent implements OnInit, AfterViewInit {
         });
         this.allDataFetched = true;
       });
+      this.userService.getUserBadge().subscribe( (data) => {
+        this.badgeName = data.name;
+      });
     });
 
     this.reloadComments();
@@ -141,7 +142,8 @@ export class MovieComponent implements OnInit, AfterViewInit {
     });
   }
 
-  onAddReviewClick(parentComment: number) {
+  onAddReviewClick(parentComment?: number) {
+    this.editCommentMode = false;
     this.showRateForm = false;
     this.showCommentForm = true;
     this.parentCommentId = parentComment;
@@ -161,6 +163,25 @@ export class MovieComponent implements OnInit, AfterViewInit {
     this.commentForms.changes.subscribe(comps => {
       if (comps.length != 0) {
         comps.first.nativeElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  }
+
+  onDeleteReviewClick(reviewId : number) {
+    this.movieService.deleteComment(reviewId).subscribe(() => {
+      this.reloadComments();
+    });
+  }
+
+  onEditReviewClick(review: any) {
+    console.log(review);
+    this.commentFormTitle = "Edit comment";
+    this.showCommentForm = true;
+    this.editCommentMode = true;
+    this.commentForms.changes.subscribe(() => {
+      if (this.editCommentMode) {
+        this.commentForms.first.nativeElement.value = review.statement;
+        this.editedReviewId = review.id;
       }
     });
   }
@@ -219,9 +240,16 @@ export class MovieComponent implements OnInit, AfterViewInit {
     this.movieService.postComment({
       movieId: Number(this.route.snapshot.paramMap.get('id')),
       reviewBody: this.commentForms.first.nativeElement.value,
-      parentReviewId: this.parentCommentId
+      parentReviewId: this.parentCommentId,
+      reviewId: this.editedReviewId
     }).subscribe((data) => {
-      this.success_msg = 'Commend has been added';
+      console.log(this.commentForms.first.nativeElement.value);
+      if (this.editCommentMode) {
+        this.success_msg = 'Comment has been edited';
+        this.editCommentMode = false;
+      } else {
+        this.success_msg = 'Comment has been added';
+      }
       this.showCommentForm = false;
       this.reloadComments();
     },
