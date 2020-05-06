@@ -3,11 +3,12 @@
 
     <li class="nav-item nav-link" style="padding-bottom: 20px">
       <div class="input-group">
-        <input (keyup.enter)="szukaj()" [(ngModel)]="tekst" type="text"
+        <input (keyup.enter)="saveSearchQuery()" [(ngModel)]="searchText" type="text"
           class="form-control bg-transparent border-dark searchBox" type="search" placeholder="Find the cinema"
           aria-label="Search">
         <div class="input-group-append">
-          <button (click)="szukaj()" class="btn btn-outline-dark btn-style"> <i class="fas fa-search fa-fw"></i>
+          <button (click)="saveSearchQuery()" class="btn btn-outline-dark btn-style"> <i
+              class="fas fa-search fa-fw"></i>
             Search</button>
         </div>
       </div>
