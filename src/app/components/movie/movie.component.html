@@ -174,12 +174,8 @@
               <p>{{cast.character}}</p>
             </div>
         </div>
-
-
       </div>
-
     </div>
-
   </div>
 
     <p class="title2">Users' rating and comments</p>
@@ -269,7 +265,7 @@
 <div class="swiper-container" #commentsSwiperContainer>
   <div class="swiper-wrapper">
     <div #commentsChildren class="swiper-slide" *ngFor="let item of comments">
-      <div class="comment-child">
+      <div class="comment-child" [ngStyle]="item.highlighted?{'box-shadow': '5px 10px 18px yellow'} : {'box-shadow': '5px 10px 18px gray'}">
         <div style="margin-left: 10px; margin-right: 10px; display: flex;">
           <p style="color: #6a6666; padding-top: 10px"><span style = "color: #B7D4FF">{{badgeName}} </span><strong class="text-grey">{{item.infoCU.username}}</strong> write on
             day {{item.infoCD | date}}</p>
@@ -295,6 +291,15 @@
               </span>
               </a>
             </p>
+          </ng-container>
+          <ng-container *ngIf="this.isAdmin">
+          <p style="margin-left: 5px; font-size: 24px;">
+            <a (click)="onHighlightComment(item.id)">
+              <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Highlight comment">
+                <i class="fas fa-star"></i>
+              </span>
+            </a>
+          </p>
           </ng-container>
         </div>
         <p>{{item.statement}}</p>
