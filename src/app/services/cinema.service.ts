@@ -12,16 +12,14 @@ export class CinemaService {
   ) { }
 
   getCinema(cinemaQuery: any): Observable<any> {
-    console.log('cinemaQuery: any<', cinemaQuery);
-    // getCinema(): Observable<CinemaInterface[]> {
     let url = 'http://localhost:8200/cinema/find?';
 
     Object.keys(cinemaQuery).forEach((key: string) => {
       if (cinemaQuery[key] !== undefined) { url += key + '=' + cinemaQuery[key] + '&'; }
     });
+
     if (url[-1] === '&') { url = url.substring(0, url.length - 1); }
 
-    console.log('url: ', url);
     return this.httpClient.get<CinemaInterface[]>(url, { withCredentials: true })
       .pipe();
   }

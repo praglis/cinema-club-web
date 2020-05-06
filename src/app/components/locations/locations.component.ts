@@ -57,7 +57,6 @@ export class LocationsComponent implements OnInit, DoCheck {
 
   saveSearchQuery() {
     this.newQuery = this.searchText;
-    console.log('saveSearchQuery:this.newQuery: ' + this.newQuery);
   }
 
   private getCinemasObserver(query: string) {
