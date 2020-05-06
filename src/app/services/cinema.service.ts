@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {CinemaInterface} from '../interfaces/cinema.interface';
+import { CinemaInterface } from '../interfaces/cinema.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -11,16 +11,18 @@ export class CinemaService {
     private httpClient: HttpClient
   ) { }
 
-  getCinema(query: string[]): Observable<any> {
-  // getCinema(): Observable<CinemaInterface[]> {
+  getCinema(cinemaQuery: any): Observable<any> {
+    console.log('cinemaQuery: any<', cinemaQuery);
+    // getCinema(): Observable<CinemaInterface[]> {
     let url = 'http://localhost:8200/cinema/find?';
-    if(query[0] !== '') {
-      url += 'name=';
-      query.forEach(function(value) {
-        url += value + ' ';
-      });
-    }
-    return this.httpClient.get<CinemaInterface[]>(url, {withCredentials: true})
+
+    Object.keys(cinemaQuery).forEach((key: string) => {
+      if (cinemaQuery[key] !== undefined) { url += key + '=' + cinemaQuery[key] + '&'; }
+    });
+    if (url[-1] === '&') { url = url.substring(0, url.length - 1); }
+
+    console.log('url: ', url);
+    return this.httpClient.get<CinemaInterface[]>(url, { withCredentials: true })
       .pipe();
   }
 
