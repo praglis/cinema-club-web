@@ -13,15 +13,15 @@ export class LocationsComponent implements OnInit, DoCheck {
     private activatedRoute: ActivatedRoute,
     private cinemaService: CinemaService
   ) { }
-  newQuery: string[];
-  query: string[];
+  newQuery: string;
+  query: string;
   cinemas: CinemaInterface[];
-  tekst: string;
+  searchText: string;
   wybor: CinemaInterface;
 
   ngOnInit() {
-    this.query = [''];
-    this.newQuery = [''];
+    this.query = '';
+    this.newQuery = '';
     this.activatedRoute.queryParams.subscribe(params => {
       this.smoothScrollToTop();
       this.getCinemasObserver(this.query).subscribe((jsonObject: CinemaInterface[]) => {
@@ -55,13 +55,23 @@ export class LocationsComponent implements OnInit, DoCheck {
     this.wybor = wybor;
   }
 
-  szukaj() {
-    this.newQuery = this.tekst.split(' ');
+  saveSearchQuery() {
+    this.newQuery = this.searchText;
   }
 
-  private getCinemasObserver(query: string[]) {
-    return this.cinemaService.getCinema(query);
-    // return this.cinemaService.getCinema();
+  private getCinemasObserver(query: string) {
+    return this.cinemaService.getCinema(this.prepareBasicCinemaQuery(query));
+  }
+
+  private prepareBasicCinemaQuery(query: string) {
+    return {
+      name: query,
+      country: query,
+      state: query,
+      city: query,
+      streetName: query,
+      houseNumber: query,
+    };
   }
 
 }
