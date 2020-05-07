@@ -45,7 +45,12 @@ export class UserService {
   }
 
   getUserBadge(): Observable<any> {
-    const url = 'http://localhost:8200/badge'
+    const url = 'http://localhost:8200/badge';
     return this.httpClient.get<any>(url, { withCredentials: true }).pipe();
+  }
+
+  isAdminUser(): Observable<boolean> {
+    let url = "http://localhost:8200/isAdmin";
+    return this.httpClient.get<boolean>(url, {withCredentials: true}).pipe();
   }
 }

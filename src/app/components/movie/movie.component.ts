@@ -57,6 +57,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
   reportReason = '';
   editCommentMode = false;
   editedReviewId: number;
+  isAdmin: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -127,6 +128,10 @@ export class MovieComponent implements OnInit, AfterViewInit {
           });
         });
         this.allDataFetched = true;
+
+        this.userService.isAdminUser().subscribe((obj: boolean) => {
+          this.isAdmin = obj;
+        });
       });
       this.userService.getUserBadge().subscribe( (data) => {
         this.badgeName = data.name;
@@ -283,7 +288,12 @@ export class MovieComponent implements OnInit, AfterViewInit {
         this.reloadComments();
       });
   }
-
+  onHighlightComment(commentId: number) {
+    this.movieService.highlightComment(commentId)
+      .subscribe(response => {
+        this.reloadComments();
+      });
+  }
   reportUser(commentId: string) {
     const dialogRef = this.dialog.open(UserReportComponent, {
       hasBackdrop: true,
