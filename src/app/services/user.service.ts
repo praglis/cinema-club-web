@@ -50,7 +50,7 @@ export class UserService {
   }
 
   isAdminUser(): Observable<boolean> {
-    let url = "http://localhost:8200/isAdmin/";
+    let url = "http://localhost:8200/isAdmin";
     return this.httpClient.get<boolean>(url, {withCredentials: true}).pipe();
   }
 }
