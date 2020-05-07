@@ -91,20 +91,17 @@ export class MovieComponent implements OnInit, AfterViewInit {
     const id = +this.route.snapshot.paramMap.get('id');
     this.movieService.getMovie(id).subscribe((jsonObject: MovieDetails) => {
       this.movie = (jsonObject as MovieDetails);
-      this.movieService.getMovieNYTReview(this.movie.title).subscribe((jsonObject: NYTResponse) => {
-        const response = (jsonObject as NYTResponse);
+      this.movieService.getMovieNYTReview(this.movie.title).subscribe((jsonObject: NYTReview) => {
+        const response = (jsonObject as NYTReview);
 
-        for (const review of response.results) {
-          if (review.display_title === this.movie.title) {
-            this.reviewNYT = review;
-            break;
-          }
+        if (response !== null) {
+          this.reviewNYT = response;
         }
       });
 
-      this.movieService.getMovieGuardianReview(this.movie.title).subscribe((jsonObject: GuardianResponse) => {
+      this.movieService.getMovieGuardianReview(this.movie.title).subscribe((jsonObject: GuardianReview) => {
         if (jsonObject !== null) {
-          this.reviewGuardian = jsonObject.response.content;
+          this.reviewGuardian = jsonObject;
         }
       });
 
