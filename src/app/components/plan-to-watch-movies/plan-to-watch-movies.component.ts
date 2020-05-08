@@ -6,6 +6,7 @@ import {UserService} from "../../services/user.service";
 import {AuthenticationService} from "../../services/authentication.service";
 import {User} from "../../interfaces/user.interface";
 import {PlanToWatchService} from "../../services/plantowatch.service";
+import {MoviesList} from "../../interfaces/movieslist.interface";
 
 @Component({
   selector: 'app-plan-to-watch-movies',
@@ -35,8 +36,8 @@ export class PlanToWatchMoviesComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.userService.findLoggedUser().subscribe((user : User) => {
         this.movieService.getUserPlanToWatch(user.id.toString())
-          .subscribe((jsonObject: SingleMovieResult []) => {
-            this.planToWatchMovies = (jsonObject as SingleMovieResult []);
+          .subscribe((jsonObject: MoviesList) => {
+            this.planToWatchMovies = (jsonObject as MoviesList).results;
             this.userId = user.id;
           });
       });

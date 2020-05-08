@@ -6,6 +6,7 @@ import {AuthenticationService} from "../../services/authentication.service";
 import {SingleMovieResult} from "../../interfaces/singlemovie.interface";
 import {FavouritesService} from "../../services/favourites.service";
 import {User} from "../../interfaces/user.interface";
+import {MoviesList} from "../../interfaces/movieslist.interface";
 
 @Component({
   selector: 'app-favourite-movies',
@@ -35,8 +36,8 @@ export class FavouriteMoviesComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.userService.findLoggedUser().subscribe((user : User) => {
         this.movieService.getUserFavourites(user.id.toString())
-          .subscribe((jsonObject: SingleMovieResult []) => {
-            this.favouriteMovies = (jsonObject as SingleMovieResult []);
+          .subscribe((jsonObject: MoviesList) => {
+            this.favouriteMovies = (jsonObject as MoviesList).results;
             this.userId = user.id;
           });
       });
