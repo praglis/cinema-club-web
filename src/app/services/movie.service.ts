@@ -107,4 +107,9 @@ export class MovieService {
     let url = "http://localhost:8200/movie/" + id + "/rate";
     return this.httpClient.post<any>(url, rate, {withCredentials: true}).pipe();
   }
+
+  getTrailerKey(movieId: string): Observable<any> {
+    let url = "http://localhost:8200/movie/get/trailer?id=" + movieId;
+    return this.httpClient.get<any>(url, {withCredentials: true}).pipe();
+  }
 }

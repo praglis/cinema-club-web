@@ -14,6 +14,7 @@ import { PlanToWatchService } from '../../services/plantowatch.service';
 import { UserReportComponent } from '../user-report/user-report.component';
 import { ReportService } from 'src/app/services/report.service';
 import { MatDialog } from '@angular/material/dialog';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 declare let Swiper: any;
 
@@ -47,6 +48,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
   commentFormTitle: string = "My comment"
   comments: any = [];
   success_msg: string;
+  trailerKey: any;
   badgeName: string;
   error: string;
   isMovieInFavourites: boolean;
@@ -57,6 +59,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
   reportReason = '';
   editCommentMode = false;
   editedReviewId: number;
+  public safeURL: SafeResourceUrl;
   isAdmin: boolean;
 
   constructor(
@@ -67,7 +70,19 @@ export class MovieComponent implements OnInit, AfterViewInit {
     private reportService: ReportService,
     private dialog: MatDialog,
     private planToWatchService: PlanToWatchService,
-  ) { }
+    // tslint:disable-next-line:variable-name
+    private _sanitizer: DomSanitizer
+  ) {
+
+    this.movieService.getTrailerKey(String(this.route.snapshot.paramMap.get('id'))).subscribe((key) => {
+
+        this.trailerKey = 'https://www.youtube.com/embed/' + key.key;
+        this.safeURL = this._sanitizer.bypassSecurityTrustResourceUrl(this.trailerKey);
+      }
+    )
+
+    console.log('a');
+  }
 
   ngAfterViewInit() {
     this.commentsSwiper = this.initCommentsSwiper();
@@ -134,6 +149,8 @@ export class MovieComponent implements OnInit, AfterViewInit {
         this.badgeName = data.name;
       });
     });
+
+
 
     this.reloadComments();
   }
