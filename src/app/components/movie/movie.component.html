@@ -103,7 +103,7 @@
           <div class="col property-value">
             <p>
               <ng-container *ngFor="let crew of movie.crews">
-                <ng-container *ngIf="crew.department==='Directing' && crew.job === 'Director'">{{crew.name}}, </ng-container>
+                <ng-container *ngIf="crew.department==='Directing' && crew.job === 'Director'"><a routerLink="/person/{{crew.id}}">{{crew.name}}</a>, </ng-container>
               </ng-container>
             </p>
           </div>
@@ -115,7 +115,7 @@
           <div class="col property-value">
             <p>
               <ng-container *ngFor="let crew of movie.crews">
-                <ng-container *ngIf="crew.department==='Writing' && (crew.job === 'Screenplay' || crew.job === 'Writer')">{{crew.name}}, </ng-container>
+                <ng-container *ngIf="crew.department==='Writing' && (crew.job === 'Screenplay' || crew.job === 'Writer')"><a routerLink="/person/{{crew.id}}">{{crew.name}}</a>, </ng-container>
               </ng-container>
             </p>
           </div>
@@ -167,10 +167,14 @@
         <div *ngFor="let cast of movie.casts; index as i" class="row">
             <div *ngIf="!cast.profile_path && i < 20" class="col-1"></div>
             <div *ngIf="cast.profile_path && i < 20" class="col-1">
-              <img class="cast-image" src="https://image.tmdb.org/t/p/w300/{{cast.profile_path}}">
+              <a routerLink="/person/{{cast.id}}" >
+                <img class="cast-image" src="https://image.tmdb.org/t/p/w300/{{cast.profile_path}}">
+              </a>
             </div>
-            <div *ngIf="i < 20" class="col property-header">
-              <p>{{cast.name}}</p>
+            <div *ngIf="i < 20" class="col property-header" >
+              <a routerLink="/person/{{cast.id}}" >
+                <p>{{cast.name}}</p>
+              </a>
             </div>
             <div *ngIf="i < 20" class="col property-value">
               <p>{{cast.character}}</p>

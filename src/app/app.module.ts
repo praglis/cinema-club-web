@@ -37,6 +37,7 @@ import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS, MAT_DIALOG_DATA, MatDialog
 import { UserReportComponent } from './components/user-report/user-report.component';
 import { PlanToWatchMoviesComponent } from './components/plan-to-watch-movies/plan-to-watch-movies.component';
 import { DiscoverMoviesComponent } from './components/discover-movies/discover-movies.component';
+import { CastComponent } from './components/cast/cast.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { DiscoverMoviesComponent } from './components/discover-movies/discover-m
     UserReportComponent,
     PlanToWatchMoviesComponent,
     DiscoverMoviesComponent,
+    CastComponent,
   ],
   imports: [
     FormsModule,

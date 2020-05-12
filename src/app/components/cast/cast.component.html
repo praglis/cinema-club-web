@@ -1,0 +1,164 @@
+<div class="person-details" *ngIf="person != undefined">
+    <div class="container">
+
+        <p class="title">{{person.name}}</p>
+
+
+        <div class="row">
+
+            <div class="col align-middle">
+                <div class="row" style="padding-top: 30px">
+                    <img class="person-poster" src="https://image.tmdb.org/t/p/w300/{{person.profile_path}}">
+                </div>
+            </div>
+            <div class="col-7">
+
+                <div *ngIf="person.biography">
+                    <p>Overview</p>
+                    <p class="overview person-container">{{person.biography}}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="padding-top: 30px; padding-bottom: 30px">
+
+            <div class="col-5">
+                <p>Details</p>
+
+                <div class="person-container">
+                    <div class="row" *ngIf="person.name != null">
+                        <div class="col property-header">
+                            <p style="font-weight: bold">Name</p>
+                        </div>
+                        <div class="col property-value">
+                            <p>{{person.name}}</p>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="person.gender_name != null">
+                        <div class="col property-header">
+                            <p style="font-weight: bold">Gender</p>
+                        </div>
+                        <div class="col property-value">
+                            <p>{{person.gender_name}}</p>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="person.birthday != null">
+                        <div class="col property-header">
+                            <p style="font-weight: bold">Birthday</p>
+                        </div>
+                        <div class="col property-value">
+                            <p>{{person.birthday | date}}</p>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="person.birthplace != null">
+                        <div class="col property-header">
+                            <p style="font-weight: bold">Birthplace</p>
+                        </div>
+                        <div class="col property-value">
+                            <p>{{person.birthplace}}</p>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="person.deathday != null">
+                        <div class="col property-header">
+                            <p style="font-weight: bold">deathday</p>
+                        </div>
+                        <div class="col property-value">
+                            <p>{{person.deathday}}</p>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="person.known_for_department != null">
+                        <div class="col property-header">
+                            <p style="font-weight: bold">Department</p>
+                        </div>
+                        <div class="col property-value">
+                            <p>{{person.known_for_department}}</p>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="person.popularity != null">
+                        <div class="col property-header">
+                            <p style="font-weight: bold">Popularity</p>
+                        </div>
+                        <div class="col property-value">
+                            <p>{{person.popularity}}</p>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="person.also_known_as != null">
+                        <div class="col property-header">
+                            <p style="font-weight: bold">Also known as</p>
+                        </div>
+                        <div class="col property-value">
+                            <p>
+                                <ng-container *ngFor="let name of person.also_known_as">
+                                    {{name}} <br>
+                                </ng-container>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col" style="max-width: 570px;" *ngIf="cast.length !== 0">
+                <p>Cast</p>
+                <div class="person-container">
+                    <div class="row">
+                        <div class="col"></div>
+                        <div class="col property-header">
+                            <p style="font-weight: bold">Movie</p>
+                        </div>
+                        <div class="col property-value">
+                            <p style="font-weight: bold">Played character</p>
+                        </div>
+                    </div>
+                    <div *ngFor="let cast of cast; index as i" class="row cast-row">
+                        <div *ngIf="!cast.poster_path && i < 20" class="col"></div>
+                        <div *ngIf="cast.poster_path && i < 20" class="col">
+                            <a routerLink="/movie/{{cast.id}}">
+                                <img class="cast-image" src="https://image.tmdb.org/t/p/w300/{{cast.poster_path}}">
+                            </a>
+                        </div>
+                        <div *ngIf="i < 20" class="col property-header align-self-center">
+                            <a routerLink="/movie/{{cast.id}}">
+                                <p>{{cast.title}}</p>
+                            </a>
+                        </div>
+                        <div *ngIf="i < 20" class="col property-value align-self-center">
+                            <p>{{cast.character}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col" style="max-width: 570px;" *ngIf="crew.length !== 0">
+                <p>Crew</p>
+                <div class="person-container">
+                    <div class="row">
+                        <div class="col"></div>
+                        <div class="col property-header">
+                            <p style="font-weight: bold">Movie</p>
+                        </div>
+                        <div class="col property-value">
+                            <p style="font-weight: bold">Job</p>
+                        </div>
+                    </div>
+                    <div *ngFor="let crew of crew; index as i" class="row cast-row">
+                        <div *ngIf="!crew.poster_path && i < 20" class="col"></div>
+                        <div *ngIf="crew.poster_path && i < 20" class="col">
+                            <a routerLink="/movie/{{crew.id}}">
+                                <img class="cast-image" src="https://image.tmdb.org/t/p/w300/{{crew.poster_path}}">
+                            </a>
+                        </div>
+                        <div *ngIf="i < 20" class="col property-header align-self-center">
+                            <a routerLink="/movie/{{crew.id}}">
+                                <p>{{crew.title}}</p>
+                            </a>
+                        </div>
+                        <div *ngIf="i < 20" class="col property-value align-self-center">
+                            <p>{{crew.job}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
