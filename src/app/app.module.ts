@@ -1,8 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-
+import { MatAutocompleteModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { ReactiveFormsModule } from '@angular/forms';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainLayoutComponent } from './components/main-layout/main-layout.component';
@@ -15,7 +18,6 @@ import { MoviesListComponent } from './components/movieslist/movieslist.componen
 import { MovieComponent } from './components/movie/movie.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-import { ReactiveFormsModule } from '@angular/forms';
 import { Interceptor } from './helpers/interceptor';
 import { ErrorInterceptor } from './helpers/errorInterceptor';
 import { VerificationComponent } from './components/verification/verification.component';
@@ -33,11 +35,10 @@ import { MapComponent } from './components/locations/map/map.component';
 import { FavouriteMoviesComponent } from './components/favourite-movies/favourite-movies.component';
 import { PreferencesComponent } from './components/preferences/preferences.component';
 import { BugReportComponent } from './components/bug-report/bug-report.component';
-import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { UserReportComponent } from './components/user-report/user-report.component';
 import { PlanToWatchMoviesComponent } from './components/plan-to-watch-movies/plan-to-watch-movies.component';
 import { DiscoverMoviesComponent } from './components/discover-movies/discover-movies.component';
-import { MatAutocompleteModule } from '@angular/material';
+import { CastComponent } from './components/cast/cast.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { MatAutocompleteModule } from '@angular/material';
     BugReportComponent,
     UserReportComponent,
     PlanToWatchMoviesComponent,
-    DiscoverMoviesComponent
+    DiscoverMoviesComponent,
+    CastComponent
   ],
   imports: [
     FormsModule,

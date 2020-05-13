@@ -1,0 +1,102 @@
+.container {
+    text-align: center;
+}
+.title {
+  color: white;
+  text-align: left;
+  font-size: 30px;
+  display: block;
+  margin: 20px;
+}
+
+.title2 {
+  color: white;
+  text-align: left;
+  font-size: 30px;
+  display: block;
+  margin-left: -35px;
+}
+
+.person-poster {
+    background-color: white;
+    display: block;
+    margin: 0 auto;
+}
+
+.person-details {
+  margin-top: 30px;
+  color: white;
+}
+
+.overview {
+  text-align: justify;
+  color: white;
+  padding-top: 15px;
+}
+
+.property-header {
+  text-align: center;
+}
+
+.property-value {
+  text-align: left;
+}
+
+.review-title {
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+
+.review-short {
+  color: white;
+  text-align: justify;
+}
+
+.review-author {
+  color: white;
+  text-align: right;
+  font-style: italic;
+}
+
+.review-link {
+  color: white;
+}
+
+.reviews {
+  color: white;
+  margin-top: 20px;
+}
+
+.darkTextArea {
+  outline: none;
+  color: white;
+  border-color: black;
+  background-color: #2d2d2dbf;
+  resize: none;
+}
+
+.person-container {
+  padding: 20px;
+  border: 1px solid black;
+  background-color: #02030F;
+  opacity: 0.8;
+}
+
+.thumbs-color{
+  color: deepskyblue;
+}
+
+a:hover {
+  cursor:pointer;
+  text-shadow: 0 0 15px white;
+}
+
+.cast-image {
+  object-fit: cover;
+  width: 90px;
+}
+
+.cast-row {
+    margin-bottom: 10px;
+}
