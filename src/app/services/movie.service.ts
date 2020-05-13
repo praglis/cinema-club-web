@@ -5,6 +5,7 @@ import {UserReview} from '../interfaces/userreview.interface';
 import {MovieSearchCriteria} from "../interfaces/movie.search.criteria.interface";
 import {MoviesList} from "../interfaces/movieslist.interface";
 import {RateInterface} from '../interfaces/rate.interface';
+import { Person } from '../interfaces/person';
 
 @Injectable({
   providedIn: 'root'
@@ -111,5 +112,15 @@ export class MovieService {
   getTrailerKey(movieId: string): Observable<any> {
     let url = "http://localhost:8200/movie/get/trailer?id=" + movieId;
     return this.httpClient.get<any>(url, {withCredentials: true}).pipe();
+  }
+  
+  getPerson(id: number): Observable<Person> {
+    let url = "http://localhost:8200/person/get/" + id;
+    return this.httpClient.get<Person>(url).pipe();
+  }
+
+  getPersonCredits(id: number): Observable<any> {
+    let url = "http://localhost:8200/person/get/" + id+ "/credits";
+    return this.httpClient.get<any>(url).pipe();
   }
 }
