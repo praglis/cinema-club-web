@@ -37,6 +37,7 @@ import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS, MAT_DIALOG_DATA, MatDialog
 import { UserReportComponent } from './components/user-report/user-report.component';
 import { PlanToWatchMoviesComponent } from './components/plan-to-watch-movies/plan-to-watch-movies.component';
 import { DiscoverMoviesComponent } from './components/discover-movies/discover-movies.component';
+import { MatAutocompleteModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,7 @@ import { DiscoverMoviesComponent } from './components/discover-movies/discover-m
     BugReportComponent,
     UserReportComponent,
     PlanToWatchMoviesComponent,
-    DiscoverMoviesComponent,
+    DiscoverMoviesComponent
   ],
   imports: [
     FormsModule,
@@ -76,7 +77,8 @@ import { DiscoverMoviesComponent } from './components/discover-movies/discover-m
     HttpClientModule,
     AppRoutingModule,
     MDBBootstrapModule.forRoot(),
-    MatDialogModule
+    MatDialogModule,
+    MatAutocompleteModule
   ],
   entryComponents: [
     BugReportComponent,
