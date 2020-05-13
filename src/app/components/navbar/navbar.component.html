@@ -1,66 +1,73 @@
-<nav class="navbar navbar-expand-lg navbar-dark" *ngIf="currentUser">
-    <a class="navbar-brand nav-link" routerLink="/">Cinema Club</a>
+<nav class="navbar navbar-expand-lg navbar-dark w-100" *ngIf="currentUser">
+  <a class="navbar-brand nav-link" routerLink="/">Cinema Club</a>
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-film mr-2"></i>Ranking
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Characters</a>
-                    <a [routerLink]="['/movies']" [queryParams]="{ type: 'popular' }" class="dropdown-item">Popular movies</a>
-                    <a [routerLink]="['/movies']" [queryParams]="{ type: 'best' }" class="dropdown-item">Best movies</a>
-                    <a class="dropdown-item" href="#">Cinemas</a>
-                </div>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['movies/discover']" class="nav-link"><i class="fas fa-bullhorn mr-2"></i>Discover</a>
-            </li>
-            <li class="nav-item">
-                <a [routerLink]="['/locations']" class="nav-link"><i class="fas fa-search-location mr-2"></i>Locations</a>
-            </li>
-            <li class="nav-item">
-                <a [routerLink]="['/preferences']" class="nav-link"><i class="fas fa-theater-masks mr-2"></i>Preferences</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link"><i class="fas fa-users mr-2"></i>Reviews</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link"><i class="fas fa-calendar-alt mr-2"></i>Events</a>
-            </li>
-        </ul>
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item nav-link">
-                <div class="input-group">
-                    <input (keyup.enter)="saveQuery()" [(ngModel)]="query" type="text"
-                        class="form-control bg-transparent border-dark searchBox" type="search"
-                        placeholder="Find the movie" aria-label="Search">
-                    <div class="input-group-append">
-                        <button (click)="saveQuery()" [routerLink]="['/searchResult']"
-                            [queryParams]="{ type: 'searchQuery' }" class="btn btn-outline-dark btn-style"> <i
-                                class="fas fa-search fa-fw"></i> Search</button>
-                    </div>
-                </div>
-            </li>
-            <li [routerLink]="['/my_profile']" class="nav-item nav-link">My Profile</li>
-            <li class="nav-item dropdown user">
-                <a class="nav-link dropdown-toggle" href="#" id="logIn" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-user-secret mr-2"></i>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="logIn">
-                    <a class="dropdown-item" href="#">Settings</a>
-                    <a class="dropdown-item" (click)="logout()" style="cursor: pointer;">Logout</a>
-                    <a class="dropdown-item" [routerLink]="['/preferences']">My preferences</a>
-                </div>
-            </li>
-        </ul>
-    </div>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto w-100">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-film mr-2"></i>Ranking
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Characters</a>
+          <a [routerLink]="['/movies']" [queryParams]="{ type: 'popular' }" class="dropdown-item">Popular movies</a>
+          <a [routerLink]="['/movies']" [queryParams]="{ type: 'best' }" class="dropdown-item">Best movies</a>
+          <a class="dropdown-item" href="#">Cinemas</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a [routerLink]="['movies/discover']" class="nav-link"><i class="fas fa-bullhorn mr-2"></i>Discover</a>
+      </li>
+      <li class="nav-item">
+        <a [routerLink]="['/locations']" class="nav-link"><i class="fas fa-search-location mr-2"></i>Locations</a>
+      </li>
+      <li class="nav-item">
+        <a [routerLink]="['/preferences']" class="nav-link"><i class="fas fa-theater-masks mr-2"></i>Preferences</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link"><i class="fas fa-users mr-2"></i>Reviews</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto w-100">
+      <li class="nav-item nav-link col-9">
+        <div class="input-group">
+
+          <input [(ngModel)]="query" (keyup.enter)="saveQuery()" (keyup.enter)="['/searchResult']"
+            class="form-control bg-transparent border-dark searchBox" (ngModelChange)="prepareHints()" type="search"
+            placeholder="Find the movie" [matAutocomplete]="auto" aria-label="Search">
+
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let movie of hintedMovies" routerLink="/movie/{{movie.id}}">
+              <img src="https://image.tmdb.org/t/p/w200/{{movie.poster_path}}" width="40" />
+              {{movie.original_title}}
+              <i>{{movie.release_date|date:'yyyy'}}</i>
+            </mat-option>
+          </mat-autocomplete>
+
+          <div class="input-group-append">
+            <button (click)="saveQuery()" [routerLink]="['/searchResult']" [queryParams]="{ type: 'searchQuery' }"
+              class="btn btn-outline-dark btn-style"> <i class="fas fa-search fa-fw"></i> Search</button>
+          </div>
+
+        </div>
+      </li>
+      <li [routerLink]="['/my_profile']" class="nav-item nav-link col-2">My Profile</li>
+      <li class="nav-item dropdown user col">
+        <a class="nav-link dropdown-toggle" href="#" id="logIn" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-user-secret mr-2"></i>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="logIn">
+          <a class="dropdown-item" href="#">Settings</a>
+          <a class="dropdown-item" (click)="logout()" style="cursor: pointer;">Logout</a>
+          <a class="dropdown-item" [routerLink]="['/preferences']">My preferences</a>
+        </div>
+      </li>
+    </ul>
+  </div>
 </nav>

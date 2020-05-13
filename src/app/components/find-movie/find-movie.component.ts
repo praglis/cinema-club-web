@@ -22,6 +22,7 @@ export class FindMovieComponent implements OnInit, DoCheck {
     public findMovieService: FindMovieService,
     private activatedRoute: ActivatedRoute,
     private movieService: MovieService) { }
+
   movies: SingleMovieResult[] = [];
   query: string;
 
