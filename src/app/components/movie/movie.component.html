@@ -202,7 +202,7 @@
       </div>
 
       <div style="padding: 5px">
-        <button class="btn btn-dark" type="button" (click)="onAddReviewClick()">Comment movie</button>
+        <button class="btn btn-dark" type="button" (click)="onAddComment()">Comment movie</button>
       </div>
 
       <div style="padding: 5px">
@@ -239,8 +239,7 @@
           </ng-container>
 
           <div class="col-sm">
-            <a (click)="showCommentForm = false; editCommentMode = false" class="review-button row float-right">Close
-              button</a>
+            <a (click)="closeCommentWritingForm()" class="review-button row float-right">Cancel</a>
           </div>
         </div>
       </div>
@@ -266,7 +265,7 @@
 
           <div class="row">
             <div class="col-sm">
-              <a (click)="showRateForm = false" class="review-button row float-right">Close button</a>
+              <a (click)="showRateForm = false" class="review-button row float-right">Cancel</a>
             </div>
           </div>
         </div>
@@ -284,33 +283,35 @@
 
 <div class="swiper-container" #commentsSwiperContainer>
   <div class="swiper-wrapper">
-    <div #commentsChildren class="swiper-slide" *ngFor="let item of comments">
+    <div #commentsChildren class="swiper-slide" *ngFor="let comment of comments">
 
       <div class="comment-child"
-        [ngStyle]="item.highlighted?{'box-shadow': '5px 10px 18px yellow'} : {'box-shadow': '5px 10px 18px gray'}">
+        [ngStyle]="comment.highlighted?{'box-shadow': '5px 10px 18px yellow'} : {'box-shadow': '5px 10px 18px gray'}">
 
         <div class="comment-header">
-          <p style="color: #6a6666; padding-top: 10px"><span style="color: #B7D4FF">{{badgeName}} </span><strong
-              class="text-grey">{{item.infoCU.username}}</strong> wrote on
-            day {{item.infoCD | date}}</p>
+          <p style="color: dimgrey; padding-top: 10px">
+            <span class="badge">{{badgeName}} </span>
+            <strong class="text-grey">{{comment.infoCU.username}}</strong> wrote on day {{comment.infoCD | date}}
+          </p>
+
           <p class="first-comment-header-button">
-            <a (click)="onAddReviewClick(item.id)">
+            <a (click)="onAddComment(comment.id)">
               <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Reply on comment">
                 <i class="fas fa-reply"></i>
               </span>
             </a>
           </p>
 
-          <ng-container *ngIf="item.infoCU.id == userId">
+          <ng-container *ngIf="comment.infoCU.id == userId">
             <p class="next-comment-header-button">
-              <a (click)="onEditReviewClick(item)">
+              <a (click)="onEditComment(comment)">
                 <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Edit comment">
                   <i class="fas fa-edit"></i>
                 </span>
               </a>
             </p>
             <p class="next-comment-header-button">
-              <a (click)="onDeleteReviewClick(item.id)">
+              <a (click)="onDeleteComment(comment.id)">
                 <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Delete comment">
                   <i class="fas fa-trash"></i>
                 </span>
@@ -320,7 +321,7 @@
 
           <ng-container *ngIf="this.isAdmin">
             <p class="next-comment-header-button">
-              <a (click)="onHighlightComment(item.id)">
+              <a (click)="onHighlightComment(comment.id)">
                 <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Highlight comment">
                   <i class="fas fa-star"></i>
                 </span>
@@ -329,31 +330,35 @@
           </ng-container>
         </div>
 
-        <p>{{item.statement}}</p>
+        <p>{{comment.statement}}</p>
 
         <div style="display: flex;">
-          <p style="font-size: 24px;">{{item.likes}} <a (click)="likeComment(item.id)"><i
+          <p style="font-size: 24px;">{{comment.likes}} <a (click)="likeComment(comment.id)"><i
                 class="far fa-thumbs-up"></i></a>
           </p>
-          <p style="margin-left: auto;"><a style="color: #6a6666;" (click)="reportUser(item.id)">report comment</a></p>
+          <p style="margin-left: auto;"><a style="color: dimgrey;" (click)="reportUser(comment.id)">report comment</a>
+          </p>
         </div>
       </div>
 
-      <div *ngFor="let reply of item.replies" class="comment-child" style="margin-left: 100px; margin-top: 20px;">
+      <div *ngFor="let reply of comment.replies" class="comment-child" style="margin-left: 100px; margin-top: 20px;">
         <div class="comment-header">
-          <p style="color: #6a6666; padding-top: 10px"><strong class="text-grey">{{reply.infoCU.username}}</strong>
-            reply on day {{reply.infoCD | date}}</p>
+
+          <p style="color: dimgrey; padding-top: 10px">
+            <span class="badge">{{badgeName}}</span>
+            <strong class="text-grey">{{reply.infoCU.username}}</strong> wrote on day {{reply.infoCD | date}}
+          </p>
 
           <ng-container *ngIf="reply.infoCU.id == userId">
             <p class="first-comment-header-button">
-              <a (click)="onEditReviewClick(item)">
-                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Edit comment">
+              <a (click)="onEditComment(reply, comment.id)">
+                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Edit reply">
                   <i class="fas fa-edit"></i>
                 </span>
               </a>
             </p>
             <p class="next-comment-header-button">
-              <a (click)="onDeleteReviewClick(item.id)">
+              <a (click)="onDeleteComment(reply.id)">
                 <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Delete comment">
                   <i class="fas fa-trash"></i>
                 </span>
@@ -369,7 +374,7 @@
           <p style="font-size: 24px;">{{reply.likes}} <a (click)="likeComment(reply.id)"><i
                 class="far fa-thumbs-up"></i></a>
           </p>
-          <p style="margin-left: auto;"><a style="color: #6a6666;" (click)="reportUser(reply.id)">report comment</a></p>
+          <p style="margin-left: auto;"><a style="color: dimgrey;" (click)="reportUser(reply.id)">report comment</a></p>
         </div>
       </div>
 

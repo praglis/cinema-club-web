@@ -53,10 +53,10 @@ export class MovieComponent implements OnInit, AfterViewInit {
   loading = false;
   allDataFetched = false;
   reportReason = '';
-  editedReviewId: number;
   public safeURL: SafeResourceUrl;
   isAdmin: boolean;
 
+  editedReviewId: number;
   commentsSwiper: any;
   showCommentForm = false;
   parentCommentId: number;
@@ -82,8 +82,6 @@ export class MovieComponent implements OnInit, AfterViewInit {
       this.safeURL = this._sanitizer.bypassSecurityTrustResourceUrl(this.trailerKey);
     }
     );
-
-    console.log('a');
   }
 
   ngOnInit() {
@@ -230,8 +228,8 @@ export class MovieComponent implements OnInit, AfterViewInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed. Result:', result);
-      if (result.doSend === true) { this.reportService.reportUser(this.prepareUserReport(commentId, result.description)); }
+      // tslint:disable-next-line: triple-equals
+      if (result.doSend == true) { this.reportService.reportUser(this.prepareUserReport(commentId, result.description)); }
     });
   }
 
@@ -251,8 +249,9 @@ export class MovieComponent implements OnInit, AfterViewInit {
     });
   }
 
-  onAddReviewClick(parentComment?: number) {
-    this.editCommentMode = false;
+  onAddComment(parentComment?: number) {
+    this.closeCommentWritingForm();
+    console.log('onAddComment():parentComment?:', parentComment);
     this.showRateForm = false;
     this.showCommentForm = true;
     this.parentCommentId = parentComment;
@@ -265,9 +264,9 @@ export class MovieComponent implements OnInit, AfterViewInit {
           break;
         }
       }
-      this.commentFormTitle = 'Reply on comment ' + comment.infoCU.username;
+      this.commentFormTitle = 'Reply on ' + comment.infoCU.username + '\'s comment';
     } else {
-      this.commentFormTitle = 'My comment';
+      this.commentFormTitle = 'Write your comment';
     }
     this.commentForms.changes.subscribe(comps => {
       if (comps.length != 0) {
@@ -276,7 +275,29 @@ export class MovieComponent implements OnInit, AfterViewInit {
     });
   }
 
+  onEditComment(review: any, parentCommentId?: any) {
+    console.log(review);
+
+    this.closeCommentWritingForm();
+    this.commentFormTitle = 'Edit comment';
+    this.showCommentForm = true;
+    this.editCommentMode = true;
+    this.commentForms.changes.subscribe(() => {
+      if (this.editCommentMode) {
+        this.commentForms.first.nativeElement.value = review.statement;
+        this.editedReviewId = review.id;
+        this.parentCommentId = parentCommentId;
+        console.log('onEditComment()SUB:this.parentCommentId:', this.parentCommentId);
+        console.log('onEditComment()SUB:this.editedReviewId:', this.editedReviewId);
+      }
+    });
+    console.log('onEditComment()END:this.parentCommentId:', this.parentCommentId);
+    console.log('onEditComment()END:this.editedReviewId:', this.editedReviewId);
+  }
+
   submitComment() {
+    console.log('submitComment():this.parentCommentId:', this.parentCommentId);
+    console.log('submitComment():this.editedReviewId:', this.editedReviewId);
     this.movieService.postComment({
       movieId: Number(this.route.snapshot.paramMap.get('id')),
       reviewBody: this.commentForms.first.nativeElement.value,
@@ -299,22 +320,9 @@ export class MovieComponent implements OnInit, AfterViewInit {
       });
   }
 
-  onDeleteReviewClick(reviewId: number) {
+  onDeleteComment(reviewId: number) {
     this.movieService.deleteComment(reviewId).subscribe(() => {
       this.reloadComments();
-    });
-  }
-
-  onEditReviewClick(review: any) {
-    console.log(review);
-    this.commentFormTitle = 'Edit comment';
-    this.showCommentForm = true;
-    this.editCommentMode = true;
-    this.commentForms.changes.subscribe(() => {
-      if (this.editCommentMode) {
-        this.commentForms.first.nativeElement.value = review.statement;
-        this.editedReviewId = review.id;
-      }
     });
   }
 
@@ -330,5 +338,11 @@ export class MovieComponent implements OnInit, AfterViewInit {
       .subscribe(response => {
         this.reloadComments();
       });
+  }
+
+  closeCommentWritingForm() {
+    this.showCommentForm = false;
+    this.editCommentMode = false;
+    this.editedReviewId = undefined;
   }
 }
