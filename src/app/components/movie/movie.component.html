@@ -1,5 +1,6 @@
 <div style="position:fixed; top:0; width:100%; z-index:100; " *ngIf="error" class="alert alert-danger">{{error}}</div>
-<div style="position:fixed; top:0; width:100%; z-index:100; opacity: 0.8;" *ngIf="success_msg != undefined" class="alert alert-success">{{success_msg}}</div>
+<div style="position:fixed; top:0; width:100%; z-index:100; opacity: 0.8;" *ngIf="successMsg != undefined"
+  class="alert alert-success">{{successMsg}}</div>
 <div class="movie-details" *ngIf="movie != undefined">
   <div class="container">
 
@@ -61,160 +62,169 @@
           </div>
         </div>
 
-    </div>
-
-  </div>
-
-  <div class="row" style="padding-top: 30px; padding-bottom: 30px">
-
-    <div  class="col-5">
-      <p>Details</p>
-
-      <div class="movie-container">
-        <div class="row" *ngIf="movie.original_title != null">
-          <div class="col property-header">
-            <p style="font-weight: bold">Original title</p>
-          </div>
-          <div class="col property-value">
-            <p>{{movie.original_title}}</p>
-          </div>
-        </div>
-        <div class="row" *ngIf="movie.status != null">
-          <div class="col property-header">
-            <p style="font-weight: bold">Status</p>
-          </div>
-          <div class="col property-value">
-            <p>{{movie.status}}</p>
-          </div>
-        </div>
-        <div class="row" *ngIf="movie.release_date != null">
-          <div class="col property-header">
-            <p style="font-weight: bold">Release date</p>
-          </div>
-          <div class="col property-value">
-            <p>{{movie.release_date}}</p>
-          </div>
-        </div>
-
-        <div class="row" *ngIf="movie.crews != null">
-          <div class="col property-header">
-            <p style="font-weight: bold">Directing</p>
-          </div>
-          <div class="col property-value">
-            <p>
-              <ng-container *ngFor="let crew of movie.crews">
-                <ng-container *ngIf="crew.department==='Directing' && crew.job === 'Director'"><a routerLink="/person/{{crew.id}}">{{crew.name}}</a>, </ng-container>
-              </ng-container>
-            </p>
-          </div>
-        </div>
-        <div class="row" *ngIf="movie.crews != null">
-          <div class="col property-header">
-            <p style="font-weight: bold">Screenplay</p>
-          </div>
-          <div class="col property-value">
-            <p>
-              <ng-container *ngFor="let crew of movie.crews">
-                <ng-container *ngIf="crew.department==='Writing' && (crew.job === 'Screenplay' || crew.job === 'Writer')"><a routerLink="/person/{{crew.id}}">{{crew.name}}</a>, </ng-container>
-              </ng-container>
-            </p>
-          </div>
-        </div>
-
-        <div class="row" *ngIf="movie.genres != null">
-          <div class="col property-header">
-            <p style="font-weight: bold">Genres</p>
-          </div>
-          <div class="col property-value">
-            <p>
-              <ng-container *ngFor="let genre of movie.genres">
-                {{genre.name}},
-              </ng-container>
-            </p>
-          </div>
-        </div>
-        <div class="row" *ngIf="movie.production_companies != null">
-          <div class="col property-header">
-            <p style="font-weight: bold">Production companies</p>
-          </div>
-          <div class="col property-value">
-            <p>
-              <ng-container *ngFor="let company of movie.production_companies">
-                {{company.name}},
-              </ng-container>
-            </p>
-          </div>
-
-        </div>
-        <iframe width="460" height="315" [src]='safeURL' frameborder="0" allowfullscreen></iframe>
       </div>
+
     </div>
 
-    <div class="col-7">
-      <p>Cast</p>
-      <div class="movie-container">
+    <div class="row" style="padding-top: 30px; padding-bottom: 30px">
 
-        <div class="row">
-          <div class="col-1"></div>
-          <div class="col property-header">
-            <p style="font-weight: bold">Name</p>
+      <div class="col-5">
+        <p>Details</p>
+
+        <div class="movie-container">
+          <div class="row" *ngIf="movie.original_title != null">
+            <div class="col property-header">
+              <p style="font-weight: bold">Original title</p>
+            </div>
+            <div class="col property-value">
+              <p>{{movie.original_title}}</p>
+            </div>
           </div>
-          <div class="col property-value">
-            <p style="font-weight: bold">Character</p>
+          <div class="row" *ngIf="movie.status != null">
+            <div class="col property-header">
+              <p style="font-weight: bold">Status</p>
+            </div>
+            <div class="col property-value">
+              <p>{{movie.status}}</p>
+            </div>
           </div>
+          <div class="row" *ngIf="movie.release_date != null">
+            <div class="col property-header">
+              <p style="font-weight: bold">Release date</p>
+            </div>
+            <div class="col property-value">
+              <p>{{movie.release_date}}</p>
+            </div>
+          </div>
+
+          <div class="row" *ngIf="movie.crews != null">
+            <div class="col property-header">
+              <p style="font-weight: bold">Directing</p>
+            </div>
+            <div class="col property-value">
+              <p>
+                <ng-container *ngFor="let crew of movie.crews">
+                  <ng-container *ngIf="crew.department==='Directing' && crew.job === 'Director'"><a
+                      routerLink="/person/{{crew.id}}">{{crew.name}}</a>, </ng-container>
+                </ng-container>
+              </p>
+            </div>
+          </div>
+          <div class="row" *ngIf="movie.crews != null">
+            <div class="col property-header">
+              <p style="font-weight: bold">Screenplay</p>
+            </div>
+            <div class="col property-value">
+              <p>
+                <ng-container *ngFor="let crew of movie.crews">
+                  <ng-container
+                    *ngIf="crew.department==='Writing' && (crew.job === 'Screenplay' || crew.job === 'Writer')"><a
+                      routerLink="/person/{{crew.id}}">{{crew.name}}</a>, </ng-container>
+                </ng-container>
+              </p>
+            </div>
+          </div>
+
+          <div class="row" *ngIf="movie.genres != null">
+            <div class="col property-header">
+              <p style="font-weight: bold">Genres</p>
+            </div>
+            <div class="col property-value">
+              <p>
+                <ng-container *ngFor="let genre of movie.genres">
+                  {{genre.name}},
+                </ng-container>
+              </p>
+            </div>
+          </div>
+          <div class="row" *ngIf="movie.production_companies != null">
+            <div class="col property-header">
+              <p style="font-weight: bold">Production companies</p>
+            </div>
+            <div class="col property-value">
+              <p>
+                <ng-container *ngFor="let company of movie.production_companies">
+                  {{company.name}},
+                </ng-container>
+              </p>
+            </div>
+
+          </div>
+          <iframe width="460" height="315" [src]='safeURL' frameborder="0" allowfullscreen></iframe>
         </div>
+      </div>
 
-        <div *ngFor="let cast of movie.casts; index as i" class="row">
+      <div class="col-7">
+        <p>Cast</p>
+        <div class="movie-container">
+
+          <div class="row">
+            <div class="col-1"></div>
+            <div class="col property-header">
+              <p style="font-weight: bold">Name</p>
+            </div>
+            <div class="col property-value">
+              <p style="font-weight: bold">Character</p>
+            </div>
+          </div>
+
+          <div *ngFor="let cast of movie.casts; index as i" class="row">
             <div *ngIf="!cast.profile_path && i < 20" class="col-1"></div>
             <div *ngIf="cast.profile_path && i < 20" class="col-1">
-              <a routerLink="/person/{{cast.id}}" >
+              <a routerLink="/person/{{cast.id}}">
                 <img class="cast-image" src="https://image.tmdb.org/t/p/w300/{{cast.profile_path}}">
               </a>
             </div>
-            <div *ngIf="i < 20" class="col property-header" >
-              <a routerLink="/person/{{cast.id}}" >
+            <div *ngIf="i < 20" class="col property-header">
+              <a routerLink="/person/{{cast.id}}">
                 <p>{{cast.name}}</p>
               </a>
             </div>
             <div *ngIf="i < 20" class="col property-value">
               <p>{{cast.character}}</p>
             </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
     <p class="title2">Users' rating and comments</p>
 
     <div class="row" style="margin-left: -40px">
       <div class="star-rating">
-      <!-- The '|| 0' would prevent an undefined or null value on the Rating property -->
+        <!-- The '|| 0' would prevent an undefined or null value on the Rating property -->
         <div class="full-star2" [ngStyle]="{'width': movie.rating * 10 + '%'}"></div>
-      <div class="empty-star"></div>
-    </div>
-
-    <div style="padding: 5px">
-      <button class="btn btn-dark" type="button" (click)="onAddRateClick()">Rate movie</button>
-    </div>
-
-      <div style="padding: 5px">
-      <button class="btn btn-dark" type="button" (click)="onAddReviewClick()">Comment movie</button>
-    </div>
-
-      <div style="padding: 5px">
-        <button *ngIf="isMovieInFavourites" class="btn btn-dark" type="button" (click)="onRemoveMovieFromFavourites()">Delete movie from favourites</button>
-        <button *ngIf="!isMovieInFavourites" class="btn btn-dark" type="button" (click)="onAddToFavourites()">Add movie to favourites</button>
-      </div>
-      <div style="padding: 5px">
-        <button *ngIf="isMovieInPlanToWatch" class="btn btn-dark" type="button" (click)="onRemoveMovieFromPlanToWatch()">Delete movie from plan to watch</button>
-        <button *ngIf="!isMovieInPlanToWatch" class="btn btn-dark" type="button" (click)="onAddToPlanToWatch()">Add movie to plan to watch</button>
+        <div class="empty-star"></div>
       </div>
 
-  </div>
+      <div style="padding: 5px">
+        <button class="btn btn-dark" type="button" (click)="onAddRateClick()">Rate movie</button>
+      </div>
 
-  <div class="row">
+      <div style="padding: 5px">
+        <button class="btn btn-dark" type="button" (click)="onAddReviewClick()">Comment movie</button>
+      </div>
+
+      <div style="padding: 5px">
+        <button *ngIf="isMovieInFavourites" class="btn btn-dark" type="button"
+          (click)="onRemoveMovieFromFavourites()">Delete movie from favourites</button>
+        <button *ngIf="!isMovieInFavourites" class="btn btn-dark" type="button" (click)="onAddToFavourites()">Add movie
+          to favourites</button>
+      </div>
+      <div style="padding: 5px">
+        <button *ngIf="isMovieInPlanToWatch" class="btn btn-dark" type="button"
+          (click)="onRemoveMovieFromPlanToWatch()">Delete movie from plan to watch</button>
+        <button *ngIf="!isMovieInPlanToWatch" class="btn btn-dark" type="button" (click)="onAddToPlanToWatch()">Add
+          movie to plan to watch</button>
+      </div>
+
+    </div>
+
+    <div class="row">
       <div *ngIf="showCommentForm" style="margin-bottom: 30px; padding-left:100px; width: 1000px">
-        <div style="text-align: left; margin-bottom: -10px;"><p>{{commentFormTitle}}</p></div>
+        <div style="text-align: left; margin-bottom: -10px;">
+          <p>{{commentFormTitle}}</p>
+        </div>
         <textarea #commentForm class="form-control darkTextArea" rows="3"></textarea>
         <div class="row">
           <ng-container *ngIf="editCommentMode">
@@ -229,107 +239,142 @@
           </ng-container>
 
           <div class="col-sm">
-            <a (click)="showCommentForm = false; editCommentMode = false" class="review-button row float-right">Close button</a>
+            <a (click)="showCommentForm = false; editCommentMode = false" class="review-button row float-right">Close
+              button</a>
           </div>
         </div>
       </div>
 
-    <div style="padding-left: 110px">
-      <div id=rate-container *ngIf="showRateForm" style="margin-bottom: 30px; margin-left: -125px; margin-top: 20px; padding-top: 10px">
+      <div style="padding-left: 110px">
+        <div id=rate-container *ngIf="showRateForm"
+          style="margin-bottom: 30px; margin-left: -125px; margin-top: 20px; padding-top: 10px">
 
-        <div style="text-align: left; margin-bottom: -10px;"><p>My rate</p></div>
+          <div style="text-align: left; margin-bottom: -10px;">
+            <p>My rate</p>
+          </div>
 
-        <span (click)="submitRate(1)" class="rate-button"> 1 </span>
-        <span (click)="submitRate(2)" class="rate-button"> 2 </span>
-        <span (click)="submitRate(3)" class="rate-button"> 3 </span>
-        <span (click)="submitRate(4)" class="rate-button"> 4 </span>
-        <span (click)="submitRate(5)" class="rate-button"> 5 </span>
-        <span (click)="submitRate(6)" class="rate-button"> 6 </span>
-        <span (click)="submitRate(7)" class="rate-button"> 7 </span>
-        <span (click)="submitRate(8)" class="rate-button"> 8 </span>
-        <span (click)="submitRate(9)" class="rate-button"> 9 </span>
-        <span (click)="submitRate(10)" class="rate-button"> 10 </span>
+          <span (click)="submitRate(1)" class="rate-button"> 1 </span>
+          <span (click)="submitRate(2)" class="rate-button"> 2 </span>
+          <span (click)="submitRate(3)" class="rate-button"> 3 </span>
+          <span (click)="submitRate(4)" class="rate-button"> 4 </span>
+          <span (click)="submitRate(5)" class="rate-button"> 5 </span>
+          <span (click)="submitRate(6)" class="rate-button"> 6 </span>
+          <span (click)="submitRate(7)" class="rate-button"> 7 </span>
+          <span (click)="submitRate(8)" class="rate-button"> 8 </span>
+          <span (click)="submitRate(9)" class="rate-button"> 9 </span>
+          <span (click)="submitRate(10)" class="rate-button"> 10 </span>
 
           <div class="row">
             <div class="col-sm">
               <a (click)="showRateForm = false" class="review-button row float-right">Close button</a>
             </div>
           </div>
+        </div>
       </div>
-    </div>
 
-  </div>
+    </div>
 
     <div *ngIf="comments.length === 0" style="padding-bottom: 50px">
       <h2 style="text-align: center; color: dimgray; padding: 40px; opacity: 50%">No comments found. Comment first!</h2>
     </div>
 
-</div>
+  </div>
 
 </div>
 
 <div class="swiper-container" #commentsSwiperContainer>
   <div class="swiper-wrapper">
     <div #commentsChildren class="swiper-slide" *ngFor="let item of comments">
-      <div class="comment-child" [ngStyle]="item.highlighted?{'box-shadow': '5px 10px 18px yellow'} : {'box-shadow': '5px 10px 18px gray'}">
-        <div style="margin-left: 10px; margin-right: 10px; display: flex;">
-          <p style="color: #6a6666; padding-top: 10px"><span style = "color: #B7D4FF">{{badgeName}} </span><strong class="text-grey">{{item.infoCU.username}}</strong> write on
+
+      <div class="comment-child"
+        [ngStyle]="item.highlighted?{'box-shadow': '5px 10px 18px yellow'} : {'box-shadow': '5px 10px 18px gray'}">
+
+        <div class="comment-header">
+          <p style="color: #6a6666; padding-top: 10px"><span style="color: #B7D4FF">{{badgeName}} </span><strong
+              class="text-grey">{{item.infoCU.username}}</strong> wrote on
             day {{item.infoCD | date}}</p>
-          <p style="margin-left: auto;font-size: 24px;">
+          <p class="first-comment-header-button">
             <a (click)="onAddReviewClick(item.id)">
               <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Reply on comment">
                 <i class="fas fa-reply"></i>
               </span>
             </a>
           </p>
+
           <ng-container *ngIf="item.infoCU.id == userId">
-            <p style="margin-left: 5px; font-size: 24px;">
-              <a (click)="onDeleteReviewClick(item.id)">
-              <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Delete comment">
-                <i class="fas fa-trash"></i>
-              </span>
+            <p class="next-comment-header-button">
+              <a (click)="onEditReviewClick(item)">
+                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Edit comment">
+                  <i class="fas fa-edit"></i>
+                </span>
               </a>
             </p>
-            <p style="margin-left: 5px; font-size: 24px;">
-              <a (click)="onEditReviewClick(item)">
-              <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Edit comment">
-                <i class="fas fa-edit"></i>
-              </span>
+            <p class="next-comment-header-button">
+              <a (click)="onDeleteReviewClick(item.id)">
+                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Delete comment">
+                  <i class="fas fa-trash"></i>
+                </span>
               </a>
             </p>
           </ng-container>
+
           <ng-container *ngIf="this.isAdmin">
-          <p style="margin-left: 5px; font-size: 24px;">
-            <a (click)="onHighlightComment(item.id)">
-              <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Highlight comment">
-                <i class="fas fa-star"></i>
-              </span>
-            </a>
-          </p>
+            <p class="next-comment-header-button">
+              <a (click)="onHighlightComment(item.id)">
+                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Highlight comment">
+                  <i class="fas fa-star"></i>
+                </span>
+              </a>
+            </p>
           </ng-container>
         </div>
+
         <p>{{item.statement}}</p>
+
         <div style="display: flex;">
-          <p style="font-size: 24px;">{{item.likes}} <a (click)="likeComment(item.id)"><i class="far fa-thumbs-up"></i></a>
+          <p style="font-size: 24px;">{{item.likes}} <a (click)="likeComment(item.id)"><i
+                class="far fa-thumbs-up"></i></a>
           </p>
           <p style="margin-left: auto;"><a style="color: #6a6666;" (click)="reportUser(item.id)">report comment</a></p>
         </div>
       </div>
-      <div class="comment-child" style="margin-left: 100px;margin-top: 20px;" *ngFor="let reply of item.replies">
-        <p style="color: #6a6666; padding-top: 10px"><strong class="text-grey">{{reply.infoCU.username}}</strong> reply on
-          day {{reply.infoCD | date}}</p>
+
+      <div *ngFor="let reply of item.replies" class="comment-child" style="margin-left: 100px; margin-top: 20px;">
+        <div class="comment-header">
+          <p style="color: #6a6666; padding-top: 10px"><strong class="text-grey">{{reply.infoCU.username}}</strong>
+            reply on day {{reply.infoCD | date}}</p>
+
+          <ng-container *ngIf="reply.infoCU.id == userId">
+            <p class="first-comment-header-button">
+              <a (click)="onEditReviewClick(item)">
+                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Edit comment">
+                  <i class="fas fa-edit"></i>
+                </span>
+              </a>
+            </p>
+            <p class="next-comment-header-button">
+              <a (click)="onDeleteReviewClick(item.id)">
+                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Delete comment">
+                  <i class="fas fa-trash"></i>
+                </span>
+              </a>
+            </p>
+          </ng-container>
+        </div>
+
+
         <p>{{reply.statement}}</p>
+
         <div style="display: flex;">
-          <p style="font-size: 24px;">{{reply.likes}} <a (click)="likeComment(reply.id)"><i class="far fa-thumbs-up"></i></a>
+          <p style="font-size: 24px;">{{reply.likes}} <a (click)="likeComment(reply.id)"><i
+                class="far fa-thumbs-up"></i></a>
           </p>
           <p style="margin-left: auto;"><a style="color: #6a6666;" (click)="reportUser(reply.id)">report comment</a></p>
         </div>
       </div>
+
     </div>
   </div>
   <div class="swiper-button-next" style="top: 100px;" #commentsSwiperButtonNext></div>
   <div class="swiper-button-prev" style="top: 100px;" #commentsSwiperButtonPrev></div>
 </div>
-
-
-

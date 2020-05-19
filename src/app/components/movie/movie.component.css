@@ -1,5 +1,5 @@
 .container {
-    text-align: center;
+  text-align: center;
 }
 .title {
   color: white;
@@ -19,9 +19,9 @@
 }
 
 .movie-poster {
-    background-color: white;
-    display: block;
-    margin: 0 auto;
+  background-color: white;
+  display: block;
+  margin: 0 auto;
 }
 
 .movie-details {
@@ -94,7 +94,6 @@
   width: 970px;
 }
 
-
 .star-rating {
   height: 40px;
   width: 400px;
@@ -105,7 +104,7 @@
   position: absolute;
   z-index: 1;
   height: 100%;
-  background-image: url('src/assets/images/star_yellow.png');
+  background-image: url("src/assets/images/star_yellow.png");
   background-size: 400px 40px;
 }
 
@@ -113,21 +112,21 @@
   position: absolute;
   z-index: 1;
   height: 100%;
-  background-image: url('src/assets/images/star_blue.png');
+  background-image: url("src/assets/images/star_blue.png");
   background-size: 400px 40px;
 }
 
 .empty-star {
   width: 100%;
   height: 100%;
-  background-image: url('src/assets/images/star_grey.png');
+  background-image: url("src/assets/images/star_grey.png");
   background-size: 400px 40px;
 }
 
 .movie-container {
   padding: 20px;
   border: 1px solid black;
-  background-color: #02030F;
+  background-color: #02030f;
   opacity: 0.8;
 }
 
@@ -138,14 +137,14 @@
   opacity: 0.8;
 }
 
-.rate-button{
+.rate-button {
   font-size: 30px;
   margin-right: 5px;
   margin-left: 5px;
-  cursor: pointer
+  cursor: pointer;
 }
 
-.rate-button:hover{
+.rate-button:hover {
   text-shadow: 0 0 15px white;
 }
 
@@ -178,12 +177,28 @@
   border-radius: 25px;
 }
 
-.thumbs-color{
+.comment-header {
+  margin-left: 10px;
+  margin-right: 10px;
+  display: flex;
+}
+
+.first-comment-header-button {
+  margin-left: auto;
+  font-size: 24px;
+}
+
+.next-comment-header-button {
+  margin-left: 5px;
+  font-size: 24px;
+}
+
+.thumbs-color {
   color: deepskyblue;
 }
 
 a:hover {
-  cursor:pointer;
+  cursor: pointer;
   text-shadow: 0 0 15px white;
 }
 

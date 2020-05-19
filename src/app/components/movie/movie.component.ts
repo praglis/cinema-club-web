@@ -41,13 +41,9 @@ export class MovieComponent implements OnInit, AfterViewInit {
   @ViewChild('commentsSwiperButtonNext', { static: true }) commentsSwiperButtonNext: ElementRef;
   @ViewChild('commentsSwiperButtonPrev', { static: true }) commentsSwiperButtonPrev: ElementRef;
 
-  commentsSwiper: any;
-  showCommentForm = false;
+
   showRateForm = false;
-  parentCommentId: number;
-  commentFormTitle: string = "My comment"
-  comments: any = [];
-  success_msg: string;
+  successMsg: string;
   trailerKey: any;
   badgeName: string;
   error: string;
@@ -57,10 +53,16 @@ export class MovieComponent implements OnInit, AfterViewInit {
   loading = false;
   allDataFetched = false;
   reportReason = '';
-  editCommentMode = false;
   editedReviewId: number;
   public safeURL: SafeResourceUrl;
   isAdmin: boolean;
+
+  commentsSwiper: any;
+  showCommentForm = false;
+  parentCommentId: number;
+  commentFormTitle: string = 'My comment';
+  comments: any = [];
+  editCommentMode = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -76,31 +78,12 @@ export class MovieComponent implements OnInit, AfterViewInit {
 
     this.movieService.getTrailerKey(String(this.route.snapshot.paramMap.get('id'))).subscribe((key) => {
 
-        this.trailerKey = 'https://www.youtube.com/embed/' + key.key;
-        this.safeURL = this._sanitizer.bypassSecurityTrustResourceUrl(this.trailerKey);
-      }
-    )
+      this.trailerKey = 'https://www.youtube.com/embed/' + key.key;
+      this.safeURL = this._sanitizer.bypassSecurityTrustResourceUrl(this.trailerKey);
+    }
+    );
 
     console.log('a');
-  }
-
-  ngAfterViewInit() {
-    this.commentsSwiper = this.initCommentsSwiper();
-    this.commentsChildren.changes.subscribe(t => { this.commentsSwiper.update(); });
-  }
-
-  private initCommentsSwiper() {
-    return this.commentsSwiper = new Swiper(this.commentsSwiperContainer.nativeElement, {
-      slidesPerView: 'auto',
-      spaceBetween: 30,
-      slidesPerGroup: 2,
-      // loop: true,
-      loopFillGroupWithBlank: true,
-      navigation: {
-        nextEl: this.commentsSwiperButtonNext.nativeElement,
-        prevEl: this.commentsSwiperButtonPrev.nativeElement
-      }
-    });
   }
 
   ngOnInit() {
@@ -145,62 +128,29 @@ export class MovieComponent implements OnInit, AfterViewInit {
           this.isAdmin = obj;
         });
       });
-      this.userService.getUserBadge().subscribe( (data) => {
+      this.userService.getUserBadge().subscribe((data) => {
         this.badgeName = data.name;
       });
     });
 
-
-
     this.reloadComments();
   }
 
-  reloadComments() {
-    this.movieService.getComments(this.route.snapshot.paramMap.get('id')).subscribe((object) => {
-      this.comments = object;
-    });
+  ngAfterViewInit() {
+    this.commentsSwiper = this.initCommentsSwiper();
+    this.commentsChildren.changes.subscribe(t => { this.commentsSwiper.update(); });
   }
 
-  onAddReviewClick(parentComment?: number) {
-    this.editCommentMode = false;
-    this.showRateForm = false;
-    this.showCommentForm = true;
-    this.parentCommentId = parentComment;
-    if (parentComment != undefined) {
-      var comment;
-      for (let index = 0; index < this.comments.length; index++) {
-        const element = this.comments[index];
-        if(element.id === parentComment) {
-          comment = element;
-          break;
-        }
-      }
-      this.commentFormTitle = "Reply on comment " + comment.infoCU.username;
-    } else {
-      this.commentFormTitle = "My comment";
-    }
-    this.commentForms.changes.subscribe(comps => {
-      if (comps.length != 0) {
-        comps.first.nativeElement.scrollIntoView({ behavior: 'smooth' });
-      }
-    });
-  }
-
-  onDeleteReviewClick(reviewId : number) {
-    this.movieService.deleteComment(reviewId).subscribe(() => {
-      this.reloadComments();
-    });
-  }
-
-  onEditReviewClick(review: any) {
-    console.log(review);
-    this.commentFormTitle = "Edit comment";
-    this.showCommentForm = true;
-    this.editCommentMode = true;
-    this.commentForms.changes.subscribe(() => {
-      if (this.editCommentMode) {
-        this.commentForms.first.nativeElement.value = review.statement;
-        this.editedReviewId = review.id;
+  private initCommentsSwiper() {
+    return this.commentsSwiper = new Swiper(this.commentsSwiperContainer.nativeElement, {
+      slidesPerView: 'auto',
+      spaceBetween: 30,
+      slidesPerGroup: 2,
+      // loop: true,
+      loopFillGroupWithBlank: true,
+      navigation: {
+        nextEl: this.commentsSwiperButtonNext.nativeElement,
+        prevEl: this.commentsSwiperButtonPrev.nativeElement
       }
     });
   }
@@ -255,34 +205,11 @@ export class MovieComponent implements OnInit, AfterViewInit {
     });
   }
 
-  submitComment() {
-    this.movieService.postComment({
-      movieId: Number(this.route.snapshot.paramMap.get('id')),
-      reviewBody: this.commentForms.first.nativeElement.value,
-      parentReviewId: this.parentCommentId,
-      reviewId: this.editedReviewId
-    }).subscribe((data) => {
-      console.log(this.commentForms.first.nativeElement.value);
-      if (this.editCommentMode) {
-        this.success_msg = 'Comment has been edited';
-        this.editCommentMode = false;
-      } else {
-        this.success_msg = 'Comment has been added';
-      }
-      this.showCommentForm = false;
-      this.reloadComments();
-    },
-      error => {
-        this.error = error.message;
-        this.loading = false;
-      });
-  }
-
   submitRate(rate: number) {
     this.movieService.postRate(
       Number(this.route.snapshot.paramMap.get('id')),
       { rate }).subscribe((data) => {
-        this.success_msg = 'Rate has been added';
+        this.successMsg = 'Rate has been added';
         this.showRateForm = false;
         const id = +this.route.snapshot.paramMap.get('id');
         this.movieService.getMovie(id).subscribe((jsonObject: MovieDetails) => {
@@ -290,24 +217,12 @@ export class MovieComponent implements OnInit, AfterViewInit {
         });
         this.reloadComments();
       },
-      error => {
-        this.error = error.message;
-        this.loading = false;
-      });
+        error => {
+          this.error = error.message;
+          this.loading = false;
+        });
   }
 
-  likeComment(commentId: string) {
-    this.movieService.likeComment(commentId)
-      .subscribe(response => {
-        this.reloadComments();
-      });
-  }
-  onHighlightComment(commentId: number) {
-    this.movieService.highlightComment(commentId)
-      .subscribe(response => {
-        this.reloadComments();
-      });
-  }
   reportUser(commentId: string) {
     const dialogRef = this.dialog.open(UserReportComponent, {
       hasBackdrop: true,
@@ -326,5 +241,94 @@ export class MovieComponent implements OnInit, AfterViewInit {
       reportDate: new Date(),
       reportReason: reason
     };
+  }
+
+  // Może zrobić z komentarzy/usersReview oddzielny moduł? Dużo kodu
+
+  reloadComments() {
+    this.movieService.getComments(this.route.snapshot.paramMap.get('id')).subscribe((object) => {
+      this.comments = object;
+    });
+  }
+
+  onAddReviewClick(parentComment?: number) {
+    this.editCommentMode = false;
+    this.showRateForm = false;
+    this.showCommentForm = true;
+    this.parentCommentId = parentComment;
+    if (parentComment != undefined) {
+      let comment;
+      for (let index = 0; index < this.comments.length; index++) {
+        const element = this.comments[index];
+        if (element.id === parentComment) {
+          comment = element;
+          break;
+        }
+      }
+      this.commentFormTitle = 'Reply on comment ' + comment.infoCU.username;
+    } else {
+      this.commentFormTitle = 'My comment';
+    }
+    this.commentForms.changes.subscribe(comps => {
+      if (comps.length != 0) {
+        comps.first.nativeElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  }
+
+  submitComment() {
+    this.movieService.postComment({
+      movieId: Number(this.route.snapshot.paramMap.get('id')),
+      reviewBody: this.commentForms.first.nativeElement.value,
+      parentReviewId: this.parentCommentId,
+      reviewId: this.editedReviewId
+    }).subscribe((data) => {
+      console.log(this.commentForms.first.nativeElement.value);
+      if (this.editCommentMode) {
+        this.successMsg = 'Comment has been edited';
+        this.editCommentMode = false;
+      } else {
+        this.successMsg = 'Comment has been added';
+      }
+      this.showCommentForm = false;
+      this.reloadComments();
+    },
+      error => {
+        this.error = error.message;
+        this.loading = false;
+      });
+  }
+
+  onDeleteReviewClick(reviewId: number) {
+    this.movieService.deleteComment(reviewId).subscribe(() => {
+      this.reloadComments();
+    });
+  }
+
+  onEditReviewClick(review: any) {
+    console.log(review);
+    this.commentFormTitle = 'Edit comment';
+    this.showCommentForm = true;
+    this.editCommentMode = true;
+    this.commentForms.changes.subscribe(() => {
+      if (this.editCommentMode) {
+        this.commentForms.first.nativeElement.value = review.statement;
+        this.editedReviewId = review.id;
+      }
+    });
+  }
+
+  likeComment(commentId: string) {
+    this.movieService.likeComment(commentId)
+      .subscribe(response => {
+        this.reloadComments();
+      });
+  }
+
+  onHighlightComment(commentId: number) {
+    this.movieService.highlightComment(commentId)
+      .subscribe(response => {
+        this.reloadComments();
+      });
   }
 }
