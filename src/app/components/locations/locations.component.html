@@ -39,16 +39,19 @@
   <div class="col-8">
     <app-map [cinema]="wybor"></app-map>
   <br>
-      <div *ngIf="wybor !== undefined">
-        <div class="row">
-          <div class="star-rating">
-            <!-- The '|| 0' would prevent an undefined or null value on the Rating property -->
-            <div class="full-star2" [ngStyle]="{'width': wybor.rating * 10 + '%'}"></div>
-            <div class="empty-star"></div>
-          </div>
-          <button class="btn btn-dark" (click)="onAddRateClick()">Rate now!</button>
-        </div>
-        <div style="padding-left: 110px">
+
+
+  <div *ngIf="wybor !== undefined">
+    <div class="row">
+      <p class="title">{{wybor.name}}</p>
+      <div class="star-rating">
+        <!-- The '|| 0' would prevent an undefined or null value on the Rating property -->
+        <div class="full-star2" [ngStyle]="{'width': wybor.rating * 10 + '%'}"></div>
+        <div class="empty-star"></div>
+      </div>
+      <button class="btn btn-dark" (click)="onAddRateClick()">Rate now!</button>
+    </div>
+    <div style="padding-left: 110px">
       <div id=rate-container *ngIf="showRateForm" style="margin-bottom: 30px; margin-left: -125px; margin-top: 20px; padding-top: 10px">
 
         <div style="text-align: left; margin-bottom: -10px;"><p>My rate</p></div>
@@ -64,12 +67,15 @@
         <span (click)="submitRate(9)" class="rate-button"> 9 </span>
         <span (click)="submitRate(10)" class="rate-button"> 10 </span>
 
-          <div class="row">
-            <div class="col-sm">
-              <a (click)="showRateForm = false" class="review-button row float-right">Close</a>
-            </div>
+        <div class="row">
+          <div class="col-sm">
+            <a (click)="showRateForm = false" class="review-button row float-right">Close</a>
           </div>
+        </div>
       </div>
     </div>
+
+
+
   </div>
 </div>
