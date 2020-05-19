@@ -13,7 +13,7 @@ export class MapComponent implements OnInit {
 
   @Input('cinema')
   set cinema(cinema: CinemaInterface) {
-    if (cinema != undefined) {
+    if (cinema != undefined && (this._cinema == null || cinema.id !== this._cinema.id)) {
       this._cinema = cinema;
       if (cinema.name === 'Białystok Helios Alfa') {
         this.setCenter(53.1252582, 23.1685194);
