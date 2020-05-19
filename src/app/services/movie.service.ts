@@ -79,6 +79,11 @@ export class MovieService {
     return this.httpClient.get<any>(url, { withCredentials: true }).pipe();
   }
 
+  getAllComments(): Observable<any> {
+    const url = 'http://localhost:8200/reviews/userReviewAll/';
+    return this.httpClient.get<any>(url, { withCredentials: true }).pipe();
+  }
+
   likeComment(commentId: string): Observable<any> {
     const url = 'http://localhost:8200/reviews/userReview/' + commentId + '/like';
     return this.httpClient.put<any>(url, {}, { withCredentials: true }).pipe();
