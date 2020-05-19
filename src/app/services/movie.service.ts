@@ -116,11 +116,11 @@ export class MovieService {
   
   getPerson(id: number): Observable<Person> {
     let url = "http://localhost:8200/person/get/" + id;
-    return this.httpClient.get<Person>(url).pipe();
+    return this.httpClient.get<Person>(url, {withCredentials: true}).pipe();
   }
 
   getPersonCredits(id: number): Observable<any> {
     let url = "http://localhost:8200/person/get/" + id+ "/credits";
-    return this.httpClient.get<any>(url).pipe();
+    return this.httpClient.get<any>(url, {withCredentials: true}).pipe();
   }
 }
