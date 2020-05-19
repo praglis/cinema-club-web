@@ -6,6 +6,8 @@ export interface CinemaInterface {
   phoneNo: string;
   additionalPhoneNos: string;
   address: Address;
+  rating: number;
+  numberOfVotes: number;
 }
 
 export interface Address {
