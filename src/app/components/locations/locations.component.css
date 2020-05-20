@@ -12,9 +12,9 @@
 
 .rate-button {
   font-size: 30px;
-    margin-right: 5px;
-    margin-left: 5px;
-    cursor: pointer
+  margin-right: 5px;
+  margin-left: 5px;
+  cursor: pointer
 }
 .rate-button:hover{
     text-shadow: 0 0 15px white;
@@ -55,4 +55,13 @@
   display: block;
   margin-left: 20px;
   margin-right: 20px;
+}
+
+#table-wrapper {
+  position:relative;
+}
+#table-scroll {
+  height:53vh;
+  overflow:auto;
+  margin-top:20px;
 }

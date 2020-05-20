@@ -39,9 +39,9 @@ export class CinemaService {
       .pipe();
   }
 
-  // getPremieres(cinemaId: string): Observable<any> {
-  //   const url = 'http://localhost:8200/' + cinemaId + '/premiers';
-  //   return this.httpClient.get<any>(url)
-  //     .pipe();
-  // }
+  getPremieres(cinemaId: number): Observable<any> {
+    const url = 'http://localhost:8200/cinema/' + cinemaId + '/premiers';
+    return this.httpClient.get<any>(url)
+      .pipe();
+  }
 }

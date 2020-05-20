@@ -2,6 +2,8 @@ import { Component, DoCheck, OnInit, ViewChildren } from '@angular/core';
 import { CinemaService } from '../../services/cinema.service';
 import { CinemaInterface } from 'src/app/interfaces/cinema.interface';
 import { ActivatedRoute } from '@angular/router';
+import {MovieDetails} from '../../interfaces/moviedetails.interface';
+import {MovieService} from '../../services/movie.service';
 
 @Component({
   selector: 'app-locations',
@@ -15,6 +17,7 @@ export class LocationsComponent implements OnInit, DoCheck {
   constructor(
     private activatedRoute: ActivatedRoute,
     private cinemaService: CinemaService,
+    private movieService: MovieService,
   ) { }
   newQuery: string;
   query: string;
@@ -25,7 +28,8 @@ export class LocationsComponent implements OnInit, DoCheck {
   success_msg: string;
   error: string;
   orderBy: string;
-
+  premieres: any = [];
+  posters: any = [];
 
   ngOnInit() {
     this.query = '';
@@ -62,6 +66,18 @@ export class LocationsComponent implements OnInit, DoCheck {
 
   wybierz(wybor: CinemaInterface) {
     this.wybor = wybor;
+    this.cinemaService.getPremieres(this.wybor.id).subscribe((object) => {
+      this.premieres = object;
+    });
+    this.posters = new Array(this.premieres.length);
+    for (let i = 0; i < this.premieres.length; i++) {
+      console.log('1234');
+
+      this.movieService.getMovie(this.premieres[i].movie.id).subscribe((jsonObject: MovieDetails) => {
+        this.posters[i] = (jsonObject as MovieDetails).poster_path;
+      });
+      console.log(this.premieres[i].movie.title + ' ' + this.posters[i]);
+    }
   }
 
   saveSearchQuery() {

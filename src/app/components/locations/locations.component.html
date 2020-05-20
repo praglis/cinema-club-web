@@ -17,19 +17,24 @@
     </li>
 
     <ng-container *ngIf="cinemas != undefined">
-      <div *ngIf="cinemas.length !== 0" class="movies">
-        <table class="table table-striped text-white">
-          <tr *ngFor="let cinema of cinemas">
-            <td>
-              <p style="color: brown; cursor: pointer" (click)="wybierz(cinema)">{{cinema.name}}</p>
+      <div id="table-wrapper">
+        <div id="table-scroll">
+          <div *ngIf="cinemas.length !== 0" class="movies">
+            <table class="table table-striped text-white">
+              <tr *ngFor="let cinema of cinemas">
+                <td>
+                  <p style="color: brown; cursor: pointer" (click)="wybierz(cinema)">{{cinema.name}}</p>
 
-              <p style="cursor: default" align="justify">
-                {{cinema.address.city}}, {{cinema.address.streetName}} {{cinema.address.houseNumber}}
-              </p>
-            </td>
-          </tr>
-        </table>
+                  <p style="cursor: default" align="justify">
+                    {{cinema.address.city}}, {{cinema.address.streetName}} {{cinema.address.houseNumber}}
+                  </p>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
       </div>
+
 
       <div *ngIf="cinemas.length  === 0">
         <h1>No results found</h1>
@@ -38,44 +43,49 @@
   </div>
   <div class="col-8">
     <app-map [cinema]="wybor"></app-map>
-  <br>
+  </div>
+</div>
 
+<div *ngIf="wybor !== undefined">
 
-  <div *ngIf="wybor !== undefined">
-    <div class="row">
-      <p class="title">{{wybor.name}}</p>
-      <div class="star-rating">
-        <!-- The '|| 0' would prevent an undefined or null value on the Rating property -->
-        <div class="full-star2" [ngStyle]="{'width': wybor.rating * 10 + '%'}"></div>
-        <div class="empty-star"></div>
-      </div>
-      <button class="btn btn-dark" (click)="onAddRateClick()">Rate now!</button>
+  <div  class="row" style="padding-top: 50px; padding-left: 30px">
+    <p class="title">{{wybor.name}}</p>
+    <div class="star-rating">
+      <div class="full-star2" [ngStyle]="{'width': wybor.rating * 10 + '%'}"></div>
+      <div class="empty-star"></div>
     </div>
-    <div style="padding-left: 110px">
-      <div id=rate-container *ngIf="showRateForm" style="margin-bottom: 30px; margin-left: -125px; margin-top: 20px; padding-top: 10px">
+    <button class="btn btn-dark" (click)="onAddRateClick()">Rate now!</button>
+  </div>
+  <div class="row" style="padding-left: 50px">
+    <div id=rate-container *ngIf="showRateForm" >
 
-        <div style="text-align: left; margin-bottom: -10px;"><p>My rate</p></div>
+      <div style="text-align: left; margin-bottom: -10px;"><p>My rate</p></div>
 
-        <span (click)="submitRate(1)" class="rate-button"> 1 </span>
-        <span (click)="submitRate(2)" class="rate-button"> 2 </span>
-        <span (click)="submitRate(3)" class="rate-button"> 3 </span>
-        <span (click)="submitRate(4)" class="rate-button"> 4 </span>
-        <span (click)="submitRate(5)" class="rate-button"> 5 </span>
-        <span (click)="submitRate(6)" class="rate-button"> 6 </span>
-        <span (click)="submitRate(7)" class="rate-button"> 7 </span>
-        <span (click)="submitRate(8)" class="rate-button"> 8 </span>
-        <span (click)="submitRate(9)" class="rate-button"> 9 </span>
-        <span (click)="submitRate(10)" class="rate-button"> 10 </span>
+      <span (click)="submitRate(1)" class="rate-button"> 1 </span>
+      <span (click)="submitRate(2)" class="rate-button"> 2 </span>
+      <span (click)="submitRate(3)" class="rate-button"> 3 </span>
+      <span (click)="submitRate(4)" class="rate-button"> 4 </span>
+      <span (click)="submitRate(5)" class="rate-button"> 5 </span>
+      <span (click)="submitRate(6)" class="rate-button"> 6 </span>
+      <span (click)="submitRate(7)" class="rate-button"> 7 </span>
+      <span (click)="submitRate(8)" class="rate-button"> 8 </span>
+      <span (click)="submitRate(9)" class="rate-button"> 9 </span>
+      <span (click)="submitRate(10)" class="rate-button"> 10 </span>
 
-        <div class="row">
-          <div class="col-sm">
-            <a (click)="showRateForm = false" class="review-button row float-right">Close</a>
-          </div>
+      <div class="row">
+        <div class="col-sm">
+          <a (click)="showRateForm = false" class="review-button row float-right">Close</a>
         </div>
       </div>
     </div>
+  </div>
 
-
+  <div *ngIf="premieres != undefined" class="row" style="padding-left: 50px">
+    <div *ngFor="let prem of premieres; index as i"> {{prem.movie.title}} {{posters[i]}} </div>
 
   </div>
 </div>
+
+
+
+
