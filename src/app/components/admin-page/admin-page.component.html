@@ -1,56 +1,56 @@
 <div id="admin-page">
   <div class="container">
     <h1 class="text-center pt-5 promotion-title">Admin page</h1>
-    <div id="admin-page-rows" >
-      <div id="admin-page-row" class="row justify-content-center align-items-center" >
-          <form  id="ban-form"  class="form"(ngSubmit)="onSubmitBanUser($event)">
-            <div class="keyword-wrapper">
-              <input type="text"  list="names1" [(ngModel)]="userModel" (change)="saveCode($event)">
-              <button class="btn btn-secondary">
-                Ban
-              </button>
-            </div>
-            <datalist id = "names1">
-              <option *ngFor="let user of usersList" [value]= "user" >{{user}}</option>
-            </datalist>
-          </form>
-      </div>
-      <div  id="admin-page-row2" class="row justify-content-center align-items-center">
-        <form  id="block-form"  class="form"(ngSubmit)="onSubmitBlockUser($event)">
+    <div id="admin-page-rows">
+      <div id="admin-page-row" class="row justify-content-center align-items-center">
+        <form id="ban-form" class="form" (ngSubmit)="onSubmitBanUser($event)">
           <div class="keyword-wrapper">
-            <input type="text"  list="names2" [(ngModel)]="userModel" (change)="saveCode($event)">
+            <input type="text" list="names1" [(ngModel)]="userModel" (change)="saveCode($event)">
+            <button class="btn btn-secondary">
+              Ban
+            </button>
+          </div>
+          <datalist id="names1">
+            <option *ngFor="let user of usersList" [value]="user">{{user}}</option>
+          </datalist>
+        </form>
+      </div>
+      <div id="admin-page-row2" class="row justify-content-center align-items-center">
+        <form id="block-form" class="form" (ngSubmit)="onSubmitBlockUser($event)">
+          <div class="keyword-wrapper">
+            <input type="text" list="names2" [(ngModel)]="userModel" (change)="saveCode($event)">
             <button class="btn btn-secondary">
               Block
             </button>
           </div>
-          <datalist id = "names2">
-            <option *ngFor="let user of usersList" [value]= "user" >{{user}}</option>
+          <datalist id="names2">
+            <option *ngFor="let user of usersList" [value]="user">{{user}}</option>
           </datalist>
         </form>
       </div>
-      <div  id="admin-page-row3" class="row justify-content-center align-items-center">
-        <form  id="active-form"  class="form"(ngSubmit)="onSubmitActiveUser($event)">
+      <div id="admin-page-row3" class="row justify-content-center align-items-center">
+        <form id="active-form" class="form" (ngSubmit)="onSubmitActiveUser($event)">
           <div class="keyword-wrapper">
-            <input type="text"  list="names3" [(ngModel)]="userModel" (change)="saveCode($event)">
+            <input type="text" list="names3" [(ngModel)]="userModel" (change)="saveCode($event)">
             <button class="btn btn-secondary">
               Active
             </button>
           </div>
-          <datalist id = "names3">
-            <option *ngFor="let user of usersList" [value]= "user" >{{user}}</option>
+          <datalist id="names3">
+            <option *ngFor="let user of usersList" [value]="user">{{user}}</option>
           </datalist>
         </form>
       </div>
-      <div  id="admin-page-row4" class="row justify-content-center align-items-center">
-        <form  id="delete-form"  class="form"(ngSubmit)="onSubmitDeleteUser($event)">
+      <div id="admin-page-row4" class="row justify-content-center align-items-center">
+        <form id="delete-form" class="form" (ngSubmit)="onSubmitDeleteUser($event)">
           <div class="keyword-wrapper">
-            <input type="text"  list="names4" [(ngModel)]="userModel" (change)="saveCode($event)">
+            <input type="text" list="names4" [(ngModel)]="userModel" (change)="saveCode($event)">
             <button class="btn btn-secondary">
               Delete
             </button>
           </div>
-          <datalist id = "names4">
-            <option *ngFor="let user of usersList" [value]= "user" >{{user}}</option>
+          <datalist id="names4">
+            <option *ngFor="let user of usersList" [value]="user">{{user}}</option>
           </datalist>
         </form>
       </div>
