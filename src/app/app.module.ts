@@ -39,6 +39,7 @@ import { UserReportComponent } from './components/user-report/user-report.compon
 import { PlanToWatchMoviesComponent } from './components/plan-to-watch-movies/plan-to-watch-movies.component';
 import { DiscoverMoviesComponent } from './components/discover-movies/discover-movies.component';
 import { CastComponent } from './components/cast/cast.component';
+import { QuetionaireComponent } from './components/quetionaire/quetionaire.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { CastComponent } from './components/cast/cast.component';
     UserReportComponent,
     PlanToWatchMoviesComponent,
     DiscoverMoviesComponent,
-    CastComponent
+    CastComponent,
+    QuetionaireComponent
   ],
   imports: [
     FormsModule,

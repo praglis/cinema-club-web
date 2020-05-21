@@ -56,6 +56,6 @@ export class ResetPasswordComponent implements OnInit {
   convertToResetPasswordValues(values) {
     return {
       username: values.username,
-    }
+    };
   }
 }

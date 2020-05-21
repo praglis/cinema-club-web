@@ -87,6 +87,9 @@
         <li class="nav-item">
           <a (click)="resetPassword()" class="nav-link"><i class="fa fa-key fa-2x"></i><br />Reset Password</a>
         </li>
+        <li class="nav-item" *ngIf="!editedProfile.hasQuestionnaire">
+          <a [routerLink]="['/questionaire']" class="nav-link"><i class="fas fa-grin-hearts fa-2x"></i><br />Complete the preferential survey</a>
+        </li>
       </ul>
     </div>
   </div>
