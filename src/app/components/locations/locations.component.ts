@@ -1,4 +1,4 @@
-import { Component, DoCheck, OnInit } from '@angular/core';
+import { Component, DoCheck, OnInit, ViewChildren } from '@angular/core';
 import { CinemaService } from '../../services/cinema.service';
 import { CinemaInterface } from 'src/app/interfaces/cinema.interface';
 import { ActivatedRoute } from '@angular/router';
@@ -9,20 +9,29 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./locations.component.css']
 })
 export class LocationsComponent implements OnInit, DoCheck {
+  @ViewChildren('rateForm')
+  rateForms: any;
+
   constructor(
     private activatedRoute: ActivatedRoute,
-    private cinemaService: CinemaService
+    private cinemaService: CinemaService,
   ) { }
   newQuery: string;
   query: string;
   cinemas: CinemaInterface[];
   searchText: string;
   wybor: CinemaInterface;
+  showRateForm = false;
+  success_msg: string;
+  error: string;
+  orderBy: string;
+
 
   ngOnInit() {
     this.query = '';
     this.newQuery = '';
     this.activatedRoute.queryParams.subscribe(params => {
+      this.orderBy = params['orderBy'];
       this.smoothScrollToTop();
       this.getCinemasObserver(this.query).subscribe((jsonObject: CinemaInterface[]) => {
         this.cinemas = (jsonObject as CinemaInterface[]);
@@ -60,7 +69,7 @@ export class LocationsComponent implements OnInit, DoCheck {
   }
 
   private getCinemasObserver(query: string) {
-    return this.cinemaService.getCinema(this.prepareBasicCinemaQuery(query));
+    return this.cinemaService.getCinema(this.prepareBasicCinemaQuery(query), this.orderBy);
   }
 
   private prepareBasicCinemaQuery(query: string) {
@@ -74,4 +83,35 @@ export class LocationsComponent implements OnInit, DoCheck {
     };
   }
 
+  submitRate(rate: number) {
+    this.cinemaService.postRate(
+      this.wybor.id, { rate }).subscribe((data) => {
+        this.success_msg = 'Rate has been added';
+        this.showRateForm = false;
+        this.cinemaService.getCinemaById(this.wybor.id).subscribe((data: CinemaInterface) => {
+          let position = 0;
+          for (let index = 1; index < this.cinemas.length; index++) {
+            const element = this.cinemas[index];
+            if (element.id === data.id) {
+              position = index;
+              break;
+            }
+          }
+          this.wybor = data;
+          this.cinemas[position] = data;
+        })
+      },
+        error => {
+          this.error = error.message;
+        });
+  }
+
+  onAddRateClick() {
+    this.showRateForm = true;
+    this.rateForms.changes.subscribe(comps => {
+      if (comps.length != 0) {
+        comps.first.nativeElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  }
 }

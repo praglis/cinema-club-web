@@ -1,3 +1,5 @@
+<div *ngIf="error" class="alert alert-danger" style="cursor: pointer;" (click)="error = null">{{error}}</div>
+<div style="opacity: 0.8;cursor: pointer;" *ngIf="success_msg != undefined" class="alert alert-success" (click)="success_msg = null">{{success_msg}}</div>
 <div class="row" style="padding: 20px">
   <div class="col-4">
 
@@ -36,5 +38,38 @@
   </div>
   <div class="col-8">
     <app-map [cinema]="wybor"></app-map>
+  <br>
+      <div *ngIf="wybor !== undefined">
+        <div class="row">
+          <div class="star-rating">
+            <!-- The '|| 0' would prevent an undefined or null value on the Rating property -->
+            <div class="full-star2" [ngStyle]="{'width': wybor.rating * 10 + '%'}"></div>
+            <div class="empty-star"></div>
+          </div>
+          <button class="btn btn-dark" (click)="onAddRateClick()">Rate now!</button>
+        </div>
+        <div style="padding-left: 110px">
+      <div id=rate-container *ngIf="showRateForm" style="margin-bottom: 30px; margin-left: -125px; margin-top: 20px; padding-top: 10px">
+
+        <div style="text-align: left; margin-bottom: -10px;"><p>My rate</p></div>
+
+        <span (click)="submitRate(1)" class="rate-button"> 1 </span>
+        <span (click)="submitRate(2)" class="rate-button"> 2 </span>
+        <span (click)="submitRate(3)" class="rate-button"> 3 </span>
+        <span (click)="submitRate(4)" class="rate-button"> 4 </span>
+        <span (click)="submitRate(5)" class="rate-button"> 5 </span>
+        <span (click)="submitRate(6)" class="rate-button"> 6 </span>
+        <span (click)="submitRate(7)" class="rate-button"> 7 </span>
+        <span (click)="submitRate(8)" class="rate-button"> 8 </span>
+        <span (click)="submitRate(9)" class="rate-button"> 9 </span>
+        <span (click)="submitRate(10)" class="rate-button"> 10 </span>
+
+          <div class="row">
+            <div class="col-sm">
+              <a (click)="showRateForm = false" class="review-button row float-right">Close</a>
+            </div>
+          </div>
+      </div>
+    </div>
   </div>
 </div>

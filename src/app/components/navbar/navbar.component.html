@@ -17,7 +17,7 @@
           <a class="dropdown-item" href="#">Characters</a>
           <a [routerLink]="['/movies']" [queryParams]="{ type: 'popular' }" class="dropdown-item">Popular movies</a>
           <a [routerLink]="['/movies']" [queryParams]="{ type: 'best' }" class="dropdown-item">Best movies</a>
-          <a class="dropdown-item" href="#">Cinemas</a>
+          <a class="dropdown-item" [routerLink]="['/locations']" [queryParams]="{ orderBy: 'rating' }">Cinemas</a>
         </div>
       </li>
       <li class="nav-item">
