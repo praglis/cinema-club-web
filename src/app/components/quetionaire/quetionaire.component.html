@@ -1,0 +1,19 @@
+
+<h1 class="title">Select from the list the movies you like or would like to watch:</h1>
+<div class="container pt-5">
+  <div class="row justify-content-center align-items-end">
+    <ng-container *ngFor="let movie of movies; index as i;">
+      <div class="col-3 pb-3">
+        <a (click)="addMovie(movie)">
+          <img class="card-img-top movie" [src]="movie.poster_path" alt="Card image cap">
+        </a>
+        <p class="card-title cardTitle border-top ba 0 p-1">{{movie.title}}</p>
+      </div>
+    </ng-container>
+  </div>
+  <div class="row justify-content-center align-items-end">
+    <div class="col-4">
+      <button (click)="onDone()" type="button" class="btn doneButton btn-block">Done</button>
+    </div>
+  </div>
+</div>
