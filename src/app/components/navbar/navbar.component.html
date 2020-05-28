@@ -2,7 +2,7 @@
   <a class="navbar-brand nav-link" routerLink="/">Cinema Club</a>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
@@ -10,7 +10,7 @@
     <ul class="navbar-nav mr-auto w-100">
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
+           aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-film mr-2"></i>Ranking
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -38,12 +38,13 @@
         <div class="input-group">
 
           <input [(ngModel)]="query" (keyup.enter)="saveQuery()" (keyup.enter)="['/searchResult']"
-            class="form-control bg-transparent border-dark searchBox" (ngModelChange)="prepareHints()" type="search"
-            placeholder="Find the movie" [matAutocomplete]="auto" aria-label="Search">
+                 class="form-control bg-transparent border-dark searchBox" (ngModelChange)="prepareHints()"
+                 type="search"
+                 placeholder="Find the movie" [matAutocomplete]="auto" aria-label="Search">
 
           <mat-autocomplete #auto="matAutocomplete">
             <mat-option *ngFor="let movie of hintedMovies" routerLink="/movie/{{movie.id}}">
-              <img src="https://image.tmdb.org/t/p/w200/{{movie.poster_path}}" width="40" />
+              <img src="https://image.tmdb.org/t/p/w200/{{movie.poster_path}}" width="40"/>
               {{movie.original_title}}
               <i>{{movie.release_date|date:'yyyy'}}</i>
             </mat-option>
@@ -51,7 +52,8 @@
 
           <div class="input-group-append">
             <button (click)="saveQuery()" [routerLink]="['/searchResult']" [queryParams]="{ type: 'searchQuery' }"
-              class="btn btn-outline-dark btn-style"> <i class="fas fa-search fa-fw"></i> Search</button>
+                    class="btn btn-outline-dark btn-style"><i class="fas fa-search fa-fw"></i> Search
+            </button>
           </div>
 
         </div>
@@ -59,7 +61,7 @@
       <li [routerLink]="['/my_profile']" class="nav-item nav-link col-2">My Profile</li>
       <li class="nav-item dropdown user col">
         <a class="nav-link dropdown-toggle" href="#" id="logIn" role="button" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
+           aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-user-secret mr-2"></i>
         </a>
         <div class="dropdown-menu" aria-labelledby="logIn">

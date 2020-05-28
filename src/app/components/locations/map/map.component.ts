@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { CinemaInterface } from 'src/app/interfaces/cinema.interface';
+import {Component, Input, OnInit} from '@angular/core';
+import {CinemaInterface} from 'src/app/interfaces/cinema.interface';
+
 declare var ol: any;
 
 @Component({
@@ -10,6 +11,13 @@ declare var ol: any;
 export class MapComponent implements OnInit {
 
   private _cinema: CinemaInterface;
+
+  longitude = 19.134422;
+  latitude = 52.215933;
+  map: any;
+
+  constructor() {
+  }
 
   @Input('cinema')
   set cinema(cinema: CinemaInterface) {
@@ -64,13 +72,10 @@ export class MapComponent implements OnInit {
       }
     }
   }
-  get cinema(): CinemaInterface { return this._cinema; }
 
-  longitude = 19.134422;
-  latitude = 52.215933;
-  map: any;
-
-  constructor() { }
+  get cinema(): CinemaInterface {
+    return this._cinema;
+  }
 
   ngOnInit() {
     this.map = new ol.Map({
@@ -113,9 +118,10 @@ export class MapComponent implements OnInit {
     const view = this.map.getView();
     var location = ol.proj.fromLonLat([longitude, latitude]);
     var duration = 2000;
-    var zoom = 16;//view.getZoom();
+    var zoom = 16;
     var parts = 2;
     var called = false;
+
     function callback(complete) {
       --parts;
       if (called) {
@@ -123,9 +129,9 @@ export class MapComponent implements OnInit {
       }
       if (parts === 0 || !complete) {
         called = true;
-        // done(complete);
       }
     }
+
     view.animate({
       center: location,
       duration: duration
@@ -137,9 +143,6 @@ export class MapComponent implements OnInit {
       zoom: zoom,
       duration: duration / 2
     }, callback);
-
-    // view.setCenter(ol.proj.fromLonLat([longitude, latitude]));
-    // view.setZoom(16);
   }
 }
 

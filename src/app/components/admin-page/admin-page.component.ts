@@ -1,10 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Observable} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
-import {MovieService} from '../../services/movie.service';
 import {AdminService} from '../../services/admin.service';
-import {MoviesList} from '../../interfaces/movieslist.interface';
-import {FormControl} from '@angular/forms';
 import {UserService} from '../../services/user.service';
 
 @Component({
@@ -12,20 +8,19 @@ import {UserService} from '../../services/user.service';
   templateUrl: './admin-page.component.html',
   styleUrls: ['./admin-page.component.css']
 })
-
 export class AdminPageComponent implements OnInit {
-  usersList: string[] = [];
+
+  users: string[] = [];
   currentUser: string;
   public userModel: string;
 
   constructor(private activatedRoute: ActivatedRoute,
               private adminService: AdminService,
-              private userService: UserService){ }
+              private userService: UserService) {
+  }
 
   ngOnInit() {
-    this.getUserObserver().subscribe(response =>
-    this.usersList = response);
-
+    this.getUserObserver().subscribe(response => this.users = response);
   }
 
   onSubmitBanUser(event: any) {
@@ -68,7 +63,6 @@ export class AdminPageComponent implements OnInit {
   public saveCode(e): void {
     const name = e.target.value;
     this.currentUser = name;
-    const list = this.usersList.filter(x => x === name)[0];
+    const list = this.users.filter(x => x === name)[0];
   }
-
 }
