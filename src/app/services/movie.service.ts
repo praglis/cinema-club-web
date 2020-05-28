@@ -35,7 +35,7 @@ export class MovieService {
   }
 
   getBestMovies(page: number): Observable<MoviesList> {
-    let url = "http://localhost:8200/movies/best?page=" + page;
+    const url = "http://localhost:8200/movies/best?page=" + page;
     return this.httpClient.get<MoviesList>(url, {withCredentials: true})
       .pipe();
   }
@@ -69,62 +69,62 @@ export class MovieService {
   }
 
   postComment(userReview: UserReview): Observable<any> {
-    let url = "http://localhost:8200/reviews/userReview";
-    return this.httpClient.put<any>(url, userReview, {withCredentials: true}).pipe();
+    const url = 'http://localhost:8200/reviews/userReview';
+    return this.httpClient.put<any>(url, userReview, { withCredentials: true }).pipe();
   }
 
   deleteComment(reviewId: number): Observable<any> {
-    let url = "http://localhost:8200/reviews/userReview/" + reviewId + "/remove";
-    return this.httpClient.put<any>(url, null, {withCredentials: true}).pipe();
+    const url = 'http://localhost:8200/reviews/userReview/' + reviewId + '/remove';
+    return this.httpClient.put<any>(url, null, { withCredentials: true }).pipe();
   }
 
   getComments(movieId: string): Observable<any> {
-    let url = "http://localhost:8200/reviews/userReview/" + movieId;
-    return this.httpClient.get<any>(url, {withCredentials: true}).pipe();
+    const url = 'http://localhost:8200/reviews/userReview/' + movieId;
+    return this.httpClient.get<any>(url, { withCredentials: true }).pipe();
   }
 
   likeComment(commentId: string): Observable<any> {
-    let url = "http://localhost:8200/reviews/userReview/" + commentId + "/like";
-    return this.httpClient.put<any>(url, {}, {withCredentials: true}).pipe();
+    const url = 'http://localhost:8200/reviews/userReview/' + commentId + '/like';
+    return this.httpClient.put<any>(url, {}, { withCredentials: true }).pipe();
   }
 
   highlightComment(commentId: number): Observable<any> {
-    let url = "http://localhost:8200/admin/highlight/" + commentId;
-    return this.httpClient.put<any>(url, {}, {withCredentials: true}).pipe();
+    const url = 'http://localhost:8200/admin/highlight/' + commentId;
+    return this.httpClient.put<any>(url, {}, { withCredentials: true }).pipe();
   }
 
   getUserFavourites(userId: string): Observable<MoviesList> {
-    let url = "http://localhost:8200/user/favourites?user=" + userId;
+    const url = "http://localhost:8200/user/favourites?user=" + userId;
     return this.httpClient.get<MoviesList>(url, {withCredentials: true}).pipe();
   }
 
   getUserPlanToWatch(userId: string): Observable<MoviesList> {
-    let url = "http://localhost:8200/user/plantowatch?user=" + userId;
+    const url = "http://localhost:8200/user/plantowatch?user=" + userId;
     return this.httpClient.get<MoviesList>(url, {withCredentials: true}).pipe();
   }
 
   getMoviesByCriteria(criteria: MovieSearchCriteria): Observable<MoviesList> {
-    let url = "http://localhost:8200/movies/get";
+    const url = "http://localhost:8200/movies/get";
     return this.httpClient.post<MoviesList>(url, criteria, {withCredentials: true}).pipe();
   }
 
   postRate(id: number, rate: RateInterface): Observable<any> {
-    let url = "http://localhost:8200/movie/" + id + "/rate";
-    return this.httpClient.post<any>(url, rate, {withCredentials: true}).pipe();
+    const url = 'http://localhost:8200/movie/' + id + '/rate';
+    return this.httpClient.post<any>(url, rate, { withCredentials: true }).pipe();
   }
 
   getTrailerKey(movieId: string): Observable<Trailer> {
-    let url = "http://localhost:8200/movie/get/trailer?id=" + movieId;
+    const url = "http://localhost:8200/movie/get/trailer?id=" + movieId;
     return this.httpClient.get<Trailer>(url, {withCredentials: true}).pipe();
   }
 
   getPerson(id: number): Observable<Person> {
-    let url = "http://localhost:8200/person/get/" + id;
-    return this.httpClient.get<Person>(url).pipe();
+    const url = 'http://localhost:8200/person/get/' + id;
+    return this.httpClient.get<Person>(url, { withCredentials: true }).pipe();
   }
 
   getPersonCredits(id: number): Observable<Credit> {
-    let url = "http://localhost:8200/person/get/" + id + "/credits";
+    const url = "http://localhost:8200/person/get/" + id + "/credits";
     return this.httpClient.get<Credit>(url).pipe();
   }
 }
