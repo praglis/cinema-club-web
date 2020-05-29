@@ -1,8 +1,8 @@
-import { SingleMovieResult } from './singlemovie.interface';
+import {SingleMovieResult} from './singlemovie.interface';
 
 export interface MoviesList {
-    page: number; 
-    total_results: number;
-    total_pages: number;
-    results: SingleMovieResult[];
+  page: number;
+  total_results: number;
+  total_pages: number;
+  results: SingleMovieResult[];
 }

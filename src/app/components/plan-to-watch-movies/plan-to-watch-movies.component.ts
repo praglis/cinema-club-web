@@ -33,8 +33,8 @@ export class PlanToWatchMoviesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      this.userService.findLoggedUser().subscribe((user : User) => {
+    this.route.queryParams.subscribe(() => {
+      this.userService.findLoggedUser().subscribe((user: User) => {
         this.movieService.getUserPlanToWatch(user.id.toString())
           .subscribe((jsonObject: MoviesList) => {
             this.planToWatchMovies = (jsonObject as MoviesList).results;
@@ -44,12 +44,12 @@ export class PlanToWatchMoviesComponent implements OnInit {
     });
   }
 
-  onRemoveMovieFromList(movieTitle : string, movieUrl: string) {
+  onRemoveMovieFromList(movieTitle: string, movieUrl: string) {
     this.planToWatchService.removeUserPlanToWatch({
       "userId": this.userId,
       "movieTitle": movieTitle,
       "movieUrl": movieUrl
-    }).subscribe((response) => {
+    }).subscribe(() => {
       window.location.reload();
     })
   }

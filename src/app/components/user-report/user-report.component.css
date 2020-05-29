@@ -12,10 +12,11 @@ button {
   background-color: black;
   color: var(--theme-gold);
 }
-.button-container{
+
+.button-container {
   display: flex;
 }
 
-.cancel-button{
+.cancel-button {
   margin-left: auto;
 }

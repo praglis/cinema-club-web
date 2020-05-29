@@ -1,9 +1,9 @@
-import { Component, OnInit, Injectable, Input, OnDestroy, DoCheck } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { MovieService } from 'src/app/services/movie.service';
-import { SingleMovieResult } from 'src/app/interfaces/singlemovie.interface';
-import { MoviesList } from 'src/app/interfaces/movieslist.interface';
-import { FindMovieService } from 'src/app/services/find-movie.service';
+import {Component, OnInit, Injectable, DoCheck} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {MovieService} from 'src/app/services/movie.service';
+import {SingleMovieResult} from 'src/app/interfaces/singlemovie.interface';
+import {MoviesList} from 'src/app/interfaces/movieslist.interface';
+import {FindMovieService} from 'src/app/services/find-movie.service';
 
 @Component({
   selector: 'app-find-movie',
@@ -14,27 +14,26 @@ import { FindMovieService } from 'src/app/services/find-movie.service';
 @Injectable({
   providedIn: 'root'
 })
-
 export class FindMovieComponent implements OnInit, DoCheck {
 
   constructor(
     private router: Router,
     public findMovieService: FindMovieService,
     private activatedRoute: ActivatedRoute,
-    private movieService: MovieService) { }
+    private movieService: MovieService) {
+  }
 
   movies: SingleMovieResult[] = [];
   query: string;
 
   ngOnInit() {
     this.query = this.findMovieService.query;
-    this.activatedRoute.queryParams.subscribe(params => {
-      this.smoothScrollToTop();
-      this.getMoviesObserver(this.query).subscribe((jsonObject: MoviesList) => {
-        this.movies = (jsonObject as MoviesList).results;
-
-      });
-    }
+    this.activatedRoute.queryParams.subscribe(() => {
+        this.smoothScrollToTop();
+        this.getMoviesObserver(this.query).subscribe((jsonObject: MoviesList) => {
+          this.movies = (jsonObject as MoviesList).results;
+        });
+      }
     );
   }
 
@@ -51,7 +50,7 @@ export class FindMovieComponent implements OnInit, DoCheck {
     let scrollToTop = window.setInterval(() => {
       let pos = window.pageYOffset;
       if (pos > 0) {
-        window.scrollTo(0, pos - 200); // how far to scroll on each step
+        window.scrollTo(0, pos - 200); // How far to scroll on each step
       } else {
         window.clearInterval(scrollToTop);
       }

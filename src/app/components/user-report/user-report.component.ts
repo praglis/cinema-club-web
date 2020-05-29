@@ -1,5 +1,5 @@
-import { MatDialogModule, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Component, Inject } from '@angular/core';
+import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {Component, Inject} from '@angular/core';
 
 @Component({
   selector: 'app-user-report',
@@ -16,7 +16,7 @@ export class UserReportComponent {
 
   onClick(doSend): void {
     this.doSend = doSend;
-    this.dialogRef.close({ doSend: this.doSend, description: this.data });
+    this.dialogRef.close({doSend: this.doSend, description: this.data});
   }
 
 }

@@ -1,20 +1,18 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit, QueryList, ViewChildren } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { MovieService } from 'src/app/services/movie.service';
-import { MovieDetails } from '../../interfaces/moviedetails.interface';
-import { NYTResponse } from '../../interfaces/nytresponse.interface';
-import { NYTReview } from '../../interfaces/nyt.review.interface';
-import { GuardianResponse } from '../../interfaces/guardianresponse.interface';
-import { GuardianReview } from '../../interfaces/guardian.review.interface';
-import { UserService } from '../../services/user.service';
-import { User } from '../../interfaces/user.interface';
-import { FavouritesService } from '../../services/favourites.service';
-import { Favourites } from '../../interfaces/favourites.interface';
-import { PlanToWatchService } from '../../services/plantowatch.service';
-import { UserReportComponent } from '../user-report/user-report.component';
-import { ReportService } from 'src/app/services/report.service';
-import { MatDialog } from '@angular/material/dialog';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import {Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit, QueryList, ViewChildren} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {MovieService} from 'src/app/services/movie.service';
+import {MovieDetails} from '../../interfaces/moviedetails.interface';
+import {NYTReview} from '../../interfaces/nyt.review.interface';
+import {GuardianReview} from '../../interfaces/guardian.review.interface';
+import {UserService} from '../../services/user.service';
+import {User} from '../../interfaces/user.interface';
+import {FavouritesService} from '../../services/favourites.service';
+import {Favourites} from '../../interfaces/favourites.interface';
+import {PlanToWatchService} from '../../services/plantowatch.service';
+import {UserReportComponent} from '../user-report/user-report.component';
+import {ReportService} from 'src/app/services/report.service';
+import {MatDialog} from '@angular/material/dialog';
+import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 
 declare let Swiper: any;
 
@@ -37,10 +35,9 @@ export class MovieComponent implements OnInit, AfterViewInit {
 
   // Comments swiper
   @ViewChildren('commentsChildren') commentsChildren: QueryList<any>;
-  @ViewChild('commentsSwiperContainer', { static: true }) commentsSwiperContainer: ElementRef;
-  @ViewChild('commentsSwiperButtonNext', { static: true }) commentsSwiperButtonNext: ElementRef;
-  @ViewChild('commentsSwiperButtonPrev', { static: true }) commentsSwiperButtonPrev: ElementRef;
-
+  @ViewChild('commentsSwiperContainer', {static: true}) commentsSwiperContainer: ElementRef;
+  @ViewChild('commentsSwiperButtonNext', {static: true}) commentsSwiperButtonNext: ElementRef;
+  @ViewChild('commentsSwiperButtonPrev', {static: true}) commentsSwiperButtonPrev: ElementRef;
 
   showRateForm = false;
   successMsg: string;
@@ -72,15 +69,12 @@ export class MovieComponent implements OnInit, AfterViewInit {
     private reportService: ReportService,
     private dialog: MatDialog,
     private planToWatchService: PlanToWatchService,
-    // tslint:disable-next-line:variable-name
     private _sanitizer: DomSanitizer
   ) {
-
     this.movieService.getTrailerKey(String(this.route.snapshot.paramMap.get('id'))).subscribe((key) => {
-
-      this.trailerKey = 'https://www.youtube.com/embed/' + key.key;
-      this.safeURL = this._sanitizer.bypassSecurityTrustResourceUrl(this.trailerKey);
-    }
+        this.trailerKey = 'https://www.youtube.com/embed/' + key.key;
+        this.safeURL = this._sanitizer.bypassSecurityTrustResourceUrl(this.trailerKey);
+      }
     );
   }
 
@@ -136,7 +130,9 @@ export class MovieComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.commentsSwiper = this.initCommentsSwiper();
-    this.commentsChildren.changes.subscribe(t => { this.commentsSwiper.update(); });
+    this.commentsChildren.changes.subscribe(t => {
+      this.commentsSwiper.update();
+    });
   }
 
   private initCommentsSwiper() {
@@ -144,7 +140,6 @@ export class MovieComponent implements OnInit, AfterViewInit {
       slidesPerView: 'auto',
       spaceBetween: 30,
       slidesPerGroup: 2,
-      // loop: true,
       loopFillGroupWithBlank: true,
       navigation: {
         nextEl: this.commentsSwiperButtonNext.nativeElement,
@@ -158,7 +153,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
     this.showRateForm = true;
     this.rateForms.changes.subscribe(comps => {
       if (comps.length != 0) {
-        comps.first.nativeElement.scrollIntoView({ behavior: 'smooth' });
+        comps.first.nativeElement.scrollIntoView({behavior: 'smooth'});
       }
     });
   }
@@ -206,7 +201,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
   submitRate(rate: number) {
     this.movieService.postRate(
       Number(this.route.snapshot.paramMap.get('id')),
-      { rate }).subscribe((data) => {
+      {rate}).subscribe((data) => {
         this.successMsg = 'Rate has been added';
         this.showRateForm = false;
         const id = +this.route.snapshot.paramMap.get('id');
@@ -215,10 +210,10 @@ export class MovieComponent implements OnInit, AfterViewInit {
         });
         this.reloadComments();
       },
-        error => {
-          this.error = error.message;
-          this.loading = false;
-        });
+      error => {
+        this.error = error.message;
+        this.loading = false;
+      });
   }
 
   reportUser(commentId: string) {
@@ -228,8 +223,9 @@ export class MovieComponent implements OnInit, AfterViewInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      // tslint:disable-next-line: triple-equals
-      if (result.doSend == true) { this.reportService.reportUser(this.prepareUserReport(commentId, result.description)); }
+      if (result.doSend == true) {
+        this.reportService.reportUser(this.prepareUserReport(commentId, result.description));
+      }
     });
   }
 
@@ -240,8 +236,6 @@ export class MovieComponent implements OnInit, AfterViewInit {
       reportReason: reason
     };
   }
-
-  // Może zrobić z komentarzy/usersReview oddzielny moduł? Dużo kodu
 
   reloadComments() {
     this.movieService.getComments(this.route.snapshot.paramMap.get('id')).subscribe((object) => {
@@ -270,7 +264,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
     }
     this.commentForms.changes.subscribe(comps => {
       if (comps.length != 0) {
-        comps.first.nativeElement.scrollIntoView({ behavior: 'smooth' });
+        comps.first.nativeElement.scrollIntoView({behavior: 'smooth'});
       }
     });
   }
@@ -303,17 +297,17 @@ export class MovieComponent implements OnInit, AfterViewInit {
       reviewBody: this.commentForms.first.nativeElement.value,
       parentReviewId: this.parentCommentId,
       reviewId: this.editedReviewId
-    }).subscribe((data) => {
-      console.log(this.commentForms.first.nativeElement.value);
-      if (this.editCommentMode) {
-        this.successMsg = 'Comment has been edited';
-        this.editCommentMode = false;
-      } else {
-        this.successMsg = 'Comment has been added';
-      }
-      this.showCommentForm = false;
-      this.reloadComments();
-    },
+    }).subscribe(() => {
+        console.log(this.commentForms.first.nativeElement.value);
+        if (this.editCommentMode) {
+          this.successMsg = 'Comment has been edited';
+          this.editCommentMode = false;
+        } else {
+          this.successMsg = 'Comment has been added';
+        }
+        this.showCommentForm = false;
+        this.reloadComments();
+      },
       error => {
         this.error = error.message;
         this.loading = false;
@@ -335,7 +329,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
 
   onHighlightComment(commentId: number) {
     this.movieService.highlightComment(commentId)
-      .subscribe(response => {
+      .subscribe(() => {
         this.reloadComments();
       });
   }
