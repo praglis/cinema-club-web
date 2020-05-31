@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AuthenticationService } from 'src/app/services/authentication.service';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {AuthenticationService} from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-verification',
@@ -15,7 +15,8 @@ export class VerificationComponent implements OnInit {
     private route: ActivatedRoute,
     private authenticationService: AuthenticationService,
     private router: Router,
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     let token = this.route.snapshot.queryParams['token'];
@@ -25,7 +26,7 @@ export class VerificationComponent implements OnInit {
       return;
     }
     this.authenticationService.activeAccount(token, username)
-      .subscribe(data => {
+      .subscribe(() => {
         this.router.navigate(['/login']);
       }, error => {
         this.error = error.message;

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MovieService} from "../../services/movie.service";
 import {UserService} from "../../services/user.service";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -33,8 +33,8 @@ export class FavouriteMoviesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      this.userService.findLoggedUser().subscribe((user : User) => {
+    this.route.queryParams.subscribe(() => {
+      this.userService.findLoggedUser().subscribe((user: User) => {
         this.movieService.getUserFavourites(user.id.toString())
           .subscribe((jsonObject: MoviesList) => {
             this.favouriteMovies = (jsonObject as MoviesList).results;
@@ -44,12 +44,12 @@ export class FavouriteMoviesComponent implements OnInit {
     });
   }
 
-  onRemoveMovieFromFavourites(movieTitle : string, movieUrl: string) {
+  onRemoveMovieFromFavourites(movieTitle: string, movieUrl: string) {
     this.favouriteService.removeUserFavourite({
       "userId": this.userId,
       "movieTitle": movieTitle,
       "movieUrl": movieUrl
-    }).subscribe((response) => {
+    }).subscribe(() => {
       window.location.reload();
     })
   }

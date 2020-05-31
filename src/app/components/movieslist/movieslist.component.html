@@ -1,50 +1,56 @@
 <div class="movies">
-    <nav aria-label="movies-pagination">
-        <ul class="pagination justify-content-center">
-            <li class="page-item " [class.disabled]="actualPage == 1">
-                <a [routerLink]="['/movies']" [queryParams]="{ page: prevPage }" tabindex="-1" aria-disabled="true" class="page-link" queryParamsHandling="merge">Previous</a>
-            </li>
+  <nav aria-label="movies-pagination">
+    <ul class="pagination justify-content-center">
+      <li class="page-item " [class.disabled]="actualPage == 1">
+        <a [routerLink]="['/movies']" [queryParams]="{ page: prevPage }" tabindex="-1" aria-disabled="true"
+           class="page-link" queryParamsHandling="merge">Previous</a>
+      </li>
 
-            <ng-container *ngFor="let index of indices">
-                <li class="page-item" [class.active]="actualPage == index">
-                    <a class="page-link" [routerLink]="['/movies']" [queryParams]="{ page: index }" class="page-link" queryParamsHandling="merge">{{index}}</a>
-                </li>
-            </ng-container>
+      <ng-container *ngFor="let index of indices">
+        <li class="page-item" [class.active]="actualPage == index">
+          <a class="page-link" [routerLink]="['/movies']" [queryParams]="{ page: index }"
+             queryParamsHandling="merge">{{index}}</a>
+        </li>
+      </ng-container>
 
-            <li class="page-item" [class.disabled]="actualPage == lastPage">
-                <a [routerLink]="['/movies']" [queryParams]="{ page: nextPage }" class="page-link" queryParamsHandling="merge">Next</a>
-            </li>
-        </ul>
-    </nav>
+      <li class="page-item" [class.disabled]="actualPage == lastPage">
+        <a [routerLink]="['/movies']" [queryParams]="{ page: nextPage }" class="page-link" queryParamsHandling="merge">Next</a>
+      </li>
+    </ul>
+  </nav>
 
-    <table class="table table-striped text-white">
-        <tr *ngFor="let movie of movies">
-            <td><a routerLink="/movie/{{movie.id}}"><img src="https://image.tmdb.org/t/p/w200/{{movie.poster_path}}"/></a></td>
-            <td>
-                <p class="font-weight-bold"><a class="title-link" routerLink="/movie/{{movie.id}}">{{movie.title}}</a> ({{movie.vote_average}} / 10.0)</p>
+  <table class="table table-striped text-white">
+    <tr *ngFor="let movie of movies">
+      <td><a routerLink="/movie/{{movie.id}}"><img src="https://image.tmdb.org/t/p/w200/{{movie.poster_path}}" alt="poster"/></a>
+      </td>
+      <td>
+        <p class="font-weight-bold"><a class="title-link" routerLink="/movie/{{movie.id}}">{{movie.title}}</a>
+          ({{movie.vote_average}} / 10.0)</p>
 
-                <p align="justify">
-                    {{movie.overview}}
-                </p>
-            </td>
-        </tr>
-    </table>
+        <p class="text-justify">
+          {{movie.overview}}
+        </p>
+      </td>
+    </tr>
+  </table>
 
-    <nav aria-label="movies-pagination">
-        <ul class="pagination justify-content-center">
-            <li class="page-item" [class.disabled]="actualPage == 1">
-                <a [routerLink]="['/movies']" [queryParams]="{ page: prevPage }" tabindex="-1" aria-disabled="true" class="page-link" queryParamsHandling="merge">Previous</a>
-            </li>
-    
-            <ng-container *ngFor="let index of indices">
-                <li class="page-item" [class.active]="actualPage == index">
-                    <a class="page-link" [routerLink]="['/movies']" [queryParams]="{ page: index }" class="page-link" queryParamsHandling="merge">{{index}}</a>
-                </li>
-            </ng-container>
+  <nav aria-label="movies-pagination">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" [class.disabled]="actualPage == 1">
+        <a [routerLink]="['/movies']" [queryParams]="{ page: prevPage }" tabindex="-1" aria-disabled="true"
+           class="page-link" queryParamsHandling="merge">Previous</a>
+      </li>
 
-                <li class="page-item" [class.disabled]="actualPage == lastPage">
-                    <a [routerLink]="['/movies']" [queryParams]="{ page: nextPage }" class="page-link" queryParamsHandling="merge">Next</a>
-                </li>
-            </ul>
-    </nav>
+      <ng-container *ngFor="let index of indices">
+        <li class="page-item" [class.active]="actualPage == index">
+          <a class="page-link" [routerLink]="['/movies']" [queryParams]="{ page: index }"
+             queryParamsHandling="merge">{{index}}</a>
+        </li>
+      </ng-container>
+
+      <li class="page-item" [class.disabled]="actualPage == lastPage">
+        <a [routerLink]="['/movies']" [queryParams]="{ page: nextPage }" class="page-link" queryParamsHandling="merge">Next</a>
+      </li>
+    </ul>
+  </nav>
 </div>

@@ -11,14 +11,17 @@
   margin: 30px auto;
   text-align: center;
 }
+
 .title-link {
   color: white;
   font-size: 20px;
 }
+
 .page-link {
 
   color: black;
 }
+
 .page-item.active .page-link {
   background-color: rgb(143, 70, 110);
   border-color: rgb(143, 70, 110);

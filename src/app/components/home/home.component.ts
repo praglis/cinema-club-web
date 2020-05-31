@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -8,13 +8,11 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
 
   public text: string;
-  constructor() { }
+
+  constructor() {
+  }
 
   ngOnInit() {
     this.text = 'home init test';
-  }
-
-  onCliked(text: string) {
-    alert(text);
   }
 }

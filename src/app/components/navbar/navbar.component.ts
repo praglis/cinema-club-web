@@ -1,13 +1,12 @@
-import { Component, OnInit, OnDestroy, DoCheck } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthenticationService } from 'src/app/services/authentication.service';
-import { FormGroup } from '@angular/forms';
-import { FindMovieService } from 'src/app/services/find-movie.service';
-import { UserService } from '../../services/user.service';
-import { User } from '../../interfaces/user.interface';
-import { MoviesList } from 'src/app/interfaces/movieslist.interface';
-import { SingleMovieResult } from 'src/app/interfaces/singlemovie.interface';
-import { MovieService } from 'src/app/services/movie.service';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {AuthenticationService} from 'src/app/services/authentication.service';
+import {FindMovieService} from 'src/app/services/find-movie.service';
+import {UserService} from '../../services/user.service';
+import {User} from '../../interfaces/user.interface';
+import {MoviesList} from 'src/app/interfaces/movieslist.interface';
+import {SingleMovieResult} from 'src/app/interfaces/singlemovie.interface';
+import {MovieService} from 'src/app/services/movie.service';
 
 @Component({
   selector: 'app-navbar',
@@ -18,7 +17,6 @@ export class NavbarComponent implements OnInit {
   query: string;
   currentUser: any;
   currentUserID: number;
-  navForm: FormGroup;
   hintedMovies: SingleMovieResult[] = [];
 
   constructor(
@@ -42,8 +40,6 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  get navFormControls() { return this.navForm.controls; }
-
   saveQuery() {
     this.findMovieService.query = this.query;
   }
@@ -62,5 +58,4 @@ export class NavbarComponent implements OnInit {
   private getMoviesObserver(query: string) {
     return this.movieService.getMovieByQuery(query);
   }
-
 }

@@ -1,6 +1,5 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import {Component, OnInit} from '@angular/core';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-main-layout',
@@ -11,7 +10,9 @@ import { Observable } from 'rxjs';
 export class MainLayoutComponent implements OnInit {
 
   public movies: Observable<string[]>;
-  constructor() { }
+
+  constructor() {
+  }
 
   ngOnInit() {
   }
