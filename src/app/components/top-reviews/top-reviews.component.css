@@ -95,3 +95,11 @@ a:hover {
   cursor: pointer;
   text-shadow: 0 0 15px white;
 }
+
+.movie-poster {
+  background-color: white;
+  display: block;
+  margin: 0 auto;
+  width: 80px;
+  margin-top: 12px;
+}

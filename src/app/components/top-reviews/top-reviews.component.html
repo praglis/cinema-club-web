@@ -3,57 +3,64 @@
 
     <div class="comment-child"
          [ngStyle]="comment.highlighted?{'box-shadow': '5px 10px 18px yellow'} : {'box-shadow': '5px 10px 18px gray'}">
+      <div class="row">
+        <div class="col-1">
+          <img class="movie-poster" src="https://image.tmdb.org/t/p/w300/{{comment.movie.poster_path}}" alt="poster">
+        </div>
+        <div class="col">
 
-      <div class="comment-header">
-        <p style="color: dimgrey; padding-top: 10px">
-  <!--        <span class="badge">{{badgeName}} </span>-->
-          <strong class="text-grey">{{comment.infoCU.username}}</strong> wrote on day {{comment.infoCD | date}}
-        </p>
+          <div class="comment-header">
+            <p style="color: dimgrey; padding-top: 10px">
+      <!--        <span class="badge">{{badgeName}} </span>-->
+              <strong class="text-grey">{{comment.infoCU.username}}</strong> wrote about <strong>{{comment.movie.title}}</strong> on day {{comment.infoCD | date}}
+            </p>
 
-        <p class="first-comment-header-button">
-          <a (click)="onAddComment(comment.id)">
-                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Reply on comment">
-                  <i class="fas fa-reply"></i>
-                </span>
-          </a>
-        </p>
+            <p class="first-comment-header-button">
+              <a (click)="onAddComment(comment.id)">
+                    <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Reply on comment">
+                      <i class="fas fa-reply"></i>
+                    </span>
+              </a>
+            </p>
 
-        <ng-container *ngIf="comment.infoCU.id == userId">
-          <p class="next-comment-header-button">
-            <a (click)="onEditComment(comment)">
-                  <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Edit comment">
-                    <i class="fas fa-edit"></i>
-                  </span>
-            </a>
-          </p>
-          <p class="next-comment-header-button">
-            <a (click)="onDeleteComment(comment.id)">
-                  <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Delete comment">
-                    <i class="fas fa-trash"></i>
-                  </span>
-            </a>
-          </p>
-        </ng-container>
+            <ng-container *ngIf="comment.infoCU.id == userId">
+              <p class="next-comment-header-button">
+                <a (click)="onEditComment(comment)">
+                      <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Edit comment">
+                        <i class="fas fa-edit"></i>
+                      </span>
+                </a>
+              </p>
+              <p class="next-comment-header-button">
+                <a (click)="onDeleteComment(comment.id)">
+                      <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Delete comment">
+                        <i class="fas fa-trash"></i>
+                      </span>
+                </a>
+              </p>
+            </ng-container>
 
-        <ng-container *ngIf="this.isAdmin">
-          <p class="next-comment-header-button">
-            <a (click)="onHighlightComment(comment.id)">
-                  <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Highlight comment">
-                    <i class="fas fa-star"></i>
-                  </span>
-            </a>
-          </p>
-        </ng-container>
-      </div>
+            <ng-container *ngIf="this.isAdmin">
+              <p class="next-comment-header-button">
+                <a (click)="onHighlightComment(comment.id)">
+                      <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Highlight comment">
+                        <i class="fas fa-star"></i>
+                      </span>
+                </a>
+              </p>
+            </ng-container>
+          </div>
 
-      <p>{{comment.statement}}</p>
+          <p>{{comment.statement}}</p>
 
-      <div style="display: flex;">
-        <p style="font-size: 24px;">{{comment.likes}} <a (click)="likeComment(comment.id)"><i
-          class="far fa-thumbs-up"></i></a>
-        </p>
-        <p style="margin-left: auto;"><a style="color: dimgrey;" (click)="reportUser(comment.id)">report comment</a>
-        </p>
+          <div style="display: flex;">
+            <p style="font-size: 24px;">{{comment.likes}} <a (click)="likeComment(comment.id)"><i
+              class="far fa-thumbs-up"></i></a>
+            </p>
+            <p style="margin-left: auto;"><a style="color: dimgrey;" (click)="reportUser(comment.id)">report comment</a>
+            </p>
+          </div>
+        </div>
       </div>
     </div>
 

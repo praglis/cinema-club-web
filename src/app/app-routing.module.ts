@@ -22,6 +22,7 @@ import {PreferencesComponent} from './components/preferences/preferences.compone
 import {PlanToWatchMoviesComponent} from "./components/plan-to-watch-movies/plan-to-watch-movies.component";
 import {DiscoverMoviesComponent} from "./components/discover-movies/discover-movies.component";
 import {CastComponent} from './components/cast/cast.component';
+import {TopReviewsComponent} from './components/top-reviews/top-reviews.component';
 
 const routes: Routes = [
   {path: 'movies', component: MoviesListComponent},
@@ -58,7 +59,8 @@ const routes: Routes = [
   {path: 'movies/favourite', component: FavouriteMoviesComponent},
   {path: 'movies/plan-to-watch', component: PlanToWatchMoviesComponent},
   {path: 'movies/discover', component: DiscoverMoviesComponent},
-  {path: 'person/:id', component: CastComponent}
+  {path: 'person/:id', component: CastComponent},
+  {path: 'top-reviews', component: TopReviewsComponent}
 ];
 
 @NgModule({
