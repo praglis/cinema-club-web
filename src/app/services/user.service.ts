@@ -47,8 +47,8 @@ export class UserService {
     return this.httpClient.post<any>(url, '', {withCredentials: true}).pipe();
   }
 
-  getUserBadge(): Observable<Badge> {
-    const url = 'http://localhost:8200/badge';
+  getUserBadge(name: string): Observable<Badge> {
+    const url = 'http://localhost:8200/badge?userName=' + name;
     return this.httpClient.get<Badge>(url, {withCredentials: true}).pipe();
   }
 
