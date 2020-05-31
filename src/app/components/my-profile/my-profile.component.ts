@@ -41,12 +41,9 @@ export class MyProfileComponent implements OnInit {
     this.userService.findLoggedUser().subscribe((jsonObject: User) => {
       this.editedProfile = jsonObject as User;
       this.editedProfile.birthday = this.datePipe.transform(this.editedProfile.birthday, 'MM-dd-yyyy');
-    });
-
-    this.userService.getUserBadge().subscribe((data) => {
-      this.badgeName = data.name;
-      console.log(data);
-      console.log(' a ' + this.badgeName);
+      this.userService.getUserBadge(this.editedProfile.username).subscribe((data) => {
+        this.badgeName = data.name;
+      });
     });
     this.editMode = false;
   }

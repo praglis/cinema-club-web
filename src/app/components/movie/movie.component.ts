@@ -42,7 +42,6 @@ export class MovieComponent implements OnInit, AfterViewInit {
   showRateForm = false;
   successMsg: string;
   trailerKey: any;
-  badgeName: string;
   error: string;
   isMovieInFavourites: boolean;
   isMovieInPlanToWatch: boolean;
@@ -50,6 +49,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
   loading = false;
   allDataFetched = false;
   reportReason = '';
+  map: any;
   public safeURL: SafeResourceUrl;
   isAdmin: boolean;
 
@@ -79,6 +79,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    this.map = new Map();
     const id = +this.route.snapshot.paramMap.get('id');
     this.movieService.getMovie(id).subscribe((jsonObject: MovieDetails) => {
       this.movie = (jsonObject as MovieDetails);
@@ -119,9 +120,6 @@ export class MovieComponent implements OnInit, AfterViewInit {
         this.userService.isAdminUser().subscribe((obj: boolean) => {
           this.isAdmin = obj;
         });
-      });
-      this.userService.getUserBadge().subscribe((data) => {
-        this.badgeName = data.name;
       });
     });
 
@@ -240,7 +238,16 @@ export class MovieComponent implements OnInit, AfterViewInit {
   reloadComments() {
     this.movieService.getComments(this.route.snapshot.paramMap.get('id')).subscribe((object) => {
       this.comments = object;
+      for (let item of this.comments) {
+        this.userService.getUserBadge(item.infoCU.username).subscribe((data) => {
+          this.map.set(item.infoCU.username, data.name);
+        });
+      }
     });
+  }
+
+  getUserBadge(name: string) {
+    return this.map.get(name);
   }
 
   onAddComment(parentComment?: number) {
