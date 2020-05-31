@@ -68,16 +68,15 @@ export class LocationsComponent implements OnInit, DoCheck {
     this.wybor = wybor;
     this.cinemaService.getPremieres(this.wybor.id).subscribe((object) => {
       this.premieres = object;
+      // this.posters = new Array(this.premieres.length);
+      for (let i = 0; i < this.premieres.length; i++) {
+        this.movieService.getMovie(this.premieres[i].movie.id).subscribe((jsonObject: MovieDetails) => {
+          this.posters[i] = (jsonObject as MovieDetails).poster_path;
+          console.log(this.premieres[i].movie.title + ' ' + this.posters[i]);
+        });
+      }
     });
-    this.posters = new Array(this.premieres.length);
-    for (let i = 0; i < this.premieres.length; i++) {
-      console.log('1234');
 
-      this.movieService.getMovie(this.premieres[i].movie.id).subscribe((jsonObject: MovieDetails) => {
-        this.posters[i] = (jsonObject as MovieDetails).poster_path;
-      });
-      console.log(this.premieres[i].movie.title + ' ' + this.posters[i]);
-    }
   }
 
   saveSearchQuery() {
