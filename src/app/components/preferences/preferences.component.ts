@@ -1,6 +1,17 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit, AfterViewChecked, ContentChild, Directive, AfterContentChecked, QueryList, ViewChildren } from '@angular/core';
-import { UserService } from 'src/app/services/user.service';
-import { DomSanitizer } from '@angular/platform-browser';
+import {
+  Component,
+  OnInit,
+  Output,
+  EventEmitter,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
+  QueryList,
+  ViewChildren
+} from '@angular/core';
+import {UserService} from 'src/app/services/user.service';
+import {DomSanitizer} from '@angular/platform-browser';
+
 declare let Swiper: any;
 
 @Component({
@@ -11,27 +22,27 @@ declare let Swiper: any;
 export class PreferencesComponent implements OnInit, AfterViewInit {
 
   @ViewChildren('preferMoviesChildren') preferMoviesChildren: QueryList<any>;
-  @ViewChild('preferSwiperContainer', { static: true }) preferSwiperContainer: ElementRef;
-  @ViewChild('preferSwiperButtonNext', { static: true }) preferSwiperButtonNext: ElementRef;
-  @ViewChild('preferSwiperButtonPrev', { static: true }) preferSwiperButtonPrev: ElementRef;
+  @ViewChild('preferSwiperContainer', {static: true}) preferSwiperContainer: ElementRef;
+  @ViewChild('preferSwiperButtonNext', {static: true}) preferSwiperButtonNext: ElementRef;
+  @ViewChild('preferSwiperButtonPrev', {static: true}) preferSwiperButtonPrev: ElementRef;
 
   // Genres Movies Swiper
   @ViewChildren('genresMoviesChildren') genresMoviesChildren: QueryList<any>;
-  @ViewChild('genresSwiperContainer', { static: true }) genresSwiperContainer: ElementRef;
-  @ViewChild('genresSwiperButtonNext', { static: true }) genresSwiperButtonNext: ElementRef;
-  @ViewChild('genresSwiperButtonPrev', { static: true }) genresSwiperButtonPrev: ElementRef;
+  @ViewChild('genresSwiperContainer', {static: true}) genresSwiperContainer: ElementRef;
+  @ViewChild('genresSwiperButtonNext', {static: true}) genresSwiperButtonNext: ElementRef;
+  @ViewChild('genresSwiperButtonPrev', {static: true}) genresSwiperButtonPrev: ElementRef;
 
   // Casts Movies Swiper
   @ViewChildren('castsMoviesChildren') castsMoviesChildren: QueryList<any>;
-  @ViewChild('castsSwiperContainer', { static: true }) castsSwiperContainer: ElementRef;
-  @ViewChild('castsSwiperButtonNext', { static: true }) castsSwiperButtonNext: ElementRef;
-  @ViewChild('castsSwiperButtonPrev', { static: true }) castsSwiperButtonPrev: ElementRef;
+  @ViewChild('castsSwiperContainer', {static: true}) castsSwiperContainer: ElementRef;
+  @ViewChild('castsSwiperButtonNext', {static: true}) castsSwiperButtonNext: ElementRef;
+  @ViewChild('castsSwiperButtonPrev', {static: true}) castsSwiperButtonPrev: ElementRef;
 
   // Crews Movies Swiper
   @ViewChildren('crewsMoviesChildren') crewsMoviesChildren: QueryList<any>;
-  @ViewChild('crewsSwiperContainer', { static: true }) crewsSwiperContainer: ElementRef;
-  @ViewChild('crewsSwiperButtonNext', { static: true }) crewsSwiperButtonNext: ElementRef;
-  @ViewChild('crewsSwiperButtonPrev', { static: true }) crewsSwiperButtonPrev: ElementRef;
+  @ViewChild('crewsSwiperContainer', {static: true}) crewsSwiperContainer: ElementRef;
+  @ViewChild('crewsSwiperButtonNext', {static: true}) crewsSwiperButtonNext: ElementRef;
+  @ViewChild('crewsSwiperButtonPrev', {static: true}) crewsSwiperButtonPrev: ElementRef;
 
   @Output() clicked = new EventEmitter<string>();
 
@@ -48,35 +59,43 @@ export class PreferencesComponent implements OnInit, AfterViewInit {
   crewsMovies;
   crews: String[];
   preferMovies;
-  prefers: String[];
   loading: boolean;
 
   constructor(
     private userService: UserService,
     private santizator: DomSanitizer,
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.userService.getRecommendation("C", "1").subscribe(data => {
       this.genres = data.recommendation_values;
-      data.movies.results.forEach(element => { this.bypassSecurityForPoster(element); });
+      data.movies.results.forEach(element => {
+        this.bypassSecurityForPoster(element);
+      });
       this.genresMovies = data.movies.results;
       this.haveRecommendations = data.recommendations;
     });
     this.userService.getRecommendation("A", "1").subscribe(data => {
       this.crews = data.recommendation_values;
-      data.movies.results.forEach(element => { this.bypassSecurityForPoster(element); });
+      data.movies.results.forEach(element => {
+        this.bypassSecurityForPoster(element);
+      });
       this.crewsMovies = data.movies.results;
       this.haveRecommendations = data.recommendations;
     });
     this.userService.getRecommendation("D", "1").subscribe(data => {
       this.casts = data.recommendation_values;
-      data.movies.results.forEach(element => { this.bypassSecurityForPoster(element); });
+      data.movies.results.forEach(element => {
+        this.bypassSecurityForPoster(element);
+      });
       this.castsMovies = data.movies.results;
       this.haveRecommendations = data.recommendations;
     });
     this.userService.getRecommendation("S", "1").subscribe(data => {
-      data.movies.results.forEach(element => { this.bypassSecurityForPoster(element); });
+      data.movies.results.forEach(element => {
+        this.bypassSecurityForPoster(element);
+      });
       this.preferMovies = data.movies.results;
       this.haveRecommendations = data.recommendations;
     })
@@ -87,10 +106,18 @@ export class PreferencesComponent implements OnInit, AfterViewInit {
     this.castsMoviesSwiper = this.initCastsMoviesSwiper();
     this.crewsMoviesSwiper = this.initCrewsMoviesSwiper();
     this.preferMoviesSwiper = this.initPreferMoviesSwiper();
-    this.genresMoviesChildren.changes.subscribe(t => { this.genresMoviesSwiper.update(); });
-    this.castsMoviesChildren.changes.subscribe(t => { this.castsMoviesSwiper.update(); });
-    this.crewsMoviesChildren.changes.subscribe(t => { this.crewsMoviesSwiper.update(); });
-    this.preferMoviesChildren.changes.subscribe(t => { this.preferMoviesSwiper.update() });
+    this.genresMoviesChildren.changes.subscribe(() => {
+      this.genresMoviesSwiper.update();
+    });
+    this.castsMoviesChildren.changes.subscribe(() => {
+      this.castsMoviesSwiper.update();
+    });
+    this.crewsMoviesChildren.changes.subscribe(() => {
+      this.crewsMoviesSwiper.update();
+    });
+    this.preferMoviesChildren.changes.subscribe(() => {
+      this.preferMoviesSwiper.update()
+    });
   }
 
   private bypassSecurityForPoster(element: any) {
@@ -123,6 +150,7 @@ export class PreferencesComponent implements OnInit, AfterViewInit {
       }
     });
   }
+
   private initCrewsMoviesSwiper() {
     return new Swiper(this.crewsSwiperContainer.nativeElement, {
       slidesPerView: 'auto',
@@ -162,9 +190,11 @@ export class PreferencesComponent implements OnInit, AfterViewInit {
 
   onRefresh() {
     this.loading = true;
-    this.userService.refreshPreferences().subscribe(data => {
+    this.userService.refreshPreferences().subscribe(() => {
       this.userService.getRecommendation("S", "1").subscribe(data => {
-        data.movies.results.forEach(element => { this.bypassSecurityForPoster(element); });
+        data.movies.results.forEach(element => {
+          this.bypassSecurityForPoster(element);
+        });
         this.preferMovies = data.movies.results;
         this.haveRecommendations = data.recommendations;
         this.loading = false;

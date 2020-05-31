@@ -1,6 +1,7 @@
 .container {
   text-align: center;
 }
+
 .title {
   color: white;
   text-align: left;
@@ -15,7 +16,6 @@
   font-size: 30px;
   display: block;
   margin-left: -35px;
-  /*margin: 20px;*/
 }
 
 .movie-poster {
@@ -80,8 +80,8 @@
 .review-button {
   text-decoration: underline;
   color: dimgrey;
-  margin-left: 0px;
-  margin-right: 0px;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .add-comment-button {
@@ -170,8 +170,6 @@
   word-wrap: break-word;
   padding-left: 20px;
   padding-right: 20px;
-  /* min-width: 650px; */
-  /* max-width: 650px; */
   text-align: left;
   background-color: #2d2d2dbf;
   border-radius: 25px;

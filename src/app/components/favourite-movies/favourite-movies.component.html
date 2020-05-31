@@ -4,12 +4,12 @@
     <div class="row">
       <ng-container *ngFor="let movie of favouriteMovies">
         <div class="col-4 text-center">
-            <div class="img-wrap">
-              <span class="close" (click)="onRemoveMovieFromFavourites(movie.title, movie.id.toString())">&times;</span>
-              <a routerLink="/movie/{{movie.id}}">
-                <img src="https://image.tmdb.org/t/p/w200/{{ movie.poster_path }}" />
-              </a>
-            </div>
+          <div class="img-wrap">
+            <span class="close" (click)="onRemoveMovieFromFavourites(movie.title, movie.id.toString())">&times;</span>
+            <a routerLink="/movie/{{movie.id}}">
+              <img src="https://image.tmdb.org/t/p/w200/{{ movie.poster_path }}" alt="poster"/>
+            </a>
+          </div>
           <p class="subtitle">{{movie.title}}</p>
         </div>
       </ng-container>

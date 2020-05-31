@@ -1,3 +1,5 @@
+import {Address} from "./address.interface";
+
 export interface CinemaInterface {
   id: number;
   infoCD: string;
@@ -8,13 +10,4 @@ export interface CinemaInterface {
   address: Address;
   rating: number;
   numberOfVotes: number;
-}
-
-export interface Address {
-  id: number;
-  country: string;
-  state: string;
-  city: string;
-  streetName: string;
-  houseNumber: string;
 }

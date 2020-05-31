@@ -7,4 +7,6 @@ export interface Cast {
   name: string;
   order: number;
   profile_path: string;
+  poster_path: string;
+  title: string;
 }

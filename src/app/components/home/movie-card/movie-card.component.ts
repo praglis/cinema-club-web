@@ -1,9 +1,20 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit, AfterViewChecked, ContentChild, Directive, AfterContentChecked, QueryList, ViewChildren } from '@angular/core';
-import { MovieService } from 'src/app/services/movie.service';
-import { DomSanitizer } from '@angular/platform-browser';
+import {
+  Component,
+  OnInit,
+  Output,
+  EventEmitter,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
+  QueryList,
+  ViewChildren
+} from '@angular/core';
+import {MovieService} from 'src/app/services/movie.service';
+import {DomSanitizer} from '@angular/platform-browser';
 import {UserService} from '../../../services/user.service';
 import {Router} from '@angular/router';
 import {AuthenticationService} from '../../../services/authentication.service';
+
 declare let Swiper: any;
 
 @Component({
@@ -15,15 +26,15 @@ export class MovieCardComponent implements OnInit, AfterViewInit {
 
   // Popular movies swiper
   @ViewChildren('popularMoviesChildren') popularMoviesChildren: QueryList<any>;
-  @ViewChild('popularSwiperContainer', { static: true }) popularSwiperContainer: ElementRef;
-  @ViewChild('popularSwiperButtonNext', { static: true }) popularSwiperButtonNext: ElementRef;
-  @ViewChild('popularSwiperButtonPrev', { static: true }) popularSwiperButtonPrev: ElementRef;
+  @ViewChild('popularSwiperContainer', {static: true}) popularSwiperContainer: ElementRef;
+  @ViewChild('popularSwiperButtonNext', {static: true}) popularSwiperButtonNext: ElementRef;
+  @ViewChild('popularSwiperButtonPrev', {static: true}) popularSwiperButtonPrev: ElementRef;
 
   //Best movies swiper
   @ViewChildren('bestMoviesChildren') bestMoviesChildren: QueryList<any>;
-  @ViewChild('bestSwiperContainer', { static: true }) bestSwiperContainer: ElementRef;
-  @ViewChild('bestSwiperButtonNext', { static: true }) bestSwiperButtonNext: ElementRef;
-  @ViewChild('bestSwiperButtonPrev', { static: true }) bestSwiperButtonPrev: ElementRef;
+  @ViewChild('bestSwiperContainer', {static: true}) bestSwiperContainer: ElementRef;
+  @ViewChild('bestSwiperButtonNext', {static: true}) bestSwiperButtonNext: ElementRef;
+  @ViewChild('bestSwiperButtonPrev', {static: true}) bestSwiperButtonPrev: ElementRef;
 
   @Output() clicked = new EventEmitter<string>();
 
@@ -31,7 +42,6 @@ export class MovieCardComponent implements OnInit, AfterViewInit {
   bestMovies: any[];
   popularMoviesSwiper: any;
   bestMoviesSwiper: any;
-  x: any;
 
   constructor(
     private movieService: MovieService,
@@ -51,22 +61,30 @@ export class MovieCardComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.popularMoviesSwiper = this.initPopularMoviesSwiper();
     this.bestMoviesSwiper = this.initBestMoviesSwiper();
-    this.popularMoviesChildren.changes.subscribe(t => { this.popularMoviesSwiper.update(); })
-    this.bestMoviesChildren.changes.subscribe(t => { this.bestMoviesSwiper.update(); })
+    this.popularMoviesChildren.changes.subscribe(() => {
+      this.popularMoviesSwiper.update();
+    })
+
+    this.bestMoviesChildren.changes.subscribe(() => {
+      this.bestMoviesSwiper.update();
+    })
   }
 
   ngOnInit() {
-
     this.popularMovies = this.pupulateSlides();
     this.bestMovies = this.pupulateSlides();
     this.movieService.getPopularMovies(1)
       .subscribe(res => {
-        res.results.forEach(element => { this.bypassSecurityForPoster(element); });
+        res.results.forEach(element => {
+          this.bypassSecurityForPoster(element);
+        });
         this.popularMovies = res.results;
       });
     this.movieService.getBestMovies(1)
       .subscribe(res => {
-        res.results.forEach(element => { this.bypassSecurityForPoster(element); });
+        res.results.forEach(element => {
+          this.bypassSecurityForPoster(element);
+        });
         this.bestMovies = res.results;
       });
   }
@@ -81,7 +99,6 @@ export class MovieCardComponent implements OnInit, AfterViewInit {
       slidesPerView: 'auto',
       spaceBetween: 30,
       slidesPerGroup: 2,
-      // loop: true,
       loopFillGroupWithBlank: true,
       navigation: {
         nextEl: this.bestSwiperButtonNext.nativeElement,
@@ -95,7 +112,6 @@ export class MovieCardComponent implements OnInit, AfterViewInit {
       slidesPerView: 'auto',
       spaceBetween: 30,
       slidesPerGroup: 2,
-      // loop: true,
       loopFillGroupWithBlank: true,
       navigation: {
         nextEl: this.popularSwiperButtonNext.nativeElement,

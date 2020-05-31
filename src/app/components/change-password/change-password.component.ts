@@ -1,9 +1,7 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AuthenticationService } from 'src/app/services/authentication.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {AuthenticationService} from 'src/app/services/authentication.service';
 import {AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators} from '@angular/forms';
-import {first} from 'rxjs/operators';
-import {RegisterService} from '../../services/register.service';
 
 @Component({
   selector: 'app-change-password',
@@ -11,7 +9,7 @@ import {RegisterService} from '../../services/register.service';
   styleUrls: ['./change-password.component.css']
 })
 export class ChangePasswordComponent implements OnInit {
-  @ViewChild('passwordField', { static: true }) passwordField: ElementRef;
+  @ViewChild('passwordField', {static: true}) passwordField: ElementRef;
   changePasswordForm: FormGroup;
   loading = false;
   submitted = false;
@@ -24,7 +22,8 @@ export class ChangePasswordComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private router: Router,
     private formBuilder: FormBuilder,
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.changePasswordForm = this.formBuilder.group({
@@ -39,7 +38,9 @@ export class ChangePasswordComponent implements OnInit {
     }
   }
 
-  get registerFormControls() { return this.changePasswordForm.controls; }
+  get registerFormControls() {
+    return this.changePasswordForm.controls;
+  }
 
   onSubmit() {
     this.submitted = true;
@@ -65,12 +66,11 @@ export class ChangePasswordComponent implements OnInit {
   }
 
 
-
 }
 
 export function repeatPasswordValidator(passwordElement: any): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
     const equals = passwordElement.value === control.value;
-    return equals ? null : { 'passwordNotMatch': { value: control.value } };
+    return equals ? null : {'passwordNotMatch': {value: control.value}};
   };
 }

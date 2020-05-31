@@ -1,28 +1,23 @@
 <div style="position:fixed; top:0; width:100%; z-index:100; " *ngIf="error" class="alert alert-danger">{{error}}</div>
 <div style="position:fixed; top:0; width:100%; z-index:100; opacity: 0.8;" *ngIf="successMsg != undefined"
-  class="alert alert-success">{{successMsg}}</div>
+     class="alert alert-success">{{successMsg}}</div>
 <div class="movie-details" *ngIf="movie != undefined">
   <div class="container">
-
     <p class="title">{{movie.title}} ({{movie.vote_average}} / 10.0)</p>
 
-
     <div class="row">
-
       <div class="col align-middle">
         <div class="row" style="padding-left: 30px">
           <div class="star-rating">
-            <!-- The '|| 0' would prevent an undefined or null value on the Rating property -->
             <div class="full-star" [ngStyle]="{'width': movie.vote_average * 10 + '%'}"></div>
-            <div class="empty-star"> </div>
+            <div class="empty-star"></div>
           </div>
         </div>
         <div class="row" style="padding-top: 30px">
-          <img class="movie-poster" src="https://image.tmdb.org/t/p/w300/{{movie.poster_path}}">
+          <img class="movie-poster" src="https://image.tmdb.org/t/p/w300/{{movie.poster_path}}" alt="poster">
         </div>
       </div>
       <div class="col-7">
-
         <p>Overview</p>
         <p class="overview movie-container">{{movie.overview}}</p>
 
@@ -61,16 +56,12 @@
             </div>
           </div>
         </div>
-
       </div>
-
     </div>
 
     <div class="row" style="padding-top: 30px; padding-bottom: 30px">
-
       <div class="col-5">
         <p>Details</p>
-
         <div class="movie-container">
           <div class="row" *ngIf="movie.original_title != null">
             <div class="col property-header">
@@ -105,7 +96,8 @@
               <p>
                 <ng-container *ngFor="let crew of movie.crews">
                   <ng-container *ngIf="crew.department==='Directing' && crew.job === 'Director'"><a
-                      routerLink="/person/{{crew.id}}">{{crew.name}}</a>, </ng-container>
+                    routerLink="/person/{{crew.id}}">{{crew.name}}</a>,
+                  </ng-container>
                 </ng-container>
               </p>
             </div>
@@ -119,7 +111,8 @@
                 <ng-container *ngFor="let crew of movie.crews">
                   <ng-container
                     *ngIf="crew.department==='Writing' && (crew.job === 'Screenplay' || crew.job === 'Writer')"><a
-                      routerLink="/person/{{crew.id}}">{{crew.name}}</a>, </ng-container>
+                    routerLink="/person/{{crew.id}}">{{crew.name}}</a>,
+                  </ng-container>
                 </ng-container>
               </p>
             </div>
@@ -157,7 +150,6 @@
       <div class="col-7">
         <p>Cast</p>
         <div class="movie-container">
-
           <div class="row">
             <div class="col-1"></div>
             <div class="col property-header">
@@ -172,7 +164,7 @@
             <div *ngIf="!cast.profile_path && i < 20" class="col-1"></div>
             <div *ngIf="cast.profile_path && i < 20" class="col-1">
               <a routerLink="/person/{{cast.id}}">
-                <img class="cast-image" src="https://image.tmdb.org/t/p/w300/{{cast.profile_path}}">
+                <img class="cast-image" src="https://image.tmdb.org/t/p/w300/{{cast.profile_path}}" alt="poster">
               </a>
             </div>
             <div *ngIf="i < 20" class="col property-header">
@@ -192,7 +184,6 @@
 
     <div class="row" style="margin-left: -40px">
       <div class="star-rating">
-        <!-- The '|| 0' would prevent an undefined or null value on the Rating property -->
         <div class="full-star2" [ngStyle]="{'width': movie.rating * 10 + '%'}"></div>
         <div class="empty-star"></div>
       </div>
@@ -207,15 +198,19 @@
 
       <div style="padding: 5px">
         <button *ngIf="isMovieInFavourites" class="btn btn-dark" type="button"
-          (click)="onRemoveMovieFromFavourites()">Delete movie from favourites</button>
+                (click)="onRemoveMovieFromFavourites()">Delete movie from favourites
+        </button>
         <button *ngIf="!isMovieInFavourites" class="btn btn-dark" type="button" (click)="onAddToFavourites()">Add movie
-          to favourites</button>
+          to favourites
+        </button>
       </div>
       <div style="padding: 5px">
         <button *ngIf="isMovieInPlanToWatch" class="btn btn-dark" type="button"
-          (click)="onRemoveMovieFromPlanToWatch()">Delete movie from plan to watch</button>
+                (click)="onRemoveMovieFromPlanToWatch()">Delete movie from plan to watch
+        </button>
         <button *ngIf="!isMovieInPlanToWatch" class="btn btn-dark" type="button" (click)="onAddToPlanToWatch()">Add
-          movie to plan to watch</button>
+          movie to plan to watch
+        </button>
       </div>
 
     </div>
@@ -246,7 +241,7 @@
 
       <div style="padding-left: 110px">
         <div id=rate-container *ngIf="showRateForm"
-          style="margin-bottom: 30px; margin-left: -125px; margin-top: 20px; padding-top: 10px">
+             style="margin-bottom: 30px; margin-left: -125px; margin-top: 20px; padding-top: 10px">
 
           <div style="text-align: left; margin-bottom: -10px;">
             <p>My rate</p>
@@ -286,11 +281,11 @@
     <div #commentsChildren class="swiper-slide" *ngFor="let comment of comments">
 
       <div class="comment-child"
-        [ngStyle]="comment.highlighted?{'box-shadow': '5px 10px 18px yellow'} : {'box-shadow': '5px 10px 18px gray'}">
+           [ngStyle]="comment.highlighted?{'box-shadow': '5px 10px 18px yellow'} : {'box-shadow': '5px 10px 18px gray'}">
 
         <div class="comment-header">
           <p style="color: dimgrey; padding-top: 10px">
-            <span class="badge">{{badgeName}} </span>
+            <span class="badge">{{getUserBadge(comment.infoCU.username)}} </span>
             <strong class="text-grey">{{comment.infoCU.username}}</strong> wrote on day {{comment.infoCD | date}}
           </p>
 
@@ -334,7 +329,7 @@
 
         <div style="display: flex;">
           <p style="font-size: 24px;">{{comment.likes}} <a (click)="likeComment(comment.id)"><i
-                class="far fa-thumbs-up"></i></a>
+            class="far fa-thumbs-up"></i></a>
           </p>
           <p style="margin-left: auto;"><a style="color: dimgrey;" (click)="reportUser(comment.id)">report comment</a>
           </p>
@@ -372,7 +367,7 @@
 
         <div style="display: flex;">
           <p style="font-size: 24px;">{{reply.likes}} <a (click)="likeComment(reply.id)"><i
-                class="far fa-thumbs-up"></i></a>
+            class="far fa-thumbs-up"></i></a>
           </p>
           <p style="margin-left: auto;"><a style="color: dimgrey;" (click)="reportUser(reply.id)">report comment</a></p>
         </div>

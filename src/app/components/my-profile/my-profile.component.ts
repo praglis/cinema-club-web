@@ -1,10 +1,10 @@
-import { Component, OnInit, Injectable } from '@angular/core';
-import { UserService } from 'src/app/services/user.service';
-import { User } from '../../interfaces/user.interface';
-import { DatePipe } from '@angular/common';
-import { BugReportComponent } from '../bug-report/bug-report.component';
-import { MatDialogModule, MatDialog, MatDialogRef, MatDialogConfig } from '@angular/material/dialog';
-import { ReportService } from 'src/app/services/report.service';
+import {Component, OnInit, Injectable} from '@angular/core';
+import {UserService} from 'src/app/services/user.service';
+import {User} from '../../interfaces/user.interface';
+import {DatePipe} from '@angular/common';
+import {BugReportComponent} from '../bug-report/bug-report.component';
+import {MatDialog} from '@angular/material/dialog';
+import {ReportService} from 'src/app/services/report.service';
 import {AuthenticationService} from '../../services/authentication.service';
 
 @Component({
@@ -41,12 +41,9 @@ export class MyProfileComponent implements OnInit {
     this.userService.findLoggedUser().subscribe((jsonObject: User) => {
       this.editedProfile = jsonObject as User;
       this.editedProfile.birthday = this.datePipe.transform(this.editedProfile.birthday, 'MM-dd-yyyy');
-    });
-
-    this.userService.getUserBadge().subscribe( (data) => {
-      this.badgeName = data.name;
-      console.log(data);
-      console.log(' a ' + this.badgeName);
+      this.userService.getUserBadge(this.editedProfile.username).subscribe((data) => {
+        this.badgeName = data.name;
+      });
     });
     this.editMode = false;
   }
@@ -55,18 +52,21 @@ export class MyProfileComponent implements OnInit {
     this.editedField = 'none';
     const userValues = this.convertToUserValues(this.editedProfile);
     this.userService.updateProfile(userValues).subscribe((data) => {
-      this.successMsg = 'Success';
-    },
-    error => {
-      this.errorMsg = error.message;
-    });
+        this.successMsg = 'Success';
+      },
+      error => {
+        this.errorMsg = error.message;
+      });
     this.editMode = false;
   }
 
   getCleanAddress(user: User): string {
-    // tslint:disable-next-line:max-line-length
-    if (user.address.streetName && user.address.houseNumber && user.address.city && user.address.state && user.address.country) { return user.address.streetName + ', ' + user.address.houseNumber + ', '
-      + user.address.city + ', ' + user.address.state + ', ' + user.address.country; } else { return ''; }
+    if (user.address.streetName && user.address.houseNumber && user.address.city && user.address.state && user.address.country) {
+      return user.address.streetName + ', ' + user.address.houseNumber + ', '
+        + user.address.city + ', ' + user.address.state + ', ' + user.address.country;
+    } else {
+      return '';
+    }
 
   }
 
@@ -106,8 +106,8 @@ export class MyProfileComponent implements OnInit {
 
   resetPassword() {
     this.authenticationService.resetPasswordWithLoggedUser().subscribe((data) => {
-      this.successMsg = 'Email with reset password url has been sent';
-    },
+        this.successMsg = 'Email with reset password url has been sent';
+      },
       error => {
         this.errorMsg = error.message;
       });

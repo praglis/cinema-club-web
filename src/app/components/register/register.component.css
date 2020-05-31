@@ -7,25 +7,31 @@
   background-color: #00010D;
   opacity: 0.8;
 }
+
 #register .container #register-row #register-column #register-box #register-form {
   padding: 20px;
 }
+
 #register .container #register-row #register-column #register-box #register-form #register-link {
   margin-top: -85px;
 }
+
 .register-title {
   color: aliceblue;
 }
+
 .promotion-title {
   color: aliceblue;
 }
+
 .register-field {
   color: cornsilk;
 }
 
 .address-title {
-  color: aliceblue 
+  color: aliceblue
 }
+
 .alert {
   margin-top: 10px;
 }
