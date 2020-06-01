@@ -1,6 +1,7 @@
 .container {
-    text-align: center;
+  text-align: center;
 }
+
 .title {
   color: white;
   text-align: left;
@@ -18,9 +19,9 @@
 }
 
 .person-poster {
-    background-color: white;
-    display: block;
-    margin: 0 auto;
+  background-color: white;
+  display: block;
+  margin: 0 auto;
 }
 
 .person-details {
@@ -83,12 +84,12 @@
   opacity: 0.8;
 }
 
-.thumbs-color{
+.thumbs-color {
   color: deepskyblue;
 }
 
 a:hover {
-  cursor:pointer;
+  cursor: pointer;
   text-shadow: 0 0 15px white;
 }
 
@@ -98,5 +99,5 @@ a:hover {
 }
 
 .cast-row {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }

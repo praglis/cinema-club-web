@@ -7,7 +7,7 @@
           <div class="img-wrap">
             <span class="close" (click)="onRemoveMovieFromList(movie.title, movie.id.toString())">&times;</span>
             <a routerLink="/movie/{{movie.id}}">
-              <img src="https://image.tmdb.org/t/p/w200/{{ movie.poster_path }}" />
+              <img src="https://image.tmdb.org/t/p/w200/{{ movie.poster_path }}" alt="poster"/>
             </a>
           </div>
           <p class="subtitle">{{movie.title}}</p>
@@ -16,4 +16,3 @@
     </div>
   </div>
 </div>
-

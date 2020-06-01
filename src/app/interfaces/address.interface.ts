@@ -5,6 +5,3 @@ export interface Address {
   streetName: string;
   houseNumber: number;
 }
-
-
-

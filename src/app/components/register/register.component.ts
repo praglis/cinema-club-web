@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
-import { first } from 'rxjs/operators';
-import { AuthenticationService } from 'src/app/services/authentication.service';
-import { RegisterService } from 'src/app/services/register.service';
+import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
+import {Router} from '@angular/router';
+import {FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl} from '@angular/forms';
+import {first} from 'rxjs/operators';
+import {AuthenticationService} from 'src/app/services/authentication.service';
+import {RegisterService} from 'src/app/services/register.service';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +11,7 @@ import { RegisterService } from 'src/app/services/register.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  @ViewChild('passwordField', { static: true }) passwordField: ElementRef;
+  @ViewChild('passwordField', {static: true}) passwordField: ElementRef;
 
   registerForm: FormGroup;
   loading = false;
@@ -43,7 +43,9 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  get registerFormControls() { return this.registerForm.controls; }
+  get registerFormControls() {
+    return this.registerForm.controls;
+  }
 
   onSubmit() {
     this.submitted = true;
@@ -51,14 +53,14 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
-    const registrationValues = this.convertToRegistractionValues(this.registerForm.value);
+    const registrationValues = this.convertToRegistrationValues(this.registerForm.value);
 
     this.loading = true;
     this.userService.register(registrationValues)
       .pipe(first())
       .subscribe(
-        data => {
-          this.router.navigate(['/login'], { queryParams: { registered: true } });
+        () => {
+          this.router.navigate(['/login'], {queryParams: {registered: true}});
         },
         error => {
           this.error = error.message;
@@ -66,7 +68,7 @@ export class RegisterComponent implements OnInit {
         });
   }
 
-  convertToRegistractionValues(values) {
+  convertToRegistrationValues(values) {
     return {
       email: values.email,
       password: values.password,
@@ -88,6 +90,6 @@ export class RegisterComponent implements OnInit {
 export function repeatPasswordValidator(passwordElement: any): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
     const equals = passwordElement.value === control.value;
-    return equals ? null : { 'passwordNotMatch': { value: control.value } };
+    return equals ? null : {'passwordNotMatch': {value: control.value}};
   };
 }

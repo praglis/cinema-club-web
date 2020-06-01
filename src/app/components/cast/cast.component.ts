@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Person } from 'src/app/interfaces/person';
-import { MovieService } from 'src/app/services/movie.service';
-import { ActivatedRoute } from '@angular/router';
-import { Cast } from 'src/app/interfaces/cast.interface';
-import { Crew } from 'src/app/interfaces/crew.interface';
+import {Component, OnInit} from '@angular/core';
+import {Person} from 'src/app/interfaces/person';
+import {MovieService} from 'src/app/services/movie.service';
+import {ActivatedRoute} from '@angular/router';
+import {Cast} from 'src/app/interfaces/cast.interface';
+import {Crew} from 'src/app/interfaces/crew.interface';
 
 @Component({
   selector: 'app-cast',
@@ -19,7 +19,8 @@ export class CastComponent implements OnInit {
   constructor(
     private movieService: MovieService,
     private route: ActivatedRoute
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     const id = +this.route.snapshot.paramMap.get('id');

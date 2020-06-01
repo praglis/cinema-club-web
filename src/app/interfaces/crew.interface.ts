@@ -6,4 +6,6 @@ export interface Crew {
   job: string;
   name: string;
   profile_path: string;
+  poster_path: string;
+  title: string;
 }

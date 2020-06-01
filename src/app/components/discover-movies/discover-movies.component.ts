@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Genre} from "../../interfaces/genre.interface";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MovieService} from "../../services/movie.service";
@@ -107,19 +107,19 @@ export class DiscoverMoviesComponent implements OnInit {
   onPrevPage() {
     this.registerForm.value.page = this.actualPage - 1;
     this.onSubmit();
-    window.scroll(0,0);
+    window.scroll(0, 0);
   }
 
   onNextPage() {
     this.registerForm.value.page = this.actualPage + 1;
     this.onSubmit();
-    window.scroll(0,0);
+    window.scroll(0, 0);
   }
 
   onJumpPage(page: number) {
     this.registerForm.value.page = page;
     this.onSubmit();
-    window.scroll(0,0);
+    window.scroll(0, 0);
   }
 
   convertToCriteriaValues(values) {

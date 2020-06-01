@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {UserService} from "../../services/user.service";
-import {User} from "../../interfaces/user.interface";
-import {Router} from "@angular/router";
+import {Component, OnInit} from '@angular/core';
+import {UserService} from '../../services/user.service';
+import {User} from '../../interfaces/user.interface';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -35,9 +35,5 @@ export class HomeComponent implements OnInit {
       }
     });
     this.text = 'home init test';
-  }
-
-  onCliked(text: string) {
-    alert(text);
   }
 }

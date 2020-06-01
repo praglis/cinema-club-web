@@ -5,7 +5,7 @@
     <div class="row">
       <div class="col-md-6">
         <form id="account-data-form">
-          <h2 class="text-center">Account Data</h2><br />
+          <h2 class="text-center">Account Data</h2><br/>
           <p>User ID: <span>{{editedProfile.id}}</span></p>
           <p>Username: <span *ngIf="editedField != 'username'">{{editedProfile.username}}</span></p>
           <p>Joined: {{editedProfile.enrolmentDate|date : 'mediumDate'}}</p>
@@ -15,21 +15,21 @@
       </div>
       <div class="col-md-6">
         <form id="personal-data-form">
-          <h2 class="text-center">Personal Data</h2><br />
+          <h2 class="text-center">Personal Data</h2><br/>
           <p>
             Name: <span *ngIf="!editMode"> {{editedProfile.name}}</span>
             <input id="name" type="text" *ngIf="editMode" [(ngModel)]="editedProfile.name"
-              [ngModelOptions]="{standalone: true}">
+                   [ngModelOptions]="{standalone: true}">
           </p>
           <p>
             Last name: <span *ngIf="!editMode">  {{editedProfile.surname}}</span>
             <input id=" surname" type="text" *ngIf="editMode" [(ngModel)]="editedProfile.surname"
-              [ngModelOptions]="{standalone: true}">
+                   [ngModelOptions]="{standalone: true}">
           </p>
           <p>
             Birthday: <span *ngIf="!editMode">  {{editedProfile.birthday|date : 'mediumDate'}}</span>
             <input id="birthdayDate" type="text" *ngIf="editMode" [(ngModel)]="editedProfile.birthday"
-              [ngModelOptions]="{standalone: true}">
+                   [ngModelOptions]="{standalone: true}">
           </p>
           <p>
             Mail:  <span *ngIf="!editMode">  {{editedProfile.email}}</span>
@@ -39,7 +39,7 @@
           <p>
             Phone no.: <span *ngIf="!editMode">  {{editedProfile.phoneNo}}</span>
             <input id="phoneNo" type="text" *ngIf="editMode" [(ngModel)]="editedProfile.phoneNo"
-              [ngModelOptions]="{standalone: true}">
+                   [ngModelOptions]="{standalone: true}">
           </p>
           <p>
             Address: {{getCleanAddress(editedProfile)}}
@@ -47,15 +47,15 @@
 
           <span *ngIf="editMode" class="address-container">
             Country: <input type="text" [(ngModel)]="editedProfile.address.country"
-              [ngModelOptions]="{standalone: true}"><br />
+                            [ngModelOptions]="{standalone: true}"><br/>
             State: <input type="text" [(ngModel)]="editedProfile.address.state"
-              [ngModelOptions]="{standalone: true}"><br />
+                          [ngModelOptions]="{standalone: true}"><br/>
             City: <input type="text" [(ngModel)]="editedProfile.address.city"
-              [ngModelOptions]="{standalone: true}"><br />
+                         [ngModelOptions]="{standalone: true}"><br/>
             Street: <input type="text" [(ngModel)]="editedProfile.address.streetName"
-              [ngModelOptions]="{standalone: true}"><br />
+                           [ngModelOptions]="{standalone: true}"><br/>
             House number: <input type="text" [(ngModel)]="editedProfile.address.houseNumber"
-              [ngModelOptions]="{standalone: true}">
+                                 [ngModelOptions]="{standalone: true}">
           </span>
         </form>
       </div>
@@ -65,27 +65,27 @@
         <li class="nav-item">
           <ng-container *ngIf="editMode">
             <a (click)="onSubmit()" class="nav-link" href="javascript:void(0)"><i
-                class="fas fa-save fa-2x"></i><br />Submit changes</a>
+              class="fas fa-save fa-2x"></i><br/>Submit changes</a>
           </ng-container>
           <ng-container *ngIf="!editMode">
-            <a (click)="edit()" class="nav-link" href="javascript:void(0)"><i class="fas fa-edit fa-2x"></i><br />Edit
+            <a (click)="edit()" class="nav-link" href="javascript:void(0)"><i class="fas fa-edit fa-2x"></i><br/>Edit
               profile</a>
           </ng-container>
 
         </li>
         <li class="nav-item">
-          <a [routerLink]="['/movies/favourite']" class="nav-link"><i class="fas fa-heart fa-2x"></i><br />Favourite
+          <a [routerLink]="['/movies/favourite']" class="nav-link"><i class="fas fa-heart fa-2x"></i><br/>Favourite
             movies</a>
         </li>
         <li class="nav-item">
-          <a [routerLink]="['/movies/plan-to-watch']" class="nav-link"><i class="fas fa-list fa-2x"></i><br />Plan to
+          <a [routerLink]="['/movies/plan-to-watch']" class="nav-link"><i class="fas fa-list fa-2x"></i><br/>Plan to
             watch movies</a>
         </li>
         <li class="nav-item">
-          <a (click)="reportBug()" class="nav-link"><i class="fas fa-bug fa-2x"></i><br />Report a bug</a>
+          <a (click)="reportBug()" class="nav-link"><i class="fas fa-bug fa-2x"></i><br/>Report a bug</a>
         </li>
         <li class="nav-item">
-          <a (click)="resetPassword()" class="nav-link"><i class="fa fa-key fa-2x"></i><br />Reset Password</a>
+          <a (click)="resetPassword()" class="nav-link"><i class="fa fa-key fa-2x"></i><br/>Reset Password</a>
         </li>
         <li class="nav-item" *ngIf="!editedProfile.hasQuestionnaire">
           <a [routerLink]="['/questionaire']" class="nav-link"><i class="fas fa-grin-hearts fa-2x"></i><br />Complete the preferential survey</a>

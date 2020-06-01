@@ -1,9 +1,8 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
-import { first } from 'rxjs/operators';
-import { AuthenticationService } from 'src/app/services/authentication.service';
-import { RegisterService } from 'src/app/services/register.service';
+import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
+import {Router} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {first} from 'rxjs/operators';
+import {AuthenticationService} from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-reset-password',
@@ -30,7 +29,9 @@ export class ResetPasswordComponent implements OnInit {
     });
   }
 
-  get resetPasswordFormControls() { return this.resetPasswordForm.controls; }
+  get resetPasswordFormControls() {
+    return this.resetPasswordForm.controls;
+  }
 
   onSubmit() {
     this.submitted = true;
@@ -44,8 +45,8 @@ export class ResetPasswordComponent implements OnInit {
     this.authenticationService.resetPassword(resetPasswordValues)
       .pipe(first())
       .subscribe(
-        data => {
-          this.router.navigate(['/login'], { queryParams: { passwordChanged: true } });
+        () => {
+          this.router.navigate(['/login'], {queryParams: {passwordChanged: true}});
         },
         error => {
           this.error = error.message;
