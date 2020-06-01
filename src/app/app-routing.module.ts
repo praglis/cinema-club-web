@@ -21,7 +21,8 @@ import {FavouriteMoviesComponent} from "./components/favourite-movies/favourite-
 import {PreferencesComponent} from './components/preferences/preferences.component';
 import {PlanToWatchMoviesComponent} from "./components/plan-to-watch-movies/plan-to-watch-movies.component";
 import {DiscoverMoviesComponent} from "./components/discover-movies/discover-movies.component";
-import {CastComponent} from './components/cast/cast.component';
+import { CastComponent } from './components/cast/cast.component';
+import {QuetionaireComponent} from "./components/quetionaire/quetionaire.component";
 
 const routes: Routes = [
   {path: 'movies', component: MoviesListComponent},
@@ -37,6 +38,7 @@ const routes: Routes = [
   {path: 'help', component: HelpPageComponent},
   {path: 'admin', component: AdminPageComponent},
   {path: 'preferences', component: PreferencesComponent},
+  { path: 'questionaire', component: QuetionaireComponent },
   {
     path: '',
     component: MainLayoutComponent,

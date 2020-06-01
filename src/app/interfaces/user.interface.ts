@@ -12,4 +12,6 @@ export interface User {
   email: string;
   phoneNo: string;
   address: Address;
+  hasQuestionnaire: boolean;
+  firstLogIn: boolean;
 }
