@@ -22,7 +22,7 @@ export class CinemaService {
       }
     });
     if (orderBy !== undefined) {
-      url += "orderBy=" + orderBy;
+      url += 'orderBy=' + orderBy;
     }
 
     if (url[-1] === '&') {
@@ -35,12 +35,18 @@ export class CinemaService {
 
   postRate(id: number, rate: RateInterface): Observable<any> {
     let url = 'http://localhost:8200/cinema/' + id + '/rate';
-    return this.httpClient.post<any>(url, rate, { withCredentials: true }).pipe();
+    return this.httpClient.post<any>(url, rate, {withCredentials: true}).pipe();
   }
 
   getCinemaById(cinemaId: number): Observable<CinemaInterface> {
     let url = 'http://localhost:8200/cinema/' + cinemaId;
-    return this.httpClient.get<CinemaInterface>(url, { withCredentials: true })
+    return this.httpClient.get<CinemaInterface>(url, {withCredentials: true})
+      .pipe();
+  }
+
+  getPremieres(cinemaId: number): Observable<any> {
+    const url = 'http://localhost:8200/cinema/' + cinemaId + '/premiers';
+    return this.httpClient.get<any>(url)
       .pipe();
   }
 }

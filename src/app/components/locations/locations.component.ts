@@ -2,6 +2,8 @@ import {Component, DoCheck, OnInit, ViewChildren} from '@angular/core';
 import {CinemaService} from '../../services/cinema.service';
 import {CinemaInterface} from 'src/app/interfaces/cinema.interface';
 import {ActivatedRoute} from '@angular/router';
+import {MovieDetails} from '../../interfaces/moviedetails.interface';
+import {MovieService} from '../../services/movie.service';
 
 @Component({
   selector: 'app-locations',
@@ -15,6 +17,7 @@ export class LocationsComponent implements OnInit, DoCheck {
   constructor(
     private activatedRoute: ActivatedRoute,
     private cinemaService: CinemaService,
+    private movieService: MovieService,
   ) {
   }
 
@@ -22,12 +25,13 @@ export class LocationsComponent implements OnInit, DoCheck {
   query: string;
   cinemas: CinemaInterface[];
   searchText: string;
-  selectedCinema: CinemaInterface;
+  wybor: CinemaInterface;
   showRateForm = false;
   success_msg: string;
   error: string;
   orderBy: string;
-
+  premieres: any = [];
+  posters: any = [];
 
   ngOnInit() {
     this.query = '';
@@ -55,15 +59,23 @@ export class LocationsComponent implements OnInit, DoCheck {
     const scrollToTop = window.setInterval(() => {
       const pos = window.pageYOffset;
       if (pos > 0) {
-        window.scrollTo(0, pos - 200); // How far to scroll on each step
+        window.scrollTo(0, pos - 200); // how far to scroll on each step
       } else {
         window.clearInterval(scrollToTop);
       }
     }, 16);
   }
 
-  onCinemaChoose(selectedCinema: CinemaInterface) {
-    this.selectedCinema = selectedCinema;
+  wybierz(wybor: CinemaInterface) {
+    this.wybor = wybor;
+    this.cinemaService.getPremieres(this.wybor.id).subscribe((object) => {
+      this.premieres = object;
+      for (let i = 0; i < this.premieres.length; i++) {
+        this.movieService.getMovie(this.premieres[i].movie.apiUrl).subscribe((jsonObject: MovieDetails) => {
+          this.posters[i] = (jsonObject as MovieDetails).poster_path;
+        });
+      }
+    });
   }
 
   saveSearchQuery() {
@@ -71,10 +83,10 @@ export class LocationsComponent implements OnInit, DoCheck {
   }
 
   private getCinemasObserver(query: string) {
-    return this.cinemaService.getCinema(LocationsComponent.prepareBasicCinemaQuery(query), this.orderBy);
+    return this.cinemaService.getCinema(this.prepareBasicCinemaQuery(query), this.orderBy);
   }
 
-  private static prepareBasicCinemaQuery(query: string) {
+  private prepareBasicCinemaQuery(query: string) {
     return {
       name: query,
       country: query,
@@ -87,10 +99,10 @@ export class LocationsComponent implements OnInit, DoCheck {
 
   submitRate(rate: number) {
     this.cinemaService.postRate(
-      this.selectedCinema.id, {rate}).subscribe((data) => {
+      this.wybor.id, {rate}).subscribe((data) => {
         this.success_msg = 'Rate has been added';
         this.showRateForm = false;
-        this.cinemaService.getCinemaById(this.selectedCinema.id).subscribe((data: CinemaInterface) => {
+        this.cinemaService.getCinemaById(this.wybor.id).subscribe((data: CinemaInterface) => {
           let position = 0;
           for (let index = 1; index < this.cinemas.length; index++) {
             const element = this.cinemas[index];
@@ -99,9 +111,9 @@ export class LocationsComponent implements OnInit, DoCheck {
               break;
             }
           }
-          this.selectedCinema = data;
+          this.wybor = data;
           this.cinemas[position] = data;
-        })
+        });
       },
       error => {
         this.error = error.message;
