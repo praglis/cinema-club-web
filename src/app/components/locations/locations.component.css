@@ -50,3 +50,42 @@
   background-image: url('src/assets/images/star_grey.png');
   background-size: 400px 40px;
 }
+
+.title {
+  color: white;
+  text-align: left;
+  font-size: 30px;
+  display: block;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+#table-wrapper {
+  position: relative;
+}
+
+#table-scroll {
+  height: 53vh;
+  overflow: auto;
+  margin-top: 20px;
+}
+
+.person-container {
+  padding: 20px;
+  border: 1px solid black;
+  background-color: #02030F;
+  opacity: 0.8;
+}
+
+.property-header {
+  text-align: center;
+}
+
+.property-value {
+  text-align: center;
+}
+
+.cast-image {
+  object-fit: cover;
+  width: 90px;
+}
