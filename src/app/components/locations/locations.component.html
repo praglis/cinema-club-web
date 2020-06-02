@@ -46,7 +46,7 @@
   </div>
 </div>
 
-<div *ngIf="wybor !== undefined">
+<div *ngIf="wybor !== undefined" style="color: white">
 
   <div  class="row" style="padding-top: 50px; padding-left: 30px">
     <p class="title">{{wybor.name}}</p>
@@ -80,8 +80,107 @@
     </div>
   </div>
 
-  <div *ngIf="premieres != undefined" class="row" style="padding-left: 50px">
-    <div *ngFor="let prem of premieres; index as i"> {{prem.movie.title}} {{posters[i]}} --- </div>
+  <div *ngIf="premieres.length !== 0" class="row" style="padding: 30px">
+
+    <div class="col">
+
+      <div class="person-container">
+        <div class="row">
+          <div class="col"></div>
+          <div class="col property-header">
+            <p style="font-weight: bold">Movie</p>
+          </div>
+          <div class="col property-value">
+            <p style="font-weight: bold">Date</p>
+          </div>
+        </div>
+        <div *ngFor="let prem of premieres; index as i" class="row">
+          <div *ngIf="!posters[i] && i < premieres.length/3" class="col"></div>
+          <div *ngIf="posters[i] && i < premieres.length/3" class="col">
+            <a routerLink="/movie/{{prem.movie.id}}">
+              <img class="cast-image" src="https://image.tmdb.org/t/p/w300/{{posters[i]}}">
+            </a>
+          </div>
+          <div *ngIf="i < premieres.length/3" class="col property-header align-self-center">
+            <a routerLink="/movie/{{prem.movie.id}}">
+              <p>{{prem.movie.title}}</p>
+            </a>
+          </div>
+          <div *ngIf="i < premieres.length/3" class="col property-value align-self-center">
+            <p>{{prem.date | date}}</p>
+            <p>{{prem.date | date:'shortTime'}}</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col">
+
+      <div class="person-container">
+        <div class="row">
+          <div class="col"></div>
+          <div class="col property-header">
+            <p style="font-weight: bold">Movie</p>
+          </div>
+          <div class="col property-value">
+            <p style="font-weight: bold">Date</p>
+          </div>
+        </div>
+        <div *ngFor="let prem of premieres; index as i" class="row">
+          <div *ngIf="!posters[i] && i >= premieres.length/3 && i < premieres.length/3*2" class="col"></div>
+          <div *ngIf="posters[i] && i >= premieres.length/3 && i < premieres.length/3*2" class="col">
+            <a routerLink="/movie/{{prem.movie.id}}">
+              <img class="cast-image" src="https://image.tmdb.org/t/p/w300/{{posters[i]}}">
+            </a>
+          </div>
+          <div *ngIf="i >= premieres.length/3 && i < premieres.length/3*2" class="col property-header align-self-center">
+            <a routerLink="/movie/{{prem.movie.id}}">
+              <p>{{prem.movie.title}}</p>
+            </a>
+          </div>
+          <div *ngIf="i >= premieres.length/3 && i < premieres.length/3*2" class="col property-value align-self-center">
+            <p>{{prem.date | date}}</p>
+            <p>{{prem.date | date:'shortTime'}}</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col">
+
+      <div class="person-container">
+        <div class="row">
+          <div class="col"></div>
+          <div class="col property-header">
+            <p style="font-weight: bold">Movie</p>
+          </div>
+          <div class="col property-value">
+            <p style="font-weight: bold">Date</p>
+          </div>
+        </div>
+        <div *ngFor="let prem of premieres; index as i" class="row">
+          <div *ngIf="!posters[i] && i >= premieres.length/3*2" class="col"></div>
+          <div *ngIf="posters[i] && i >= premieres.length/3*2" class="col">
+            <a routerLink="/movie/{{prem.movie.id}}">
+              <img class="cast-image" src="https://image.tmdb.org/t/p/w300/{{posters[i]}}">
+            </a>
+          </div>
+          <div *ngIf="i >= premieres.length/3*2" class="col property-header align-self-center">
+            <a routerLink="/movie/{{prem.movie.id}}">
+              <p>{{prem.movie.title}}</p>
+            </a>
+          </div>
+          <div *ngIf="i >= premieres.length/3*2" class="col property-value align-self-center">
+            <p>{{prem.date | date}}</p>
+            <p>{{prem.date | date:'shortTime'}}</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
 
   </div>
 </div>
