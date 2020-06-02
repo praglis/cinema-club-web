@@ -11,6 +11,7 @@ import {NYTReview} from "../interfaces/nyt.review.interface";
 import {GuardianReview} from "../interfaces/guardian.review.interface";
 import {Trailer} from "../interfaces/trailer.interface";
 import {Credit} from "../interfaces/credit.interface";
+import {QuestionairePropositions} from '../interfaces/questionairePropositions';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,12 @@ export class MovieService {
     this.getCinemas();
     let url = "http://localhost:8200/movies/popular?page=" + page;
     return this.httpClient.get<MoviesList>(url, {withCredentials: true})
+      .pipe();
+  }
+
+  getQuestionairePropositions(): Observable<QuestionairePropositions> {
+    const url = 'http://localhost:8200/movies/questionnaire';
+    return this.httpClient.get<QuestionairePropositions>(url, { withCredentials: true })
       .pipe();
   }
 
@@ -115,7 +122,7 @@ export class MovieService {
 
   postRate(id: number, rate: RateInterface): Observable<any> {
     const url = 'http://localhost:8200/movie/' + id + '/rate';
-    return this.httpClient.post<any>(url, rate, { withCredentials: true }).pipe();
+    return this.httpClient.post<any>(url, rate, {withCredentials: true}).pipe();
   }
 
   getTrailerKey(movieId: string): Observable<Trailer> {

@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {User} from "../interfaces/user.interface";
 import {Badge} from "../interfaces/badge.interface";
+import {SingleMovieResult} from "../interfaces/singlemovie.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -56,4 +57,11 @@ export class UserService {
     let url = "http://localhost:8200/isAdmin";
     return this.httpClient.get<boolean>(url, {withCredentials: true}).pipe();
   }
+
+  sendQuestionaireResults(movies) {
+    const url = 'http://localhost:8200/user/questionnaire';
+    return this.httpClient.post<any>(url, movies, { withCredentials: true })
+      .pipe();
+  }
+
 }
