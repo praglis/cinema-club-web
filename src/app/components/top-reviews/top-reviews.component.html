@@ -1,18 +1,22 @@
 <div style="padding-bottom: 50px">
-  <div #commentsChildren class="comments-section" *ngFor="let comment of comments" style="color: white; padding-top: 50px">
+  <div #commentsChildren class="comments-section" *ngFor="let comment of comments"
+       style="color: white; padding-top: 50px">
 
     <div class="comment-child"
          [ngStyle]="comment.highlighted?{'box-shadow': '5px 10px 18px yellow'} : {'box-shadow': '5px 10px 18px gray'}">
       <div class="row">
         <div class="col-1">
-          <img class="movie-poster" src="https://image.tmdb.org/t/p/w300/{{comment.movie.poster_path}}" alt="poster">
+          <a routerLink="/movie/{{comment.movie.id}}"><img class="movie-poster"
+                                                           src="https://image.tmdb.org/t/p/w300/{{comment.movie.poster_path}}"
+                                                           alt="poster"></a>
         </div>
         <div class="col">
 
           <div class="comment-header">
             <p style="color: dimgrey; padding-top: 10px">
-      <!--        <span class="badge">{{badgeName}} </span>-->
-              <strong class="text-grey">{{comment.infoCU.username}}</strong> wrote about <strong>{{comment.movie.title}}</strong> on day {{comment.infoCD | date}}
+              <strong class="text-grey">{{comment.infoCU.username}}</strong> wrote about <a
+              routerLink="/movie/{{comment.movie.id}}"><strong>{{comment.movie.title}}</strong></a> on
+              day {{comment.infoCD | date}}
             </p>
 
             <p class="first-comment-header-button">
@@ -64,7 +68,8 @@
       </div>
     </div>
 
-    <div *ngIf="showCommentForm && parentCommentId === comment.id" style="margin-bottom: 30px; padding-left:100px; width: 1000px">
+    <div *ngIf="showCommentForm && parentCommentId === comment.id"
+         style="margin-bottom: 30px; padding-left:100px; width: 1000px">
       <div style="text-align: left; margin-bottom: -10px;">
         <p>{{commentFormTitle}}</p>
       </div>
@@ -91,7 +96,6 @@
       <div class="comment-header">
 
         <p style="color: dimgrey; padding-top: 10px">
-  <!--        <span class="badge">{{badgeName}}</span>-->
           <strong class="text-grey">{{reply.infoCU.username}}</strong> wrote on day {{reply.infoCD | date}}
         </p>
 

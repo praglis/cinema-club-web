@@ -36,7 +36,8 @@ export class TopReviewsComponent implements OnInit {
     private movieService: MovieService,
     private reportService: ReportService,
     private dialog: MatDialog,
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.userService.findLoggedUser().subscribe((jsonObject: User) => {
@@ -55,8 +56,9 @@ export class TopReviewsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      // tslint:disable-next-line: triple-equals
-      if (result.doSend == true) { this.reportService.reportUser(this.prepareUserReport(commentId, result.description)); }
+      if (result.doSend == true) {
+        this.reportService.reportUser(this.prepareUserReport(commentId, result.description));
+      }
     });
   }
 
@@ -95,7 +97,7 @@ export class TopReviewsComponent implements OnInit {
     }
     this.commentForms.changes.subscribe(comps => {
       if (comps.length != 0) {
-        comps.first.nativeElement.scrollIntoView({ behavior: 'smooth' });
+        comps.first.nativeElement.scrollIntoView({behavior: 'smooth'});
       }
     });
   }
