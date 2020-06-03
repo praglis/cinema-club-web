@@ -117,28 +117,6 @@ export class TopReviewsComponent implements OnInit {
     });
   }
 
-  // submitComment() {
-  //   this.movieService.postComment({
-  //     movieId: Number(this.route.snapshot.paramMap.get('id')),
-  //     reviewBody: this.commentForms.first.nativeElement.value,
-  //     parentReviewId: this.parentCommentId,
-  //     reviewId: this.editedReviewId
-  //   }).subscribe((data) => {
-  //       if (this.editCommentMode) {
-  //         this.successMsg = 'Comment has been edited';
-  //         this.editCommentMode = false;
-  //       } else {
-  //         this.successMsg = 'Comment has been added';
-  //       }
-  //       this.showCommentForm = false;
-  //       this.reloadComments();
-  //     },
-  //     error => {
-  //       this.error = error.message;
-  //       this.loading = false;
-  //     });
-  // }
-
   submitComment() {
 
     let userReview: UserReview;
