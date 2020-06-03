@@ -75,29 +75,29 @@ export class MovieService {
       .pipe();
   }
 
-  postComment(userReview: UserReview): Observable<any> {
+  postComment(userReview: UserReview): Observable<UserReview> {
     const url = 'http://localhost:8200/reviews/userReview';
-    return this.httpClient.put<any>(url, userReview, {withCredentials: true}).pipe();
+    return this.httpClient.put<UserReview>(url, userReview, {withCredentials: true}).pipe();
   }
 
-  deleteComment(reviewId: number): Observable<any> {
+  deleteComment(reviewId: number): Observable<UserReview> {
     const url = 'http://localhost:8200/reviews/userReview/' + reviewId + '/remove';
-    return this.httpClient.put<any>(url, null, {withCredentials: true}).pipe();
+    return this.httpClient.put<UserReview>(url, null, {withCredentials: true}).pipe();
   }
 
-  getComments(movieId: string): Observable<any> {
+  getComments(movieId: string): Observable<UserReview> {
     const url = 'http://localhost:8200/reviews/userReview/' + movieId;
-    return this.httpClient.get<any>(url, {withCredentials: true}).pipe();
+    return this.httpClient.get<UserReview>(url, {withCredentials: true}).pipe();
   }
 
-  getAllComments(): Observable<any> {
+  getAllComments(): Observable<UserReview> {
     const url = 'http://localhost:8200/reviews/userReviewAll/';
-    return this.httpClient.get<any>(url, {withCredentials: true}).pipe();
+    return this.httpClient.get<UserReview>(url, {withCredentials: true}).pipe();
   }
 
-  likeComment(commentId: string): Observable<any> {
+  likeComment(commentId: string): Observable<UserReview> {
     const url = 'http://localhost:8200/reviews/userReview/' + commentId + '/like';
-    return this.httpClient.put<any>(url, {}, {withCredentials: true}).pipe();
+    return this.httpClient.put<UserReview>(url, {}, {withCredentials: true}).pipe();
   }
 
   highlightComment(commentId: number): Observable<any> {

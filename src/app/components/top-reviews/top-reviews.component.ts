@@ -6,6 +6,8 @@ import {UserService} from '../../services/user.service';
 import {ReportService} from '../../services/report.service';
 import {MatDialog} from '@angular/material/dialog';
 import {User} from '../../interfaces/user.interface';
+import {UserreportInterface} from '../../interfaces/userreport.interface';
+import {UserReview} from '../../interfaces/userreview.interface';
 
 @Component({
   selector: 'app-top-reviews',
@@ -62,7 +64,7 @@ export class TopReviewsComponent implements OnInit {
     });
   }
 
-  prepareUserReport(commentId: string, reason: string) {
+  prepareUserReport(commentId: string, reason: string): UserreportInterface {
     return {
       commentId,
       reportDate: new Date(),
@@ -115,13 +117,39 @@ export class TopReviewsComponent implements OnInit {
     });
   }
 
+  // submitComment() {
+  //   this.movieService.postComment({
+  //     movieId: Number(this.route.snapshot.paramMap.get('id')),
+  //     reviewBody: this.commentForms.first.nativeElement.value,
+  //     parentReviewId: this.parentCommentId,
+  //     reviewId: this.editedReviewId
+  //   }).subscribe((data) => {
+  //       if (this.editCommentMode) {
+  //         this.successMsg = 'Comment has been edited';
+  //         this.editCommentMode = false;
+  //       } else {
+  //         this.successMsg = 'Comment has been added';
+  //       }
+  //       this.showCommentForm = false;
+  //       this.reloadComments();
+  //     },
+  //     error => {
+  //       this.error = error.message;
+  //       this.loading = false;
+  //     });
+  // }
+
   submitComment() {
-    this.movieService.postComment({
+
+    let userReview: UserReview;
+    userReview = {
       movieId: Number(this.route.snapshot.paramMap.get('id')),
       reviewBody: this.commentForms.first.nativeElement.value,
       parentReviewId: this.parentCommentId,
       reviewId: this.editedReviewId
-    }).subscribe((data) => {
+    };
+
+    this.movieService.postComment(userReview).subscribe(() => {
         if (this.editCommentMode) {
           this.successMsg = 'Comment has been edited';
           this.editCommentMode = false;
