@@ -40,10 +40,10 @@ export class TopReviewsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userService.findLoggedUser().subscribe((jsonObject: User) => {
-      this.userId = jsonObject.id;
-      this.userService.isAdminUser().subscribe((obj: boolean) => {
-        this.isAdmin = obj;
+    this.userService.findLoggedUser().subscribe((user: User) => {
+      this.userId = user.id;
+      this.userService.isAdminUser().subscribe((isAdmin: boolean) => {
+        this.isAdmin = isAdmin;
       });
     });
     this.reloadComments();
@@ -71,14 +71,13 @@ export class TopReviewsComponent implements OnInit {
   }
 
   reloadComments() {
-    this.movieService.getAllComments().subscribe((object) => {
-      this.comments = object;
+    this.movieService.getAllComments().subscribe((comments) => {
+      this.comments = comments;
     });
   }
 
   onAddComment(parentComment?: number) {
     this.closeCommentWritingForm();
-    console.log('onAddComment():parentComment?:', parentComment);
     this.showRateForm = false;
     this.showCommentForm = true;
     this.parentCommentId = parentComment;
@@ -103,8 +102,6 @@ export class TopReviewsComponent implements OnInit {
   }
 
   onEditComment(review: any, parentCommentId?: any) {
-    console.log(review);
-
     this.closeCommentWritingForm();
     this.commentFormTitle = 'Edit comment';
     this.showCommentForm = true;
@@ -114,24 +111,17 @@ export class TopReviewsComponent implements OnInit {
         this.commentForms.first.nativeElement.value = review.statement;
         this.editedReviewId = review.id;
         this.parentCommentId = parentCommentId;
-        console.log('onEditComment()SUB:this.parentCommentId:', this.parentCommentId);
-        console.log('onEditComment()SUB:this.editedReviewId:', this.editedReviewId);
       }
     });
-    console.log('onEditComment()END:this.parentCommentId:', this.parentCommentId);
-    console.log('onEditComment()END:this.editedReviewId:', this.editedReviewId);
   }
 
   submitComment() {
-    console.log('submitComment():this.parentCommentId:', this.parentCommentId);
-    console.log('submitComment():this.editedReviewId:', this.editedReviewId);
     this.movieService.postComment({
       movieId: Number(this.route.snapshot.paramMap.get('id')),
       reviewBody: this.commentForms.first.nativeElement.value,
       parentReviewId: this.parentCommentId,
       reviewId: this.editedReviewId
     }).subscribe((data) => {
-        console.log(this.commentForms.first.nativeElement.value);
         if (this.editCommentMode) {
           this.successMsg = 'Comment has been edited';
           this.editCommentMode = false;
