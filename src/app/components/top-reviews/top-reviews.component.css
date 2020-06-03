@@ -1,0 +1,105 @@
+.container {
+  text-align: center;
+}
+
+.property-header {
+  text-align: left;
+}
+
+.property-value {
+  text-align: left;
+}
+
+.darkTextArea {
+  outline: none;
+  color: white;
+  border-color: black;
+  background-color: #2d2d2dbf;
+  resize: none;
+}
+
+.review-button {
+  text-decoration: underline;
+  color: dimgrey;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.add-comment-button {
+  font-size: 24px;
+  color: azure;
+}
+
+.comments-section {
+  width: available;
+  margin-left: 200px;
+  margin-right: 200px;
+}
+
+.movie-container {
+  padding: 20px;
+  border: 1px solid black;
+  background-color: #02030f;
+  opacity: 0.8;
+}
+
+#rate-container {
+  padding: 20px;
+  border: 1px solid black;
+  background-color: #2d2d2dbf;
+  opacity: 0.8;
+}
+
+.rate-button {
+  font-size: 30px;
+  margin-right: 5px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.rate-button:hover {
+  text-shadow: 0 0 15px white;
+}
+
+.comment-child {
+  margin: 5px;
+  word-wrap: break-word;
+  padding-left: 20px;
+  padding-right: 20px;
+  text-align: left;
+  background-color: #2d2d2dbf;
+  border-radius: 25px;
+}
+
+.comment-header {
+  margin-left: 10px;
+  margin-right: 10px;
+  display: flex;
+}
+
+.first-comment-header-button {
+  margin-left: auto;
+  font-size: 24px;
+}
+
+.next-comment-header-button {
+  margin-left: 5px;
+  font-size: 24px;
+}
+
+.badge {
+  color: #b7d4ff;
+}
+
+a:hover {
+  cursor: pointer;
+  text-shadow: 0 0 15px white;
+}
+
+.movie-poster {
+  background-color: white;
+  display: block;
+  margin: 0 auto;
+  width: 80px;
+  margin-top: 12px;
+}
